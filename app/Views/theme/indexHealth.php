@@ -1,0 +1,20 @@
+<?= view('App\Views\theme\header') ?>
+  <?php if ($_SESSION['rid'] == 2): ?>
+    <br>
+    <?php if (!empty($profile)): ?>
+    <?php endif; ?>
+    <?php if (isset($function_title)): ?>
+      <?php $data['function_title'] = $function_title ?>
+      <?php echo view($viewName, $data); ?>
+    <?php else: ?>
+      <?php echo view($viewName); ?>
+    <?php endif; ?>
+  <?php else: ?>
+    	<link rel="stylesheet" href="<?= base_url() ?>public/css/debug.css">
+    	<div class="container text-center">
+    		<h1 class="headline">Whoops!</h1>
+    		<p class="lead">This page is exclusive for users only! <i class="fas fa-smile"></i></p>
+    	</div>
+  <?php endif; ?>
+  <?= view('App\Views\theme\footer') ?>
+  <?= view('App\Views\theme\notification') ?>
