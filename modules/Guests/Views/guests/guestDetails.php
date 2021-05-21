@@ -21,31 +21,40 @@
         <?php if (empty($latest_checklist)): ?>
           <p class="card-text" style="font-style: italic;"><i class="fas fa-spinner"></i> None</p>
         <?php else: ?>
-              <p>
-                <label>Legend: </label>
-                <button type="button" class="btn btn-danger" name="button"></button><span> Defined</span>
-                <button type="button" class="btn btn-success" name="button"></button><span> Undefined</span>
                 <a href="<?=base_url().'guests/print/'. $profile[0]['id'] ?>"><button class="btn btn-link float-right" type="button" name="button"> <i class="fas fa-file-pdf text-red"></i> Download Recent Checklist PDF</button></a>
-              </p>
-              <hr>
-
-          <form>
+              
             <?php foreach ($latest_checklist as $health): ?>
-              <div class="row">
-                <div class="col-md-4">
-                  <label for="">Temperature</label>
-                  <p>
-                    <span><?= $health['temperature'] >= 37.1 ? '<span style="color: red"><button type="button" class="btn btn-danger">'.$temp.' ℃.</button></span>': '<span style="color: green"><button type="button" class="btn btn-success">'.$temp.' ℃.</button></span>'?></span>
-                  </p>
-                </div>
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-4">
-                </div>
-              </div>
-
+              <div class="card-body">
+                                     <form>
+                                       <div class="row">
+                                         <div class="col-md-12">
+                                           <p class="h4">Defined Symtoms</p>
+                                           <table>
+                                             <tr>
+                                               <td>
+                                               <?php
+                                                foreach($questions as $role){
+                                                    $question_defined = substr($health['question_id'], 0, -1);
+                                                    $question_def = explode(',',$question_defined);
+                                                    if(in_array($role['id'], $question_def))
+                                                    {
+                                                      echo '<i class="fas fa-check text-success"></i>';
+                                                    }
+                                                    else
+                                                    {
+                                                      echo '<i class="fas fa-times"></i>';
+                                                    }
+                                                    echo ' '.$role['question'].'<br>';
+                                                }
+                                                ?>
+                                               </td>
+                                             </tr>
+                                           </table>
+                                         </div>
+                                       </div>
+                                     </form>
+                                   </div>
             <?php endforeach; ?>
-          </form>
         <?php endif; ?>
         <!-- /.post -->
       </div>
@@ -54,13 +63,11 @@
           <?php if (empty($recent_visits)): ?>
             <p style="font-style: italic;"><i class="fas fa-spinner"></i> None</p>
           <?php else: ?>
-            <a class="text-white" href="<?=base_url().'visits/'.$profile[0]['user_id']?>"><button type="button" class="btn btn-default" style="border: 1px solid gray;"><i class="fas fa-calendar-check"></i> Recent Visits </button></a>
-            <hr>
             <table  style="width: 100%;">
               <?php foreach ($recent_visits as $recent_visit): ?>
                 <tr style="border-bottom: 1px solid #ddd">
                   <td>
-                    <span class="float-left"><?=date('F d, Y h:i a', strtotime($recent_visit['log_in']))?> <?=$recent_visit['log_out'] == '' ? ' - Active': ' - ' . date('F d, Y h:i a', strtotime($recent_visit['log_out']))?></span>
+                    <span class="float-left"><?=date('F d, Y h:i a', strtotime($recent_visit['created_date']))?></span>
                   </td>
                 </tr>
               <?php endforeach; ?>
@@ -87,11 +94,36 @@
                   </h5>
                 </div>
                 <div id="collapse<?=$summary['id']?>" class="collapse" aria-labelledby="heading<?=$summary['id']?>" data-parent="#accordion">
-                  <div class="card-body">
-                    <form>
-
-                    </form>
-                  </div>
+                <div class="card-body">
+                                     <form>
+                                       <div class="row">
+                                         <div class="col-md-12">
+                                           <p class="h4">Defined Symtoms</p>
+                                           <table>
+                                             <tr>
+                                               <td>
+                                               <?php
+                                                foreach($questions as $role){
+                                                    $question_defined = substr($summary['question_id'], 0, -1);
+                                                    $question_def = explode(',',$question_defined);
+                                                    if(in_array($role['id'], $question_def))
+                                                    {
+                                                      echo '<i class="fas fa-check text-success"></i>';
+                                                    }
+                                                    else
+                                                    {
+                                                      echo '<i class="fas fa-times"></i>';
+                                                    }
+                                                    echo ' '.$role['question'].'<br>';
+                                                }
+                                                ?>
+                                               </td>
+                                             </tr>
+                                           </table>
+                                         </div>
+                                       </div>
+                                     </form>
+                                   </div>
                 </div>
               </div>
             <?php endforeach; ?>

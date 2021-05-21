@@ -25,23 +25,40 @@ class UsersModel extends \CodeIgniter\Model
 
     public function checkExpiryDate($time)
     {
-      // $updated_time = strtotime($time);
-      // $current_time = time();
-      // // die(time());
-      // $time_diff = ($current_time - $updated_time)/60;
-      // if ($time_diff < 900) {
-      //   return true;
-      // }else{
-      //   return false;
-      // }
-      $time_diff = (strtotime(date("Y-m-d h:i:s"))- strtotime($time))/60;
+      $updated_time = strtotime($time);
+      $current_time = time();
+      // die(time());
+      $time_diff = ($current_time - $updated_time)/60;
       if ($time_diff < 900) {
         return true;
       }else{
         return false;
       }
+      // $time_diff = (strtotime(date("Y-m-d h:i:s"))- strtotime($time))/60;
+      // if ($time_diff < 900) {
+      //   return true;
+      // }else{
+      //   return false;
+      // }
     }
 
+    public function getScanProfile($token){
+
+      $db = \Config\Database::connect();
+  
+      $str = "SELECT u.*, t.guest_type, e.extension, c.city, gen.gender, p.province FROM users u
+              LEFT JOIN types t ON u.user_type_id = t.id
+              LEFT JOIN extensions e ON u.ext_name_id = e.id
+              LEFT JOIN cities c ON u.city_id = c.id
+              LEFT JOIN genders gen ON u.gender_id = gen.id
+              LEFT JOIN provinces p ON u.province_id = p.id
+              WHERE u.status = 'a' AND u.role_id = 2 AND u.token = '$token'";
+  
+      $query = $db->query($str);
+  
+      return $query->getResultArray();
+    }
+  
     public function getProfile($id){
 
     $db = \Config\Database::connect();

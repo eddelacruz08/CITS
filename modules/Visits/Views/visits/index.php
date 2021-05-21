@@ -24,7 +24,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form action="<?=base_url(). 'visits/print'?>" method="post">
+                  <form action="<?=base_url(). 'visits/pdf'?>" method="post">
                       <div class="row">
                         <div class="col-md-12">
                           <label for="date">Date</label>
@@ -53,7 +53,7 @@
             <th>Full Name</th>
             <th>Gender</th>
             <th>Guest Type</th>
-            <th>Active Guest</th>
+            <th>Date & Time</th>
             <th>Show Info</th>
           </tr>
         </thead>
@@ -65,10 +65,10 @@
             <td><?= ucwords($visit['firstname'].' '.$visit['middlename'].' '.$visit['lastname'].' '.$visit['extension']) ?></td>
             <td><?= $visit['gender']?></td>
             <td><?= $visit['guest_type']?></td>
-            <td><?= date('F d, Y h:m a', strtotime($visit['log_in'])) ?> <?=$visit['log_out'] == '' ? ' - Active': ' - ' . date('F d, Y h:m a', strtotime($visit['log_out']))?></td>
+            <td><?= date('F d, Y h:m a', strtotime($visit['created_date'])) ?></td>
             <td class="text-center">
               <?php
-                guest_detail_link('guests', 'show-guest', $_SESSION['userPermmissions'], $visit['patient_id']);
+                guest_detail_link('guests', 'show-guest', $_SESSION['userPermmissions'], $visit['user_id']);
               ?>
             </td>
           </tr>

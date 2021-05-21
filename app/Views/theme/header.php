@@ -106,6 +106,49 @@
     </style>
     <title><?= SYSTEM_NAME ?></title>
   </head>
+  
+  <?php if(esc($_SESSION['uid'])==2):?>
+      <!-- Modal -->
+      <div class="modal fade" id="myModalqr" role="dialog">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">
+              <i class="fas fa-qrcode">&nbsp</i>
+              My QR Code</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                            <script src="<?= base_url() ?>public/js/qrcode.js"></script>
+                            <center>
+                              <div id="qrcode"></div>
+                              <h6><?= $profile[0]['token']?></h6>
+                              <h5><?= ucwords($profile[0]['firstname'].' '.$profile[0]['lastname'])?></h5>
+                              <button class="btn btn-dark mt-2" onclick="downLoadCode();">Download QR code</button>
+                            </center>
+                            <script>
+                                let qrcode = new QRCode("qrcode", {
+                                    text: "<?= $profile[0]['token']?>",
+                                    width: 177,
+                                    height: 177,
+                                    colorDark : "#000000",
+                                    colorLight : "#ffffff",
+                                    correctLevel : QRCode.CorrectLevel.H
+                                });
+                                function downLoadCode(){
+                                    var img = $('#qrcode').children('img').attr("src");
+                                    var alink = document.createElement("a");
+                                    alink.href = img;
+                                      alink.download = "<?= date('F d, Y h:i:s')?>"+".png";
+                                    alink.click();
+                                  }
+                            </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <?php endif;?>
   <body class="hold-transition sidebar-mini layout-fixed hidePrint"style="background-color: #d9d9d9;">
   <div class="wrapper"style="background-color: #d9d9d9;">
 
@@ -142,7 +185,6 @@
                 </div>
             </li>
         </ul>
-
       </ul>
     </nav>
     <!-- /.navbar -->
@@ -165,6 +207,16 @@
                <?php user_primary_links_two($_SESSION['userPermmissions']) ?>
                <?php user_primary_links($_SESSION['userPermmissions']) ?>
         </ul>
+        <?php if($_SESSION['uid']==2):?>
+        <ul class="nav nav-pills nav-sidebar flex-column"> 
+          <li class="nav-item">
+            <a class="nav-link" type="button" data-toggle="modal" data-target="#myModalqr">
+              <i class="fas fa-qrcode">&nbsp</i>
+              <p> My QR Code</p>
+            </a>
+          </li>
+        </ul>
+        <?php endif;?>
         <ul class="nav nav-pills nav-sidebar flex-column">
           <li class="nav-item">
             <a class="nav-link">
@@ -182,7 +234,7 @@
     <!-- /.sidebar -->
   </aside>
 
-
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper"style="background-color: #d9d9d9;">
         <div class="container-fluid" style="background-color: #d9d9d9;">
+

@@ -9,6 +9,7 @@ use Modules\Maintenances\Models\ExtensionModel;
 use Modules\Maintenances\Models\ProvinceModel;
 use Modules\Maintenances\Models\GenderModel;
 use Modules\Maintenances\Models\TypeModel;
+use Modules\Maintenances\Models\QuestionModel;
 use Modules\UserManagement\Models\UsersModel;
 use Modules\UserManagement\Models\PermissionsModel;
 use App\Controllers\BaseController;
@@ -45,12 +46,15 @@ class Guests extends BaseController
 		$model = new UsersModel();
 		$visit_model = new VisitsModel();
 		$checklist_model = new ChecklistModel();
+		$question_model = new QuestionModel();
 
 		$data['visit_id'] = $visit_model->getVisitId($id);
 		$data['recent_visits'] = $visit_model->get(['status' => 'a', 'user_id' => $id]);
 		$data['latest_checklist'] = $checklist_model->getLatestChecklist($id);
 		$data['health_summary'] = $checklist_model->getHealthTrendSummary($id);
 		$data['checklist_recorded'] = $checklist_model->isChecklistCaptured($data['visit_id']);
+		$data['questions'] = $question_model->get();
+		$data['questionself'] = $checklist_model->getSelfAssessmentHistory();
 		foreach ($data['latest_checklist'] as $health )
 		{
 			$date = $health['created_date'];

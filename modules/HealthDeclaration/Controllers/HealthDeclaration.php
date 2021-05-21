@@ -6,7 +6,6 @@ use Modules\UserManagement\Models\UsersModel;
 use Modules\HealthDeclaration\Models\HealthDeclarationModel;
 use Modules\Visits\Models\ChecklistModel;
 use Modules\Visits\Models\VisitsModel;
-// use Modules\Guests\Models\GuestsModel;
 use Modules\Maintenances\Models\DepartmentModel;
 use Modules\Maintenances\Models\QuestionModel;
 use App\Controllers\BaseController;;
@@ -30,7 +29,12 @@ class HealthDeclaration extends BaseController
 		$visit_model = new VisitsModel();
 		$checklist_model = new ChecklistModel();
 		$department_model = new DepartmentModel();
+		$question_model = new QuestionModel();
+		$data['latest_checklist_date'] = $checklist_model->getDate($_SESSION['uid']);
 		$guest_id = $model->getGuestWithCondition(['id' => $_SESSION['uid'], 'status' => 'a']);
+		$data['questions'] = $question_model->get();
+		$data['questionself'] = $model->getSelfAssessmentHistory();
+		$data['health_summary'] = $checklist_model->getHealthTrendSummary($_SESSION['uid']);
 		$data['latest_checklist'] = $checklist_model->getLatestChecklistDate($_SESSION['uid']);
 	
 		foreach ($data['latest_checklist'] as $health )

@@ -1,109 +1,95 @@
 
   <?php $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
 
-  <?php if (empty($latest_checklist)): ?>
-    <div class="card bg-light ">
-      <div class="card-body">
-        <p class="card-text" style="font-style: italic;"><i class="fas fa-spinner"></i> None</p>
-      </div>
-    </div>
-  <?php else: ?>
-    <div class="card bg-light ">
-      <div class="card-body">
-      <div class="row">
-        <div class="col-md-6">
-          <h3><?= $function_title?></h3>
-        </div>
-        <div class="col-md-6">
+  <br>
+       <div class="card card-primary card-outline">
+         <div class="card-body box-profile">
+           <div class="row">
+             <div class="col-md-6">
+               <center>
+               <label>Latest Self-Assessment Status:
+               <?php if ($latest_checklist_date[0]['status_defined'] == true):?>
+                 <i class="fas fa-circle text-center text-danger"></i><a class="h6 text-danger"> Have Symtoms</a>
+                 <hr style="margin: 0; padding: 0; border: solid 1px red;">
+               <?php else:?>
+                 <i class="fas fa-circle text-center text-success"></i><a class="h6 text-success"> No Symtoms</a>
+                 <hr style="margin: 0; padding: 0; border: solid 1px green;">
+               <?php endif;?>
+               </label>
+             </center>
+             </div>
+             <div class="col-md-6">
+               <center>
+                 <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
+                    <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
+                      <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
+                    </button>
+                 </a>
+               </center>
+             </div>
+           </div>
+         </div>
+       </div>
+  <div class="card card-primary card-outline">
+                     <div class="card-body box-profile">
+                       <h3 align="center">Self-Assessment History</h3>
 
-        </div>
-      </div>
-
-      <hr>
-      <div class="card-body">
-        <div class="tab-content">
-          <div class="active tab-pane" id="activity">
-            <!-- Post -->
-              <div class="row">
-                <div class="col-md-12">
-                </div>
-              </div>
-
-              <form>
-                <?php foreach ($latest_checklist as $health): ?>
-
-                  <div class="row">
-                    <div class="col-md-8">
-                          <p>
-                            <label>Legend: </label>
-                            <button type="button" class="btn btn-danger" name="button"></button><span> Defined</span>
-                            <button type="button" class="btn btn-success" name="button"></button><span> Undefined</span>
-                            <!-- <a href="#" class="text-white">
-                            <button type="button" class="btn btn-dark btn-md float-right" data-toggle="modal" data-target="#modal-lg" style="border: 1px solid gray;">
-                            <i class="fas fa-qrcode text-white"></i>  Generate Qrcode
-                          </button>
-                        </a> -->
+                       <div class="tab-pane" id="settings">
+                         <?php if (empty($health_summary)): ?>
+                           <p class="card-text" style="font-style: italic;"><i class="fas fa-spinner"></i> None</p>
+                         <?php else: ?>
+                           <div id="accordion">
+                             <?php foreach ($health_summary as $summary): ?>
+                               <div class="card">
+                                 <div class="card-header" id="heading<?=$summary['id']?>">
+                                   <h5 class="mb-0">
+                                     <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<?=$summary['id']?>" aria-expanded="false" aria-controls="collapse<?=$summary['id']?>">
+                                      <?php if ($summary['question_id']=='none'):?>
+                                        <?=date('F d, Y h:i a', strtotime($summary['created_date']))?> | <label class="text-success"> Negative for Symtoms</label>
+                                      <?php else:?>
+                                        <?=date('F d, Y h:i a', strtotime($summary['created_date']))?> | <label class="text-danger"> Positive for Symtoms</label>
+                                      <?php endif;?>
+                                     </button>
+                                   </h5>
+                                 </div>
+                                 <div id="collapse<?=$summary['id']?>" class="collapse" aria-labelledby="heading<?=$summary['id']?>" data-parent="#accordion">
+                                   <div class="card-body">
+                                     <form>
+                                       <div class="row">
+                                         <div class="col-md-12">
+                                           <p class="h4">Defined Symtoms</p>
+                                           <table>
+                                             <tr>
+                                               <td>
+                                               <?php
+                                                foreach($questions as $role){
+                                                    $question_defined = substr($summary['question_id'], 0, -1);
+                                                    $question_def = explode(',',$question_defined);
+                                                    if(in_array($role['id'], $question_def))
+                                                    {
+                                                      echo '<i class="fas fa-check text-success"></i>';
+                                                    }
+                                                    else
+                                                    {
+                                                      echo '<i class="fas fa-times"></i>';
+                                                    }
+                                                    echo ' '.$role['question'].'<br>';
+                                                }
+                                                ?>
+                                               </td>
+                                             </tr>
+                                           </table>
+                                         </div>
+                                       </div>
+                                     </form>
+                                   </div>
+                                 </div>
+                               </div>
+                             <?php endforeach; ?>
+                           </div>
+                         <?php endif; ?>
+                       </div>
+                       <!-- /.tab-pane -->
                     </div>
-                    <div class="col-4">
-                    
-                    </div>
-                  </div>
-
-                  <hr>
-                  <label for="">1. Are you experiencing:</label>
-                  <p>A. Fever greater than 38℃ (Lagnat:) |
-                    <!-- </style> -->
-                    <span style="float:right"><?= $health['one_a'] >= 'yes' ? '<span style="color: red "><button type="button" class="btn btn-danger">'.ucfirst($health['one_a']).' Date: '.date('F d, Y', strtotime($health['one_a_date'])).'</button></span>': '<span style="color: green"><button type="button" class="btn btn-success justify">'.ucfirst($health['one_a']).'</button></span>'?></span>
-
-                  </p>
-
-                  <p>B. Cough and/or colds (Ubo at/ sipon) |
-                    <span style="float:right"><?= $health['one_b'] >= 'yes' ? '<span style="color: red"><button type="button" class="btn btn-danger">'.ucfirst($health['one_b']).' Date: '.date('F d, Y', strtotime($health['one_b_date'])).'</button></span>': '<span style="color: green"><button type="button" class="btn btn-success justify">'.ucfirst($health['one_b']).'</button></span>'?></span>
-
-                  </p>
-                  <p>C. Body pains (pananakit ng katawan) |
-                    <span style="float:right"><?= $health['one_c'] >= 'yes' ? '<span style="color: red"><button type="button" class="btn btn-danger">'.ucfirst($health['one_c']).' Date: '.date('F d, Y', strtotime($health['one_c_date'])).'</button></span>': '<span style="color: green"><button type="button" class="btn btn-success">'.ucfirst($health['one_c']).'</button></span>'?></span>
-                  </p>
-                  <p>D. Sore throat (pananakit ng lalamunan/hirap lumunok) |
-                    <span style="float:right"><?= $health['one_d'] >= 'yes' ? '<span style="color: red"><button type="button" class="btn btn-danger">'.ucfirst($health['one_d']).' Date: '.date('F d, Y', strtotime($health['one_d_date'])).'</button></span>': '<span style="color: green"><button type="button" class="btn btn-success">'.ucfirst($health['one_d']).'</button></span>'?></span>
-                  </p>
-                  <p>E. Shortness of breath (hirap sa paghinga) |
-                    <span style="float:right"><?= $health['one_e'] >= 'yes' ? '<span style="color: red"><button type="button" class="btn btn-danger">'.ucfirst($health['one_e']).' Date: '.date('F d, Y', strtotime($health['one_e_date'])).'</button></span>': '<span style="color: green"><button type="button" class="btn btn-success">'.ucfirst($health['one_e']).'</button></span>'?></span>
-                  </p>
-                  <p>F. Diarrhea (pagtatae) |
-                    <span style="float:right"><?= $health['one_f'] >= 'yes' ? '<span style="color: red"><button type="button" class="btn btn-danger">'.ucfirst($health['one_f']).' Date: '.date('F d, Y', strtotime($health['one_f_date'])).'</button></span>': '<span style="color: green"><button type="button" class="btn btn-success">'.ucfirst($health['one_f']).'</button></span>'?></span>
-                  </p>
-                  <label for="">2. TRAVEL HISTORY:</label>
-                  <p>For the last 14 days, did you travel to a country or a place with high number of COVID-19 patients? |
-                    <span style="float:right"><?= $health['two_travel'] >= 'yes' ? '<span style="color: red"><button type="button" class="btn btn-danger">'.ucfirst($health['two_travel']).' Address: '.ucfirst($health['two_travel_address']).'</button></span>': '<span style="color: green"><button type="button" class="btn btn-success">'.ucfirst($health['two_travel']).'</button></span>'?></span>
-                  </p>
-                  <label for="">3. Did you have any close contact or interaction with any of the following:</label>
-                  <p>•	Individuals providing direct care, and/or working with individuals infected with COVID-19, and/or visiting or staying in the same environment with COVID-19 patient? |
-                    <span style="float:right"><?= $health['three_contact_one'] >= 'yes' ? '<span style="color: red"><button type="button" class="btn btn-danger">'.ucfirst($health['three_contact_one']).'</button></span>': '<span style="color: green"><button type="button" class="btn btn-success">'.ucfirst($health['three_contact_one']).'</button></span>'?></span>
-                  </p>
-                  <p>•	In close proximity or shared the same room with a COVID-19 patient? |
-                    <span style="float:right"><?= $health['three_contact_two'] >= 'yes' ? '<span style="color: red"><button type="button" class="btn btn-danger">'.ucfirst($health['three_contact_two']).'</button></span>': '<span style="color: green"><button type="button" class="btn btn-success">'.ucfirst($health['three_contact_two']).'</button></span>'?></span>
-                  </p>
-                  <p>•	Travelled together with COVID-19 patient? |
-                    <span style="float:right"><?= $health['three_contact_three'] >= 'yes' ? '<span style="color: red"><button type="button" class="btn btn-danger">'.ucfirst($health['three_contact_three']).'</button></span>': '<span style="color: green"><button type="button" class="btn btn-success">'.ucfirst($health['three_contact_three']).'</button></span>'?></span>
-                  </p>
-                  <p>•	Living with a COVID-19 patient within a 14-day period after the onset of his/her symptoms? |
-                    <span style="float:right"><?= $health['three_contact_four'] >= 'yes' ? '<span style="color: red"><button type="button" class="btn btn-danger">'.ucfirst($health['three_contact_four']).'</button></span>': '<span style="color: green"><button type="button" class="btn btn-success">'.ucfirst($health['three_contact_four']).'</button></span>'?></span>
-                  </p>
-                  <label for="">4. Do you have pre-existing illness?</label>
-                  <p> Do you have pre-existing illness? |
-                    <span style="float:right"><?= $health['four_existing'] >= 'yes' ? '<span style="color: red"><button type="button" class="btn btn-danger">'.ucfirst($health['four_existing']).' Pre-illness: '.ucfirst($health['four_existing_specify']).'</button></span>': '<span style="color: green"><button type="button" class="btn btn-success">'.ucfirst($health['four_existing']).'</button></span>'?></span>
-                  </p>
-                  <label for="">5. Are you pregnant?</label>
-                  <p> Are you pregnant? |
-                    <span style="float:right"><?= $health['five_pregnant'] >= 'yes' ? '<span style="color: red"><button type="button" class="btn btn-danger">'.ucfirst($health['five_pregnant']).'</button></span>': '<span style="color: green"><button type="button" class="btn btn-success">'.ucfirst($health['five_pregnant']).'</button></span>'?></span>
-                  </p>
-                <?php endforeach; ?>
-              </form>
-            <?php endif; ?>
-            <!-- /.post -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+                   </div>
+                 </div>

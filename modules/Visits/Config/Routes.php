@@ -2,9 +2,8 @@
 $routes->group('visits', ['namespace' => 'Modules\Visits\Controllers'], function($routes)
 {
     $routes->get('/', 'Visits::index');
-  $routes->get('pdf', 'Visits::pdf');
-    $routes->get('start/(:num)', 'Visits::start/$1');
-    $routes->get('end/(:num)/(:num)', 'Visits::end/$1/$2');
+    $routes->get('pdf', 'Visits::pdf');
+    $routes->match(['get', 'post'], 'pdf', 'Visits::pdf');
 });
 $routes->group('checklists', ['namespace' => 'Modules\Visits\Controllers'], function($routes)
 {

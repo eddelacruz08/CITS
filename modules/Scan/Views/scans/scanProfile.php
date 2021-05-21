@@ -54,66 +54,153 @@
       <section class="content text-dark">
         <div class="container-fluid">
           <div class="row">
-            <?php if(isset($scan)):?>
-            <div class="col-md-4">
-              <!-- Profile Image -->
-              <div class="card card-primary card-outline">
-                <div class="card-body">
-                  <div class="text-center">
-                    <img class="profile-user-img img-fluid img-circle"
-                         src="<?= base_url() ?>public/img/LOGO.png"
-                         alt="User profile picture">
-                  </div>
-
-                  <h3 class="profile-username text-center">Nina Mcintire</h3>
-
-                  <p class="text-muted text-center">Software Engineer</p>
-
-                  <ul class="list-group list-group-unbordered mb-3">
-                  </ul>
-                </div>
-                <!-- /.card-body -->
-              </div>
-              <!-- /.card -->
-            </div>
-            <!-- /.col -->
-          <?php else:?>
-            <div class="col-md-4" id="container">
+            <div class="col-md-5" id="container">
               <div class="card">
                 <div class="card-body">
                   <center>
                     <h5 style="color: black;">QR Code Scanner <i class="fas fa-qrcode"></i></h5>
                   </center>
                     <video id="previewChecklist"></video>
+                    <form action="<?= base_url() ?>scan/add-scan" id="myForm" method="post">
+                      <div class="custom-control mt-2 text-center">
+                        <div class="row">
+                          <div class="col-md-1">
+                            <label>ID:</label>
+                          </div>
+                          <div class="col-md-11">
+                            <input class="form-control" type="text" value="<?=isset($value['identifier']) ? '': ''?>" id="identifier" name="identifier"> 
+                          </div>
+                        </div>
+                      </div>
+                      <div class="custom-control mt-2 text-center">
+                        <button class="btn btn-success" type="submit">Login</button>
+                      </div>
+                    </form>
+                    <div id="liveScanData"></div>
                 </div>
               </div>
             </div>
-          <?php endif;?>
-            <div class="col-md-8">
-              <div class="card">
+          <div class="col-md-7">
+          <div class="row">
+            <div class="col-md-12">
+              <?php if(isset($success_added2)): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <?= $success_added2; ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+              <?php endif; ?>
+              <?php if(isset($error_added2)): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <?= $error_added2; ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+               </div>
+             <?php endif; ?>
+            </div>
+          </div>
+              <!-- Profile Image -->
+              <div class="card card-primary card-outline">
+              <?php if(!empty($profile)):?>
                 <div class="card-body">
-                  <form class="" action="<?= base_url() ?>scan/add-scan" method="post">
-                    <div class="form-group mb-2">
-                      <span>Body Temperature:</span>
-                      <input type="text" class="form-control" name="full_name" id="full_name">
+                  <div class="text-center">
+                    <img class="img-fluid img-circle"  width="20%"
+                         src="<?= base_url() ?>public/img/user.png"
+                         alt="User profile picture">
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p class="h5 float-right">Full Name: </p>
                     </div>
-                    <div class="form-group mb-2">
-                      <span>Assessment Form:</span>
-                      <input type="text" class="form-control" name="full_name" id="full_name">
+                    <div class="col-md-6">
+                      <span><?= ucwords($profile[0]['firstname'].' '.$profile[0]['lastname'])?></span>
                     </div>
-                    <div class="form-group mb-2">
-                      <button type="submit" class="btn btn-danger">Submit</button>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p class="h5 float-right">Gender: </p>
                     </div>
-                  </form>
+                    <div class="col-md-6">
+                      <span><?= ucwords($profile[0]['gender'])?></span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p class="h5 float-right">Guest Type: </p>
+                    </div>
+                    <div class="col-md-6">
+                      <span><?= ucwords($profile[0]['guest_type'])?></span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p class="h5 float-right">Age: </p>
+                    </div>
+                    <div class="col-md-6">
+                      <span><?= date_diff(date_create($profile[0]['birthdate']), date_create(date('Y-m-d')))->format("%y") . ' year(s) old'?></span>
+                    </div>
+                  </div>
+                  <ul class="list-group list-group-unbordered mb-3">
+                  </ul>
                 </div>
                 <!-- /.card-body -->
+                
+              <?php else:?>
+                <div class="card-body">
+                  <div class="text-center">
+                    <img class="img-fluid img-circle"  width="20%"
+                         src="<?= base_url() ?>public/img/user.png"
+                         alt="User profile picture">
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p class="h5 float-right">Full Name: </p>
+                    </div>
+                    <div class="col-md-6">
+                      <span>Unavailable</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p class="h5 float-right">Gender: </p>
+                    </div>
+                    <div class="col-md-6">
+                      <span>Unavailable</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p class="h5 float-right">Guest Type: </p>
+                    </div>
+                    <div class="col-md-6">
+                      <span>Unavailable</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p class="h5 float-right">Age: </p>
+                    </div>
+                    <div class="col-md-6">
+                      <span>Unavailable</span>
+                    </div>
+                  </div>
+                  <ul class="list-group list-group-unbordered mb-3">
+                  </ul>
+                </div>
+                <!-- /.card-body -->
+              <?php endif; ?>
               </div>
               <!-- /.card -->
             </div>
             <!-- /.col -->
           </div>
           <!-- /.row -->
-        </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.container-fluid -->
       </section>
       <!-- /.content -->
     </div>
@@ -127,9 +214,6 @@
       console.log(content);
       var audio = new Audio('<?=base_url()?>public/js/scanner.mp3');
       audio.play();
-      // if (document.getElementById("full_name").value !== "") {
-      //   document.getElementById("myForm").submit();
-      // }
     });
     Instascan.Camera.getCameras().then(function (cameras) {
       if (cameras.length > 0) {
@@ -144,26 +228,11 @@
     scanner.addListener('scan', function(cont){
       var parts = cont.split(':');
 
-      document.getElementById('id').value = parts[0];
-      document.getElementById('user_id').value = parts[1];
-      document.getElementById('full_name').value = parts[2];
+      document.getElementById('identifier').value = parts[0];
 
     });
   </script>
   <script src="<?= base_url() ?>public/js/jquery.min.js"></script>
-  <script type="text/javascript">
-    var sounds = document.getElementsByTagName("audio");
-    var muteBtn = document.getElementById("print-btn");
-
-    muteBtn.onclick = function () {
-
-    for (var i = 0; i < sounds.length; ++i) {
-
-          sounds[i].muted = true;
-      }
-
-    }
-  </script>
   <script src="<?= base_url() ?>public/js/bootstrap.min.js"></script>
   <script src="<?= base_url() ?>/public/js/popper.min.js"></script>
   <script src="<?= base_url() ?>/public/dist/js/adminlte.min.js"></script>

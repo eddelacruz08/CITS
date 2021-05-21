@@ -28,27 +28,7 @@ class Visits extends BaseController
       echo view('App\Views\theme\index', $data);
     }
 
-		public function start_visit($id){
-			$model = new VisitsModel();
-			$val_array = [
-				'user_id' => $id,
-			];
-			if($model->add($val_array)){
-				$_SESSION['success'] = 'Visit Has Started';
-				$this->session->markAsFlashdata('success');
-				return redirect()->to(base_url('guests/show/' . $id));
-			}
-		}
-
-		public function end_visit($vId, $pId){
-			$model = new VisitsModel();
-			if($model->edit($val_array = [], $vId)){
-				$_SESSION['success'] = 'Visit Has Ended';
-				$this->session->markAsFlashdata('success');
-				return redirect()->to(base_url('visits'));
-			}
-		}
-		public function pdf(){
+	public function pdf(){
 			$pdf = new Pdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 			// set document information
