@@ -28,20 +28,26 @@ class BaseModel extends Model
     return $this->findAll();
   }
     // assessment
-  // public function add_assess($val_array = [])
-  // {
-  //   $val_array['guest_status'] = 'a';
-  //   $val_array['created_date'] = (new \DateTime())->format('Y-m-d H:i:s');
-  //   $val_array['status'] = 'a';
-  //   return $this->save($val_array);
-  // }
+  public function add_assess($val_array = [])
+  {
+    $val_array['created_date'] = (new \DateTime())->format('Y-m-d H:i:s');
+    $val_array['status'] = 'a';
+    return $this->save($val_array);
+  }
+  
+  public function edit_assess($val_array = [], $id)
+  {
+    $val_array['updated_date'] = (new \DateTime())->format('Y-m-d H:i:s');
+    $val_array['status'] = 'd';
+    return $this->update($id, $val_array);
+  }
 
-  // public function add_checkup($val_array = [])
-  // {
-  //   $val_array['created_date'] = (new \DateTime())->format('Y-m-d H:i:s');
-  //   $val_array['status'] = 'a';
-  //   return $this->save($val_array);
-  // }
+  public function add_checkup($val_array = [])
+  {
+    $val_array['created_date'] = (new \DateTime())->format('Y-m-d H:i:s');
+    $val_array['status'] = 'a';
+    return $this->save($val_array);
+  }
   public function add($val_array = [])
   {
     $val_array['created_date'] = (new \DateTime())->format('Y-m-d H:i:s');

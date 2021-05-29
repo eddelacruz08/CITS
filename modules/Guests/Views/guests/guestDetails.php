@@ -24,36 +24,50 @@
                 <a href="<?=base_url().'guests/print/'. $profile[0]['id'] ?>"><button class="btn btn-link float-right" type="button" name="button"> <i class="fas fa-file-pdf text-red"></i> Download Recent Checklist PDF</button></a>
               
             <?php foreach ($latest_checklist as $health): ?>
-              <div class="card-body">
-                                     <form>
-                                       <div class="row">
-                                         <div class="col-md-12">
-                                           <p class="h4">Defined Symtoms</p>
-                                           <table>
-                                             <tr>
-                                               <td>
-                                               <?php
-                                                foreach($questions as $role){
-                                                    $question_defined = substr($health['question_id'], 0, -1);
-                                                    $question_def = explode(',',$question_defined);
-                                                    if(in_array($role['id'], $question_def))
-                                                    {
-                                                      echo '<i class="fas fa-check text-success"></i>';
-                                                    }
-                                                    else
-                                                    {
-                                                      echo '<i class="fas fa-times"></i>';
-                                                    }
-                                                    echo ' '.$role['question'].'<br>';
-                                                }
-                                                ?>
-                                               </td>
-                                             </tr>
-                                           </table>
-                                         </div>
-                                       </div>
-                                     </form>
-                                   </div>
+                      <?php if ($health['status_defined']==false):?>
+                        <p class="h4">No Symtoms</p>
+                      <?php else:?>
+                        <p class="h4">Have Symtoms</p>
+                      <?php endif;?>
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr class="text-center">
+                            <th>No. </th>
+                            <th>Questions</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <?php $cnt = 1; ?>
+                          <?php foreach ($questions as $question): ?>
+                            <tr>
+                              <td class="text-center"><?= $cnt++;?></td>
+                              <td colspan="1"><?= $question['q_one']?></td>
+                              <td class="text-center"><?= strtoupper($health['q_one'])?></td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><?= $cnt++;?></td>
+                              <td colspan="1"><?= $question['q_two']?></td>
+                              <td class="text-center"><?= strtoupper($health['q_two'])?></td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><?= $cnt++;?></td>
+                              <td colspan="1"><?= $question['q_three']?></td>
+                              <td class="text-center"><?= strtoupper($health['q_three'])?></td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><?= $cnt++;?></td>
+                              <td colspan="1"><?= $question['q_four']?></td>
+                              <td class="text-center"><?= strtoupper($health['q_four'])?></td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><?= $cnt++;?></td>
+                              <td colspan="1"><?= $question['q_five']?></td>
+                              <td class="text-center"><?= strtoupper($health['q_five'])?></td>
+                            </tr>
+                          <?php endforeach; ?>
+                        </tbody>
+                      </table>
             <?php endforeach; ?>
         <?php endif; ?>
         <!-- /.post -->
@@ -98,28 +112,51 @@
                                      <form>
                                        <div class="row">
                                          <div class="col-md-12">
-                                           <p class="h4">Defined Symtoms</p>
-                                           <table>
-                                             <tr>
-                                               <td>
-                                               <?php
-                                                foreach($questions as $role){
-                                                    $question_defined = substr($summary['question_id'], 0, -1);
-                                                    $question_def = explode(',',$question_defined);
-                                                    if(in_array($role['id'], $question_def))
-                                                    {
-                                                      echo '<i class="fas fa-check text-success"></i>';
-                                                    }
-                                                    else
-                                                    {
-                                                      echo '<i class="fas fa-times"></i>';
-                                                    }
-                                                    echo ' '.$role['question'].'<br>';
-                                                }
-                                                ?>
-                                               </td>
-                                             </tr>
-                                           </table>
+                                                 
+                      <?php if ($summary['status_defined']==false):?>
+                        <p class="h4">No Symtoms</p>
+                      <?php else:?>
+                        <p class="h4">Have Symtoms</p>
+                      <?php endif;?>
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr class="text-center">
+                            <th>No. </th>
+                            <th>Questions</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <?php $cnt = 1; ?>
+                          <?php foreach ($questions as $question): ?>
+                            <tr>
+                              <td class="text-center"><?= $cnt++;?></td>
+                              <td colspan="1"><?= $question['q_one']?></td>
+                              <td class="text-center"><?= strtoupper($summary['q_one'])?></td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><?= $cnt++;?></td>
+                              <td colspan="1"><?= $question['q_two']?></td>
+                              <td class="text-center"><?= strtoupper($summary['q_two'])?></td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><?= $cnt++;?></td>
+                              <td colspan="1"><?= $question['q_three']?></td>
+                              <td class="text-center"><?= strtoupper($summary['q_three'])?></td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><?= $cnt++;?></td>
+                              <td colspan="1"><?= $question['q_four']?></td>
+                              <td class="text-center"><?= strtoupper($summary['q_four'])?></td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><?= $cnt++;?></td>
+                              <td colspan="1"><?= $question['q_five']?></td>
+                              <td class="text-center"><?= strtoupper($summary['q_five'])?></td>
+                            </tr>
+                          <?php endforeach; ?>
+                        </tbody>
+                      </table>
                                          </div>
                                        </div>
                                      </form>

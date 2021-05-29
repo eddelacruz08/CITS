@@ -30,6 +30,15 @@ class Validation
 		'single' => 'CodeIgniter\Validation\Views\single',
 	];
 
+    public $scan = [
+        'identifier' => [
+            'label'  => 'ID',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'ID field is required.'
+            ]
+        ],
+    ];
     public $role = [
         'role_name' => [
             'label'  => 'Role Name',
@@ -203,13 +212,6 @@ class Validation
         ],
     ];
 	public $checkups = [
-        'no_days' => [
-            'label'  => 'Number of Days',
-            'rules'  => 'required',
-            'errors' => [
-                'required' => 'No. of Days field is required.',
-            ]
-        ],
 				'date' => [
             'label'  => 'Date',
             'rules'  => 'required',
@@ -434,7 +436,6 @@ class Validation
 
        ];
 			 public $checklists = [
-
 		 						// 'temperature' => [
 		 						// 		'label'  => 'temperature',
 		 						// 		'rules'  => 'min_length[2]|max_length[5]|numeric',
@@ -442,111 +443,26 @@ class Validation
 		 						// 				'numeric' => '* This temperature field is not accept letters.',
 		 						// 		]
 		 						// ],
-
-		 						'one_a' => [
-		 								'label'  => 'A',
+		 						'q_one' => [
+		 								'label'  => 'Question One',
 		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => '* This question A. is required.',
-		 								]
 		 						],
-
-		 						'one_b' => [
-		 								'label'  => 'B',
+		 						'q_two' => [
+		 								'label'  => 'Question Two',
 		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => '* This question B. is required.',
-		 								]
 		 						],
-
-		 						'one_c' => [
-		 								'label'  => 'C',
+		 						'q_three' => [
+		 								'label'  => 'Question Three',
 		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => '* This question C. is required.',
-		 								]
 		 						],
-
-		 						'one_d' => [
-		 								'label'  => 'D',
+		 						'q_four' => [
+		 								'label'  => 'Question Four',
 		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => '* This question D. is required.',
-		 								]
 		 						],
-
-		 						'one_e' => [
-		 								'label'  => 'E',
+		 						'q_five' => [
+		 								'label'  => 'Question Five',
 		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => '* This question E. is required.',
-		 								]
 		 						],
-
-		 						'one_f' => [
-		 								'label'  => 'F',
-		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => '* This question F. is required.',
-		 								]
-		 						],
-
-		 						'two_travel' => [
-		 								'label'  => 'Travel',
-		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => '* This travel history is required.',
-		 								]
-		 						],
-
-		 						'three_contact_one' => [
-		 								'label'  => 'Close Contact',
-		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => '* This question no. 3 is required.',
-		 								]
-		 						],
-
-		 						'three_contact_two' => [
-		 								'label'  => 'Close Contact',
-		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => '* This question no. 3 is required.',
-		 								]
-		 						],
-
-		 						'three_contact_three' => [
-		 								'label'  => 'Close Contact',
-		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => '* This question no. 3 is required.',
-		 								]
-		 						],
-
-		 						'three_contact_four' => [
-		 								'label'  => 'Close Contact',
-		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => '* This question no. 3 is required.',
-		 								]
-		 						],
-
-		 						'four_existing' => [
-		 								'label'  => 'Existing',
-		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => '* This question no. 4 is required.',
-		 								]
-		 						],
-
-		 						'five_pregnant' => [
-		 								'label'  => 'Existing',
-		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => '* This question no. 5 is required.',
-		 								]
-		 						],
-
 		        ];
 			 public $temperature = [
 

@@ -21,13 +21,35 @@ class CreateChecklists extends \CodeIgniter\Database\Migration {
         'type'           => 'VARCHAR',
         'constraint'        => '25',
         ],
-        'question_id' => [
-        'type'           => 'VARCHAR',
-        'constraint'        => '255',
+        'q_one' => [
+          'type' => 'VARCHAR',
+          'constraint' => '255'
+        ],
+        'q_two' => [
+          'type' => 'VARCHAR',
+          'constraint' => '255'
+        ],
+        'q_three' => [
+          'type' => 'VARCHAR',
+          'constraint' => '255'
+        ],
+        'q_four' => [
+          'type' => 'VARCHAR',
+          'constraint' => '255'
+        ],
+        'q_five' => [
+          'type' => 'VARCHAR',
+          'constraint' => '255'
+        ],
+        'reason_id' => [
+          'type' => 'INT',
+          'constraint' => '11'
         ],
         'status_defined' => [
         'type'           => 'VARCHAR',
         'constraint'        => '25',
+        'null' => true,
+        'default' => null,
         ],
         'status' => [
           'type' => 'CHAR',

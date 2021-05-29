@@ -3,6 +3,7 @@
 $routes->group('guests', ['namespace' => 'Modules\Guests\Controllers'], function($routes)
 {
     $routes->get('/', 'Guests::index');
+    $routes->match(['get', 'post'], 'message', 'Guests::message');
     $routes->get('show/(:num)', 'Guests::show_guest/$1');//ito yung sa show
     $routes->get('print_summary/(:num)/(:num)', 'Guests::print_summary/$1/$2');//ito yung sa show
 });

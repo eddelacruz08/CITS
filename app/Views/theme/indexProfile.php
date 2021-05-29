@@ -7,7 +7,7 @@
              <div class="col-md-6">
                <center>
                <label>Latest Self-Assessment Status:
-               <?php if ($latest_checklist_date[0]['status_defined'] == true):?>
+               <?php if (isset($latest_checklist_date[0]['status_defined']) == true):?>
                  <i class="fas fa-circle text-center text-danger"></i><a class="h6 text-danger"> Have Symtoms</a>
                  <hr style="margin: 0; padding: 0; border: solid 1px red;">
                <?php else:?>
@@ -18,14 +18,32 @@
              </center>
              </div>
              <div class="col-md-6">
-               <center>
-                 <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
-                    <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
-                      <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
-                    </button>
-                 </a>
-               </center>
-             </div>
+              <?php if(esc($latest_checklist_date[0]['date'])== date('Y-m-d')):?>
+                  <?php if(isset($latest_checklist_date[0]['status_defined'])==false):?>
+                    <center>
+                      <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
+                          <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
+                            <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
+                          </button>
+                      </a>
+                    </center>
+                  <?php else:?>
+                      <center>
+                      <a class="btn text-red btn-rounded" style="border: 2px solid red; padding: 5px;">
+                            <i class="fas fa-exclamation-triangle"></i> Unavailable. Please try tommorrow.
+                      </a>
+                      </center>
+                  <?php endif;?>
+              <?php else:?>
+                  <center>
+                    <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
+                      <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
+                        <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
+                      </button>
+                    </a>
+                  </center>
+              <?php endif;?>
+              </div>
            </div>
          </div>
        </div>
@@ -176,7 +194,7 @@
             <?php echo view($viewName); ?>
         <?php endif; ?>
 <?= view('App\Views\theme\footer') ?>
-<?php if($latest_checklist_date[0]['status_defined'] == true && $latest_checklist_date[0]['date'] == date('Y-m-d')): ?>
+<?php if(isset($latest_checklist_date[0]['status_defined']) == true && isset($latest_checklist_date[0]['date']) == date('Y-m-d')): ?>
   <script>
   	$(document).ready(function(){
   		$("#myModalDefined").modal('show');
@@ -190,7 +208,7 @@
   </script>
 <?php endif; ?>
 
-<?php if($latest_checklist_date[0]['date'] == date('Y-m-d')): ?>
+<?php if(isset($latest_checklist_date[0]['date']) == date('Y-m-d')): ?>
   <script>
   	$(document).ready(function(){
   		$("#myModal").modal('hide');

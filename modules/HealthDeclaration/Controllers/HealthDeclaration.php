@@ -8,6 +8,7 @@ use Modules\Visits\Models\ChecklistModel;
 use Modules\Visits\Models\VisitsModel;
 use Modules\Maintenances\Models\DepartmentModel;
 use Modules\Maintenances\Models\QuestionModel;
+use Modules\Scan\Models\QrcodeAttendanceModel;
 use App\Controllers\BaseController;;
 use CodeIgniter\I18n\Time;
 
@@ -33,82 +34,62 @@ class HealthDeclaration extends BaseController
 		$data['latest_checklist_date'] = $checklist_model->getDate($_SESSION['uid']);
 		$guest_id = $model->getGuestWithCondition(['id' => $_SESSION['uid'], 'status' => 'a']);
 		$data['questions'] = $question_model->get();
-		$data['questionself'] = $model->getSelfAssessmentHistory();
+		// $data['questionself'] = $model->getSelfAssessmentHistory();
 		$data['health_summary'] = $checklist_model->getHealthTrendSummary($_SESSION['uid']);
 		$data['latest_checklist'] = $checklist_model->getLatestChecklistDate($_SESSION['uid']);
-	
-		foreach ($data['latest_checklist'] as $health )
-		{
-			$date = $health['created_date'];
-			$temperature = $health['temperature'];
-
-			$time = new Time( $date, 'Asia/Manila','en_US');
-			$hour = $time->format('H');
-			if($hour < 12){
-				$data['temp'] = '<b>PM Temperature</b>: '.$temperature;
-			}else{
-				$data['temp'] = '<b>AM Temperature</b>: '.$temperature;
-			}
-		}
-			$data['departments'] = $department_model->get(['status' => 'a']);
-
-			$data['profile'] = $model->getProfile($_SESSION['uid']);
-			$data['function_title'] = "Latest Health Declaration Checklist";
-			$data['viewName'] = 'Modules\HealthDeclaration\Views\healthdeclaration\index';
-			echo view('App\Views\theme\indexHealth', $data);
+		$data['profile'] = $model->getProfile($_SESSION['uid']);
+		$data['profiles'] = $model->getProfile($_SESSION['uid']);
+		$data['function_title'] = "Latest Health Declaration Checklist";
+		$data['viewName'] = 'Modules\HealthDeclaration\Views\healthdeclaration\index';
+		echo view('App\Views\theme\indexHealth', $data);
   }
   public function capture_checklists($id)
   {
 		$model = new ChecklistModel();
 		$visit_model = new VisitsModel();
 		$users_model = new UsersModel();
-		$department_model = new DepartmentModel();
 		$question_model = new QuestionModel();
-		$val_array = [
-			'user_id' => $_SESSION['uid'],
-		];
-
-		$data['departments'] = $department_model->get(['status' => 'a']);
+		$assess_model = new QrcodeAttendanceModel();
 		$data['questions'] = $question_model->get(['status' => 'a']);
-
 		$data['checklist_counts'] = $model->getChecklistCount($_SESSION['uid']);
 		$data['visit_counts'] = $model->getVisitsCount($_SESSION['uid']);
 		$data['assess_counts'] = $model->getAssessCount($_SESSION['uid']);
 		$data['profile'] = $users_model->getProfile($_SESSION['uid']);
+		$data['profiles'] = $users_model->getProfile($_SESSION['uid']);
+		$data['latest_checklist_date'] = $model->getDate($_SESSION['uid']);
 
-		if($_POST){
-			$checkbox = $_POST['question_id'];
-			$check = "";
-			if ($_POST['question_id'] == TRUE) {
-				foreach ($checkbox as $checkboxResult) {
-					$check .= $checkboxResult.",";
-				}
-			}
-			if($_POST['question_id'] == TRUE){
-				$_POST['status_defined'] = 'ws';
-			}
-			if (isset($_POST['question']) == TRUE) {
-				$_POST['question_id'] = $_POST['question'];
+		if($this->request->getMethod() === 'post'){
+			if (!$this->validate('checklists')){
+				$data['value'] = $_POST;
+				$data['errors'] = \Config\Services::validation()->getErrors();
+				$data['viewName'] = 'Modules\HealthDeclaration\Views\healthdeclaration\frmChecklist';
+				echo view('App\Views\theme\indexHealth', $data);
 			}else{
-				$_POST['question_id'] = $check;
-			}
-
-			$_POST['user_id'] = $_SESSION['uid'];
+				if($_POST['q_one'] == 'yes' ||
+					$_POST['q_two'] == 'yes' ||
+					$_POST['q_three'] == 'yes' ||
+					$_POST['q_four'] == 'yes' ||
+					$_POST['q_five'] == 'yes'){
+					$_POST['status_defined'] = 'ws';
+					$val_array = [
+						'user_id' => $_SESSION['uid'],
+					];
+					$assess_model->add_assess($val_array);
+				}
+				$_POST['user_id'] = $_SESSION['uid'];
 				if($model->add($_POST)){
 					$_SESSION['success'] = 'You have Successfuly added a checklist!';
 					$this->session->markAsFlashdata('success');
 					return redirect()->to(base_url('profile'));
-				}
-				else{
+				}else{
 					$_SESSION['error'] = 'You have an error in adding a record!';
 					$this->session->markAsFlashdata('error');
 					return redirect()->to( base_url('profile'));
 				}
-		}
-		else{
+			}
+		}else{
 			$data['viewName'] = 'Modules\HealthDeclaration\Views\healthdeclaration\frmChecklist';
 			echo view('App\Views\theme\indexHealth', $data);
 		}
-  }
-
+    }
 }

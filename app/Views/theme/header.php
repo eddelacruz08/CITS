@@ -31,48 +31,6 @@
     .wrapper {
       zoom: .9;
     }
-    .buttun {
-          background-color: #004A7F;
-          -webkit-border-radius: 10px;
-          border-radius: 10px;
-          border: none;
-          color: #FFFFFF;
-          cursor: pointer;
-          display: inline-block;
-          font-family: Arial;
-          font-size: 20px;
-          padding: 5px 10px;
-          text-align: center;
-          text-decoration: none;
-          -webkit-animation: glowing 1500ms infinite;
-          -moz-animation: glowing 1500ms infinite;
-          -o-animation: glowing 1500ms infinite;
-          animation: glowing 1500ms infinite;
-          }
-          @-webkit-keyframes glowing {
-          0% { background-color: #B20000; -webkit-box-shadow: 0 0 3px #B20000; }
-          50% { background-color: #FF0000; -webkit-box-shadow: 0 0 40px #FF0000; }
-          100% { background-color: #B20000; -webkit-box-shadow: 0 0 3px #B20000; }
-          }
-
-          @-moz-keyframes glowing {
-          0% { background-color: #B20000; -moz-box-shadow: 0 0 3px #B20000; }
-          50% { background-color: #FF0000; -moz-box-shadow: 0 0 40px #FF0000; }
-          100% { background-color: #B20000; -moz-box-shadow: 0 0 3px #B20000; }
-          }
-
-          @-o-keyframes glowing {
-          0% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
-          50% { background-color: #FF0000; box-shadow: 0 0 40px #FF0000; }
-          100% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
-          }
-
-          @keyframes glowing {
-          0% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
-          50% { background-color: #FF0000; box-shadow: 0 0 40px #FF0000; }
-          100% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
-          }
-    </style>
     <style media="screen">
 
     .box{
@@ -122,13 +80,13 @@
                             <script src="<?= base_url() ?>public/js/qrcode.js"></script>
                             <center>
                               <div id="qrcode"></div>
-                              <h6><?= $profile[0]['token']?></h6>
-                              <h5><?= ucwords($profile[0]['firstname'].' '.$profile[0]['lastname'])?></h5>
+                              <h6><?= $profiles[0]['token']?></h6>
+                              <h5><?= ucwords($profiles[0]['firstname'].' '.$profiles[0]['lastname'])?></h5>
                               <button class="btn btn-dark mt-2" onclick="downLoadCode();">Download QR code</button>
                             </center>
                             <script>
                                 let qrcode = new QRCode("qrcode", {
-                                    text: "<?= $profile[0]['token']?>",
+                                    text: "<?= $profiles[0]['token']?>",
                                     width: 177,
                                     height: 177,
                                     colorDark : "#000000",
@@ -175,11 +133,9 @@
       <ul class="navbar-nav ml-auto">
         <!-- Navbar-->
         <ul class="navbar-nav ml-auto ml-md-0">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Hi <?= ucwords($_SESSION['uname']) ?>!</a>
-          </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user fa-fw"></i> Hi <?= ucwords($_SESSION['uname']) ?>!</a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                   <a class="dropdown-item" href="<?php echo base_url() ?>logout"><center><i class="fas fa-power-off"></i> Logout</center></a>
                 </div>

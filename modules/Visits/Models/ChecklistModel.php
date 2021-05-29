@@ -7,7 +7,7 @@ class ChecklistModel extends BaseModel
 {
     protected $table = 'checklists';
 
-    protected $allowedFields = ['id','user_id', 'temperature', 'question_id','status_defined','status', 'created_date', 'updated_date', 'deleted_date'];
+    protected $allowedFields = ['id','user_id', 'temperature', 'q_one', 'q_two', 'q_three', 'q_four', 'q_five', 'reason_id','status_defined','status', 'created_date', 'updated_date', 'deleted_date'];
 
     public function getChecklistWithCondition($conditions = [])
     {
@@ -18,21 +18,21 @@ class ChecklistModel extends BaseModel
         return $this->findAll();
     }
 
-    public function getSelfAssessmentHistory(){
+    // public function getSelfAssessmentHistory(){
 
-      $db = \Config\Database::connect();
+    //   $db = \Config\Database::connect();
 
-      $str = "SELECT  c.id,
-                      GROUP_CONCAT(q.question ORDER BY q.id) DepartmentName
-              FROM    checklists c
-                      INNER JOIN questions q
-                          ON FIND_IN_SET(q.id, c.question_id) > 0
-              GROUP   BY c.id";
+    //   $str = "SELECT  c.id,
+    //                   GROUP_CONCAT(q.question ORDER BY q.id) DepartmentName
+    //           FROM    checklists c
+    //                   INNER JOIN questions q
+    //                       ON FIND_IN_SET(q.id, c.question_id) > 0
+    //           GROUP   BY c.id";
 
-      $query = $db->query($str);
+    //   $query = $db->query($str);
 
-      return $query->getResultArray();
-    }
+    //   return $query->getResultArray();
+    // }
 
     public function getChecklistData($id){
 

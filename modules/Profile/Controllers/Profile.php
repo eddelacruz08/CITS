@@ -53,6 +53,7 @@ class Profile extends BaseController
 			$data['questionself'] = $model->getSelfAssessmentHistory();
 			$data['visit_counts'] = $model->getVisitsCount($_SESSION['uid']);
 			$data['profile'] = $user_model->getProfile($_SESSION['uid']);
+			$data['profiles'] = $user_model->getProfile($_SESSION['uid']);
 			$data['assess_counts'] = $model->getAssessCount($_SESSION['uid']);
 			$data['health_summary'] = $model->getHealthTrendSummary($_SESSION['uid']);
 			$data['viewName'] = 'Modules\Profile\Views\profiles\index';
@@ -70,6 +71,7 @@ class Profile extends BaseController
 
 		helper(['form', 'url', 'html']);
 		$model = new UsersModel();
+		$data['profiles'] = $model->getProfile($_SESSION['uid']);
 		$data['rec'] = $model->find($id);
 		if(!empty($_POST))
 		{

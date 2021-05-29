@@ -27,7 +27,7 @@ class Guests extends BaseController
 		$permissions_model = new PermissionsModel();
 		$this->permissions = $permissions_model->getPermissionsWithCondition(['status' => 'a']);
 	}
-
+	
   public function index()
   {
   	$this->hasPermissionRedirect('list-guest');

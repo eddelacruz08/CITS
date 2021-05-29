@@ -58,25 +58,28 @@
               <div class="card">
                 <div class="card-body">
                   <center>
-                    <h5 style="color: black;">QR Code Scanner <i class="fas fa-qrcode"></i></h5>
+                    <h5 style="color: black;">QR Code Scanner <i class="fas fa-qrcode"></i> <span id="remain"></span></h5>
                   </center>
                     <video id="previewChecklist"></video>
-                    <form action="<?= base_url() ?>scan/add-scan" id="myForm" method="post">
+                    <form action="<?= base_url() ?>scan/add-scan" id="form1" name="form1" method="post">
                       <div class="custom-control mt-2 text-center">
                         <div class="row">
                           <div class="col-md-1">
                             <label>ID:</label>
                           </div>
                           <div class="col-md-11">
-                            <input class="form-control" type="text" value="<?=isset($value['identifier']) ? '': ''?>" id="identifier" name="identifier"> 
+                            <input readonly class="form-control <?= isset($errors['identifier']) ? 'is-invalid':'is-valid' ?>" type="text" value="<?=isset($value['identifier']) ? '': ''?>" id="identifier" name="identifier"> 
+                            <!-- <?php if(isset($errors['identifier'])):?>
+                              <p class="text-danger"><?=esc($errors['identifier'])?><p>
+                            <?php endif;?> -->
                           </div>
                         </div>
                       </div>
                       <div class="custom-control mt-2 text-center">
-                        <button class="btn btn-success" type="submit">Login</button>
+                        <button class="btn btn-success" type="submit">Enter</button>
                       </div>
                     </form>
-                    <div id="liveScanData"></div>
+                    <!-- <div id="liveScanData"></div> -->
                 </div>
               </div>
             </div>
@@ -233,6 +236,27 @@
     });
   </script>
   <script src="<?= base_url() ?>public/js/jquery.min.js"></script>
+  <script type="text/javascript">
+    // window.onload=counter;
+    // function counter()
+    // {
+    //   var seconds = 5;  
+    //   countDown();
+    //   function countDown()
+    //   {
+    //     document.getElementById("remain").innerHTML=seconds;
+    //     if(seconds>0)
+    //     {
+    //       seconds=seconds - 1;
+    //       setTimeout(countDown,1000);
+    //     }
+    //     if(seconds == 0)
+    //     {
+    //       document.form1.submit();
+    //     }
+    //   }
+    // }
+  </script>
   <script src="<?= base_url() ?>public/js/bootstrap.min.js"></script>
   <script src="<?= base_url() ?>/public/js/popper.min.js"></script>
   <script src="<?= base_url() ?>/public/dist/js/adminlte.min.js"></script>

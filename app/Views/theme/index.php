@@ -13,7 +13,7 @@
                               alt="User profile picture">
                        </div>
                        <a href="<?=base_url().'guests/show/'.$profile[0]['id']?>">
-                         <h3 class="profile-username text-center"><?=ucfirst($profile[0]['firstname'].' '.$profile[0]['middlename'].' '.$profile[0]['lastname'].' '.$profile[0]['extension'])?></h3>
+                         <h3 class="profile-username text-center"><?=ucwords($profile[0]['firstname'].' '.$profile[0]['middlename'].' '.$profile[0]['lastname'].' '.$profile[0]['extension'])?></h3>
                        </a>
                        <p class="text-muted text-center"><?=ucfirst($profile[0]['guest_type'])?></p>
                        <p class="text-muted text-center"><?=ucfirst($profile[0]['gender']).' | '.date_diff(date_create($profile[0]['birthdate']), date_create(date('Y-m-d')))->format("%y") . ' year(s) old'?></p>

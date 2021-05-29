@@ -7,7 +7,7 @@ class GuestAssessmentModel extends BaseModel
 {
     protected $table = 'assess';
 
-    protected $allowedFields = [ 'guest_id','user_id','guest_status','status','date', 'created_date','updated_date', 'deleted_date'];
+    protected $allowedFields = ['user_id','status','date', 'created_date','updated_date', 'deleted_date'];
 
     public function getGuestAssessWithCondition($conditions = [])
     {
@@ -35,8 +35,13 @@ class GuestAssessmentModel extends BaseModel
 
     $db = \Config\Database::connect();
 
-    $str = "SELECT a.*, g.first_name, g.middle_name, g.last_name, gen.gender, t.guest_type FROM assess a LEFT JOIN guests g ON g.user_id = a.guest_id
-    LEFT JOIN genders gen ON gen.id = g.gender_id LEFT JOIN types t ON t.id = g.user_type_id WHERE a.status = 'a' AND a.guest_status = 'a' ORDER BY a.created_date DESC";
+    $str = "SELECT a.*, g.firstname, g.middlename, g.lastname, gen.gender, t.guest_type 
+    FROM assess a 
+    LEFT JOIN users g ON g.id = a.user_id
+    LEFT JOIN genders gen ON gen.id = g.gender_id 
+    LEFT JOIN types t ON t.id = g.user_type_id 
+    WHERE a.status = 'a'
+    ORDER BY a.created_date DESC";
 
     $query = $db->query($str);
 

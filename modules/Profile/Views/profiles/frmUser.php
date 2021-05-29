@@ -11,11 +11,7 @@
               <label for="firstname">First Name:</label>
               <div class="input-group mb-1">
                 <input name="firstname" type="text" value="<?= isset($rec['firstname']) ? $rec['firstname'] : set_value('firstname') ?>" class="form-control <?= isset($errors['firstname']) ? 'is-invalid':' ' ?>" id="firstname" placeholder="First name">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <span class="fas fa-user"></span>
-                  </div>
-                </div>
+              
                 <?php if(isset($errors['firstname'])): ?>
                   <div class="invalid-feedback">
                     <?= $errors['firstname'] ?>
@@ -25,11 +21,7 @@
               <label for="middlename">Middle Name:</label>
               <div class="input-group mb-1">
                 <input name="middlename" type="text" value="<?= isset($rec['middlename']) ? $rec['middlename'] : set_value('middlename') ?>" class="form-control <?= isset($errors['middlename']) ? 'is-invalid':' ' ?>" id="middlename" placeholder="Middle name">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <span class="fas fa-user"></span>
-                  </div>
-                </div>
+              
                 <?php if(isset($errors['middlename'])): ?>
                   <div class="invalid-feedback">
                     <?= $errors['middlename'] ?>
@@ -39,11 +31,7 @@
               <label for="lastname">Last Name:</label>
               <div class="input-group mb-1">
                 <input name="lastname" type="text" value="<?= isset($rec['lastname']) ? $rec['lastname'] : set_value('lastname') ?>" class="form-control <?= isset($errors['lastname']) ? 'is-invalid':' ' ?>" id="lastname" placeholder="Last name">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <span class="fas fa-user"></span>
-                  </div>
-                </div>
+              
                 <?php if(isset($errors['lastname'])): ?>
                   <div class="invalid-feedback">
                     <?= $errors['lastname'] ?>
@@ -64,11 +52,7 @@
                     <?php endforeach; ?>
                   <?php endif; ?>
                 </select>
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <span class="fas fa-user"></span>
-                  </div>
-                </div>
+               
                 <?php if(isset($errors['ext_name_id'])): ?>
                   <div class="invalid-feedback">
                     <?= $errors['ext_name_id'] ?>
@@ -90,11 +74,7 @@
                   <?php endif; ?>
 
                 </select>
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <span class="fas fa-venus-mars"></span>
-                  </div>
-                </div>
+              
                 <?php if(isset($errors['gender_id'])): ?>
                   <div class="invalid-feedback">
                     <?= $errors['gender_id'] ?>
@@ -104,11 +84,7 @@
                 <label for="username">Username:</label>
               <div class="input-group mb-1">
                 <input name="username" type="text" value="<?= isset($rec['username']) ? $rec['username'] : set_value('username') ?>" class="form-control <?= isset($errors['username']) ? 'is-invalid':' ' ?>" id="username" placeholder="Username">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <span class="fas fa-user"></span>
-                  </div>
-                </div>
+               
                 <?php if(isset($errors['username'])): ?>
                   <div class="invalid-feedback">
                     <?= $errors['username'] ?>
@@ -118,11 +94,7 @@
               <label for="password">Password:</label>
               <div class="input-group mb-1">
               <input name="password" type="password" value="<?= isset($rec['password']) ? '': set_value('password') ?>" class="form-control <?= isset($errors['password']) ? 'is-invalid':' ' ?>" id="password" placeholder="Password">
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-lock"></span>
-                </div>
-              </div>
+            
               <?php if(isset($errors['password'])): ?>
                 <div class="invalid-feedback">
                   <?= $errors['password'] ?>
@@ -132,11 +104,7 @@
               <label for="password_retype">Password Re-type:</label>
               <div class="input-group mb-1">
               <input name="password_retype" type="password" value="<?= isset($rec['password']) ? '' : set_value('password_retype') ?>" class="form-control <?= isset($errors['password_retype']) ? 'is-invalid':' ' ?>" id="password_retype" placeholder="Password Re-type">
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-lock"></span>
-                </div>
-              </div>
+              
               <?php if(isset($errors['password_retype'])): ?>
                 <div class="invalid-feedback">
                   <?= $errors['password_retype'] ?>
@@ -157,11 +125,7 @@
                     <?php endforeach; ?>
                   <?php endif; ?>
                 </select>
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <span class="fas fa-users"></span>
-                  </div>
-                </div>
+               
                 <?php if(isset($errors['user_type_id'])): ?>
                   <div class="invalid-feedback">
                     <?= $errors['user_type_id'] ?>
@@ -173,11 +137,7 @@
               <label for="email">Email:</label>
             <div class="input-group mb-1">
               <input name="email" type="email" value="<?= isset($rec['email']) ? $rec['email'] : set_value('email') ?>" class="form-control <?= isset($errors['email']) ? 'is-invalid':' ' ?>" id="email" placeholder="Email">
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-envelope"></span>
-                </div>
-              </div>
+             
               <?php if(isset($errors['email'])): ?>
                 <div class="invalid-feedback">
                   <?= $errors['email'] ?>
@@ -196,11 +156,7 @@
             <label for="cellphone_no">Cellphone No.:</label>
             <div class="input-group mb-1">
             <input name="cellphone_no" type="text" value="<?= isset($rec['cellphone_no']) ? $rec['cellphone_no'] : set_value('cellphone_no') ?>" class="form-control <?= isset($errors['cellphone_no']) ? 'is-invalid':' ' ?>" id="cellphone_no" placeholder="Cellphone Number">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-mobile"></span>
-              </div>
-            </div>
+            
             <?php if(isset($errors['cellphone_no'])): ?>
               <div class="invalid-feedback">
                 <?= $errors['cellphone_no'] ?>
@@ -210,11 +166,7 @@
             <label for="landline_no">Landline No.:</label><span>(Optional)</span>
             <div class="input-group mb-1">
             <input name="landline_no" type="text" value="<?= isset($rec['landline_no']) ? $rec['landline_no'] : set_value('landline_no') ?>" class="form-control <?= isset($errors['landline_no']) ? 'is-invalid':' ' ?>" id="landline_no" placeholder="Landline Number">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-phone"></span>
-              </div>
-            </div>
+            
             <?php if(isset($errors['landline_no'])): ?>
               <div class="invalid-feedback">
                 <?= $errors['landline_no'] ?>
@@ -224,11 +176,7 @@
             <label for="address">Address:</label>
             <div class="input-group mb-1">
             <input name="address" type="text" value="<?= isset($rec['address']) ? $rec['address'] : set_value('address') ?>" class="form-control <?= isset($errors['address']) ? 'is-invalid':' ' ?>" id="address" placeholder="[#House No.], [Street Name], [Baranggay]">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-address-book"></span>
-              </div>
-            </div>
+            
             <?php if(isset($errors['address'])): ?>
               <div class="invalid-feedback">
                 <?= $errors['address'] ?>
@@ -249,11 +197,7 @@
                   <?php endforeach; ?>
                 <?php endif; ?>
               </select>
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-city"></span>
-                </div>
-              </div>
+            
               <?php if(isset($errors['city_id'])): ?>
                 <div class="invalid-feedback">
                   <?= $errors['city_id'] ?>
@@ -274,11 +218,7 @@
                     <?php endforeach; ?>
                   <?php endif; ?>
                 </select>
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <span class="fas fa-map"></span>
-                  </div>
-                </div>
+               
                 <?php if(isset($errors['province_id'])): ?>
                   <div class="invalid-feedback">
                     <?= $errors['province_id'] ?>
@@ -288,11 +228,7 @@
               <label for="postal">Postal No.:</label>
               <div class="input-group mb-3">
               <input name="postal" type="text" value="<?= isset($rec['postal']) ? $rec['postal'] : set_value('postal') ?>" class="form-control <?= isset($errors['postal']) ? 'is-invalid':' ' ?>" id="postal" placeholder="Postal Number">
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-map-pin"></span>
-                </div>
-              </div>
+             
               <?php if(isset($errors['postal'])): ?>
                 <div class="invalid-feedback">
                   <?= $errors['postal'] ?>
@@ -309,7 +245,7 @@
           <div class="row">
             <!-- /.col -->
             <div class="col-12 mb-3">
-              <button type="submit" class="btn btn-primary btn-block">Register</button>
+              <button type="submit" class="btn btn-primary btn-block">Save</button>
             </div>
             <!-- /.col -->
           </div>

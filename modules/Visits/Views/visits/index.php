@@ -4,7 +4,6 @@
       <div class="row">
         <div class="col-md-6">
           <h2><?= $function_title?></h2>
-          <a href="<?=base_url()?>visits/pdf" target="_blank">Download as PDF</a>
         </div>
         <div class="col-md-6">
             <button type="button" class="btn btn-danger float-right btn-md" name="button" data-toggle="modal" data-target="#modal-lg2">

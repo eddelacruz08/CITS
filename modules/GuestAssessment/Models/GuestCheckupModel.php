@@ -7,7 +7,7 @@ class GuestCheckupModel extends BaseModel
 {
     protected $table = 'checkups';
 
-    protected $allowedFields = ['id','guest_id','user_id','no_days','date','description', 'status','created_date','updated_date', 'deleted_date'];
+    protected $allowedFields = ['id','user_id','date','description', 'status','created_date','updated_date', 'deleted_date'];
 
     public function getObservationGuest(){
 
