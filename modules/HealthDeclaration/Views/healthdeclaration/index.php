@@ -18,31 +18,41 @@
              </center>
              </div>
              <div class="col-md-6">
-              <?php if(esc($latest_checklist_date[0]['date'])== date('Y-m-d')):?>
-                  <?php if(isset($latest_checklist_date[0]['status_defined'])==false):?>
+              <?php if(!empty($latest_checklist_date)): ?>
+                <?php if(esc($latest_checklist_date[0]['date'])== date('Y-m-d')):?>
+                    <?php if(isset($latest_checklist_date[0]['status_defined'])==false):?>
+                      <center>
+                        <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
+                            <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
+                              <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
+                            </button>
+                        </a>
+                      </center>
+                    <?php else:?>
+                        <center>
+                        <a class="btn text-red btn-rounded" style="border: 2px solid red; padding: 5px;">
+                              <i class="fas fa-exclamation-triangle"></i> Unavailable. Please try tommorrow.
+                        </a>
+                        </center>
+                    <?php endif;?>
+                <?php else:?>
                     <center>
                       <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
-                          <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
-                            <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
-                          </button>
+                        <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
+                          <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
+                        </button>
                       </a>
                     </center>
-                  <?php else:?>
-                      <center>
-                      <a class="btn text-red btn-rounded" style="border: 2px solid red; padding: 5px;">
-                            <i class="fas fa-exclamation-triangle"></i> Unavailable. Please try tommorrow.
-                      </a>
-                      </center>
-                  <?php endif;?>
-              <?php else:?>
-                  <center>
-                    <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
-                      <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
-                        <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
-                      </button>
-                    </a>
-                  </center>
-              <?php endif;?>
+                <?php endif;?>
+              <?php else: ?>
+                <center>
+                  <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
+                    <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
+                      <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
+                    </button>
+                  </a>
+                </center>
+              <?php endif; ?>
              </div>
            </div>
          </div>
@@ -66,9 +76,9 @@
                 <th scope="row"><?= $cnt++ ?></th>
                 <td class="text-center">
                       <?php if ($summary['status_defined']=='ws'):?>
-                        <?=date('F d, Y h:i a', strtotime($summary['created_date']))?> <label class="text-success"> |  No Symtoms</label>
-                      <?php else:?>
                         <?=date('F d, Y h:i a', strtotime($summary['created_date']))?> <label class="text-danger"> |  Have Symtoms</label>
+                      <?php else:?>
+                        <?=date('F d, Y h:i a', strtotime($summary['created_date']))?> <label class="text-success"> |  No Symtoms</label>
                       <?php endif;?>
                 </td>
                 <td class="text-center">
@@ -95,9 +105,9 @@
                     </div>
                     <div class="modal-body">
                       <?php if ($summary['status_defined']=='ws'):?>
-                        <p class="h4">No Symtoms</p>
-                      <?php else:?>
                         <p class="h4">Have Symtoms</p>
+                      <?php else:?>
+                        <p class="h4">No Symtoms</p>
                       <?php endif;?>
                       <table class="table">
                         <thead class="thead-dark">

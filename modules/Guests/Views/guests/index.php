@@ -18,6 +18,22 @@
         </div>
       </div>
       <br>
+      <?php if(isset($_SESSION['success_request'])): ?>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+             <?= $_SESSION['success_request']; ?>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+      <?php endif; ?>
+      <?php if(isset($_SESSION['error_request'])): ?>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+             <?= $_SESSION['error_request']; ?>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+        <?php endif; ?>
        <div class="table-responsive">
          <table class="table table-sm table-striped table-bordered index-table">
           <thead class="thead-dark">
@@ -27,6 +43,7 @@
               <th>Guest Type</th>
               <th>Gender</th>
               <th>Email</th>
+              <th>Send Request Health Form</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -39,6 +56,11 @@
               <td><?= ucwords($patient['guest_type']) ?></td>
               <td><?= ucfirst($patient['gender']) ?></td>
               <td><?= $patient['email'] ?></td>
+              <td>
+                <form action="<?=base_url().'checklists/requests/'.$patient['token']?>" method="post">
+                  <button type="submit" class="btn btn-info">Request Health Form</button>
+                </form>
+              </td>
               <td class="text-center">
                 <?php
                   users_action('guests', $_SESSION['userPermmissions'], $patient['id']);

@@ -18,31 +18,41 @@
              </center>
              </div>
              <div class="col-md-6">
-              <?php if(esc($latest_checklist_date[0]['date'])== date('Y-m-d')):?>
-                  <?php if(isset($latest_checklist_date[0]['status_defined'])==false):?>
+              <?php if(!empty($latest_checklist_date)): ?>
+                <?php if(esc($latest_checklist_date[0]['date'])== date('Y-m-d')):?>
+                    <?php if(isset($latest_checklist_date[0]['status_defined'])==false):?>
+                      <center>
+                        <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
+                            <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
+                              <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
+                            </button>
+                        </a>
+                      </center>
+                    <?php else:?>
+                        <center>
+                        <a class="btn text-red btn-rounded" style="border: 2px solid red; padding: 5px;">
+                              <i class="fas fa-exclamation-triangle"></i> Unavailable. Please try tommorrow.
+                        </a>
+                        </center>
+                    <?php endif;?>
+                <?php else:?>
                     <center>
                       <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
-                          <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
-                            <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
-                          </button>
+                        <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
+                          <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
+                        </button>
                       </a>
                     </center>
-                  <?php else:?>
-                      <center>
-                      <a class="btn text-red btn-rounded" style="border: 2px solid red; padding: 5px;">
-                            <i class="fas fa-exclamation-triangle"></i> Unavailable. Please try tommorrow.
-                      </a>
-                      </center>
-                  <?php endif;?>
-              <?php else:?>
-                  <center>
-                    <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
-                      <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
-                        <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
-                      </button>
-                    </a>
-                  </center>
-              <?php endif;?>
+                <?php endif;?>
+              <?php else: ?>
+                <center>
+                  <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
+                    <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
+                      <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
+                    </button>
+                  </a>
+                </center>
+              <?php endif; ?>
               </div>
            </div>
          </div>
@@ -170,8 +180,9 @@
                           <div class="modal-body">
                               <form>
                                 <center>
-                                  <p class="h5">Your latest self-assessment tested positive for symtoms. Make sure you don't leave and stay at home. Please quarantine yourself so as not to infect other people with the symptoms experienced.</p>
-                                  <p class="h5">Please take self-assessment for another day to clarify your status.</p>
+                                  <p class="h6">Your latest self-assessment tested positive for symtoms. Make sure you don't leave and stay at home. Please quarantine yourself so as not to infect other people with the symptoms experienced.</p>
+                                  <hr>
+                                  <p class="h6">Please take self-assessment for another day to clarify your status.</p>
                                 </center>
                               </form>
                           </div>

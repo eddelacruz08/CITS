@@ -10,7 +10,7 @@
               <h5><?= $function_title_active?></h5>
             </div>
             <div class="col-md-6">
-              <?php maintenance_detail_add_link('departments', $_SESSION['userPermmissions']) ?>
+              <?php maintenance_detail_add_link('reasons', $_SESSION['userPermmissions']) ?>
             </div>
           </div>
           <br>
@@ -19,20 +19,20 @@
               <thead class="thead-dark">
                 <tr class="text-center">
                   <th>#</th>
-                  <th>Departments</th>
+                  <th>Reasons</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 <?php $cnt = 1; ?>
-                <?php foreach($departmentsActive as $department): ?>
+                <?php foreach($reasonsActive as $reason): ?>
                 <tr class="text-center">
                   <th scope="row"><?= $cnt++ ?></th>
-                  <td><?= $department['department'] ?></td>
+                  <td><?= $reason['reason'] ?></td>
 
                   <td class="text-center">
                     <?php
-                      maintenance_action('departments', $_SESSION['userPermmissions'], $department['id']);
+                      maintenance_action('reasons', $_SESSION['userPermmissions'], $reason['id']);
                     ?>
                   </td>
                 </tr>
@@ -59,20 +59,20 @@
               <thead class="thead-dark">
                 <tr class="text-center">
                   <th>#</th>
-                  <th>Departments</th>
+                  <th>Reasons</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 <?php $cnt = 1; ?>
-                <?php foreach($departmentsInactive as $department): ?>
+                <?php foreach($reasonsInactive as $reason): ?>
                 <tr class="text-center">
                   <th scope="row"><?= $cnt++ ?></th>
-                  <td><?= $department['department'] ?></td>
+                  <td><?= $reason['reason'] ?></td>
 
                   <td class="text-center">
                     <?php
-                      maintenance_action('departments', $_SESSION['userPermmissions'], $department['id']);
+                      maintenance_action('reasons', $_SESSION['userPermmissions'], $reason['id']);
                     ?>
                   </td>
                 </tr>

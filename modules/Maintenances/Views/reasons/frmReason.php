@@ -3,7 +3,7 @@
   <div class="col-md-12">
     <div class="card border-success" style="border-radius: 0px;">
       <div class="card-body">
-      <form action="<?= base_url() ?>departments/<?= isset($rec) ? 'edit/'.$rec['id'] : 'add' ?>" method="post">
+      <form action="<?= base_url() ?>reasons/<?= isset($rec) ? 'edit/'.$rec['id'] : 'add' ?>" method="post">
 
         <div class="row">
           <div class="col-md-3">
@@ -21,7 +21,7 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-md-8">
-                  <label for="department">Department</label>
+                  <label for="reason">Reasons</label>
                 </div>
                 <div class="col-md-4">
                 <input type="radio" name="status" id="statusA" value="a">
@@ -30,10 +30,10 @@
                 <label for="statusB">Inactive</label>
               </div>
             </div>
-              <input type="text" class="form-control" name="department" value="<?= isset($rec['department']) ? $rec['department'] : ''?>" id="department" placeholder="Department Name">
-              <?php if (isset($errors['department'])): ?>
+              <input type="text" class="form-control" name="reason" value="<?= isset($rec['reason']) ? $rec['reason'] : ''?>" id="reason" placeholder="Reason Name">
+              <?php if (isset($errors['reason'])): ?>
                 <div class="text-danger">
-                    <?= $errors['department']?>
+                    <?= $errors['reason']?>
                 </div>
               <?php endif; ?>
               <?php if (isset($errors['status'])): ?>

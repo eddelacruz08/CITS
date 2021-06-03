@@ -1,9 +1,9 @@
 <?php
-$routes->group('departments', ['namespace' => 'Modules\Maintenances\Controllers'], function($routes)
+$routes->group('reasons', ['namespace' => 'Modules\Maintenances\Controllers'], function($routes)
 {
-    $routes->get('/', 'Departments::index');
-    $routes->match(['get', 'post'], 'add', 'Departments::add_department');
-    $routes->match(['get', 'post'], 'edit/(:num)', 'Departments::edit_department/$1');
+    $routes->get('/', 'Reasons::index');
+    $routes->match(['get', 'post'], 'add', 'Reasons::add_reason');
+    $routes->match(['get', 'post'], 'edit/(:num)', 'Reasons::edit_reason/$1');
 });
 
 $routes->group('extensions', ['namespace' => 'Modules\Maintenances\Controllers'], function($routes)

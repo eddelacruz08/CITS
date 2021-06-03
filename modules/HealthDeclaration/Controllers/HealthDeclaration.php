@@ -6,7 +6,7 @@ use Modules\UserManagement\Models\UsersModel;
 use Modules\HealthDeclaration\Models\HealthDeclarationModel;
 use Modules\Visits\Models\ChecklistModel;
 use Modules\Visits\Models\VisitsModel;
-use Modules\Maintenances\Models\DepartmentModel;
+// use Modules\Maintenances\Models\DepartmentModel;
 use Modules\Maintenances\Models\QuestionModel;
 use Modules\Scan\Models\QrcodeAttendanceModel;
 use App\Controllers\BaseController;;
@@ -14,8 +14,6 @@ use CodeIgniter\I18n\Time;
 
 class HealthDeclaration extends BaseController
 {
-
-
 	public function __construct()
 	{
 		parent:: __construct();
@@ -23,13 +21,12 @@ class HealthDeclaration extends BaseController
 		$this->permissions = $permissions_model->getPermissionsWithCondition(['status' => 'a']);
 
 	}
-
   public function index()
   {
 		$model = new UsersModel();
 		$visit_model = new VisitsModel();
 		$checklist_model = new ChecklistModel();
-		$department_model = new DepartmentModel();
+		// $department_model = new DepartmentModel();
 		$question_model = new QuestionModel();
 		$data['latest_checklist_date'] = $checklist_model->getDate($_SESSION['uid']);
 		$guest_id = $model->getGuestWithCondition(['id' => $_SESSION['uid'], 'status' => 'a']);
@@ -71,8 +68,19 @@ class HealthDeclaration extends BaseController
 					$_POST['q_four'] == 'yes' ||
 					$_POST['q_five'] == 'yes'){
 					$_POST['status_defined'] = 'ws';
+					
+					// $to = $email;
+					// $subject = 'Forgot Password';
+					// $message = 'Hi '.$firstname.' '.$lastname.'!<br><a href="'.base_url().'ResetPassword/index"> Reset your password here!</a>';
+					// $email = \Config\Services::email();
+					// $email->setTo($to);
+					// $email->setFrom('United Coders Dev Team', SYSTEM_NAME);
+					// $email->setSubject($subject);
+					// $email->setMessage($message);
+					// $email->send();
 					$val_array = [
 						'user_id' => $_SESSION['uid'],
+						'email_status' => 1,
 					];
 					$assess_model->add_assess($val_array);
 				}
@@ -80,11 +88,11 @@ class HealthDeclaration extends BaseController
 				if($model->add($_POST)){
 					$_SESSION['success'] = 'You have Successfuly added a checklist!';
 					$this->session->markAsFlashdata('success');
-					return redirect()->to(base_url('profile'));
+					return redirect()->to(base_url('health%20declaration'));
 				}else{
 					$_SESSION['error'] = 'You have an error in adding a record!';
 					$this->session->markAsFlashdata('error');
-					return redirect()->to( base_url('profile'));
+					return redirect()->to( base_url('health%20declaration'));
 				}
 			}
 		}else{

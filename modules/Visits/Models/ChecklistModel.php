@@ -7,7 +7,19 @@ class ChecklistModel extends BaseModel
 {
     protected $table = 'checklists';
 
-    protected $allowedFields = ['id','user_id', 'temperature', 'q_one', 'q_two', 'q_three', 'q_four', 'q_five', 'reason_id','status_defined','status', 'created_date', 'updated_date', 'deleted_date'];
+    protected $allowedFields = ['id','user_id', 'temperature', 'q_one', 'q_two', 'q_three', 'q_four', 'q_five', 'reason_id','status_defined', 'token','status', 'created_date', 'updated_date', 'deleted_date'];
+
+    public function verifyTokenChecklist($token){
+      $builder = $this->db->table('checklists');
+      $builder->select("id, user_id, token, created_date, updated_date");
+      $builder->where("token", $token);
+      $result = $builder->get();
+      if (count($result->getResultArray())==1) {
+        return $result->getRowArray();
+      }else{
+        return false;
+      }
+    }
 
     public function getChecklistWithCondition($conditions = [])
     {

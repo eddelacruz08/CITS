@@ -1,8 +1,8 @@
 <?php namespace App\Database\Migrations;
 
-class CreateChecklists extends \CodeIgniter\Database\Migration {
+class CreateReasons extends \CodeIgniter\Database\Migration {
 
-    private $table = 'checklists';
+    private $table = 'reasons';
 
     public function up()
     {
@@ -15,52 +15,16 @@ class CreateChecklists extends \CodeIgniter\Database\Migration {
         ],
         'user_id' => [
           'type' => 'BIGINT',
-          'comment' => ''
+          'comment' => 'The user who created the information'
         ],
-        'temperature' => [
-        'type'           => 'VARCHAR',
-        'constraint'        => '25',
-        ],
-        'q_one' => [
+        'reason' => [
           'type' => 'VARCHAR',
           'constraint' => '255'
-        ],
-        'q_two' => [
-          'type' => 'VARCHAR',
-          'constraint' => '255'
-        ],
-        'q_three' => [
-          'type' => 'VARCHAR',
-          'constraint' => '255'
-        ],
-        'q_four' => [
-          'type' => 'VARCHAR',
-          'constraint' => '255'
-        ],
-        'q_five' => [
-          'type' => 'VARCHAR',
-          'constraint' => '255'
-        ],
-        'reason_id' => [
-          'type' => 'INT',
-          'constraint' => '11'
-        ],
-        'status_defined' => [
-        'type'           => 'VARCHAR',
-        'constraint'        => '25',
-        'null' => true,
-        'default' => null,
-        ],
-        'token' => [
-          'type' => 'VARCHAR',
-          'constraint' => '32'
         ],
         'status' => [
           'type' => 'CHAR',
           'constraint' => '1',
-          'default' => 'a'
         ],
-        'date DATE NOT NULL DEFAULT CURRENT_TIMESTAMP',
         'created_date' => [
           'type' => 'DATETIME',
           'comment' => 'Date of creation',
@@ -82,6 +46,18 @@ class CreateChecklists extends \CodeIgniter\Database\Migration {
       $this->forge->addKey('id', TRUE);
       $this->forge->createTable($this->table);
 
+      $data = [
+        [
+          'user_id' => '0',
+          'reason' => 'Wrong input details',
+          'status' => 'a',
+          'created_date' => date('y-m-d H:i:s')
+        ],
+      ];
+
+      $db      = \Config\Database::connect();
+      $builder = $db->table($this->table);
+      $builder->insertBatch($data);
     }
 
     public function down()

@@ -17,6 +17,10 @@ class CreateAssess extends \CodeIgniter\Database\Migration {
           'type' => 'BIGINT',
           'comment' => ''
         ],
+        'email_status' => [
+          'type' => 'INT',
+          'constraint' => '1',
+        ],
         'status' => [
           'type' => 'CHAR',
           'constraint' => '1',

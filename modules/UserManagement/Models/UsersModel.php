@@ -11,6 +11,29 @@ class UsersModel extends \CodeIgniter\Model
     'cellphone_no', 'landline_no', 'address','city_id','province_id', 'postal','user_type_id', 'role_id','date','token', 'status', 'created_date','updated_date',
     'deleted_date'];
 
+    public function get($conditions = [], $fields = [], $tables = [])
+    {
+  
+      $this->select($this->table.'.*');
+      foreach ($fields as $table => $array) {
+        foreach ($array as $field => $name) {
+          $this->select($table . '.' . $field . ' ' . $name);
+        }
+      }
+  
+      foreach ($tables as $a => $array) {
+        foreach ($array as $fk => $id) {
+          $this->join($a, $fk .'='. $id, 'left');
+        }
+      }
+  
+      foreach($conditions as $field => $value) {
+        $this->where($field, $value);
+      }
+  
+      return $this->findAll();
+    }
+    
     public function verifyToken($token){
       $builder = $this->db->table('users');
       $builder->select("id, token, firstname, lastname, username, updated_date");
@@ -21,25 +44,6 @@ class UsersModel extends \CodeIgniter\Model
       }else{
         return false;
       }
-    }
-
-    public function checkExpiryDate($time)
-    {
-      $updated_time = strtotime($time);
-      $current_time = time();
-      // die(time());
-      $time_diff = ($current_time - $updated_time)/60;
-      if ($time_diff < 900) {
-        return true;
-      }else{
-        return false;
-      }
-      // $time_diff = (strtotime(date("Y-m-d h:i:s"))- strtotime($time))/60;
-      // if ($time_diff < 900) {
-      //   return true;
-      // }else{
-      //   return false;
-      // }
     }
 
     public function getScanProfile($token){

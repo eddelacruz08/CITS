@@ -196,35 +196,26 @@ class Login extends BaseController
 							$email->setSubject($subject);
 							$email->setMessage($message);
 							$_POST['updated_date'] = date('Y-m-d h:i:s');
-							// die($_POST['updated_date']);
 							if($model->updatedDate($_POST, $id)){
 										if($email->send())
 										{
 											$data['success_login_forgot'] = 'Reset Password link sent to your registered email.<br>Please verify within 15 minutes.';
-											// $this->session->markAsFlashdata('success_login_forgot');
 											$data['viewName'] = 'App\Views\forgotPassword';
 									    echo view('App\Views\outside_layout\index', $data);
 										}else{
-											// $data = $email->printDebugger(['headers']);
-											// print_r($data);
 											$_SESSION['error_login_forgot_password'] = '<b>Incorrect email!</b><br> Please check your email!';
 											$this->session->markAsFlashdata('error_login_forgot_password');
 											$data['viewName'] = 'App\Views\forgotPassword';
 									    echo view('App\Views\outside_layout\index', $data);
 										}
-										//end checking if user is user credential is valid
-										}else{
-											// $data = $email->printDebugger(['headers']);
-											// print_r($data);
+							}else{
 								$_SESSION['error_login_forgot_password'] = 'You cannot update data!';
 								$this->session->markAsFlashdata('error_login_forgot_password');
 								$data['viewName'] = 'App\Views\forgotPassword';
-						    echo view('App\Views\outside_layout\index', $data);
+						   		 echo view('App\Views\outside_layout\index', $data);
 							}
-							//end checking if user is user credential is valid
 						}
 					}
-					// end validation
 			}
 			else
 			{
@@ -244,7 +235,7 @@ class Login extends BaseController
 				$userdata = $model->verifyToken($token);
 				// die($token);
 				if(!empty($userdata)){
-					if ($model->checkExpiryDate($userdata['updated_date'])) {
+					if ($this->checkExpiryDate($userdata['updated_date'])) {
 						// start of post
 						if($_POST)
 						{
@@ -337,5 +328,24 @@ class Login extends BaseController
 			$_SESSION['success'] = 'Thank you. Come Again!';
 			$this->session->markAsFlashdata('success');
 	    	return redirect()->to(base_url());
+		}
+
+		public function checkExpiryDate($time)
+		{
+		  $updated_time = strtotime($time);
+		  $current_time = time();
+		//   $time_diff = ($current_time - $updated_time)/60;
+		  if ($current_time - $updated_time < 120) {
+			return true;
+		  }else{
+			return false;
+		  }
+		//   $time_diff = (strtotime(time())- strtotime($time))/60;
+		//   die(strtotime($time));
+		//   if ($time_diff < 120) {
+		//     return true;
+		//   }else{
+		//     return false;
+		//   }
 		}
 }

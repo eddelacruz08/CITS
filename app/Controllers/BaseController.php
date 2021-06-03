@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use Modules\UserManagement\Models\PermissionsModel;
 use Modules\UserManagement\Models\ModulesModel;
+use Modules\UserManagement\Models\UsersModel;
 // use Modules\Documents\Models\DocumentTypesModel;
 
 /**
@@ -61,6 +62,7 @@ class BaseController extends Controller
 
 		$model_permission = new PermissionsModel();
 		$model_module = new ModulesModel();
+		$model_user = new UsersModel();
 
 		if(isset($_SESSION['user_logged_in']))
 		{
@@ -72,17 +74,27 @@ class BaseController extends Controller
 		}
 		else
 		{
-			$PATH_INFO = null;
+			$this->users = $model_user->get();
 			$str = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-			$str2 = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$PATH_INFO;
-			// die($str2);
-    		if($str != base_url())
-    		{
-					if($str == base_url().'Login/register' || $str == base_url().'Login/forgot_password' || $str2 == $str2){
-						return redirect()->to( base_url());
-					}else{
-						header('Location: '.base_url());
-					}
+			$str_arr = explode ("/", $str);
+			// die($str_arr[6]);
+			if(isset($str_arr[6])){
+				$requestURI = $model_user->get(['token'=>$str_arr[6]]);
+			}
+			// print_r($str_arr);
+			// die($str);
+    		if($str != base_url()){
+				if($str == base_url().'Login/register'){
+					return redirect()->to(base_url());
+				}elseif($str == base_url().'Login/forgot_password'){
+					return redirect()->to(base_url());
+				}elseif($str != base_url().'HealthDeclaration/request/$1'){
+					return redirect()->to(base_url());
+				}elseif(isset($str_arr[6]) == isset($requestURI[0]['token'])){
+					return redirect()->to(base_url().'Login/reset_password/'.isset($requestURI[0]['token']));
+				}else{
+					header('Location: '.base_url());
+				}
 				exit;
 			}
 		}

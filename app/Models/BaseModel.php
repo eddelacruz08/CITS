@@ -34,6 +34,12 @@ class BaseModel extends Model
     $val_array['status'] = 'a';
     return $this->save($val_array);
   }
+  public function add_request($val_array = [])
+  {
+    $val_array['created_date'] = (new \DateTime())->format('Y-m-d H:i:s');
+    $val_array['status'] = 'd';
+    return $this->save($val_array);
+  }
   
   public function edit_assess($val_array = [], $id)
   {

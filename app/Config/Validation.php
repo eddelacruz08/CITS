@@ -464,6 +464,32 @@ class Validation
 		 								'rules'  => 'required',
 		 						],
 		        ];
+				public $requestChecklist = [
+									'reason_id' => [
+											'label'  => 'Reason',
+											'rules'  => 'required',
+									],
+									'q_one' => [
+											'label'  => 'Question One',
+											'rules'  => 'required',
+									],
+									'q_two' => [
+											'label'  => 'Question Two',
+											'rules'  => 'required',
+									],
+									'q_three' => [
+											'label'  => 'Question Three',
+											'rules'  => 'required',
+									],
+									'q_four' => [
+											'label'  => 'Question Four',
+											'rules'  => 'required',
+									],
+									'q_five' => [
+											'label'  => 'Question Five',
+											'rules'  => 'required',
+									],
+				   ];
 			 public $temperature = [
 
 												 'temperature' => [
@@ -485,13 +511,13 @@ class Validation
 		 								]
 		 						],
 		        ];
-			 public $department = [
+			 public $reason = [
 
-		 						'department' => [
-		 								'label'  => 'Department',
+		 						'reason' => [
+		 								'label'  => 'Reason',
 		 								'rules'  => 'required',
 		 								'errors' => [
-		 										'required' => 'Department field is required.',
+		 										'required' => 'Reason field is required.',
 		 								]
 		 						],
 		 						'status' => [
