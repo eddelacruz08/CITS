@@ -4,9 +4,21 @@ use Modules\UserManagement\Models\RolesModel;
 use Modules\Maintenances\Models\ReasonsModel;
 use Modules\Maintenances\Models\QuestionModel;
 use Modules\Visits\Models\ChecklistModel;
+use Modules\Visits\Models\VisitsModel;
 use Modules\Scan\Models\QrcodeAttendanceModel;
 
 class HealthDeclaration extends BaseController{
+	
+	public function __construct(){
+		parent:: __construct();
+		$this->usersModel = new UsersModel();
+		$this->visitsModel = new VisitsModel();
+		$this->checklistsModel = new ChecklistModel();
+		$this->questionsModel = new QuestionModel();
+		$this->reasonsModel = new ReasonsModel();
+		$this->assessModel = new QrcodeAttendanceModel();
+	}
+
 	public function request($token = null){
 		$usersModel = new UsersModel();
 		$checklistsModel = new ChecklistModel();
@@ -130,26 +142,45 @@ class HealthDeclaration extends BaseController{
 	}
 
 	public function request_form(){
-		$usersModel = new UsersModel();
-		$checklistsModel = new ChecklistModel();
-		$question_model = new QuestionModel();
-		$reasonsModel = new ReasonsModel();
-		$assessModel = new QrcodeAttendanceModel();
 		$data = [];
-		$data['reasons'] = $reasonsModel->get(['status' => 'a']);
-		$data['questions'] = $question_model->get(['status' => 'a']);
+		$data['reasons'] = $this->reasonsModel->get(['status' => 'a']);
+		$data['questions'] = $this->questionsModel->get(['status' => 'a']);
 		if($this->request->getMethod() === 'post'){
-			if (!$this->validate('checklists')){
+			$usersData = $this->usersModel->getUserWithCondition(['email'=>$_POST, 'status'=>'a']);
+			$checkUser = 0;
+			if(!empty($usersData)){
+				foreach ($userData as $user) {
+					$id = $user['id']
+				}
+			}else{
+				$data['viewName'] = 'healthform';
+				echo view('outside_layout\index', $data);
+			}
+			if($checkUser == 1){
+
+			}else{
+
+			}
+			if(!$this->validate('checklists')){
 				$data['value'] = $_POST;
 				$data['errors'] = \Config\Services::validation()->getErrors();
-				$data['viewName'] = 'App\Views\healthform';
-				echo view('App\Views\outside_layout\index', $data);
+				$data['viewName'] = 'healthform';
+				echo view('outside_layout\index', $data);
 			}else{
-			
+				$this->checklistsModel->edit_checklists($_POST, $id);
+				if($this->reasonsModel->add($_POST)){
+					$_SESSION['success'] = 'You have Successfuly added a checklist!';
+					$this->session->markAsFlashdata('success');
+					return redirect()->to(base_url('health%20declaration'));
+				}else{
+					$_SESSION['error'] = 'You have an error of adding a checklist!';
+					$data['viewName'] = 'healthform';
+					echo view('outside_layout\index', $data);
+				}
 			}
 		}else{
-			$data['viewName'] = 'App\Views\healthform';
-			echo view('App\Views\outside_layout\index', $data);
+			$data['viewName'] = 'healthform';
+			echo view('outside_layout\index', $data);
 		}
 	}
 

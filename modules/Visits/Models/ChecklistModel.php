@@ -30,22 +30,6 @@ class ChecklistModel extends BaseModel
         return $this->findAll();
     }
 
-    // public function getSelfAssessmentHistory(){
-
-    //   $db = \Config\Database::connect();
-
-    //   $str = "SELECT  c.id,
-    //                   GROUP_CONCAT(q.question ORDER BY q.id) DepartmentName
-    //           FROM    checklists c
-    //                   INNER JOIN questions q
-    //                       ON FIND_IN_SET(q.id, c.question_id) > 0
-    //           GROUP   BY c.id";
-
-    //   $query = $db->query($str);
-
-    //   return $query->getResultArray();
-    // }
-
     public function getChecklistData($id){
 
       $db = \Config\Database::connect();

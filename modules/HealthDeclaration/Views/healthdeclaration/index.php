@@ -127,10 +127,59 @@
                     <?php endif; ?>
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
-                      <?php if($health_summary==false): ?>
+                      <?php if($reasons==false): ?>
                         <p class="text-center">No Data</p>
                       <?php else: ?>
-                        <p class="text-center">No Data</p>
+                        <!-- Timelime example  -->
+                        <div class="row">
+                          <div class="col-md-12">
+                            <!-- The time line -->
+                            <div class="timeline">
+                            <?php foreach ($reasons as $reason): ?>
+                              <!-- timeline time label -->
+                              <div class="time-label">
+                                <?php if ($reason['status_defined']=='ws'):?>
+                                  <span class="bg-red"><?=date('F d, Y', strtotime($reason['created_date']))?></span>
+                                <?php else:?>
+                                  <span class="bg-green"><?=date('F d, Y', strtotime($reason['created_date']))?></span>
+                                <?php endif;?>
+                              </div>
+                              <!-- /.timeline-label -->
+                              <!-- timeline item -->
+                              <div>
+                                <i class="fas fa-clipboard-check bg-blue"></i>
+                                <div class="timeline-item">
+                                  <div class="card-body">
+                                    <span class="time"><i class="fas fa-clock"></i> <?=date('h:i a', strtotime($reason['created_date']))?></span>
+                                      <?php if ($reason['status_defined']=='ws'):?>
+                                        <label class="text-danger"> | Have Symptoms</label>
+                                      <?php else:?>
+                                        <label class="text-success"> | No Symptoms</label>
+                                      <?php endif;?>
+                                      <p><?= $reason['reason_id']?></p>
+                                      <div class="float-right">
+                                        <a class="btn btn-link" type="button" data-toggle="modal" data-target="#myModals<?= $reason['id']?>">
+                                          <i class="fas fa-list"></i> See details
+                                      </a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- END timeline item -->
+                            <?php endforeach; ?>
+                              <!-- timeline time label -->
+                              <div class="time-label">
+                                <span class="bg-green">End of History</span>
+                              </div>
+                              <!-- /.timeline-label -->
+                              <div>
+                                <i class="fas fa-clock bg-gray"></i>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- /.col -->
+                        </div>
+                      <!-- /.timeline -->
                       <?php endif; ?>
                     </div>
                   </div>
