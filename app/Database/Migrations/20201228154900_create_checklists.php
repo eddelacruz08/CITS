@@ -17,10 +17,6 @@ class CreateChecklists extends \CodeIgniter\Database\Migration {
           'type' => 'BIGINT',
           'comment' => ''
         ],
-        'temperature' => [
-        'type'           => 'VARCHAR',
-        'constraint'        => '25',
-        ],
         'q_one' => [
           'type' => 'VARCHAR',
           'constraint' => '255'
@@ -41,19 +37,11 @@ class CreateChecklists extends \CodeIgniter\Database\Migration {
           'type' => 'VARCHAR',
           'constraint' => '255'
         ],
-        'reason_id' => [
-          'type' => 'INT',
-          'constraint' => '11'
-        ],
         'status_defined' => [
         'type'           => 'VARCHAR',
         'constraint'        => '25',
         'null' => true,
         'default' => null,
-        ],
-        'token' => [
-          'type' => 'VARCHAR',
-          'constraint' => '32'
         ],
         'status' => [
           'type' => 'CHAR',

@@ -65,7 +65,7 @@
     <title><?= SYSTEM_NAME ?></title>
   </head>
   
-  <?php if(esc($_SESSION['uid'])==2):?>
+  <?php if(esc($_SESSION['rid'])==2):?>
       <!-- Modal -->
       <div class="modal fade" id="myModalqr" role="dialog">
         <div class="modal-dialog modal-md">
@@ -163,7 +163,7 @@
                <?php user_primary_links_two($_SESSION['userPermmissions']) ?>
                <?php user_primary_links($_SESSION['userPermmissions']) ?>
         </ul>
-        <?php if($_SESSION['uid']==2):?>
+        <?php if($_SESSION['rid']==2):?>
         <ul class="nav nav-pills nav-sidebar flex-column"> 
           <li class="nav-item">
             <a class="nav-link" type="button" data-toggle="modal" data-target="#myModalqr">
@@ -173,6 +173,11 @@
           </li>
         </ul>
         <?php endif;?>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+    <div class="sidebar-custom">
         <ul class="nav nav-pills nav-sidebar flex-column">
           <li class="nav-item">
             <a class="nav-link">
@@ -184,10 +189,8 @@
             </a>
           </li>
         </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
+    <!-- /.sidebar-custom -->
   </aside>
 
       <!-- Content Wrapper. Contains page content -->

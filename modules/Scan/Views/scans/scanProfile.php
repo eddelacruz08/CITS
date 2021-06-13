@@ -39,14 +39,102 @@
         <!-- Right navbar links -->
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
           <li class="nav-item">
-            <a href="<?= base_url() ?>dashboard" class="nav-link text-white" >
-              <i class="fas fa-arrow-left text-white"></i> Dashboard
+            <a class="btn btn-default text-dark" type="button" data-toggle="modal" data-target="#qrcodeRegistrationForm">
+              <i class="fas fa-qrcode"></i> Registration Qr Code Link
+            </a>
+          </li>&nbsp&nbsp&nbsp
+          <li class="nav-item">
+            <a class="btn btn-default text-dark" type="button" data-toggle="modal" data-target="#qrcodeForm">
+              <i class="fas fa-qrcode"></i> Generate Qr Code Form Link
+            </a>
+          </li>&nbsp&nbsp&nbsp
+          <li class="nav-item">
+            <a href="<?= base_url() ?>dashboard" class="btn btn-success text-white" type="button" >
+              <i class="fas fa-sign-out-alt text-white"></i> Dashboard
             </a>
           </li>
         </ul>
       </div>
     </nav>
     <!-- /.navbar -->
+    <!-- Modal -->
+    <div class="modal fade" id="qrcodeForm" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title text-dark">
+              <i class="fas fa-qrcode">&nbsp</i>
+              Generate Qr Code Form Link</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <script src="<?= base_url() ?>public/js/qrcode.js"></script>
+              <center>
+                  <div id="qrcode"></div>
+                  <h4 class="text-dark"><?= base_url('HealthDeclaration/request')?></h4>
+                  <button class="btn btn-dark mt-2" onclick="downLoadCodeForm();">Download QR code</button>
+              </center>
+              <script>
+                  let qrcode = new QRCode("qrcode", {
+                      text: "<?= base_url('HealthDeclaration/request')?>",
+                      width: 350,
+                      height: 350,
+                      colorDark : "#000000",
+                      colorLight : "#ffffff",
+                      correctLevel : QRCode.CorrectLevel.H
+                  });
+                  function downLoadCodeForm(){
+                      var img = $('#qrcode').children('img').attr("src");
+                      var alink = document.createElement("a");
+                      alink.href = img;
+                      alink.download = "<?= date('F d, Y h:i:s')?>"+".png";
+                      alink.click();
+                  }
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end modal -->
+      <!-- Modal -->
+    <div class="modal fade" id="qrcodeRegistrationForm" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title text-dark">
+              <i class="fas fa-qrcode">&nbsp</i>
+              Registration Qr Code Link</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <script src="<?= base_url() ?>public/js/qrcode.js"></script>
+              <center>
+                  <div id="qrcodeRegister"></div>
+                  <h4 class="text-dark"><?= base_url('Login/register')?></h4>
+                  <button class="btn btn-dark mt-2" onclick="downLoadCodeRegister();">Download QR code</button>
+              </center>
+              <script>
+                  let qrcodeRegister = new QRCode("qrcodeRegister", {
+                      text: "<?= base_url('Login/register')?>",
+                      width: 350,
+                      height: 350,
+                      colorDark : "#000000",
+                      colorLight : "#ffffff",
+                      correctLevel : QRCode.CorrectLevel.H
+                  });
+                  function downLoadCodeRegister(){
+                      var img = $('#qrcodeRegister').children('img').attr("src");
+                      var alink = document.createElement("a");
+                      alink.href = img;
+                      alink.download = "<?= date('F d, Y h:i:s')?>"+".png";
+                      alink.click();
+                  }
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end modal -->
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper navbar-navy">
       <br>

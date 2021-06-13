@@ -90,7 +90,7 @@ class UsersModel extends \CodeIgniter\Model
             LEFT JOIN cities c ON u.city_id = c.id
             LEFT JOIN genders gen ON u.gender_id = gen.id
             LEFT JOIN provinces p ON u.province_id = p.id
-            WHERE u.status = 'a' AND u.role_id = 2 ORDER BY u.created_date DESC";
+            WHERE u.status = 'a' AND u.role_id = 2 ORDER BY u.created_date ASC";
 
     $query = $db->query($str);
 

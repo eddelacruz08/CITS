@@ -27,7 +27,7 @@
           <div class="alert alert-danger text-center"><?= $error;?></div>
         <?php else: ?>
           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-            <form id="myForm" action="<?= base_url().'HealthDeclaration/request/'.$token ?>" method="post">
+            <form id="myForm" action="<?= base_url().'HealthDeclaration/request_form'?>" method="post">
               <div class="form-group">
                 <label for="reason_id">Reason for wrong input details in self-assessment.</label>
                 <select type="text" class="form-select" name="reason_id" value="" id="reason_id">

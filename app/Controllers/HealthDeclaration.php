@@ -1,5 +1,4 @@
 <?php namespace App\Controllers;
-
 use Modules\UserManagement\Models\UsersModel;
 use Modules\UserManagement\Models\RolesModel;
 use Modules\Maintenances\Models\ReasonsModel;
@@ -128,6 +127,30 @@ class HealthDeclaration extends BaseController{
 		    echo view('App\Views\outside_layout\index', $data);
 		}
 			// end of post
+	}
+
+	public function request_form(){
+		$usersModel = new UsersModel();
+		$checklistsModel = new ChecklistModel();
+		$question_model = new QuestionModel();
+		$reasonsModel = new ReasonsModel();
+		$assessModel = new QrcodeAttendanceModel();
+		$data = [];
+		$data['reasons'] = $reasonsModel->get(['status' => 'a']);
+		$data['questions'] = $question_model->get(['status' => 'a']);
+		if($this->request->getMethod() === 'post'){
+			if (!$this->validate('checklists')){
+				$data['value'] = $_POST;
+				$data['errors'] = \Config\Services::validation()->getErrors();
+				$data['viewName'] = 'App\Views\healthform';
+				echo view('App\Views\outside_layout\index', $data);
+			}else{
+			
+			}
+		}else{
+			$data['viewName'] = 'App\Views\healthform';
+			echo view('App\Views\outside_layout\index', $data);
+		}
 	}
 
 	public function checkExpiryDate($time)

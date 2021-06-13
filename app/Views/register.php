@@ -1,12 +1,12 @@
 
-  <body class="container" style="background-color: #e9ecef;">
+  <body class="container" style="background-color: #001f3f;">
     <br>
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
         <a href="<?= base_url() ?>" class="h4"><b><?= SYSTEM_NAME ?></b></a>
       </div>
-      <div class="card-body">
-        <p class="text-center"><?= $function_title ?></p>
+      <div class="card-body" style="background-color: #ced1d6;">
+        <p class="h4 text-center"><?= $function_title ?></p>
         <?php if(isset($success)): ?>
           <div class="alert alert-success alert-dismissible fade show" role="alert">
              <?= $success; ?>

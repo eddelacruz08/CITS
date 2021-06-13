@@ -1,12 +1,22 @@
 
-<br>
-  <?php $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1><?= $function_title; ?></h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="<?=base_url('dashboard')?>">Dashboard</a></li>
+              <li class="breadcrumb-item active"><?= $function_title; ?></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
 
-  <div class="row">
-    <div class="col-md-12">
-      <h1><?= $function_title?></h1>
-    </div>
-  </div>
+  <?php $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
   <div class="card bg-light ">
     <div class="card-body">
       <div class="row">
@@ -14,9 +24,56 @@
           <!-- <?php user_add_link('guests', $_SESSION['userPermmissions']) ?> -->
         </div>
         <div class="col-md-3 offset-7">
-          <?php guests_print('guests', $_SESSION['userPermmissions']) ?>
+          <button type="button" class="btn btn-danger float-right btn-md" name="button" data-toggle="modal" data-target="#guestsModal">
+            <i class="fas fa-print"></i> Generate Guest List
+          </button>
         </div>
       </div>
+      <!-- modal -->
+      <div class="modal fade" id="guestsModal">
+            <div class="modal-dialog modal-md">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Filter Data</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="<?=base_url(). 'guests/print'?>" method="post">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label for="guest_type">Guest Type</label>
+                          <div class="form-group">
+                            <select name="guest_type_id" class="form-control <?= isset($errors['guest_type_id']) ? 'is-invalid':' ' ?>" required>
+                              <option value="" disabled selected>Select Guest Type</option>
+                                <?php foreach($guest_types as $guest_type): ?>
+                                  <option value="<?= $guest_type['id'] ?>"><?= ucwords($guest_type['guest_type']) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <label for="gender">Gender</label>
+                          <div class="form-group">
+                            <select name="gender_id" class="form-control <?= isset($errors['gender_id']) ? 'is-invalid':' ' ?>" required>
+                              <option value="" disabled selected>Select Guest Type</option>
+                                <?php foreach($genders as $gender): ?>
+                                  <option value="<?= $gender['id'] ?>"><?= ucwords($gender['gender']) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-success float-right"><i class="far fa-file-pdf"></i> Generate</button>
+                  </form>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          <!-- /.modal -->
       <br>
       <?php if(isset($_SESSION['success_request'])): ?>
           <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -43,7 +100,7 @@
               <th>Guest Type</th>
               <th>Gender</th>
               <th>Email</th>
-              <th>Send Request Health Form</th>
+              <!-- <th>Qr Code Form Link</th> -->
               <th>Action</th>
             </tr>
           </thead>
@@ -56,11 +113,11 @@
               <td><?= ucwords($patient['guest_type']) ?></td>
               <td><?= ucfirst($patient['gender']) ?></td>
               <td><?= $patient['email'] ?></td>
-              <td>
+              <!-- <td>
                 <form action="<?=base_url().'checklists/requests/'.$patient['token']?>" method="post">
-                  <button type="submit" class="btn btn-info">Request Health Form</button>
+                  <button type="submit" class="btn btn-info"><i class="fas fa-qrcode"></i> Generate Health Form Qr Code</button>
                 </form>
-              </td>
+              </td> -->
               <td class="text-center">
                 <?php
                   users_action('guests', $_SESSION['userPermmissions'], $patient['id']);

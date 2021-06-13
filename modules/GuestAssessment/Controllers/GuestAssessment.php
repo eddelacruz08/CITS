@@ -30,7 +30,7 @@ class GuestAssessment extends BaseController
   	$this->hasPermissionRedirect('list-guest');
 	$model = new GuestAssessmentModel();
 	$data['guests'] = $model->getAssessmentGuest();
-    $data['function_title'] = "Guests With Symtom List";
+    $data['function_title'] = "Guests With Symptom List";
     $data['viewName'] = 'Modules\GuestAssessment\Views\guestassessment\index';
     echo view('App\Views\theme\index', $data);
   }
@@ -113,7 +113,7 @@ class GuestAssessment extends BaseController
 	$pdf->Output('example_001.pdf', 'I');
 	die();
 }
-  public function delete_guest_assessment($id)
+  public function invalidate_guest($id)
   {
   	// $this->hasPermissionRedirect('delete-guest');
 	  $model = new GuestAssessmentModel();

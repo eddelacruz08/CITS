@@ -39,16 +39,5 @@ class Migrate extends \CodeIgniter\Controller
     public function seeder()
     {
         $seeder = \Config\Database::seeder();
-        // $seeder->call('AcademicProgramsSeeder');
-        // $seeder->call('AreasSeeder');
-        // $seeder->call('DepartmentsSeeder');
-        // $seeder->call('DocumentTypeSeeder');
-        // $seeder->call('ModuleSeeder');
-        // $seeder->call('ParameterSectionsSeeder');
-        // $seeder->call('RolesSeeder');
-        // $seeder->call('UsersSeeder');
-        // $seeder->call('PermissionSeeder');
-        // $seeder->call('PermissionSystemSettingsSeeder');
-        // $seeder->call('PermissionDocumentsSeeder');
     }
 }

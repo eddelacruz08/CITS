@@ -8,10 +8,10 @@
                <center>
                <label>Latest Self-Assessment Status:
                <?php if (isset($latest_checklist_date[0]['status_defined']) == true):?>
-                 <i class="fas fa-circle text-center text-danger"></i><a class="h6 text-danger"> Have Symtoms</a>
+                 <i class="fas fa-circle text-center text-danger"></i><a class="h6 text-danger"> Have Symptoms</a>
                  <hr style="margin: 0; padding: 0; border: solid 1px red;">
                <?php else:?>
-                 <i class="fas fa-circle text-center text-success"></i><a class="h6 text-success"> No Symtoms</a>
+                 <i class="fas fa-circle text-center text-success"></i><a class="h6 text-success"> No Symptoms</a>
                  <hr style="margin: 0; padding: 0; border: solid 1px green;">
                <?php endif;?>
                </label>
@@ -30,7 +30,7 @@
                       </center>
                     <?php else:?>
                         <center>
-                        <a class="btn text-red btn-rounded" style="border: 2px solid red; padding: 5px;">
+                        <a class="btn text-red btn-rounded" title="Unavailable. Please try tommorrow." style="border: 2px solid red; padding: 5px;">
                               <i class="fas fa-exclamation-triangle"></i> Unavailable. Please try tommorrow.
                         </a>
                         </center>
@@ -56,99 +56,207 @@
              </div>
            </div>
          </div>
-       </div>
-       <div class="card card-primary card-outline">
-         <div class="card-body box-profile">
-            <h3 align="center">Self-Assessment History</h3>
-          <div class="table-responsive">
-          <table class="table table-sm table-striped table-bordered index-table">
-            <thead class="thead-dark">
-              <tr class="text-center">
-                <th>#</th>
-                <th>Date & Time | Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-            <?php $cnt = 1; ?>
-            <?php foreach ($health_summary as $summary): ?>
-              <tr class="text-center">
-                <th scope="row"><?= $cnt++ ?></th>
-                <td class="text-center">
-                      <?php if ($summary['status_defined']=='ws'):?>
-                        <?=date('F d, Y h:i a', strtotime($summary['created_date']))?> <label class="text-danger"> |  Have Symtoms</label>
-                      <?php else:?>
-                        <?=date('F d, Y h:i a', strtotime($summary['created_date']))?> <label class="text-success"> |  No Symtoms</label>
-                      <?php endif;?>
-                </td>
-                <td class="text-center">
-                  <a class="btn btn-link" type="button" data-toggle="modal" data-target="#myModal<?= $summary['id']?>">
-                  <i class="fas fa-list"></i> See data...
-                  </a>
-                </td>
-              </tr>
-            <?php endforeach; ?>
-            </tbody>
-          </table>
         </div>
-        </div>
-      </div>
-      
+              <div class="card card-primary card-outline card-outline-tabs">
+                <div class="card-header p-0 border-bottom-0">
+                  <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">Self-Assessment History</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">Assessment With Reason</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-body" style="background-color: #e6e6e6;">
+                  <div class="tab-content" id="custom-tabs-four-tabContent">
+                    <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                    <?php if($health_summary==false): ?>
+                      <p class="text-center">No Data</p>
+                    <?php else: ?>
+                    <!-- Timelime example  -->
+                    <div class="row">
+                      <div class="col-md-12">
+                        <!-- The time line -->
+                        <div class="timeline">
+                        <?php foreach ($health_summary as $summary): ?>
+                          <!-- timeline time label -->
+                          <div class="time-label">
+                            <?php if ($summary['status_defined']=='ws'):?>
+                              <span class="bg-red"><?=date('F d, Y', strtotime($summary['created_date']))?></span>
+                            <?php else:?>
+                              <span class="bg-green"><?=date('F d, Y', strtotime($summary['created_date']))?></span>
+                            <?php endif;?>
+                          </div>
+                          <!-- /.timeline-label -->
+                          <!-- timeline item -->
+                          <div>
+                            <i class="fas fa-clipboard-check bg-blue"></i>
+                            <div class="timeline-item">
+                              <div class="card-body">
+                              <span class="time"><i class="fas fa-clock"></i> <?=date('h:i a', strtotime($summary['created_date']))?></span>
+                              
+                                  <?php if ($summary['status_defined']=='ws'):?>
+                                    <label class="text-danger"> | Have Symptoms</label>
+                                  <?php else:?>
+                                    <label class="text-success"> | No Symptoms</label>
+                                  <?php endif;?>
+                                <div class="float-right">
+                                  <a class="btn btn-link" type="button" data-toggle="modal" data-target="#myModals<?= $summary['id']?>">
+                                    <i class="fas fa-list"></i> See details
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- END timeline item -->
+                        <?php endforeach; ?>
+                          <!-- timeline time label -->
+                          <div class="time-label">
+                            <span class="bg-green">End of History</span>
+                          </div>
+                          <!-- /.timeline-label -->
+                          <div>
+                            <i class="fas fa-clock bg-gray"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /.col -->
+                    </div>
+                  <!-- /.timeline -->
+                    <?php endif; ?>
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
+                      <?php if($health_summary==false): ?>
+                        <p class="text-center">No Data</p>
+                      <?php else: ?>
+                        <p class="text-center">No Data</p>
+                      <?php endif; ?>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card -->
+
       <?php foreach ($health_summary as $summary): ?>
               <!-- Modal -->
-              <div class="modal fade" id="myModal<?= $summary['id']?>" role="dialog">
+              <div class="modal fade" id="myModals<?= $summary['id']?>" role="dialog">
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h4 class="modal-title"><?= date('F d, Y h:i a', strtotime($summary['created_date']))?></h4>
+                      <span class="h5"><i class="fas fa-calendar"></i> <?=date('F d, Y', strtotime($summary['created_date']))?></span>
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    <div class="modal-body">
-                      <?php if ($summary['status_defined']=='ws'):?>
-                        <p class="h4">Have Symtoms</p>
-                      <?php else:?>
-                        <p class="h4">No Symtoms</p>
-                      <?php endif;?>
-                      <table class="table">
-                        <thead class="thead-dark">
-                          <tr class="text-center">
-                            <th>No. </th>
-                            <th>Questions</th>
-                            <th>Status</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        <?php $cnt = 1; ?>
-                          <?php foreach ($questions as $question): ?>
-                            <tr>
-                              <td class="text-center"><?= $cnt++;?></td>
-                              <td colspan="1"><?= $question['q_one']?></td>
-                              <td class="text-center"><?= strtoupper($summary['q_one'])?></td>
-                            </tr>
-                            <tr>
-                              <td class="text-center"><?= $cnt++;?></td>
-                              <td colspan="1"><?= $question['q_two']?></td>
-                              <td class="text-center"><?= strtoupper($summary['q_two'])?></td>
-                            </tr>
-                            <tr>
-                              <td class="text-center"><?= $cnt++;?></td>
-                              <td colspan="1"><?= $question['q_three']?></td>
-                              <td class="text-center"><?= strtoupper($summary['q_three'])?></td>
-                            </tr>
-                            <tr>
-                              <td class="text-center"><?= $cnt++;?></td>
-                              <td colspan="1"><?= $question['q_four']?></td>
-                              <td class="text-center"><?= strtoupper($summary['q_four'])?></td>
-                            </tr>
-                            <tr>
-                              <td class="text-center"><?= $cnt++;?></td>
-                              <td colspan="1"><?= $question['q_five']?></td>
-                              <td class="text-center"><?= strtoupper($summary['q_five'])?></td>
-                            </tr>
-                          <?php endforeach; ?>
-                        </tbody>
-                      </table>
-                    </div>
+                    <div class="modal-body" style="background-color: #e6e6e6;">
+                      <!-- Timelime example  -->
+                          <!-- The time line -->
+                          <div class="timeline">
+                            <!-- timeline time label -->
+                            <div class="time-label">
+                              <?php if ($summary['status_defined']=='ws'):?>
+                                <span class="bg-red"><i class="fas fa-clock"></i> <?=date('h:i a', strtotime($summary['created_date']))?></span>
+                              <?php else:?>
+                                <span class="bg-green"><i class="fas fa-clock"></i> <?=date('h:i a', strtotime($summary['created_date']))?></span>
+                              <?php endif;?>
+                            </div>
+                            <!-- /.timeline-label --> 
+                            <!-- timeline item -->
+                            <div>
+                              <div class="timeline-item">
+                                <div class="timeline-body">
+                                  <label>Questions</label>
+                                  <div class="float-right">
+                                  <label>Status</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- END timeline item -->
+                            <?php $cnt = 1; ?>
+                            <?php foreach ($questions as $question): ?>
+                            <!-- timeline item -->
+                            <div>
+                              <div class="timeline-item">
+                                <div class="timeline-body">
+                                  <span><?= $cnt++;?>. <?= $question['q_one']?></span>
+                                  <div class="float-right">
+                                    <label for="yes">Yes</label>
+                                    <input type="radio" id="yes" disabled <?= $summary['q_one'] == 'yes' ? 'checked':'unchecked'?>>
+                                    <label for="no">No</label>
+                                    <input type="radio" id="no" disabled <?= $summary['q_one'] == 'no' ? 'checked':'unchecked'?>>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- END timeline item -->
+                             <!-- timeline item -->
+                             <div>
+                              <div class="timeline-item">
+                                <div class="timeline-body">
+                                  <span><?= $cnt++;?>. <?= $question['q_two']?></span>
+                                  <div class="float-right">
+                                    <label for="yes">Yes</label>
+                                    <input type="radio" id="yes" disabled <?= $summary['q_two'] == 'yes' ? 'checked':'unchecked'?>>
+                                    <label for="no">No</label>
+                                    <input type="radio" id="no" disabled <?= $summary['q_two'] == 'no' ? 'checked':'unchecked'?>>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- END timeline item --> 
+                            <!-- timeline item -->
+                            <div>
+                              <div class="timeline-item">
+                                <div class="timeline-body">
+                                  <span><?= $cnt++;?>. <?= $question['q_three']?></span>
+                                  <div class="float-right">
+                                    <label for="yes">Yes</label>
+                                    <input type="radio" id="yes" disabled <?= $summary['q_three'] == 'yes' ? 'checked':'unchecked'?>>
+                                    <label for="no">No</label>
+                                    <input type="radio" id="no" disabled <?= $summary['q_three'] == 'no' ? 'checked':'unchecked'?>>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- END timeline item --> 
+                            <!-- timeline item -->
+                            <div>
+                              <div class="timeline-item">
+                                <div class="timeline-body">
+                                  <span><?= $cnt++;?>. <?= $question['q_four']?></span>
+                                  <div class="float-right">
+                                    <label for="yes">Yes</label>
+                                    <input type="radio" id="yes" disabled <?= $summary['q_four'] == 'yes' ? 'checked':'unchecked'?>>
+                                    <label for="no">No</label>
+                                    <input type="radio" id="no" disabled <?= $summary['q_four'] == 'no' ? 'checked':'unchecked'?>>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- END timeline item -->
+                            <!-- timeline item -->
+                            <div>
+                              <div class="timeline-item">
+                                <div class="timeline-body">
+                                  <span><?= $cnt++;?>. <?= $question['q_five']?></span>
+                                  <div class="float-right">
+                                    <label for="yes">Yes</label>
+                                    <input type="radio" id="yes" disabled <?= $summary['q_five'] == 'yes' ? 'checked':'unchecked'?>>
+                                    <label for="no">No</label>
+                                    <input type="radio" id="no" disabled <?= $summary['q_five'] == 'no' ? 'checked':'unchecked'?>>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- END timeline item -->
+                            <?php endforeach; ?>
+                            <!-- <div>
+                              <i class="fas fa-clock bg-gray"></i>
+                            </div> -->
+                          </div>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                    <!-- /.timeline -->
                   </div>
                 </div>
               </div>

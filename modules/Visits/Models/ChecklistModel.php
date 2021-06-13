@@ -124,7 +124,8 @@ class ChecklistModel extends BaseModel
 
       $db = \Config\Database::connect();
 
-      $str = 'SELECT a.*, e.* FROM checklists a LEFT JOIN users e ON a.user_id = e.id WHERE a.status = "a" AND a.id = '.$id.' ORDER BY a.created_date desc LIMIT 1';
+      $str = "SELECT c.*, u.firstname, u.middlename, u.lastname FROM checklists c LEFT JOIN users u ON c.user_id = u.id
+      WHERE c.status = 'a' AND c.user_id = $id ORDER BY c.created_date desc LIMIT 1";
 
       $query = $db->query($str);
 

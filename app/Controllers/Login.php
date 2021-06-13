@@ -22,7 +22,6 @@ class Login extends BaseController
 		public function index()
 		{
 			$model = new UsersModel();
-			// $_SESSION[base_url().'Registration/index'] = 1;
 			if($_POST)
 			{
 				$loginOK = 0;
@@ -113,9 +112,11 @@ class Login extends BaseController
 				}
 				else
 				{
+					$_POST['token'] = md5(str_shuffle('abcdefghijklmnopqrstuvwxyz'.time()));
 					unset($_POST['password_retype']);
 						if($model->addUsers($_POST))
 						{
+							$data['function_title'] = "Registration";
 							$data['success'] = 'You have successfuly registered!';
 							$data['viewName'] = 'App\Views\register';
 					    echo view('App\Views\outside_layout\index', $data);

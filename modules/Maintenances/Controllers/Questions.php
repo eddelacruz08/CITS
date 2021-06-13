@@ -24,11 +24,11 @@ class Questions extends BaseController
 
   	$model = new QuestionModel();
 
-    $data['questionActive'] = $model->orderBy('question', 'asc')->get(['status'=> 'a']);
-    $data['questionInactive'] = $model->get(['status'=> 'b']);
+    $data['questionActive'] = $model->get(['status'=> 'a']);
+    // $data['questionInactive'] = $model->get(['status'=> 'b']);
 
     $data['function_title_active'] = "Active Question List";
-    $data['function_title_inactive'] = "Inactive Question List";
+    // $data['function_title_inactive'] = "Inactive Question List";
     $data['viewName'] = 'Modules\Maintenances\Views\questions\index';
     echo view('App\Views\theme\index', $data);
   }

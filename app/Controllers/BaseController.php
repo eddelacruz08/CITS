@@ -74,24 +74,15 @@ class BaseController extends Controller
 		}
 		else
 		{
-			$this->users = $model_user->get();
+			// die($referrer);
 			$str = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-			$str_arr = explode ("/", $str);
-			// die($str_arr[6]);
-			if(isset($str_arr[6])){
-				$requestURI = $model_user->get(['token'=>$str_arr[6]]);
-			}
-			// print_r($str_arr);
-			// die($str);
     		if($str != base_url()){
 				if($str == base_url().'Login/register'){
 					return redirect()->to(base_url());
 				}elseif($str == base_url().'Login/forgot_password'){
 					return redirect()->to(base_url());
-				}elseif($str != base_url().'HealthDeclaration/request/$1'){
+				}elseif($str != base_url().'HealthDeclaration/request_form'){
 					return redirect()->to(base_url());
-				}elseif(isset($str_arr[6]) == isset($requestURI[0]['token'])){
-					return redirect()->to(base_url().'Login/reset_password/'.isset($requestURI[0]['token']));
 				}else{
 					header('Location: '.base_url());
 				}

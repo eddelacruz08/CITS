@@ -615,12 +615,25 @@ class Validation
 		        ];
 			 public $questions = [
 
-		 						'question' => [
-		 								'label'  => 'Question',
+		 						'q_one' => [
+		 								'label'  => 'Question One',
 		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => 'Question field is required.',
-		 								]
+		 						],
+		 						'q_two' => [
+		 								'label'  => 'Question Two',
+		 								'rules'  => 'required',
+		 						],
+		 						'q_three' => [
+		 								'label'  => 'Question Three',
+		 								'rules'  => 'required',
+		 						],
+		 						'q_four' => [
+		 								'label'  => 'Question Four',
+		 								'rules'  => 'required',
+		 						],
+		 						'q_five' => [
+		 								'label'  => 'Question Five',
+		 								'rules'  => 'required',
 		 						],
 		 						'status' => [
 		 								'label'  => 'Question Status',

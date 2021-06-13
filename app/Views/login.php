@@ -1,13 +1,13 @@
 
-  <body class="hold-transition login-page">
+  <body class="hold-transition login-page" style="background-color: #001f3f;">
   <div class="login-box">
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
         <a href="<?= base_url() ?>" class="h3"><b><?= SYSTEM_NAME ?></b></a>
       </div>
-      <div class="card-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+      <div class="card-body" style="background-color: #ced1d6;">
+        <p class="h4 login-box-msg">Sign in</p>
         <?php if(isset($_SESSION['error_login'])): ?>
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
              <?= $_SESSION['error_login']; ?>

@@ -3,7 +3,6 @@ namespace Modules\Guests\Controllers;
 
 use Modules\Visits\Models\VisitsModel;
 use Modules\Visits\Models\ChecklistModel;
-use Modules\Guests\Models\GuestsModel;
 use Modules\Maintenances\Models\CitiesModel;
 use Modules\Maintenances\Models\ExtensionModel;
 use Modules\Maintenances\Models\ProvinceModel;
@@ -13,6 +12,7 @@ use Modules\Maintenances\Models\QuestionModel;
 use Modules\UserManagement\Models\UsersModel;
 use Modules\UserManagement\Models\PermissionsModel;
 use App\Controllers\BaseController;
+use App\Libraries\Pdf;
 use CodeIgniter\I18n\Time;
 
 use \Mpdf\Mpdf;
@@ -24,20 +24,86 @@ class Guests extends BaseController
 	{
 		parent:: __construct();
 
+		$this->usersModel = new UsersModel();
+		$this->gendersModel = new GenderModel();
+		$this->typesModel = new TypeModel();
 		$permissions_model = new PermissionsModel();
 		$this->permissions = $permissions_model->getPermissionsWithCondition(['status' => 'a']);
 	}
 	
-  public function index()
-  {
-  	$this->hasPermissionRedirect('list-guest');
+	public function print(){
+					
+		// create new PDF document
+		$pdf = new PDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-  	$model = new UsersModel();
+		// set document information
+		// $pdf->SetCreator(PDF_CREATOR);
+		// $pdf->SetAuthor('Nicola Asuni');
+		// $pdf->SetTitle('TCPDF Example 048');
+		// $pdf->SetSubject('TCPDF Tutorial');
+		// $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+
+		// set default header data
+		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
+
+		// set header and footer fonts
+		$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+		$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+
+		// set default monospaced font
+		$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+		// set margins
+		$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+		$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+		$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
+		// set auto page breaks
+		$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+		// set image scale factor
+		$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+		// set some language-dependent strings (optional)
+		if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+			require_once(dirname(__FILE__).'/lang/eng.php');
+			$pdf->setLanguageArray($l);
+		}
+
+		// ---------------------------------------------------------
+
+		// set font
+		$pdf->SetFont('helvetica', 'B', 20);
+
+		// add a page
+		$pdf->AddPage();
+
+		$pdf->Write(0, 'Guest List', '', 0, 'C', true, 0, false, false, 0);
+
+		$pdf->SetFont('helvetica', '', 12);
+		$data['guests'] = $this->usersModel->getUsersLists();
+		$html = view('Modules\Guests\Views\guests\guestspdf', $data);
+		$pdf->writeHTML($html, true, false, false, false, '');
+		// ---------------------------------------------------------
+
+		// Close and output PDF document
+		// This method has several options, check the source code documentation for more information.
+		$pdf->Output('example_001.pdf', 'I');
+		die();
+	}
+
+	public function index()
+	{
+		$this->hasPermissionRedirect('list-guest');
+
+		$model = new UsersModel();
 		$data['users'] = $model->getUsersLists();
-    $data['function_title'] = "Guests List";
-    $data['viewName'] = 'Modules\Guests\Views\guests\index';
-    echo view('App\Views\theme\index', $data);
-  }
+		$data['genders'] = $this->gendersModel->get();
+		$data['guest_types'] = $this->typesModel->get();
+		$data['function_title'] = "Guest List";
+		$data['viewName'] = 'Modules\Guests\Views\guests\index';
+		echo view('App\Views\theme\index', $data);
+	}
 
   public function show_guest($id)
   {
@@ -55,21 +121,7 @@ class Guests extends BaseController
 		$data['checklist_recorded'] = $checklist_model->isChecklistCaptured($data['visit_id']);
 		$data['questions'] = $question_model->get();
 		$data['questionself'] = $checklist_model->getSelfAssessmentHistory();
-		foreach ($data['latest_checklist'] as $health )
-		{
-			$date = $health['created_date'];
-			$temperature = $health['temperature'];
-
-			$time = new Time( $date, 'Asia/Manila');
-			$hour = $time->format('H');
-			if($hour < 12){
-		  $data['temp'] = '<b>AM Temperature</b>: '.$temperature;
-			}else{
-			$data['temp'] = '<b>PM Temperature</b>: '.$temperature;
-			}
-		}
-
-		// die($id);
+	
 		$data['profile'] = $model->getProfile($id);
 		// $data['profile'] = $model->get(['status' => 'a','user_id' => $id]);
 		$data['checklist_counts'] = $checklist_model->getChecklistCount($id);
@@ -78,7 +130,7 @@ class Guests extends BaseController
 		if (empty($data['profile'])) {
 			die('Walang Laman!');
 		}
-		// $data['function_title'] = "Patient Details";
+		$data['function_title'] = "Guest Details";
   	$data['viewName'] = 'Modules\Guests\Views\guests\guestDetails';
     echo view('App\Views\theme\index', $data);
   }
@@ -740,7 +792,7 @@ class Guests extends BaseController
 						return redirect()->to($mpdf->output($fullname.' - '.date('F d, Y', strtotime($date)).'.pdf', 'I'))->setContentType('application/pdf');
 	}
 
-  public function print($id)
+  public function print2($id)
   {
 			$model = new GuestsModel();
 			$checklist_model = new ChecklistModel();
