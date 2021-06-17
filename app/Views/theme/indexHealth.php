@@ -17,20 +17,6 @@
     	</div>
   <?php endif; ?>
   <?= view('App\Views\theme\footer') ?>
-<?php if(isset($latest_checklist_date[0]['status_defined']) == true && isset($latest_checklist_date[0]['date']) == date('Y-m-d')): ?>
-  <script>
-  	$(document).ready(function(){
-  		$("#myModalDefined").modal('show');
-  	});
-  </script>
-<?php else: ?>
-  <script>
-    $(document).ready(function(){
-      $("#myModalDefined").modal('hide');
-    });
-  </script>
-<?php endif; ?>
-
 <?php if(isset($latest_checklist_date[0]['date']) == date('Y-m-d')): ?>
   <script>
   	$(document).ready(function(){

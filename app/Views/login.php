@@ -25,12 +25,12 @@
           </div>
         <?php endif; ?>
         <form action="<?= base_url() ?>" method="post">
-          <label for="inputUsername">Username</label>
+          <label for="inputUsername">Email</label>
           <div class="input-group mb-2">
-            <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+            <input type="email" name="email" id="inputUsername" class="form-control" placeholder="Email" required autofocus>
             <div class="input-group-append">
               <div class="input-group-text">
-                <span class="fas fa-user"></span>
+                <span class="fas fa-envelope"></span>
               </div>
             </div>
           </div>

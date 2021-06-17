@@ -21,12 +21,20 @@ class CreateAssess extends \CodeIgniter\Database\Migration {
           'type' => 'INT',
           'constraint' => '1',
         ],
+        'checklist_id' => [
+          'type' => 'INT',
+          'constraint' => '11',
+        ],
+        'reason_id' => [
+          'type' => 'INT',
+          'constraint' => '11',
+        ],
         'status' => [
           'type' => 'CHAR',
           'constraint' => '1',
           'default' => 'a'
         ],
-          'date DATE NOT NULL DEFAULT CURRENT_TIMESTAMP',
+        'date DATE NOT NULL DEFAULT CURRENT_TIMESTAMP',
         'created_date' => [
           'type' => 'DATETIME',
           'comment' => 'Date of creation',

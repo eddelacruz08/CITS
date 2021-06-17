@@ -78,11 +78,11 @@ class BaseController extends Controller
 			$str = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     		if($str != base_url()){
 				if($str == base_url().'Login/register'){
-					return redirect()->to(base_url());
+					return redirect()->to(base_url().'Login/register');
 				}elseif($str == base_url().'Login/forgot_password'){
-					return redirect()->to(base_url());
-				}elseif($str != base_url().'HealthDeclaration/request_form'){
-					return redirect()->to(base_url());
+					return redirect()->to(base_url().'Login/forgot_password');
+				}elseif($str == base_url().'HealthDeclaration/request_form'){
+					return redirect()->to(base_url().'HealthDeclaration/request_form');
 				}else{
 					header('Location: '.base_url());
 				}

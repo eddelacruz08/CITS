@@ -450,20 +450,23 @@ if (! function_exists('maintenance_action'))
 						switch($table){
 							case 'attachments':
 								echo '<a class="btn btn-default btn-sm" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'/'.$pId . '"><i class="far fa-edit"></i></a> ';
-							break;
+								break;
 							case 'checklists':
 								echo '<a class="btn btn-warning" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'/'.$pId . '"><i class="far fa-clipboard"></i> Check this Person</a> ';
-							break;
+								break;
 							case 'dashboard':
 								echo '<a class="btn btn-default" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'"><i class="far fa-print"></i> Print Dashboard</a> ';
-							break;
+								break;
 							case 'genders':
 								echo '<a class="btn btn-default btn-sm" style="border: 1px solid #343a40;" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'"><i class="far fa-edit"></i></a> ';
-							break;
+								break;
+							case 'guidelines':
+								echo '<a class="btn btn-warning btn-md float-right" title="Edit guidelines" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'"><i class="far fa-edit"></i> Edit Guidelines</a> ';
+								break;
 							default:
 								// echo '<a class="btn btn-warning btn-lg" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'/'.$pId . '"><i class="far fa-clipboard"></i> Take Assessment</a> ';
 								echo '<a class="btn btn-default btn-sm" style="border: 1px solid #343a40;" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'"><i class="far fa-edit"></i></a> ';
-							break;
+								break;
 						}
 						break;
 					// case 'delete':

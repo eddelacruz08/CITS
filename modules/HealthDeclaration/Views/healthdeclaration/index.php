@@ -22,41 +22,49 @@
                 <?php if(esc($latest_checklist_date[0]['date'])== date('Y-m-d')):?>
                     <?php if(isset($latest_checklist_date[0]['status_defined'])==false):?>
                       <center>
-                        <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
-                            <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
-                              <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
-                            </button>
-                        </a>
+                        <button type="button" class="btn btn-block btn-outline-primary btn-sm" title="Unavailable Self-Assessment" disabled>
+                          <i class="fas fa-clipboard-check"></i> Unavailable Self-Assessment.
+                        </button>
                       </center>
                     <?php else:?>
-                        <center>
-                        <a class="btn text-red btn-rounded" title="Unavailable. Please try tommorrow." style="border: 2px solid red; padding: 5px;">
-                              <i class="fas fa-exclamation-triangle"></i> Unavailable. Please try tommorrow.
-                        </a>
-                        </center>
+                      <center>
+                        <button type="button" class="btn btn-block btn-outline-danger btn-sm swalAssessmentError">
+                          <i class="fas fa-exclamation-triangle"></i> Unavailable Self-Assessment.
+                        </button>
+                      </center>
                     <?php endif;?>
                 <?php else:?>
                     <center>
-                      <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
-                        <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
-                          <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
-                        </button>
-                      </a>
+                        <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
+                            <button type="button" class="btn btn-block btn-outline-primary btn-sm">
+                              <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
+                            </button>
+                        </a>
                     </center>
                 <?php endif;?>
               <?php else: ?>
                 <center>
                   <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
-                    <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
+                    <button type="button" class="btn btn-block btn-outline-primary btn-sm">
                       <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
-                    </button>
+                   </button>
                   </a>
                 </center>
               <?php endif; ?>
-             </div>
+              </div>
            </div>
          </div>
-        </div>
+       </div>
+
+        <?php if(isset($latest_checklist_date[0]['status_defined']) == true && isset($latest_checklist_date[0]['date']) == date('Y-m-d')): ?>
+            <div class="callout callout-danger">
+              <h5 class="text-danger"><i class="fas fa-info"></i> Important Reminder:</h5>
+              <p>Your latest self-assessment tested positive for symtoms. 
+                Make sure you don't leave and stay at home. Please quarantine yourself so as not to infect other people with the symptoms experienced.
+                Please take self-assessment for another day to clarify your status.</p>
+            </div>
+        <?php endif; ?>
+        
               <div class="card card-primary card-outline card-outline-tabs">
                 <div class="card-header p-0 border-bottom-0">
                   <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
@@ -94,17 +102,20 @@
                             <i class="fas fa-clipboard-check bg-blue"></i>
                             <div class="timeline-item">
                               <div class="card-body">
-                              <span class="time"><i class="fas fa-clock"></i> <?=date('h:i a', strtotime($summary['created_date']))?></span>
-                              
-                                  <?php if ($summary['status_defined']=='ws'):?>
-                                    <label class="text-danger"> | Have Symptoms</label>
-                                  <?php else:?>
-                                    <label class="text-success"> | No Symptoms</label>
-                                  <?php endif;?>
-                                <div class="float-right">
-                                  <a class="btn btn-link" type="button" data-toggle="modal" data-target="#myModals<?= $summary['id']?>">
-                                    <i class="fas fa-list"></i> See details
-                                  </a>
+                                <div class="row">
+                                  <div class="col-7">
+                                    <span class="time"><i class="fas fa-clock"></i> <?=date('h:i a', strtotime($summary['created_date']))?></span>
+                                    <?php if ($summary['status_defined']=='ws'):?>
+                                      <label class="text-danger"> | Have Symptoms</label>
+                                    <?php else:?>
+                                      <label class="text-success"> | No Symptoms</label>
+                                    <?php endif;?>
+                                  </div>
+                                  <div class="col-5">
+                                    <a class="btn btn-link float-right" type="button" data-toggle="modal" data-target="#myModals<?= $summary['id']?>">
+                                      <i class="fas fa-list"></i> See details
+                                    </a>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -150,17 +161,23 @@
                                 <i class="fas fa-clipboard-check bg-blue"></i>
                                 <div class="timeline-item">
                                   <div class="card-body">
-                                    <span class="time"><i class="fas fa-clock"></i> <?=date('h:i a', strtotime($reason['created_date']))?></span>
-                                      <?php if ($reason['status_defined']=='ws'):?>
-                                        <label class="text-danger"> | Have Symptoms</label>
-                                      <?php else:?>
-                                        <label class="text-success"> | No Symptoms</label>
-                                      <?php endif;?>
-                                      <p><?= $reason['reason_id']?></p>
-                                      <div class="float-right">
-                                        <a class="btn btn-link" type="button" data-toggle="modal" data-target="#myModals<?= $reason['id']?>">
+                                    <div class="row">
+                                      <div class="col-7">
+                                        <span class="time"><i class="fas fa-clock"></i> <?=date('h:i a', strtotime($reason['created_date']))?></span>
+                                        <?php if ($reason['status_defined']=='ws'):?>
+                                          <label class="text-danger"> | Have Symptoms</label>
+                                        <?php else:?>
+                                          <label class="text-success"> | No Symptoms</label>
+                                        <?php endif;?>
+                                        <br>
+                                        <label>Reason: </label>
+                                        <span><?= $reason['reason']?></span>
+                                      </div>
+                                      <div class="col-5">
+                                        <a class="btn btn-link float-right" type="button" data-toggle="modal" data-target="#myModalsReason<?= $reason['id']?>">
                                           <i class="fas fa-list"></i> See details
-                                      </a>
+                                        </a>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -186,7 +203,142 @@
                 </div>
                 <!-- /.card -->
 
-      <?php foreach ($health_summary as $summary): ?>
+            <?php foreach ($reasons as $reason): ?>
+              <!-- Modal -->
+              <div class="modal fade" id="myModalsReason<?= $reason['id']?>" role="dialog">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <span class="h5"><i class="fas fa-calendar"></i> <?=date('F d, Y', strtotime($reason['created_date']))?></span>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body" style="background-color: #e6e6e6;">
+                      <!-- Timelime example  -->
+                          <!-- The time line -->
+                          <div class="timeline">
+                            <!-- timeline time label -->
+                            <div class="time-label">
+                              <?php if ($reason['status_defined']=='ws'):?>
+                                <span class="bg-red"><i class="fas fa-clock"></i> <?=date('h:i a', strtotime($reason['created_date']))?></span>
+                              <?php else:?>
+                                <span class="bg-green"><i class="fas fa-clock"></i> <?=date('h:i a', strtotime($reason['created_date']))?></span>
+                              <?php endif;?>
+                            </div>
+                            <!-- /.timeline-label --> 
+                            <!-- timeline item -->
+                            <div>
+                              <div class="timeline-item">
+                                <div class="timeline-body">
+                                  <label>Reason: </label>
+                                  <span><?=$reason['reason']?></span>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- END timeline item -->
+                            <!-- timeline item -->
+                            <div>
+                              <div class="timeline-item">
+                                <div class="timeline-body">
+                                  <label>Questions</label>
+                                  <div class="float-right">
+                                  <label>Status</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- END timeline item -->
+                            <?php $cnt = 1; ?>
+                            <?php foreach ($questions as $question): ?>
+                            <!-- timeline item -->
+                            <div>
+                              <div class="timeline-item">
+                                <div class="timeline-body">
+                                  <span><?= $cnt++;?>. <?= $question['q_one']?></span>
+                                  <div class="float-right">
+                                    <label for="yes">Yes</label>
+                                    <input type="radio" id="yes" disabled <?= $reason['q_one'] == 'yes' ? 'checked':'unchecked'?>>
+                                    <label for="no">No</label>
+                                    <input type="radio" id="no" disabled <?= $reason['q_one'] == 'no' ? 'checked':'unchecked'?>>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- END timeline item -->
+                             <!-- timeline item -->
+                             <div>
+                              <div class="timeline-item">
+                                <div class="timeline-body">
+                                  <span><?= $cnt++;?>. <?= $question['q_two']?></span>
+                                  <div class="float-right">
+                                    <label for="yes">Yes</label>
+                                    <input type="radio" id="yes" disabled <?= $reason['q_two'] == 'yes' ? 'checked':'unchecked'?>>
+                                    <label for="no">No</label>
+                                    <input type="radio" id="no" disabled <?= $reason['q_two'] == 'no' ? 'checked':'unchecked'?>>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- END timeline item --> 
+                            <!-- timeline item -->
+                            <div>
+                              <div class="timeline-item">
+                                <div class="timeline-body">
+                                  <span><?= $cnt++;?>. <?= $question['q_three']?></span>
+                                  <div class="float-right">
+                                    <label for="yes">Yes</label>
+                                    <input type="radio" id="yes" disabled <?= $reason['q_three'] == 'yes' ? 'checked':'unchecked'?>>
+                                    <label for="no">No</label>
+                                    <input type="radio" id="no" disabled <?= $reason['q_three'] == 'no' ? 'checked':'unchecked'?>>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- END timeline item --> 
+                            <!-- timeline item -->
+                            <div>
+                              <div class="timeline-item">
+                                <div class="timeline-body">
+                                  <span><?= $cnt++;?>. <?= $question['q_four']?></span>
+                                  <div class="float-right">
+                                    <label for="yes">Yes</label>
+                                    <input type="radio" id="yes" disabled <?= $reason['q_four'] == 'yes' ? 'checked':'unchecked'?>>
+                                    <label for="no">No</label>
+                                    <input type="radio" id="no" disabled <?= $reason['q_four'] == 'no' ? 'checked':'unchecked'?>>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- END timeline item -->
+                            <!-- timeline item -->
+                            <div>
+                              <div class="timeline-item">
+                                <div class="timeline-body">
+                                  <span><?= $cnt++;?>. <?= $question['q_five']?></span>
+                                  <div class="float-right">
+                                    <label for="yes">Yes</label>
+                                    <input type="radio" id="yes" disabled <?= $reason['q_five'] == 'yes' ? 'checked':'unchecked'?>>
+                                    <label for="no">No</label>
+                                    <input type="radio" id="no" disabled <?= $reason['q_five'] == 'no' ? 'checked':'unchecked'?>>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- END timeline item -->
+                            <?php endforeach; ?>
+                            <!-- <div>
+                              <i class="fas fa-clock bg-gray"></i>
+                            </div> -->
+                          </div>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                    <!-- /.timeline -->
+                  </div>
+                </div>
+              </div>
+            <?php endforeach; ?>
+
+            <?php foreach ($health_summary as $summary): ?>
               <!-- Modal -->
               <div class="modal fade" id="myModals<?= $summary['id']?>" role="dialog">
                 <div class="modal-dialog modal-lg">
@@ -329,27 +481,6 @@
                                        <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
                                      </button>
                                   </a>
-                                </center>
-                              </form>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-                <!-- ////////////////////////////// MODAL CHECKLIST ////////////////////////////////// -->
-                <!-- ////////////////////////////// MODAL CHECKLIST ////////////////////////////////// -->
-                <div id="myModalDefined" class="modal fade">
-                  <div class="modal-dialog">
-                      <div class="modal-content">
-                          <div class="modal-header">
-                              <h5 class="modal-title">Important Reminder</h5>
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          </div>
-                          <div class="modal-body">
-                              <form>
-                                <center>
-                                  <p class="h6">Your latest self-assessment tested positive for symtoms. Make sure you don't leave and stay at home. Please quarantine yourself so as not to infect other people with the symptoms experienced.</p>
-                                  <hr>
-                                  <p class="h6">Please take self-assessment for another day to clarify your status.</p>
                                 </center>
                               </form>
                           </div>

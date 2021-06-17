@@ -465,6 +465,10 @@ class Validation
 		 						],
 		        ];
 				public $requestChecklist = [
+									'email' => [
+											'label'  => 'Email',
+											'rules'  => 'required',
+									],
 									'reason_id' => [
 											'label'  => 'Reason',
 											'rules'  => 'required',
@@ -613,60 +617,55 @@ class Validation
 		 								]
 		 						],
 		        ];
-			 public $questions = [
-
-		 						'q_one' => [
-		 								'label'  => 'Question One',
-		 								'rules'  => 'required',
-		 						],
-		 						'q_two' => [
-		 								'label'  => 'Question Two',
-		 								'rules'  => 'required',
-		 						],
-		 						'q_three' => [
-		 								'label'  => 'Question Three',
-		 								'rules'  => 'required',
-		 						],
-		 						'q_four' => [
-		 								'label'  => 'Question Four',
-		 								'rules'  => 'required',
-		 						],
-		 						'q_five' => [
-		 								'label'  => 'Question Five',
-		 								'rules'  => 'required',
-		 						],
-		 						'status' => [
-		 								'label'  => 'Question Status',
-		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => 'Please select if the status is active or inactive.',
-		 								]
-		 						],
-		        ];
-			 public $guests = [
-
-		 						'date' => [
-		 								'label'  => 'Date',
-		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => 'Date is required.',
-		 								]
-		 						],
-		 						'user_type' => [
-		 								'label'  => 'Patient Status',
-		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => 'Assessment is required.',
-		 								]
-		 						],
-		 						'gender' => [
-		 								'label'  => 'Patient Status',
-		 								'rules'  => 'required',
-		 								'errors' => [
-		 										'required' => 'Assessment is required.',
-		 								]
-		 						],
-		        ];
+	public $guidelines = [
+		'content' => [
+			'label'  => 'Guidelines',
+			'rules'  => 'required',
+		],
+	];
+	public $questions = [
+		'q_one' => [
+		 	'label'  => 'Question One',
+		 	'rules'  => 'required',
+		],
+		'q_two' => [
+		 	'label'  => 'Question Two',
+		 	'rules'  => 'required',
+		],
+		'q_three' => [
+		 	'label'  => 'Question Three',
+		 	'rules'  => 'required',
+		],
+		'q_four' => [
+		 	'label'  => 'Question Four',
+		 	'rules'  => 'required',
+		],
+		'q_five' => [
+		 	'label'  => 'Question Five',
+		 	'rules'  => 'required',
+		],
+		'status' => [
+		 	'label'  => 'Question Status',
+		 	'rules'  => 'required',
+		 	'errors' => [
+		 		'required' => 'Please select if the status is active or inactive.',
+		 		]
+		],
+	];
+	public $guests = [
+		'date' => [
+			'label'  => 'Date',
+			'rules'  => 'required',
+		],
+		'user_type' => [
+		 	'label'  => 'Patient Status',
+		 	'rules'  => 'required',
+		],
+		'gender' => [
+			'label'  => 'Patient Status',
+		 	'rules'  => 'required',
+		],
+	];
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------

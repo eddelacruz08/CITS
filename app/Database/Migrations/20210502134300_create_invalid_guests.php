@@ -17,14 +17,11 @@ class CreateInvalidGuests extends \CodeIgniter\Database\Migration {
           'type' => 'BIGINT',
           'comment' => '',
         ],
-        'checklist_id' => [
+        'reason_checklist_id' => [
           'type' => 'INT',
           'constraint' => '20',
         ],
-        'date' => [
-          'type' => 'DATE',
-          'comment' => '',
-        ],
+        'date DATE NOT NULL DEFAULT CURRENT_TIMESTAMP',
         'status' => [
           'type' => 'CHAR',
           'constraint' => '1',

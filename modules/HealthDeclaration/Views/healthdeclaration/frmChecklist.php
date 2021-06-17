@@ -183,19 +183,14 @@
                         <div class="modal-body">
                             <p class="h6"><?= $ctr++;?>. <?=$question['q_one']?></p>
                             <p class="h6" id="q_one" style= "color:green"> </p>
-                            <p id="q_one_error" style= "color:red"> </p>
                             <p class="h6"><?= $ctr++;?>. <?=$question['q_two']?></p>
                             <p class="h6" id="q_two" style= "color:green"> </p>
-                            <p id="q_two_error" style= "color:red"> </p>
                             <p class="h6"><?= $ctr++;?>. <?=$question['q_three']?></p>
                             <p class="h6" id="q_three" style= "color:green"> </p>
-                            <p id="q_three_error" style= "color:red"> </p>
                             <p class="h6"><?= $ctr++;?>. <?=$question['q_four']?></p>
                             <p class="h6" id="q_four" style= "color:green"> </p>
-                            <p id="q_four_error" style= "color:red"> </p>
                             <p class="h6"><?= $ctr++;?>. <?=$question['q_five']?></p>
                             <p class="h6" id="q_five" style= "color:green"> </p>
-                            <p id="q_five_error" style= "color:red"> </p>
                             <input class="btn btn-primary float-right" type="submit" value="Submit">
                         </div>
                     </div>
@@ -229,9 +224,9 @@
         document.getElementById("q_one").innerHTML 
           = document.getElementById("no1").value;   
       } else { 
-        document.getElementById("q_one_error").innerHTML 
-          = "Please answer this question number one."; 
-      } 
+        document.getElementById("q_one").innerHTML 
+          = "<span class='text-danger'>Please answer this question number one.</span>"; 
+      }
     if(document.getElementById('yes2').checked) { 
       document.getElementById("q_two").innerHTML 
         = document.getElementById("yes2").value; 
@@ -239,8 +234,8 @@
         document.getElementById("q_two").innerHTML 
           = document.getElementById("no2").value;   
       } else { 
-        document.getElementById("q_two_error").innerHTML 
-          = "Please answer this question number two."; 
+        document.getElementById("q_two").innerHTML 
+          = "<span class='text-danger'>Please answer this question number two.</span>"; 
       } 
     if(document.getElementById('yes3').checked) { 
       document.getElementById("q_three").innerHTML 
@@ -249,8 +244,8 @@
         document.getElementById("q_three").innerHTML 
           = document.getElementById("no3").value;   
       } else { 
-        document.getElementById("q_three_error").innerHTML 
-          = "Please answer this question number three."; 
+        document.getElementById("q_three").innerHTML 
+          = "<span class='text-danger'>Please answer this question number three.</span>"; 
       } 
     if(document.getElementById('yes4').checked) { 
       document.getElementById("q_four").innerHTML 
@@ -259,8 +254,8 @@
         document.getElementById("q_four").innerHTML 
           = document.getElementById("no4").value;   
       } else { 
-        document.getElementById("q_four_error").innerHTML 
-          = "Please answer this question number four."; 
+        document.getElementById("q_four").innerHTML 
+          = "<span class='text-danger'>Please answer this question number four.</span>"; 
       } 
     if(document.getElementById('yes5').checked) { 
       document.getElementById("q_five").innerHTML 
@@ -269,8 +264,8 @@
         document.getElementById("q_five").innerHTML 
           = document.getElementById("no5").value;   
       } else { 
-        document.getElementById("q_five_error").innerHTML 
-          = "Please answer this question number five."; 
+        document.getElementById("q_five").innerHTML 
+          = "<span class='text-danger'>Please answer this question number five.</span>"; 
       } 
     } 
     </script> 

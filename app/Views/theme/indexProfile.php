@@ -22,34 +22,32 @@
                 <?php if(esc($latest_checklist_date[0]['date'])== date('Y-m-d')):?>
                     <?php if(isset($latest_checklist_date[0]['status_defined'])==false):?>
                       <center>
-                        <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
-                            <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
-                              <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
-                            </button>
-                        </a>
+                        <button type="button" class="btn btn-block btn-outline-primary btn-sm" title="Unavailable Self-Assessment" disabled>
+                          <i class="fas fa-clipboard-check"></i> Unavailable Self-Assessment.
+                        </button>
                       </center>
                     <?php else:?>
-                        <center>
-                        <a class="btn text-red btn-rounded" style="border: 2px solid red; padding: 5px;">
-                              <i class="fas fa-exclamation-triangle"></i> Unavailable. Please try tommorrow.
-                        </a>
-                        </center>
+                      <center>
+                        <button type="button" class="btn btn-block btn-outline-danger btn-sm swalAssessmentError">
+                          <i class="fas fa-exclamation-triangle"></i> Self-Assessment Unavailable.
+                        </button>
+                      </center>
                     <?php endif;?>
                 <?php else:?>
                     <center>
-                      <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
-                        <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
-                          <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
-                        </button>
-                      </a>
+                        <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
+                            <button type="button" class="btn btn-block btn-outline-primary btn-sm">
+                              <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
+                            </button>
+                        </a>
                     </center>
                 <?php endif;?>
               <?php else: ?>
                 <center>
                   <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
-                    <button type="button" class="btn btn-default btn-md text-blue" style="border: 2px solid blue;">
+                    <button type="button" class="btn btn-block btn-outline-primary btn-sm">
                       <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
-                    </button>
+                   </button>
                   </a>
                 </center>
               <?php endif; ?>
@@ -57,6 +55,16 @@
            </div>
          </div>
        </div>
+
+        <?php if(isset($latest_checklist_date[0]['status_defined']) == true && isset($latest_checklist_date[0]['date']) == date('Y-m-d')): ?>
+            <div class="callout callout-danger">
+              <h5 class="text-danger"><i class="fas fa-info"></i> Important Reminder:</h5>
+              <p>Your latest self-assessment tested positive for symtoms. 
+                Make sure you don't leave and stay at home. Please quarantine yourself so as not to infect other people with the symptoms experienced.
+                Please take self-assessment for another day to clarify your status.</p>
+            </div>
+        <?php endif; ?>
+        
        <!-- Main content -->
                <div class="row mt-3">
                  <div class="col-md-6">
@@ -169,27 +177,6 @@
                   </div>
               </div>
               <!-- ////////////////////////////// MODAL CHECKLIST ////////////////////////////////// -->
-                <!-- ////////////////////////////// MODAL CHECKLIST ////////////////////////////////// -->
-                <div id="myModalDefined" class="modal fade">
-                  <div class="modal-dialog">
-                      <div class="modal-content">
-                          <div class="modal-header">
-                              <h3 class="modal-title">Important Reminder</h3>
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          </div>
-                          <div class="modal-body">
-                              <form>
-                                <center>
-                                  <p class="h6">Your latest self-assessment tested positive for symtoms. Make sure you don't leave and stay at home. Please quarantine yourself so as not to infect other people with the symptoms experienced.</p>
-                                  <hr>
-                                  <p class="h6">Please take self-assessment for another day to clarify your status.</p>
-                                </center>
-                              </form>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <!-- ////////////////////////////// MODAL CHECKLIST ////////////////////////////////// -->
       <?php else: ?>
         <link rel="stylesheet" href="<?= base_url() ?>public/css/debug.css">
         <div class="container text-center">
@@ -205,20 +192,6 @@
             <?php echo view($viewName); ?>
         <?php endif; ?>
 <?= view('App\Views\theme\footer') ?>
-<?php if(isset($latest_checklist_date[0]['status_defined']) == true && isset($latest_checklist_date[0]['date']) == date('Y-m-d')): ?>
-  <script>
-  	$(document).ready(function(){
-  		$("#myModalDefined").modal('show');
-  	});
-  </script>
-<?php else: ?>
-  <script>
-    $(document).ready(function(){
-      $("#myModalDefined").modal('hide');
-    });
-  </script>
-<?php endif; ?>
-
 <?php if(isset($latest_checklist_date[0]['date']) == date('Y-m-d')): ?>
   <script>
   	$(document).ready(function(){

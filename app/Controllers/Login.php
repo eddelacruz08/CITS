@@ -25,7 +25,7 @@ class Login extends BaseController
 			if($_POST)
 			{
 				$loginOK = 0;
-				$users = $model->getUserWithCondition(['username' => $_POST['username'], 'status' => 'a']);
+				$users = $model->getUserWithCondition(['email' => $_POST['email'], 'status' => 'a']);
 
 				//checking of user existense
 				if(!empty($users))
@@ -37,6 +37,8 @@ class Login extends BaseController
 							$loginOK = 1;
 							$_SESSION['uid'] = $user['id'];
 							$_SESSION['uname'] = $user['username'];
+							$_SESSION['fname'] = $user['firstname'].' '.$user['lastname'];
+							$_SESSION['email'] = $user['email'];
 							$_SESSION['rid'] = $user['role_id'];
 							$_SESSION['user_logged_in'] = 1;
 							break;
@@ -137,94 +139,70 @@ class Login extends BaseController
 			}
 		}
 
-		public function forgot_password()
-		{
+		public function forgot_password(){
 			$model = new UsersModel();
-			// start of post
-			if($_POST)
-			{
-					// start of validation
-					if (!$this->validate('email'))
-			    {
+			if($_POST){
+				if (!$this->validate('email')){
 			    	$data['errors'] = \Config\Services::validation()->getErrors();
-						$data['viewName'] = 'App\Views\forgotPassword';
-						echo view('App\Views\outside_layout\index', $data);
-			    }
-					else
-					{
-						$passwordOK = 0;
-						$users = $model->getUserWithCondition(['email' => $_POST['email'], 'status' => 'a']);
-
-						// start checking of user existense
-						if(!empty($users))
-						{
-							foreach($users as $user)
-							{
-								if($_POST['email'] == $user['email'])
-								{
-									$passwordOK = 1;
-									$firstname = $user['firstname'];
-									$lastname = $user['lastname'];
-									$email = $user['email'];
-									$user_token = $user['token'];
-									$id = $user['id'];
-									break;
-								}
+					$data['viewName'] = 'App\Views\forgotPassword';
+					echo view('App\Views\outside_layout\index', $data);
+			    }else{
+					$lengthPassword = 7;
+					$data = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz';
+  					$randomPassword = substr(str_shuffle($data), 0, $lengthPassword);
+					$passwordOK = 0;
+					$users = $model->getUserWithCondition(['email' => $_POST['email'], 'status' => 'a']);
+					if(!empty($users)){
+						foreach($users as $user){
+							if($_POST['email'] == $user['email']){
+								$passwordOK = 1;
+								$firstname = $user['firstname'];
+								$lastname = $user['lastname'];
+								$email = $user['email'];
+								$id = $user['id'];
+								break;
 							}
 						}
-						else
-						{
-							$_SESSION['error_login_forgot_password'] = 'Cannot Find Email!';
+					}else{
+						$_SESSION['error_login_forgot_password'] = 'Cannot Find Email!';
+						$this->session->markAsFlashdata('error_login_forgot_password');
+						$data['viewName'] = 'forgotPassword';
+						echo view('outside_layout\index', $data);
+					}
+					if($passwordOK == 1){
+						$to = $email;
+						$subject = 'Requested Password!';
+						$message = 'Hi '.ucfirst($firstname).' '.ucfirst($lastname).'!<br><br>'
+							.'<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+							Your new password request has been recieved. Please click '
+							.'the below link to verify your password.<br><br>'
+							.'New password: '.$randomPassword.'<br><br>'
+							.'<a type="button" href="'.base_url().'" class="btn btn-lg"> Verify New Password </a><br><br>'
+							.'Thanks!';
+						$email = \Config\Services::email();
+						$email->setTo($to);
+						$email->setFrom('United Coders Dev Team', SYSTEM_NAME);
+						$email->setSubject($subject);
+						$email->setMessage($message);
+						$_POST['password'] = $randomPassword;
+						$_POST['updated_date'] = date('Y-m-d h:i:s');
+						if($model->editUsers($_POST, $id)){
+							$email->send();
+							$_SESSION['success_login_forgot'] = 'Successfully generate a new password.<br>Please check your email to verify your password.';
+							$this->session->markAsFlashdata('success_login_forgot');
+							return redirect()->to(base_url().'Login/forgot_password');
+						}else{
+							$_SESSION['error_login_forgot_password'] = 'You cannot update data!';
 							$this->session->markAsFlashdata('error_login_forgot_password');
-							$data['viewName'] = 'App\Views\forgotPassword';
-							echo view('App\Views\outside_layout\index', $data);
-						}
-						// end checking of user existense
-						//checking if user is user credential is valid
-						if($passwordOK == 1)
-						{
-							$to = $email;
-							$subject = 'Reset Password Link';
-							$token = $user_token;
-							$message = 'Hi '.ucfirst($firstname).' '.ucfirst($lastname).'!<br><br>'
-												.'Your reset password request has been recieved. Please click '
-												.'the below link to reset your password.<br><br>'
-												.'<a href="'.base_url().'Login/reset_password/'.$token.'"> Click here to reset your password!</a><br><br>'
-												.'Thanks!';
-							$email = \Config\Services::email();
-							$email->setTo($to);
-							$email->setFrom('United Coders Dev Team', SYSTEM_NAME);
-							$email->setSubject($subject);
-							$email->setMessage($message);
-							$_POST['updated_date'] = date('Y-m-d h:i:s');
-							if($model->updatedDate($_POST, $id)){
-										if($email->send())
-										{
-											$data['success_login_forgot'] = 'Reset Password link sent to your registered email.<br>Please verify within 15 minutes.';
-											$data['viewName'] = 'App\Views\forgotPassword';
-									    echo view('App\Views\outside_layout\index', $data);
-										}else{
-											$_SESSION['error_login_forgot_password'] = '<b>Incorrect email!</b><br> Please check your email!';
-											$this->session->markAsFlashdata('error_login_forgot_password');
-											$data['viewName'] = 'App\Views\forgotPassword';
-									    echo view('App\Views\outside_layout\index', $data);
-										}
-							}else{
-								$_SESSION['error_login_forgot_password'] = 'You cannot update data!';
-								$this->session->markAsFlashdata('error_login_forgot_password');
-								$data['viewName'] = 'App\Views\forgotPassword';
-						   		 echo view('App\Views\outside_layout\index', $data);
-							}
+							return redirect()->to(base_url().'Login/forgot_password');
 						}
 					}
-			}
-			else
-			{
+				}
+			}else{
 				$data['function_title'] = "Forgot Password";
-				$data['viewName'] = 'App\Views\forgotPassword';
-		    echo view('App\Views\outside_layout\index', $data);
+				$data['viewName'] = 'forgotPassword';
+		    	echo view('outside_layout\index', $data);
 			}
-			// end of post
 		}
 
 		// start of index function

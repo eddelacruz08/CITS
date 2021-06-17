@@ -7,9 +7,9 @@
     </div>
     <div class="card-body">
       <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>
-      <?php if(isset($success_login_forgot)): ?>
+      <?php if(isset($_SESSION['success_login_forgot'])): ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-           <?= $success_login_forgot ?>
+           <?= $_SESSION['success_login_forgot'] ?>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -39,7 +39,7 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
+            <button type="submit" class="btn btn-primary btn-block">Request New Password</button>
           </div>
           <!-- /.col -->
         </div>

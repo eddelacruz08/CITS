@@ -49,7 +49,13 @@ class CreateReasons extends \CodeIgniter\Database\Migration {
       $data = [
         [
           'user_id' => '0',
-          'reason' => 'Wrong input details',
+          'reason' => 'A mistake in choosing the right data.',
+          'status' => 'a',
+          'created_date' => date('y-m-d H:i:s')
+        ], 
+        [
+          'user_id' => '0',
+          'reason' => 'Incorrect data submitted.',
           'status' => 'a',
           'created_date' => date('y-m-d H:i:s')
         ],

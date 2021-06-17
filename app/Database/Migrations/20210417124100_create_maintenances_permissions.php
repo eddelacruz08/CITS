@@ -342,6 +342,38 @@ class CreateMaintenancesPermissions extends \CodeIgniter\Database\Migration {
                           'status' => 'a',
                           'created_date' => date('Y-m-d H:i:s')
                       ],
+                      [
+                          'function_name' => 'guidelines',
+                          'function_description' => 'guidelines',
+                          'slugs' => 'list-guidelines',
+                          'name_on_class' => 'index',
+                          'page_title' => 'guidelines',
+                          'module_id' => '2',
+                          'link_icon' => '<i class="fas fa-plus"> </i>',
+                          'order' => '22',
+                          'table_name' => 'guidelines',
+                          'func_action' => 'link',
+                          'func_type' => 1,
+                          'allowed_roles' => "[1]",
+                          'status' => 'a',
+                          'created_date' => date('Y-m-d H:i:s')
+                      ],
+                      [
+                          'function_name' => 'edit guidelines',
+                          'function_description' => 'edit guidelines',
+                          'slugs' => 'edit-guidelines',
+                          'name_on_class' => 'edit_guidelines',
+                          'page_title' => 'edit guidelines',
+                          'module_id' => '2',
+                          'link_icon' => '',
+                          'order' => '23',
+                          'table_name' => 'guidelines',
+                          'func_action' => 'edit',
+                          'func_type' => 3,
+                          'allowed_roles' => "[1]",
+                          'status' => 'a',
+                          'created_date' => date('Y-m-d H:i:s')
+                      ],
                 ];
                 $db      = \Config\Database::connect();
                 $builder = $db->table($this->table);

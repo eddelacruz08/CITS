@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="<?= base_url() ?>public/dist/css/adminlte.css">
     <link href="<?= base_url() ?>public/plugins/select2/css/select2.min.css"/>
     <link href="<?= base_url() ?>public/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css"/>
-    <!-- <link rel="stylesheet" href="<?= base_url() ?>public/css/bootstrap-theme.min.css"> -->
     <link rel="stylesheet" href="<?= base_url() ?>public/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>public/font-awesome/css/all.css">
     <link rel="stylesheet" href="<?= base_url() ?>public/css/select2.min.css">
@@ -24,8 +23,9 @@
     <script src="<?= base_url() ?>public/js/instascan.min.js"></script>
     <script type="text/javascript" src="<?= base_url() ?>public/js/adapter.min.js"></script>
     <script type="text/javascript" src="<?= base_url() ?>public/js/vue.min.js"></script>
-    <!-- <script type="text/javascript" src="<?= base_url() ?>public/js/dateScripts.js"></script> -->
     <link href="<?= base_url() ?>public/css/print.css" rel="stylesheet" media="print"/>
+    <!-- summernote -->
+    <link rel="stylesheet" href="<?= base_url() ?>public/plugins/summernote/summernote-bs4.min.css">
 
     <style media="screen">
     .wrapper {
@@ -101,11 +101,11 @@
                                     alink.click();
                                   }
                             </script>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
       <?php endif;?>
   <body class="hold-transition sidebar-mini layout-fixed hidePrint"style="background-color: #d9d9d9;">
   <div class="wrapper"style="background-color: #d9d9d9;">
@@ -164,14 +164,25 @@
                <?php user_primary_links($_SESSION['userPermmissions']) ?>
         </ul>
         <?php if($_SESSION['rid']==2):?>
-        <ul class="nav nav-pills nav-sidebar flex-column"> 
-          <li class="nav-item">
-            <a class="nav-link" type="button" data-toggle="modal" data-target="#myModalqr">
-              <i class="fas fa-qrcode">&nbsp</i>
-              <p> My QR Code</p>
-            </a>
-          </li>
-        </ul>
+          <?php if(isset($_SESSION['latest_checklist_status_defined'])=="ws"):?>
+            <ul class="nav nav-pills nav-sidebar flex-column"> 
+              <li class="nav-item">
+                <a class="nav-link swalDefaultError" type="button" title="Unable to get your Qr Code.">
+                  <i class="fas fa-qrcode">&nbsp</i>
+                  <p> My QR Code</p>
+                </a>
+              </li>
+            </ul>
+          <?php else:?>
+            <ul class="nav nav-pills nav-sidebar flex-column"> 
+              <li class="nav-item">
+                <a class="nav-link" type="button" data-toggle="modal" data-target="#myModalqr">
+                  <i class="fas fa-qrcode">&nbsp</i>
+                  <p> My QR Code</p>
+                </a>
+              </li>
+            </ul>
+          <?php endif;?>
         <?php endif;?>
       </nav>
       <!-- /.sidebar-menu -->

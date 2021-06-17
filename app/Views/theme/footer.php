@@ -39,7 +39,7 @@
     <script src="<?= base_url() ?>public/chart/Chart.min.js"></script>
     <script src="<?= base_url() ?>public/DataTables/js/jquery.dataTables.min.js"></script>
     <script src="<?= base_url() ?>public/DataTables/js/dataTables.bootstrap4.min.js"></script>
-    <script src="<?= base_url() ?>/public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="<?= base_url() ?>public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <script src="<?= base_url() ?>public/chart/utils.js"></script>
     <script src="<?= base_url() ?>public/js/myAlerts.js"></script>
 
@@ -47,6 +47,38 @@
     <script src="<?= base_url() ?>public/js/myJavascript.js"></script>
     <script src="<?= base_url() ?>public/js/user_profile.js"></script>
     <script src="<?= base_url() ?>public/js/loader.js"></script>
+    <script src="<?= base_url() ?>public/plugins/summernote/summernote-bs4.min.js"></script>
+
+    <script>
+      $(function () {
+        // Summernote
+        $('#summernote').summernote()
+      })
+    </script>
+    <script>
+      $(function() {
+        var Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          // background: '#E3E3E3',
+          showConfirmButton: false,
+          timer: 5000
+        });
+
+        $('.swalDefaultError').click(function() {
+          Toast.fire({
+            icon: 'error',
+            title: '<p class="text-dark" style="font-size:13px;">Your Qr Code is unavailable because your latest assessment was defined on symptoms.</p>'
+          })
+        });
+        $('.swalAssessmentError').click(function() {
+          Toast.fire({
+            icon: 'error',
+            title: '<p class="text-dark" style="font-size:13px;">You cannot take self-assessment. Please try tommorrow.</p>'
+          })
+        });
+      });
+    </script>
 
     <script>
       $(".multiple-select").select2({

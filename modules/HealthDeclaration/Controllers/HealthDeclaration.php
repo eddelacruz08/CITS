@@ -3,12 +3,14 @@ namespace Modules\HealthDeclaration\Controllers;
 
 use Modules\UserManagement\Models\PermissionsModel;
 use Modules\UserManagement\Models\UsersModel;
-use Modules\HealthDeclaration\Models\ReasonsModel;
+use Modules\HealthDeclaration\Models\ReasonChecklistsModel;
+use Modules\Maintenances\Models\GuidelinesModel;
 use Modules\Visits\Models\ChecklistModel;
 use Modules\Visits\Models\VisitsModel;
 use Modules\Maintenances\Models\QuestionModel;
 use Modules\Scan\Models\QrcodeAttendanceModel;
-use App\Controllers\BaseController;;
+use Modules\GuestAssessment\Models\GuestAssessmentModel;
+use App\Controllers\BaseController;
 use CodeIgniter\I18n\Time;
 
 class HealthDeclaration extends BaseController
@@ -20,16 +22,21 @@ class HealthDeclaration extends BaseController
 		$this->visitsModel = new VisitsModel();
 		$this->checklistsModel = new ChecklistModel();
 		$this->questionsModel = new QuestionModel();
-		$this->reasonsModel = new ReasonsModel();
+		$this->reasonsModel = new ReasonChecklistsModel();
+		$this->guidelinesModel = new GuidelinesModel();
 		$this->assessModel = new QrcodeAttendanceModel();
+		$this->guestAssessmentModel = new GuestAssessmentModel();
 		$permissions_model = new PermissionsModel();
 		$this->permissions = $permissions_model->getPermissionsWithCondition(['status' => 'a']);
 	}
 
 	public function index()
 	{
-		$data['reasons'] = $this->reasonsModel->getReasonWithCondition(['status' => 'a']);
+		$data['reasons'] = $this->reasonsModel->getReasonChecklist($_SESSION['uid']);
 		$data['latest_checklist_date'] = $this->checklistsModel->getDate($_SESSION['uid']);
+		foreach($data['latest_checklist_date'] as $status_defined){
+			$_SESSION['latest_checklist_status_defined'] = $status_defined['status_defined'];
+		}
 		$data['questions'] = $this->questionsModel->get();
 		$data['health_summary'] = $this->checklistsModel->getHealthTrendSummary($_SESSION['uid']);
 		$data['profile'] = $this->usersModel->getProfile($_SESSION['uid']);
@@ -48,6 +55,9 @@ class HealthDeclaration extends BaseController
 		$data['profile'] = $this->usersModel->getProfile($_SESSION['uid']);
 		$data['profiles'] = $this->usersModel->getProfile($_SESSION['uid']);
 		$data['latest_checklist_date'] = $this->checklistsModel->getDate($_SESSION['uid']);
+		foreach($data['latest_checklist_date'] as $status_defined){
+			$_SESSION['latest_checklist_status_defined'] = $status_defined['status_defined'];
+		}
 
 		if($this->request->getMethod() === 'post'){
 			if (!$this->validate('checklists')){
@@ -56,6 +66,11 @@ class HealthDeclaration extends BaseController
 				$data['viewName'] = 'Modules\HealthDeclaration\Views\healthdeclaration\frmChecklist';
 				echo view('App\Views\theme\indexHealth', $data);
 			}else{
+				$guidelineData = $this->guidelinesModel->get(['status'=>'a']);
+				foreach($guidelineData as $guideline){
+					$guidelineInfo = $guideline['content'];
+					break;
+				}
 				if($_POST['q_one'] == 'yes' ||
 					$_POST['q_two'] == 'yes' ||
 					$_POST['q_three'] == 'yes' ||
@@ -63,20 +78,24 @@ class HealthDeclaration extends BaseController
 					$_POST['q_five'] == 'yes'){
 					$_POST['status_defined'] = 'ws';
 					
-					// $to = $email;
-					// $subject = 'Forgot Password';
-					// $message = 'Hi '.$firstname.' '.$lastname.'!<br><a href="'.base_url().'ResetPassword/index"> Reset your password here!</a>';
-					// $email = \Config\Services::email();
-					// $email->setTo($to);
-					// $email->setFrom('United Coders Dev Team', SYSTEM_NAME);
-					// $email->setSubject($subject);
-					// $email->setMessage($message);
-					// $email->send();
+					$emailStatus = 0;
+					$to = $_SESSION['email'];
+					$subject = 'Guidelines for Guest with Symptoms';
+					$message = $guidelineInfo;
+					$email = \Config\Services::email();
+					$email->setTo($to);
+					$email->setFrom('United Coders Dev Team', SYSTEM_NAME);
+					$email->setSubject($subject);
+					$email->setMessage($message);
+					if($email->send()){
+						$emailStatus = 1;
+					}
+
 					$val_array = [
 						'user_id' => $_SESSION['uid'],
-						'email_status' => 1,
+						'email_status' => $emailStatus,
 					];
-					$this->assessModel->add_assess($val_array);
+					$this->guestAssessmentModel->add_assess($val_array);
 				}
 				$_POST['user_id'] = $_SESSION['uid'];
 				if($this->checklistsModel->add($_POST)){

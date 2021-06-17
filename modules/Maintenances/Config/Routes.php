@@ -45,3 +45,8 @@ $routes->group('questions', ['namespace' => 'Modules\Maintenances\Controllers'],
     $routes->match(['get', 'post'], 'add', 'Questions::add_question');
     $routes->match(['get', 'post'], 'edit/(:num)', 'Questions::edit_question/$1');
 });
+$routes->group('guidelines', ['namespace' => 'Modules\Maintenances\Controllers'], function($routes)
+{
+    $routes->get('/', 'Guidelines::index');
+    $routes->match(['get', 'post'], 'edit/(:num)', 'Guidelines::edit/$1');
+});

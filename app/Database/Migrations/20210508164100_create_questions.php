@@ -66,7 +66,7 @@ class CreateQuestions extends \CodeIgniter\Database\Migration {
         [
           'user_id' => '1',
           
-          'q_one' => 'Is your temperature above or more than 37.5 degrees?',
+          'q_one' => 'Is your temperature greater than 37.5 degrees for the past 3 days?',
           
           'q_two' => 'Tested positive or presumptively positive with covid-19 (The new Coronavirus or SARS-COV2) or been identified as a potential carrier of the coronavirus?',
           

@@ -44,7 +44,6 @@ class BaseModel extends Model
   public function edit_assess($val_array = [], $id)
   {
     $val_array['updated_date'] = (new \DateTime())->format('Y-m-d H:i:s');
-    $val_array['status'] = 'd';
     return $this->update($id, $val_array);
   }
 

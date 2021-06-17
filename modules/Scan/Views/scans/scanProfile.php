@@ -39,18 +39,18 @@
         <!-- Right navbar links -->
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
           <li class="nav-item">
-            <a class="btn btn-default text-dark" type="button" data-toggle="modal" data-target="#qrcodeRegistrationForm">
+            <a class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#qrcodeRegistrationForm">
               <i class="fas fa-qrcode"></i> Registration Qr Code Link
             </a>
           </li>&nbsp&nbsp&nbsp
           <li class="nav-item">
-            <a class="btn btn-default text-dark" type="button" data-toggle="modal" data-target="#qrcodeForm">
+            <a class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#qrcodeForm">
               <i class="fas fa-qrcode"></i> Generate Qr Code Form Link
             </a>
           </li>&nbsp&nbsp&nbsp
           <li class="nav-item">
-            <a href="<?= base_url() ?>dashboard" class="btn btn-success text-white" type="button" >
-              <i class="fas fa-sign-out-alt text-white"></i> Dashboard
+            <a href="<?= base_url() ?>dashboard" class="btn btn-outline-info" type="button" >
+              <i class="fas fa-sign-out-alt"></i> Dashboard
             </a>
           </li>
         </ul>
@@ -71,8 +71,10 @@
               <script src="<?= base_url() ?>public/js/qrcode.js"></script>
               <center>
                   <div id="qrcode"></div>
-                  <h4 class="text-dark"><?= base_url('HealthDeclaration/request')?></h4>
-                  <button class="btn btn-dark mt-2" onclick="downLoadCodeForm();">Download QR code</button>
+                  <a href="<?= base_url('HealthDeclaration/request_form')?>" class="btn btn-link text-dark"><?= base_url('HealthDeclaration/request_form')?></a>
+                  <br>
+                  <button class="btn btn-outline-dark mt-2" onclick="downLoadCodeForm();">Download QR Code as Image</button>
+                  <a href="#" class="btn btn-outline-danger mt-2">Print Qr Code PDF</a>
               </center>
               <script>
                   let qrcode = new QRCode("qrcode", {
@@ -110,8 +112,10 @@
               <script src="<?= base_url() ?>public/js/qrcode.js"></script>
               <center>
                   <div id="qrcodeRegister"></div>
-                  <h4 class="text-dark"><?= base_url('Login/register')?></h4>
-                  <button class="btn btn-dark mt-2" onclick="downLoadCodeRegister();">Download QR code</button>
+                  <a href="<?= base_url('Login/register')?>" class="btn btn-link text-dark"><?= base_url('Login/register')?></a>
+                  <br>
+                  <button class="btn btn-outline-dark mt-2" onclick="downLoadCodeRegister();">Download QR Code as Image</button>
+                  <a href="#" class="btn btn-outline-danger mt-2">Print Qr Code PDF</a>
               </center>
               <script>
                   let qrcodeRegister = new QRCode("qrcodeRegister", {
