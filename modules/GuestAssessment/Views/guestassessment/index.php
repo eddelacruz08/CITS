@@ -99,7 +99,7 @@
       <div class="card-body">
         <div class="tab-content" id="custom-tabs-four-tabContent">
           <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-          <h2><?= $function_title?></h2>
+          <h4><?= $function_title?></h4>
           <hr>
           <div class="table-responsive">
             <table class="table table-sm table-striped table-bordered index-table">

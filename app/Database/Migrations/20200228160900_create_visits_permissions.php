@@ -19,7 +19,7 @@ class CreateVisitsPermissions extends \CodeIgniter\Database\Migration {
             'table_name' => 'visits',
             'func_action' => 'link',
             'func_type' => 1,
-            'allowed_roles' => "[1]",
+            'allowed_roles' => "[1,3]",
             'status' => 'a',
             'created_date' => date('Y-m-d H:i:s')
           ],
@@ -36,7 +36,7 @@ class CreateVisitsPermissions extends \CodeIgniter\Database\Migration {
             'table_name' => 'visits',
             'func_action' => 'add',
             'func_type' => 2,
-            'allowed_roles' => "[1]",
+            'allowed_roles' => "[1,3]",
             'status' => 'a',
             'created_date' => date('Y-m-d H:i:s')
          ],
@@ -53,7 +53,7 @@ class CreateVisitsPermissions extends \CodeIgniter\Database\Migration {
             'table_name' => 'visits',
             'func_action' => 'edit',
             'func_type' => 3,
-            'allowed_roles' => "[1]",
+            'allowed_roles' => "[1,3]",
             'status' => 'a',
             'created_date' => date('Y-m-d H:i:s')
          ],
@@ -70,7 +70,7 @@ class CreateVisitsPermissions extends \CodeIgniter\Database\Migration {
             'table_name' => 'visits',
             'func_action' => 'delete',
             'func_type' => 3,
-            'allowed_roles' => "[1]",
+            'allowed_roles' => "[1,3]",
             'status' => 'a',
             'created_date' => date('Y-m-d H:i:s')
          ],

@@ -156,6 +156,29 @@ class CreateUsers extends \CodeIgniter\Database\Migration {
                         'status' => 'a',
                         'created_date' => date('Y-m-d H:i:s')
                     ],
+                    [
+                        'lastname' => 'Nurse',
+                        'middlename' => 'Nurse',
+                        'firstname' => 'Nurse',
+                        'ext_name_id' => '',
+                        'username' => 'Nurse',
+                        'email' => 'Nurse@gmail.com',
+                        'password' => password_hash('nursenurse', PASSWORD_DEFAULT),
+                        'birthdate' => date('Y-m-d H:i:s', strtotime('1999-11-22')),
+                        'gender_id' => '1',
+                        'cellphone_no' => '09673104253',
+                        'landline_no' => '673104255',
+                        'address' => 'Blk 161 Lot 6 Central Bicutan',
+                        'city_id' => '5',
+                        'province_id' => '23',
+                        'postal' => '4206',
+                        'user_type_id' => '2',
+                        'role_id' => 3,
+                        'token' => md5(str_shuffle('abcdefghijklmnopqrstuvwxyz'.time())),
+                        // 'date' => date('y-m-d'),
+                        'status' => 'a',
+                        'created_date' => date('Y-m-d H:i:s')
+                    ],
 
                 ];
 
