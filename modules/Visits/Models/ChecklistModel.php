@@ -115,12 +115,25 @@ class ChecklistModel extends BaseModel
 
   	  return $query->getResultArray();
     }
+
     public function getLatestChecklistDate($id){
 
       $db = \Config\Database::connect();
 
       $str = "SELECT c.*, u.firstname, u.middlename, u.lastname FROM checklists c LEFT JOIN users u ON c.user_id = u.id
             WHERE c.status = 'a' AND c.user_id = $id ORDER BY c.created_date desc LIMIT 1";
+
+      $query = $db->query($str);
+
+  	  return $query->getResultArray();
+    }
+
+    public function getLatestChecklistAssessment($cId){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT c.* FROM checklists c
+            WHERE c.status = 'a' AND c.id = $cId ORDER BY c.created_date desc LIMIT 1";
 
       $query = $db->query($str);
 

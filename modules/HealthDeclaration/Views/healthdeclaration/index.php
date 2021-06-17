@@ -468,21 +468,19 @@
                   <div class="modal-dialog">
                       <div class="modal-content">
                           <div class="modal-header">
-                              <h3 class="modal-title">Important Reminder</h3>
+                              <h4 class="modal-title">Important Reminder</h4>
                               <button type="button" class="close" data-dismiss="modal">&times;</button>
                           </div>
                           <div class="modal-body">
-                              <form>
-                                <center>
-                                  <p class="h5">This is a daily self-assessment. Please assess yourself before entry.</p>
-                                  <hr>
-                                  <a href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
-                                     <button type="button" class="btn btn-default btn-lg text-blue" style="border: 2px solid #007bff;">
-                                       <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
-                                     </button>
-                                  </a>
-                                </center>
-                              </form>
+                                <div class="callout callout-info">
+                                  <h5 class="text-primary"><i class="fas fa-info"></i> Important Reminder:</h5>
+                                  <p>This is a daily self-assessment. Please assess yourself before entry.</p>
+                                    <a class="align-center" href="<?=base_url(). 'health%20declaration/captures/' . $_SESSION['uid']?>" class="text-white">
+                                      <button type="button" class="btn btn-outline-info btn-md">
+                                        <i class="fas fa-clipboard-check"></i>  Start to take Self-Assessment.
+                                      </button>
+                                    </a>
+                                </div>
                           </div>
                       </div>
                   </div>

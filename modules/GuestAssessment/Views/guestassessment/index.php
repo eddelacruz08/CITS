@@ -161,7 +161,7 @@
                           </div>
                           <div class="modal-footer justify-content-center">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <a href="<?=base_url().'guest%20assessment/invalidate_guest/'.$patient['user_id']?>">
+                            <a href="<?=base_url().'guest%20assessment/invalidate_guest/'.$patient['user_id'].'/'.$patient['checklist_id']?>">
                               <button type="submit" class="btn btn-danger">Invalidate</button>
                             </a>
                           </div>

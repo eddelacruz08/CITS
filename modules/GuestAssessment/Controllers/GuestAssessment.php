@@ -107,7 +107,7 @@ class GuestAssessment extends BaseController
 		die();
 	}
 
-	public function invalidate_guest($id)
+	public function invalidate_guest($id, $cId)
 	{
 		// die($id);
 		$checkUser = 0;
@@ -143,7 +143,7 @@ class GuestAssessment extends BaseController
 			    'reason_checklist_id' => $reasonChecklistId,
 			];
 			$this->invalidatedGuestsModel->add($value_invalid_guest);
-			$checklistData = $this->checklistsModel->getLatestChecklistDate($id);
+			$checklistData = $this->checklistsModel->getLatestChecklistAssessment($cId);
 			foreach($checklistData as $latestChecklist){
 			    $checklistId = $latestChecklist['id'];
 			    break;
