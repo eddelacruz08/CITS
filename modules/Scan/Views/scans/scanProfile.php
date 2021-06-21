@@ -153,17 +153,14 @@
                     <h5 style="color: black;">QR Code Scanner <i class="fas fa-qrcode"></i> <span id="remain"></span></h5>
                   </center>
                     <video id="previewChecklist"></video>
-                    <form action="<?= base_url() ?>scan/add-scan" id="form1" name="form1" method="post">
+                    <form action="<?= base_url() ?>scan" id="form1" name="form1" method="post">
                       <div class="custom-control mt-2 text-center">
                         <div class="row">
                           <div class="col-md-1">
                             <label>ID:</label>
                           </div>
                           <div class="col-md-11">
-                            <input readonly class="form-control <?= isset($errors['identifier']) ? 'is-invalid':'is-valid' ?>" type="text" value="<?=isset($value['identifier']) ? '': ''?>" id="identifier" name="identifier"> 
-                            <!-- <?php if(isset($errors['identifier'])):?>
-                              <p class="text-danger"><?=esc($errors['identifier'])?><p>
-                            <?php endif;?> -->
+                            <input readonly class="form-control <?= isset($errors['identifier']) ? 'is-invalid':'is-valid' ?>" type="text" id="identifier" name="identifier"> 
                           </div>
                         </div>
                       </div>
@@ -171,24 +168,31 @@
                         <button class="btn btn-success" type="submit">Enter</button>
                       </div>
                     </form>
-                    <!-- <div id="liveScanData"></div> -->
                 </div>
               </div>
             </div>
           <div class="col-md-7">
           <div class="row">
             <div class="col-md-12">
-              <?php if(isset($success_added2)): ?>
+              <?php if(isset($_SESSION['success_added2'])): ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <?= $success_added2; ?>
+                  <?= $_SESSION['success_added2']; ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
               <?php endif; ?>
-              <?php if(isset($error_added2)): ?>
+              <?php if(isset($_SESSION['error_added2'])): ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <?= $error_added2; ?>
+                  <?= $_SESSION['error_added2']; ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+               </div>
+             <?php endif; ?>
+              <?php if(isset($_SESSION['warning_added2'])): ?>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  <?= $_SESSION['warning_added2']; ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -199,7 +203,8 @@
               <!-- Profile Image -->
               <div class="card card-primary card-outline">
               <?php if(!empty($profile)):?>
-                <div class="card-body">
+                <!-- load info scan -->
+                  <div class="card-body">
                   <div class="text-center">
                     <img class="img-fluid img-circle"  width="20%"
                          src="<?= base_url() ?>public/img/user.png"
@@ -240,9 +245,8 @@
                   </div>
                   <ul class="list-group list-group-unbordered mb-3">
                   </ul>
-                </div>
-                <!-- /.card-body -->
-                
+                  </div>
+                <!-- load info scan -->
               <?php else:?>
                 <div class="card-body">
                   <div class="text-center">
@@ -328,27 +332,6 @@
     });
   </script>
   <script src="<?= base_url() ?>public/js/jquery.min.js"></script>
-  <script type="text/javascript">
-    // window.onload=counter;
-    // function counter()
-    // {
-    //   var seconds = 5;  
-    //   countDown();
-    //   function countDown()
-    //   {
-    //     document.getElementById("remain").innerHTML=seconds;
-    //     if(seconds>0)
-    //     {
-    //       seconds=seconds - 1;
-    //       setTimeout(countDown,1000);
-    //     }
-    //     if(seconds == 0)
-    //     {
-    //       document.form1.submit();
-    //     }
-    //   }
-    // }
-  </script>
   <script src="<?= base_url() ?>public/js/bootstrap.min.js"></script>
   <script src="<?= base_url() ?>/public/js/popper.min.js"></script>
   <script src="<?= base_url() ?>/public/dist/js/adminlte.min.js"></script>

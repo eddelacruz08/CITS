@@ -17,12 +17,7 @@
             <tr>
               <th>#</th>
               <th>Function Name</th>
-              <th>
-                <?php foreach($roles as $checkbox => $value): ?>
-                  <input type='checkbox' id='<?= $value['role_name'];?>'> <?= $value['role_name'];?>
-                <?php endforeach; ?>
-              </th>
-              <!-- <th></th> -->
+              <th>Allowed Roles</th>
             </tr>
           </thead>
           <tbody>
@@ -47,22 +42,6 @@
                       {
                         echo '<input type="checkbox" class="'.$role['role_name'].'" name="allowedUsers['.$permission['id'].']['.$role['id'].']">';
                       }
-                      echo '
-                      <script src="'.base_url().'public/js/jquery.min.js"></script>
-                      <script>
-                      $("#'.$role['role_name'].'").click(function (){
-                        if ($("#'.$role['role_name'].'").is(":checked")){
-                          $(".'.$role['role_name'].'").each(function (){
-                            $(this).prop("checked", true);
-                          });
-                        }else{
-                          $(".'.$role['role_name'].'").each(function (){
-                            $(this).prop("checked", false);
-                          });
-                        }
-                      });
-                      </script>';
-
                       echo ' '.$role['role_name'];
                       ?>
 

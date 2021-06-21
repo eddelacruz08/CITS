@@ -49,6 +49,10 @@ class CreateChecklists extends \CodeIgniter\Database\Migration {
           'default' => 'a'
         ],
         'date DATE NOT NULL DEFAULT CURRENT_TIMESTAMP',
+        'token' => [
+          'type' => 'VARCHAR',
+          'constraint' => '32'
+        ],
         'created_date' => [
           'type' => 'DATETIME',
           'comment' => 'Date of creation',

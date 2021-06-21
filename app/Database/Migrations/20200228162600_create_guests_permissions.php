@@ -30,7 +30,7 @@ class CreateGuestsPermissions extends \CodeIgniter\Database\Migration {
                           'page_title' => 'list of guest',
                           'module_id' => '4',
                           'link_icon' => '<i class="fas fa-users"></i>',
-                          'order' => '3',
+                          'order' => '2',
                           'table_name' => 'users',
                           'func_action' => 'link',
                           'func_type' => 1,

@@ -3,7 +3,8 @@ $routes->group('visits', ['namespace' => 'Modules\Visits\Controllers'], function
 {
     $routes->get('/', 'Visits::index');
     $routes->get('pdf', 'Visits::pdf');
-    $routes->match(['get', 'post'], 'pdf', 'Visits::pdf');
+    $routes->get('search_print_table', 'Visits::search_print_table');
+    $routes->match(['get', 'post'], 'print', 'Visits::print');
 });
 $routes->group('checklists', ['namespace' => 'Modules\Visits\Controllers'], function($routes)
 {

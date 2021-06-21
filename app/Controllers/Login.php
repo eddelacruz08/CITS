@@ -313,18 +313,10 @@ class Login extends BaseController
 		{
 		  $updated_time = strtotime($time);
 		  $current_time = time();
-		//   $time_diff = ($current_time - $updated_time)/60;
 		  if ($current_time - $updated_time < 120) {
 			return true;
 		  }else{
 			return false;
 		  }
-		//   $time_diff = (strtotime(time())- strtotime($time))/60;
-		//   die(strtotime($time));
-		//   if ($time_diff < 120) {
-		//     return true;
-		//   }else{
-		//     return false;
-		//   }
 		}
 }

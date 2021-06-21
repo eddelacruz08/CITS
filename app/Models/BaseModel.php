@@ -125,22 +125,21 @@ class BaseModel extends Model
   //   $val_array['status'] = 'a';
   //   return $this->update($id, $val_array);
   // }
-  public function add_visits_login($val_array = [])
+  public function add_visits_login($val_array_login = [])
   {
-    $val_array['created_date'] = (new \DateTime())->format('Y-m-d H:i:s');
-    $val_array['status'] = 'a';
-    return $this->save($val_array);
+    $val_array_login['created_date'] = (new \DateTime())->format('Y-m-d H:i:s');
+    $val_array_login['status'] = 'a';
+    return $this->save($val_array_login);
   }
-  public function edit_visits_logout($val_array = [], $id)
+  public function edit_visits_logout($val_array_logout = [], $vId)
   {
-    $val_array['updated_date'] = (new \DateTime())->format('Y-m-d H:i:s');
-    $val_array['status'] = 'a';
-    return $this->update($id, $val_array);
+    $val_array_logout['updated_date'] = (new \DateTime())->format('Y-m-d H:i:s');
+    $val_array_logout['status'] = 'a';
+    return $this->update($vId, $val_array_logout);
   }
 
   public function edit($val_array = [], $id)
   {
-    $val_array['log_in'] = (new \DateTime())->format('Y-m-d H:i:s');
     $val_array['updated_date'] = (new \DateTime())->format('Y-m-d H:i:s');
     $val_array['status'] = 'a';
     return $this->update($id, $val_array);

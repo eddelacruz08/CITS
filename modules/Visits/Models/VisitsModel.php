@@ -22,8 +22,78 @@ class VisitsModel extends BaseModel
 
       $db = \Config\Database::connect();
 
-      $str = "SELECT v.*, g.*, e.extension, gen.gender, t.guest_type FROM visits v LEFT JOIN users g ON v.user_id = g.id LEFT JOIN extensions e ON g.ext_name_id = e.id
-              LEFT JOIN genders gen ON g.gender_id = gen.id LEFT JOIN types t ON g.user_type_id = t.id WHERE v.date = '$date' AND v.status = 'a' ORDER BY v.created_date desc";
+      $str = "SELECT v.*, u.firstname, u.middlename, u.lastname, e.extension, gen.gender, t.guest_type 
+              FROM visits v 
+              LEFT JOIN users u ON v.user_id = u.id 
+              LEFT JOIN extensions e ON u.ext_name_id = e.id
+              LEFT JOIN genders gen ON u.gender_id = gen.id 
+              LEFT JOIN types t ON u.user_type_id = t.id 
+              WHERE v.date = $date AND v.status = 'a' 
+              ORDER BY v.created_date desc";
+
+      $query = $db->query($str);
+
+      return $query->getResultArray();
+    }
+
+    public function getVisitActive(){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT v.*, u.firstname, u.middlename, u.lastname, e.extension, gen.gender, t.guest_type 
+              FROM visits v 
+              LEFT JOIN users u ON v.user_id = u.id 
+              LEFT JOIN extensions e ON u.ext_name_id = e.id
+              LEFT JOIN genders gen ON u.gender_id = gen.id 
+              LEFT JOIN types t ON u.user_type_id = t.id 
+              WHERE v.date = CURDATE() AND v.status = 'a' 
+              ORDER BY v.created_date desc";
+
+      $query = $db->query($str);
+
+      return $query->getResultArray();
+    }
+
+    public function getVisitDatePrint(){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT t.*, t.date FROM visits t GROUP BY t.date DESC";
+
+      $query = $db->query($str);
+
+      return $query->getResultArray();
+    }
+
+    public function getVisitPrint($date){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT v.*, u.firstname, u.middlename, u.lastname, gen.gender, t.guest_type 
+              FROM visits v 
+              LEFT JOIN users u ON v.user_id = u.id 
+              LEFT JOIN genders gen ON u.gender_id = gen.id 
+              LEFT JOIN types t ON u.user_type_id = t.id 
+              WHERE v.status = 'a' AND v.date = '$date'
+              ORDER BY v.created_date desc";
+
+      $query = $db->query($str);
+
+      return $query->getResultArray();
+    }
+
+    public function getVisitHistory(){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT v.*, u.firstname, u.middlename, u.lastname, e.extension, gen.gender, t.guest_type 
+              FROM visits v 
+              LEFT JOIN users u ON v.user_id = u.id 
+              LEFT JOIN extensions e ON u.ext_name_id = e.id
+              LEFT JOIN genders gen ON u.gender_id = gen.id 
+              LEFT JOIN types t ON u.user_type_id = t.id 
+              WHERE v.status = 'a' 
+              ORDER BY v.created_date desc";
 
       $query = $db->query($str);
 

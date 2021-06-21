@@ -7,7 +7,7 @@ class ChecklistModel extends BaseModel
 {
     protected $table = 'checklists';
 
-    protected $allowedFields = ['id','user_id', 'temperature', 'q_one', 'q_two', 'q_three', 'q_four', 'q_five', 'reason_id','status_defined', 'token','status', 'created_date', 'updated_date', 'deleted_date'];
+    protected $allowedFields = ['id','user_id', 'q_one', 'q_two', 'q_three', 'q_four', 'q_five', 'reason_id','status_defined', 'token','status', 'created_date', 'updated_date', 'deleted_date'];
 
     public function verifyTokenChecklist($token){
       $builder = $this->db->table('checklists');
@@ -128,17 +128,53 @@ class ChecklistModel extends BaseModel
   	  return $query->getResultArray();
     }
 
-    public function getLatestChecklistAssessment($cId){
+    public function getLatestChecklistDateOnScan($id){
 
       $db = \Config\Database::connect();
 
-      $str = "SELECT c.* FROM checklists c
-            WHERE c.status = 'a' AND c.id = $cId ORDER BY c.created_date desc LIMIT 1";
+      $str = "SELECT c.* FROM checklists c 
+              WHERE c.status = 'a' AND c.user_id = $id
+              ORDER BY c.created_date desc LIMIT 1";
 
       $query = $db->query($str);
 
   	  return $query->getResultArray();
     }
+
+    public function getLatestCheckStatusDefinedOnScan($cId){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT c.* FROM checklists c 
+              WHERE c.status = 'a' AND c.id = $cId
+              ORDER BY c.created_date desc LIMIT 1";
+
+      $query = $db->query($str);
+
+  	  return $query->getResultArray();
+    }
+    public function getLatestChecklistId($id){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT c.* FROM checklists c WHERE c.status = 'a' AND c.user_id = $id ORDER BY c.created_date desc LIMIT 1";
+
+      $query = $db->query($str);
+
+  	  return $query->getResultArray();
+    }
+    
+    public function getLatestChecklistAssessment($cId){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT c.* FROM checklists c WHERE c.status = 'a' AND c.token = $cId";
+
+      $query = $db->query($str);
+
+  	  return $query->getResultArray();
+    }
+
     public function getDate($id){
 
       $db = \Config\Database::connect();

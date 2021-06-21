@@ -50,8 +50,18 @@
     <script src="<?= base_url() ?>public/plugins/summernote/summernote-bs4.min.js"></script>
 
     <script>
+      $(document).ready(function(){
+          refresh();
+      });
+      function refresh(){
+          setTimeout(function(){
+              $('#load_table_assessment').load('<?= base_url()?>guest%20assessment/load_table_assessment');
+              refresh();
+          }, 1000);
+      }
+    </script>
+    <script>
       $(function () {
-        // Summernote
         $('#summernote').summernote()
       })
     </script>

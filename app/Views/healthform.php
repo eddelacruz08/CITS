@@ -15,9 +15,9 @@
               </button>
           </div>
         <?php endif; ?>
-        <?php if(isset($_SESSION['error_request'])): ?>
+        <?php if(isset($_SESSION['error'])): ?>
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
-             <?= $_SESSION['error_request']; ?>
+             <?= $_SESSION['error']; ?>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

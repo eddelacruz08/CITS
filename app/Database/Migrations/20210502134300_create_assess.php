@@ -21,9 +21,9 @@ class CreateAssess extends \CodeIgniter\Database\Migration {
           'type' => 'INT',
           'constraint' => '1',
         ],
-        'checklist_id' => [
-          'type' => 'INT',
-          'constraint' => '11',
+        'checklist_token' => [
+          'type' => 'VARCHAR',
+          'constraint' => '32',
         ],
         'reason_id' => [
           'type' => 'INT',

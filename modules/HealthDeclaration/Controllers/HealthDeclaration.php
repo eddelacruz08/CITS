@@ -71,14 +71,11 @@ class HealthDeclaration extends BaseController
 					$guidelineInfo = $guideline['content'];
 					break;
 				}
-				if($_POST['q_one'] == 'yes' ||
-					$_POST['q_two'] == 'yes' ||
-					$_POST['q_three'] == 'yes' ||
-					$_POST['q_four'] == 'yes' ||
-					$_POST['q_five'] == 'yes'){
+				$token_checklist = md5(str_shuffle('ABCDEFGHIJKLMNOPQRSTWXYZabcdefghijklmnopqrstuvwxyz0123456789'.time()));
+				if($_POST['q_one'] == 'yes' || $_POST['q_two'] == 'yes' || $_POST['q_three'] == 'yes' || $_POST['q_four'] == 'yes' || $_POST['q_five'] == 'yes'){
+					
 					$_POST['status_defined'] = 'ws';
 					
-					$emailStatus = 0;
 					$to = $_SESSION['email'];
 					$subject = 'Guidelines for Guest with Symptoms';
 					$message = $guidelineInfo;
@@ -89,15 +86,19 @@ class HealthDeclaration extends BaseController
 					$email->setMessage($message);
 					if($email->send()){
 						$emailStatus = 1;
+					}else{
+						$emailStatus = 0;
 					}
 
 					$val_array = [
 						'user_id' => $_SESSION['uid'],
 						'email_status' => $emailStatus,
+						'checklist_token' => $token_checklist,
 					];
 					$this->guestAssessmentModel->add_assess($val_array);
 				}
 				$_POST['user_id'] = $_SESSION['uid'];
+				$_POST['token'] = $token_checklist;
 				if($this->checklistsModel->add($_POST)){
 					$_SESSION['success'] = 'You have Successfuly added a checklist!';
 					$this->session->markAsFlashdata('success');

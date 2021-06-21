@@ -15,7 +15,7 @@ class CreateChecklistsPermissions extends \CodeIgniter\Database\Migration {
             'page_title' => 'edit a checklists',
             'module_id' => '5',
             'link_icon' => '',
-            'order' => '6',
+            'order' => '2',
             'table_name' => 'checklists',
             'func_action' => 'edit',
             'func_type' => 3,
