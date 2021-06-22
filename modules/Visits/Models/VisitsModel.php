@@ -69,7 +69,7 @@ class VisitsModel extends BaseModel
 
       $db = \Config\Database::connect();
 
-      $str = "SELECT v.*, u.firstname, u.middlename, u.lastname, gen.gender, t.guest_type 
+      $str = "SELECT v.*, u.firstname, u.middlename, u.lastname, u.cellphone_no, gen.gender, t.guest_type 
               FROM visits v 
               LEFT JOIN users u ON v.user_id = u.id 
               LEFT JOIN genders gen ON u.gender_id = gen.id 

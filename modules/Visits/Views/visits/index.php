@@ -82,9 +82,9 @@
                           <td><?= date('F d, Y h:m a', strtotime($visit['log_in']))?></td>
                           <td><?= $visit['log_out'] == NULL ? 'Not Logout' : date('F d, Y h:m a', strtotime($visit['log_out']))?></td>
                           <td class="text-center">
-                              <?php
-                                  guest_detail_link('guests', 'show-guest', $_SESSION['userPermmissions'], $visit['user_id']);
-                              ?>
+                            <?php if(guest_detail_link('guests', 'show-guest', $_SESSION['userPermmissions'], $visit['user_id'])): ?>
+                              <?php guest_detail_link('guests', 'show-guest', $_SESSION['userPermmissions'], $visit['user_id']) ?>
+                            <?php endif; ?>
                           </td>
                       </tr>
                   <?php endforeach; ?>
@@ -161,9 +161,9 @@
                     <td><?= date('F d, Y h:m a', strtotime($visit['log_in'])) ?></td>
                     <td><?= date('F d, Y h:m a', strtotime($visit['log_out'])) ?></td>
                     <td class="text-center">
-                      <?php
-                        guest_detail_link('guests', 'show-guest', $_SESSION['userPermmissions'], $visit['user_id']);
-                      ?>
+                      <?php if(guest_detail_link('guests', 'show-guest', $_SESSION['userPermmissions'], $visit['user_id'])): ?>
+                        <?php guest_detail_link('guests', 'show-guest', $_SESSION['userPermmissions'], $visit['user_id']) ?>
+                      <?php endif; ?>
                     </td>
                   </tr>
                 <?php endforeach; ?>

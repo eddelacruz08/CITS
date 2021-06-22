@@ -121,7 +121,7 @@ class CreateUsers extends \CodeIgniter\Database\Migration {
                         'birthdate' => date('Y-m-d H:i:s', strtotime('1999-11-22')),
                         'gender_id' => '2',
                         'cellphone_no' => '09673104255',
-                        'landline_no' => '673104255',
+                        'landline_no' => '',
                         'address' => 'Blk 161 Lot 6 Central Bicutan',
                         'city_id' => '1',
                         'province_id' => '3',
@@ -129,7 +129,6 @@ class CreateUsers extends \CodeIgniter\Database\Migration {
                         'user_type_id' => '3',
                         'role_id' => 1,
                         'token' => md5(str_shuffle('abcdefghijklmnopqrstuvwxyz'.time())),
-                        // 'date' => date('y-m-d'),
                         'status' => 'a',
                         'created_date' => date('Y-m-d H:i:s')
                     ],
@@ -140,11 +139,11 @@ class CreateUsers extends \CodeIgniter\Database\Migration {
                         'ext_name_id' => '',
                         'username' => 'eddelacruz12',
                         'email' => 'rhingmakz21@gmail.com',
-                        'password' => password_hash('EDDelacruz12', PASSWORD_DEFAULT),
+                        'password' => password_hash('eddelacruz1234', PASSWORD_DEFAULT),
                         'birthdate' => date('Y-m-d H:i:s', strtotime('1999-11-22')),
                         'gender_id' => '1',
                         'cellphone_no' => '09673104253',
-                        'landline_no' => '673104255',
+                        'landline_no' => '',
                         'address' => 'Blk 161 Lot 6 Central Bicutan',
                         'city_id' => '5',
                         'province_id' => '13',
@@ -152,18 +151,17 @@ class CreateUsers extends \CodeIgniter\Database\Migration {
                         'user_type_id' => '3',
                         'role_id' => 2,
                         'token' => md5(str_shuffle('abcdefghijklmnopqrstuvwxyz'.time())),
-                        // 'date' => date('y-m-d'),
                         'status' => 'a',
                         'created_date' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'lastname' => 'Nurse',
-                        'middlename' => 'Nurse',
-                        'firstname' => 'Nurse',
+                        'lastname' => 'nurse',
+                        'middlename' => 'nurse',
+                        'firstname' => 'nurse',
                         'ext_name_id' => '',
-                        'username' => 'Nurse',
-                        'email' => 'Nurse@gmail.com',
-                        'password' => password_hash('nursenurse', PASSWORD_DEFAULT),
+                        'username' => 'nurse',
+                        'email' => 'nurse@gmail.com',
+                        'password' => password_hash('nursenurse1234', PASSWORD_DEFAULT),
                         'birthdate' => date('Y-m-d H:i:s', strtotime('1999-11-22')),
                         'gender_id' => '1',
                         'cellphone_no' => '09673104253',
@@ -175,11 +173,31 @@ class CreateUsers extends \CodeIgniter\Database\Migration {
                         'user_type_id' => '2',
                         'role_id' => 3,
                         'token' => md5(str_shuffle('abcdefghijklmnopqrstuvwxyz'.time())),
-                        // 'date' => date('y-m-d'),
                         'status' => 'a',
                         'created_date' => date('Y-m-d H:i:s')
                     ],
-
+                    [
+                        'lastname' => 'guard',
+                        'middlename' => 'guard',
+                        'firstname' => 'guard',
+                        'ext_name_id' => '',
+                        'username' => 'guard',
+                        'email' => 'guard@gmail.com',
+                        'password' => password_hash('guardguard1234', PASSWORD_DEFAULT),
+                        'birthdate' => date('Y-m-d H:i:s', strtotime('1999-11-22')),
+                        'gender_id' => '1',
+                        'cellphone_no' => '09673104253',
+                        'landline_no' => '',
+                        'address' => 'Blk 161 Lot 6 Central Bicutan',
+                        'city_id' => '5',
+                        'province_id' => '23',
+                        'postal' => '4206',
+                        'user_type_id' => '2',
+                        'role_id' => 4,
+                        'token' => md5(str_shuffle('abcdefghijklmnopqrstuvwxyz'.time())),
+                        'status' => 'a',
+                        'created_date' => date('Y-m-d H:i:s')
+                    ],
                 ];
 
                 $db      = \Config\Database::connect();
@@ -189,7 +207,7 @@ class CreateUsers extends \CodeIgniter\Database\Migration {
 
         public function down()
         {
-          $db      = \Config\Database::connect();
+          $db = \Config\Database::connect();
           $builder = $db->table($this->table);
           $db->simpleQuery('DELETE FROM '.$this->table);
           $this->forge->dropTable($this->table);

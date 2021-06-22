@@ -49,8 +49,8 @@
             </a>
           </li>&nbsp&nbsp&nbsp
           <li class="nav-item">
-            <a href="<?= base_url() ?>dashboard" class="btn btn-outline-info" type="button" >
-              <i class="fas fa-sign-out-alt"></i> Dashboard
+            <a href="<?= base_url() ?>visits" class="btn btn-outline-info" type="button" >
+              <i class="fas fa-list"></i> Visit List
             </a>
           </li>
         </ul>

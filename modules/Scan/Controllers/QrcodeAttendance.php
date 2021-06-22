@@ -75,20 +75,21 @@ class QrcodeAttendance extends BaseController
 											break;
 										}
 									}
-								}else{
-									$val_array_login = [
-										'user_id' => $userId,
-										'log_in' => (new \DateTime())->format('Y-m-d H:i:s'),
-									];
-									$data['profile'] = $this->usersModel->getScanProfile($_POST['identifier']);
-									if($this->visitsModel->add_visits_login($val_array_login)){
-										$_SESSION['success_added2'] = 'Successfully Login!';
-										$this->session->markAsFlashdata('success_added2');
-									}else{
-										$_SESSION['error_added2'] = 'Error Login!';
-										$this->session->markAsFlashdata('error_added2');
-									}
 								}
+								// else{
+								// 	$val_array_login = [
+								// 		'user_id' => $userId,
+								// 		'log_in' => (new \DateTime())->format('Y-m-d H:i:s'),
+								// 	];
+								// 	$data['profile'] = $this->usersModel->getScanProfile($_POST['identifier']);
+								// 	if($this->visitsModel->add_visits_login($val_array_login)){
+								// 		$_SESSION['success_added2'] = 'Successfully Login!';
+								// 		$this->session->markAsFlashdata('success_added2');
+								// 	}else{
+								// 		$_SESSION['error_added2'] = 'Error Login!';
+								// 		$this->session->markAsFlashdata('error_added2');
+								// 	}
+								// }
 								if($visitsOk == 1){
 									$data['profile'] = $this->usersModel->getScanProfile($_POST['identifier']);
 									$val_array_logout = [

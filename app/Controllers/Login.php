@@ -12,28 +12,20 @@ class Login extends BaseController
 {
 	private $roles;
 
-	public function __construct()
-	{
+	public function __construct(){
 		parent:: __construct();
 
+		$this->usersModel = new UsersModel();
 		$role_model = new RolesModel();
 		$this->roles = $role_model->getRoleWithCondition(['status' => 'a']);
 	}
-		public function index()
-		{
-			$model = new UsersModel();
-			if($_POST)
-			{
+		public function index(){
+			if($_POST){
 				$loginOK = 0;
-				$users = $model->getUserWithCondition(['email' => $_POST['email'], 'status' => 'a']);
-
-				//checking of user existense
-				if(!empty($users))
-				{
-					foreach($users as $user)
-					{
-						if(password_verify($_POST['password'], $user['password']))
-						{
+				$users = $this->usersModel->getUserWithCondition(['email' => $_POST['email'], 'status' => 'a']);
+				if(!empty($users)){
+					foreach($users as $user){
+						if(password_verify($_POST['password'], $user['password'])){
 							$loginOK = 1;
 							$_SESSION['uid'] = $user['id'];
 							$_SESSION['uname'] = $user['username'];
@@ -44,52 +36,40 @@ class Login extends BaseController
 							break;
 						}
 					}
-				}
-				else
-				{
+				}else{
 
 					$_SESSION['error_login'] = 'Cannot Find Username';
 					$this->session->markAsFlashdata('error_login');
 		        	return redirect()->to( base_url());
 				}
-
-				//checking if user is user credential is valid
-				if($loginOK == 1)
-				{
-					if($_SESSION['rid'] == 2)
-					{
-						//die('logged in');
-					  $_SESSION['success_login'] = 'Welcome '.$user['username'].'!';
+				if($loginOK == 1){
+					if($_SESSION['rid'] == 2){
+					  	$_SESSION['success_login'] = 'Welcome '.$user['username'].'!';
 						$this->session->markAsFlashdata('success_login');
-		        return redirect()->to(base_url('profile'));
+		       			 return redirect()->to(base_url('profile'));
+					}elseif($_SESSION['rid'] == 4){
+						$_SESSION['success_login'] = 'Welcome '.$user['username'].'!';
+						$this->session->markAsFlashdata('success_login');
+						return redirect()->to(base_url('visits'));
 					}else{
-						//die('logged in');
 						$_SESSION['success_login'] = 'Welcome '.$user['username'].'!';
 						$this->session->markAsFlashdata('success_login');
 						return redirect()->to(base_url('dashboard'));
 					}
-				}
-				else
-				{
+				}else{
 					//die('error login');
 					$_SESSION['error_login'] = 'Username and Password mismatch!';
 					$this->session->markAsFlashdata('error_login');
 		        	return redirect()->to(base_url());
 				}
-			}
-			else
-			{
-		    $data['viewName'] = 'App\Views\login';
-		    echo view('App\Views\outside_layout\index', $data);
+			}else{
+				$data['viewName'] = 'App\Views\login';
+				echo view('App\Views\outside_layout\index', $data);
 			}
 		}
 
-		public function register()
-		{
-			// $this->hasPermissionRedirect('add-user');
-
+		public function register(){
 			$data['roles'] = $this->roles;
-
 			helper(['form', 'url']);
 			$model = new UsersModel();
 			$extension_model = new ExtensionModel();
@@ -103,44 +83,34 @@ class Login extends BaseController
 			$data['provinces'] = $province_model->get(['status'=> 'a']);
 			$data['cities'] = $city_model->get(['status'=> 'a']);
 			$data['guest_types'] = $guest_type_model->get(['status'=> 'a']);
-			if(!empty($_POST))
-			{
-				if (!$this->validate('user'))
-				{
+			if(!empty($_POST)){
+				if (!$this->validate('user')){
 					$data['errors'] = \Config\Services::validation()->getErrors();
 					$data['function_title'] = "Registration";
 					$data['viewName'] = 'App\Views\register';
-			    echo view('App\Views\outside_layout\index', $data);
-				}
-				else
-				{
+			    	echo view('App\Views\outside_layout\index', $data);
+				}else{
 					$_POST['token'] = md5(str_shuffle('abcdefghijklmnopqrstuvwxyz'.time()));
 					unset($_POST['password_retype']);
-						if($model->addUsers($_POST))
-						{
-							$data['function_title'] = "Registration";
-							$data['success'] = 'You have successfuly registered!';
-							$data['viewName'] = 'App\Views\register';
+					if($model->addUsers($_POST)){
+						$data['function_title'] = "Registration";
+						$data['success'] = 'You have successfuly registered!';
+						$data['viewName'] = 'App\Views\register';
 					    echo view('App\Views\outside_layout\index', $data);
-						}
-						else
-						{
-							$data['error'] = 'You have an error of adding a record!';
-							$data['viewName'] = 'App\Views\register';
+					}else{
+						$data['error'] = 'You have an error of adding a record!';
+						$data['viewName'] = 'App\Views\register';
 					    echo view('App\Views\outside_layout\index', $data);
-						}
+					}
 				}
-			}
-			else
-			{
+			}else{
 				$data['function_title'] = "Registration";
 				$data['viewName'] = 'App\Views\register';
-		    echo view('App\Views\outside_layout\index', $data);
+		    	echo view('App\Views\outside_layout\index', $data);
 			}
 		}
 
 		public function forgot_password(){
-			$model = new UsersModel();
 			if($_POST){
 				if (!$this->validate('email')){
 			    	$data['errors'] = \Config\Services::validation()->getErrors();
@@ -151,7 +121,7 @@ class Login extends BaseController
 					$data = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz';
   					$randomPassword = substr(str_shuffle($data), 0, $lengthPassword);
 					$passwordOK = 0;
-					$users = $model->getUserWithCondition(['email' => $_POST['email'], 'status' => 'a']);
+					$users = $this->usersModel->getUserWithCondition(['email' => $_POST['email'], 'status' => 'a']);
 					if(!empty($users)){
 						foreach($users as $user){
 							if($_POST['email'] == $user['email']){
@@ -186,7 +156,7 @@ class Login extends BaseController
 						$email->setMessage($message);
 						$_POST['password'] = $randomPassword;
 						$_POST['updated_date'] = date('Y-m-d h:i:s');
-						if($model->editUsers($_POST, $id)){
+						if($this->usersModel->editUsers($_POST, $id)){
 							$email->send();
 							$_SESSION['success_login_forgot'] = 'Successfully generate a new password.<br>Please check your email to verify your password.';
 							$this->session->markAsFlashdata('success_login_forgot');

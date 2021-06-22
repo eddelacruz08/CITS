@@ -67,6 +67,20 @@ class CreateRole extends \CodeIgniter\Database\Migration {
                         'status' => 'a',
                         'created_date' => date('Y-m-d H:i:s')
                     ],
+                    [
+                        'role_name' => 'nurse',
+                        'function_id' => 1,
+                        'description' => 'Nurse Related Role',
+                        'status' => 'a',
+                        'created_date' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'role_name' => 'guard',
+                        'function_id' => 1,
+                        'description' => 'Guard Scanning',
+                        'status' => 'a',
+                        'created_date' => date('Y-m-d H:i:s')
+                    ],
                 ];
                 $db      = \Config\Database::connect();
                 $builder = $db->table($this->table);

@@ -156,27 +156,27 @@
             <p style="font-style: italic;"><i class="fas fa-spinner"></i> None</p>
           <?php else: ?>
             <table  style="width: 100%;">
-              <?php foreach ($recent_visits as $recent_visit): ?>
               <!-- Timelime example  -->
-                          <!-- The time line -->
-                          <div class="timeline">
-                            <!-- timeline time label -->
-                            <div class="time-label">
-                              <span class="bg-green">Date of Visits</span>
-                            </div>
-                            <!-- /.timeline-label --> 
-                            <!-- timeline item -->
-                            <div>
-                              <div class="timeline-item">
-                                <div class="timeline-body">
-                                  <span><?=date('F d, Y h:i a', strtotime($recent_visit['created_date']))?></span>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- END timeline item -->
-                          </div>
-                          <!-- END timeline item -->
+                <!-- The time line -->
+                <div class="timeline">
+                  <!-- timeline time label -->
+                  <div class="time-label">
+                    <span class="bg-green">Date of Visits</span>
+                  </div>
+                  <!-- /.timeline-label --> 
+              <?php foreach ($recent_visits as $recent_visit): ?>
+                  <!-- timeline item -->
+                  <div>
+                    <div class="timeline-item">
+                      <div class="timeline-body">
+                        <span><?=date('F d, Y h:i a', strtotime($recent_visit['created_date']))?></span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- END timeline item -->
               <?php endforeach; ?>
+                </div>
+                <!-- END timeline item -->
             </table>
           <?php endif; ?>
       </div>

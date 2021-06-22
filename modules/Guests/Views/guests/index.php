@@ -1,27 +1,10 @@
-
-<!-- Content Header (Page header) -->
-<section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1><?= $function_title; ?></h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?=base_url('dashboard')?>">Dashboard</a></li>
-              <li class="breadcrumb-item active"><?= $function_title; ?></li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
+<br>
   <?php $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
   <div class="card bg-light ">
     <div class="card-body">
       <div class="row">
         <div class="col-md-2">
-          <!-- <?php user_add_link('guests', $_SESSION['userPermmissions']) ?> -->
+          <h2><?= $function_title; ?></h2>
         </div>
         <div class="col-md-3 offset-7">
           <button type="button" class="btn btn-danger float-right btn-md" name="button" data-toggle="modal" data-target="#guestsModal">
