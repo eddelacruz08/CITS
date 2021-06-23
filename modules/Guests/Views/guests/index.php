@@ -23,12 +23,12 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form action="<?=base_url(). 'guests/print'?>" method="post">
+                  <form action="<?=base_url(). 'guests/generate-guest-report'?>" method="post">
                       <div class="row">
                         <div class="col-md-12">
                           <label for="guest_type">Guest Type</label>
                           <div class="form-group">
-                            <select name="guest_type_id" class="form-control <?= isset($errors['guest_type_id']) ? 'is-invalid':' ' ?>" required>
+                            <select name="guest_type_id" class="form-control <?= isset($errors['guest_type_id']) ? 'is-invalid':' ' ?>">
                               <option value="" disabled selected>Select Guest Type</option>
                                 <?php foreach($guest_types as $guest_type): ?>
                                   <option value="<?= $guest_type['id'] ?>"><?= ucwords($guest_type['guest_type']) ?></option>
@@ -39,7 +39,7 @@
                         <div class="col-md-12">
                           <label for="gender">Gender</label>
                           <div class="form-group">
-                            <select name="gender_id" class="form-control <?= isset($errors['gender_id']) ? 'is-invalid':' ' ?>" required>
+                            <select name="gender_id" class="form-control <?= isset($errors['gender_id']) ? 'is-invalid':' ' ?>">
                               <option value="" disabled selected>Select Guest Type</option>
                                 <?php foreach($genders as $gender): ?>
                                   <option value="<?= $gender['id'] ?>"><?= ucwords($gender['gender']) ?></option>

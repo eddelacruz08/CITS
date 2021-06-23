@@ -2,7 +2,7 @@
 <?php foreach ($guestsAssess as $patient): ?>
 <br>
 <br>
-    <table>
+    <table style="padding: 5px;">
         <thead>
             <tr>
                 <th>
@@ -10,7 +10,6 @@
                 </th>
                 <th>
                     <b>Birthdate:</b> <?=date('F d, Y', strtotime($patient['birthdate']))?>
-                    
                 </th>
             </tr>
             <tr>
@@ -27,9 +26,7 @@
             </tr>
         </thead>
     </table>
-    <br>
-    <br>
-    <table border="1">
+    <table border="1" style="padding: 10px;">
         <thead>
             <tr align="center">
                 <th width="10%"><b>#</b></th>
@@ -42,28 +39,33 @@
         <?php foreach ($questions as $question): ?>
             <tr>
                 <td align="center" width="10%"><?= $cnt++;?></td>
-                <td width="70%"> <?= $question['q_one']?></td>
+                <td width="70%"><?= $question['q_one']?></td>
                 <td align="center" width="20%"><?= ucfirst($patient['q_one'])?></td>
             </tr>
             <tr>
                 <td align="center" width="10%"><?= $cnt++;?></td>
-                <td width="70%"> <?= $question['q_two']?></td>
+                <td width="70%"><?= $question['q_two']?></td>
                 <td align="center" width="20%"><?= ucfirst($patient['q_two'])?></td>
             </tr>
             <tr>
                 <td align="center" width="10%"><?= $cnt++;?></td>
-                <td width="70%"> <?= $question['q_three']?></td>
+                <td width="70%"><?= $question['q_three']?></td>
                 <td align="center" width="20%"><?= ucfirst($patient['q_three'])?></td>
             </tr>
             <tr>
                 <td align="center" width="10%"><?= $cnt++;?></td>
-                <td width="70%"> <?= $question['q_four']?></td>
+                <td width="70%"><?= $question['q_four']?></td>
                 <td align="center" width="20%"><?= ucfirst($patient['q_four'])?></td>
             </tr>
             <tr>
                 <td align="center" width="10%"><?= $cnt++;?></td>
-                <td width="70%"> <?= $question['q_five']?></td>
+                <td width="70%"><?= $question['q_five']?></td>
                 <td align="center" width="20%"><?= ucfirst($patient['q_five'])?></td>
+            </tr>
+            <tr>
+                <td width="100%">
+                        <b>Result: </b> This guest was defined for symptoms
+                </td>
             </tr>
         <?php endforeach; ?>
         </tbody>

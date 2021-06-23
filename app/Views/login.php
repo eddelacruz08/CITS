@@ -35,11 +35,11 @@
             </div>
           </div>
           <label for="inputPassword">Password</label>
-          <div class="input-group mb-2">
-            <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password" required>
+          <div class="input-group mb-2" id="show_hide_password">
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
             <div class="input-group-append">
               <div class="input-group-text">
-                <span class="fas fa-lock"></span>
+                <a class="a" href=""><i class="bi bi-eye-slash" aria-hidden="true"></i></a>
               </div>
             </div>
           </div>

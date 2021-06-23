@@ -72,12 +72,17 @@ class Visits extends BaseController
 		// ---------------------------------------------------------
 
 		// set font
-		$pdf->SetFont('helvetica', 'B', 20);
+		$pdf->SetFont('helvetica', 'B', 15);
 
 		// add a page
 		$pdf->AddPage();
 
-		$pdf->Write(0, 'Visit List', '', 0, 'C', true, 0, false, false, 0);
+		$pdf->Write(0, 'Visit Attendance List', '', 0, 'C', true, 0, false, false, 0);
+
+		// set font
+		$pdf->SetFont('helvetica', 'B', 10);
+		
+		$pdf->Write(0, 'Date: '.date('F d, Y'), '', 0, 'C', true, 0, false, false, 0);
 
 		$pdf->SetFont('helvetica', '', 10);
 		// die($_POST['date']);

@@ -99,7 +99,50 @@
       <div class="card-body">
         <div class="tab-content" id="custom-tabs-four-tabContent">
           <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-            <h4><?= $function_title?></h4>
+            <div class="row">
+              <div class="col-6">
+              <h4><?= $function_title?></h4>
+              </div>
+              <div class="col-6">
+                <button type="button" class="btn btn-danger float-right btn-md" name="button" data-toggle="modal" data-target="#assessGenerateModal">
+                  <i class="fas fa-print"></i> Generate Report List
+                </button>
+                <!-- modal -->
+                <div class="modal fade" id="assessGenerateModal">
+                  <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Filter Data By Date</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="<?=base_url()?>guest%20assessment/generate-assess-report-by-date" method="post">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <label for="guest_type">Select Date</label>
+                                <div class="form-group">
+                                  <select name="date" class="form-control" required>
+                                    <option disabled selected>Select Date</option>
+                                      <?php foreach($generateAssessSelectDate as $date): ?>
+                                        <option value="<?= $date['date']?>"><?= date('F d, Y', strtotime($date['date'])) ?></option>
+                                      <?php endforeach; ?>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <button type="submit" class="btn btn-success float-right"><i class="far fa-file-pdf"></i> Generate</button>
+                        </form>
+                      </div>
+                    </div>
+                    <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+              </div>
+            </div>
             <hr>
             <div class="table-responsive">
               <table id="myTable" class="table table-sm table-striped table-bordered index-table">
@@ -121,7 +164,50 @@
             </div>
           </div>
           <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
-          <h4><?= $function_title_invalidated?></h4>
+          <div class="row">
+              <div class="col-6">
+              <h4><?= $function_title?></h4>
+              </div>
+              <div class="col-6">
+                <button type="button" class="btn btn-danger float-right btn-md" name="button" data-toggle="modal" data-target="#invalidatedGenerateModal">
+                  <i class="fas fa-print"></i> Generate Report List
+                </button>
+                <!-- modal -->
+                <div class="modal fade" id="invalidatedGenerateModal">
+                  <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Filter Data By Date</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="<?=base_url()?>guest%20assessment/generate-invalidated-report-by-date" method="post">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <label for="date">Select Date</label>
+                                <div class="form-group">
+                                  <select name="date" class="form-control" required>
+                                    <option disabled selected>Select Date</option>
+                                      <?php foreach($generateInvalidatedSelectDate as $date): ?>
+                                        <option value="<?= $date['date']?>"><?= date('F d, Y', strtotime($date['date'])) ?></option>
+                                      <?php endforeach; ?>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <button type="submit" class="btn btn-success float-right"><i class="far fa-file-pdf"></i> Generate</button>
+                        </form>
+                      </div>
+                    </div>
+                    <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+              </div>
+            </div>
           <br>
           <div class="table-responsive">
             <table class="table index-table">

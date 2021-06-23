@@ -97,6 +97,57 @@ class UsersModel extends \CodeIgniter\Model
     return $query->getResultArray();
     }
 
+    public function getGuestTypeAndGender($guestType, $gender){
+
+      $db = \Config\Database::connect();
+  
+      $str = "SELECT u.*, t.guest_type, e.extension, c.city, gen.gender, p.province FROM users u
+              LEFT JOIN types t ON u.user_type_id = t.id
+              LEFT JOIN extensions e ON u.ext_name_id = e.id
+              LEFT JOIN cities c ON u.city_id = c.id
+              LEFT JOIN genders gen ON u.gender_id = gen.id
+              LEFT JOIN provinces p ON u.province_id = p.id
+              WHERE u.status = 'a' AND u.role_id = 2 AND u.user_type_id = '$guestType' AND u.gender_id = '$gender' 
+              ORDER BY u.lastname ASC";
+  
+      $query = $db->query($str);
+  
+      return $query->getResultArray();
+    }
+  
+    public function getGuestTypeAndNoGender($guestType){
+
+      $db = \Config\Database::connect();
+  
+      $str = "SELECT u.*, t.guest_type, e.extension, c.city, gen.gender, p.province FROM users u
+              LEFT JOIN types t ON u.user_type_id = t.id
+              LEFT JOIN extensions e ON u.ext_name_id = e.id
+              LEFT JOIN cities c ON u.city_id = c.id
+              LEFT JOIN genders gen ON u.gender_id = gen.id
+              LEFT JOIN provinces p ON u.province_id = p.id
+              WHERE u.status = 'a' AND u.role_id = 2 AND u.user_type_id = '$guestType' ORDER BY u.lastname ASC";
+  
+      $query = $db->query($str);
+  
+      return $query->getResultArray();
+    }
+  
+    public function getNoGuestTypeAndGender($gender){
+
+      $db = \Config\Database::connect();
+  
+      $str = "SELECT u.*, t.guest_type, e.extension, c.city, gen.gender, p.province FROM users u
+              LEFT JOIN types t ON u.user_type_id = t.id
+              LEFT JOIN extensions e ON u.ext_name_id = e.id
+              LEFT JOIN cities c ON u.city_id = c.id
+              LEFT JOIN genders gen ON u.gender_id = gen.id
+              LEFT JOIN provinces p ON u.province_id = p.id
+              WHERE u.status = 'a' AND u.role_id = 2 AND u.gender_id = '$gender' ORDER BY u.lastname ASC";
+  
+      $query = $db->query($str);
+  
+      return $query->getResultArray();
+    }
     ////////////////////// STUDENTS MODEL ///////////////////////////////////////
     public function getStudentTotal(){
 

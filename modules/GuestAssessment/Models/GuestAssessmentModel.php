@@ -77,4 +77,109 @@ class GuestAssessmentModel extends BaseModel
 
       return $query->getResultArray();
     }
+    
+    public function getGenerateAssessReportByDateSelect(){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT a.*, a.date FROM assess a GROUP BY a.date DESC";
+
+      $query = $db->query($str);
+
+      return $query->getResultArray();
+    }
+
+    public function getGenerateInvalidatedReportByDateSelect(){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT a.*, a.date FROM invalid_guests a GROUP BY a.date DESC";
+
+      $query = $db->query($str);
+
+      return $query->getResultArray();
+    }
+
+    public function getGenerateAssessReportByDate($date){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT a.*, g.firstname, g.middlename, g.lastname,
+      g.cellphone_no, gen.gender, t.guest_type, c.q_one, c.q_two, c.q_three, c.q_four, c.q_five, c.status_defined
+      FROM assess a 
+      LEFT JOIN users g ON g.id = a.user_id
+      LEFT JOIN genders gen ON gen.id = g.gender_id 
+      LEFT JOIN types t ON t.id = g.user_type_id 
+      LEFT JOIN checklists c ON c.token = a.checklist_token 
+      WHERE a.status = 'a' AND a.date = '$date'
+      ORDER BY a.created_date DESC";
+
+      $query = $db->query($str);
+
+      return $query->getResultArray();
+    }
+
+    public function getGenerateInvalidatedReportByDate($date){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT a.*, g.firstname, g.middlename, g.lastname,
+      g.cellphone_no, gen.gender, t.guest_type, 
+      c.q_one, c.q_two, c.q_three, c.q_four, c.q_five, c.status_defined,
+      r.reason
+      FROM invalid_guests a 
+      LEFT JOIN users g ON g.id = a.user_id
+      LEFT JOIN genders gen ON gen.id = g.gender_id 
+      LEFT JOIN types t ON t.id = g.user_type_id 
+      LEFT JOIN reason_checklists c ON c.id = a.reason_checklist_id 
+      LEFT JOIN reasons r ON r.id = c.reason_id 
+      WHERE a.status = 'a' AND a.date = '$date'
+      ORDER BY a.created_date DESC";
+
+      $query = $db->query($str);
+
+      return $query->getResultArray();
+    }
+
+    public function getGenerateInvalidatedReportByDateHistory(){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT a.*, g.firstname, g.middlename, g.lastname,
+      g.cellphone_no, gen.gender, t.guest_type, 
+      c.q_one, c.q_two, c.q_three, c.q_four, c.q_five, c.status_defined,
+      r.reason
+      FROM invalid_guests a 
+      LEFT JOIN users g ON g.id = a.user_id
+      LEFT JOIN genders gen ON gen.id = g.gender_id 
+      LEFT JOIN types t ON t.id = g.user_type_id 
+      LEFT JOIN reason_checklists c ON c.id = a.reason_checklist_id 
+      LEFT JOIN reasons r ON r.id = c.reason_id 
+      WHERE a.status = 'a'
+      ORDER BY a.created_date DESC";
+
+      $query = $db->query($str);
+
+      return $query->getResultArray();
+    }
+
+    public function getGenerateAssessReportByDateHistory(){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT a.*, g.firstname, g.middlename, g.lastname,
+      g.cellphone_no, gen.gender, t.guest_type, 
+      c.q_one, c.q_two, c.q_three, c.q_four, c.q_five, c.status_defined
+      FROM assess a 
+      LEFT JOIN users g ON g.id = a.user_id
+      LEFT JOIN genders gen ON gen.id = g.gender_id 
+      LEFT JOIN types t ON t.id = g.user_type_id 
+      LEFT JOIN checklists c ON c.token = a.checklist_token 
+      WHERE a.status = 'a'
+      ORDER BY a.created_date DESC";
+
+      $query = $db->query($str);
+
+      return $query->getResultArray();
+    }
 }
