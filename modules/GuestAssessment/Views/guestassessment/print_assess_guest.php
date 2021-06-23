@@ -64,7 +64,11 @@
             </tr>
             <tr>
                 <td width="100%">
-                        <b>Result: </b> This guest was defined for symptoms
+                    <b>For defined/with symptoms/identified.</b><br>
+                    <br>
+                    <b>Comments: </b>Based on the collected data from your Health Declaration, we regret to inform you that your answer equate or was associated to one of the symptoms of Covid-19. Please stay at home, and follow the quarantine guidelines.
+                    <br>
+                    <p style="color:red;font-style:italic;">Note: Please see the sent email for further recommendation.</p>
                 </td>
             </tr>
         <?php endforeach; ?>

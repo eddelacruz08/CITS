@@ -85,6 +85,22 @@
 </style>
 <br>
   <?php $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
+        <?php if(isset($_SESSION['success'])): ?>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+             <?= $_SESSION['success']; ?>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+        <?php endif; ?>
+        <?php if(isset($_SESSION['error'])): ?>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+             <?= $_SESSION['error']; ?>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+        <?php endif; ?>
     <div class="card card-primary card-outline card-outline-tabs">
       <div class="card-header p-0 border-bottom-0">
         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
