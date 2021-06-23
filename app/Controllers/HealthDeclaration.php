@@ -75,7 +75,7 @@ class HealthDeclaration extends BaseController{
 									$_POST['q_five'] == 'yes'){
 									$_POST['status_defined'] = 'ws';
 									
-									$to = $_SESSION['email'];
+									$to = $_POST['email'];
 									$subject = 'Guidelines for Guest with Symptoms';
 									$message = $guidelineInfo;
 									$email = \Config\Services::email();

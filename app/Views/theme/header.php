@@ -82,7 +82,7 @@
                               <div id="qrcode"></div>
                               <h6><?= $profiles[0]['token']?></h6>
                               <h5><?= ucwords($profiles[0]['firstname'].' '.$profiles[0]['lastname'])?></h5>
-                              <button class="btn btn-dark mt-2" onclick="downLoadCode();">Download QR code</button>
+                              <button class="btn btn-outline-dark mt-2" onclick="downLoadCode();">Download QR code</button>
                             </center>
                             <script>
                                 let qrcode = new QRCode("qrcode", {

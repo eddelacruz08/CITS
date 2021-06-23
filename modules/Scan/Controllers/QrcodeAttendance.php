@@ -117,7 +117,7 @@ class QrcodeAttendance extends BaseController
 									}
 								}
 							}else{
-								$_SESSION['warning_added2'] = 'You are not required to enter to the premises, because your latest self-assessment detected that had a sysmtoms!';
+								$_SESSION['warning_added2'] = 'You are not required to enter to the premises, because your latest self-assessment detected that had a symptoms!';
 								$this->session->markAsFlashdata('warning_added2');
 							}
 						}else{
