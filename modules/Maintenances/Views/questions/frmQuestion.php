@@ -22,10 +22,6 @@
                   <label for="question">Question 1</label>
                 </div>
                 <div class="col-md-4">
-                <input type="radio" name="status" id="statusA" value="a">
-                <label for="statusA">Active</label>
-                <input type="radio" name="status" id="statusB" value="b">
-                <label for="statusB">Inactive</label>
               </div>
             </div>
               <textarea type="text" class="form-control" rows="5" name="q_one" id="q_one" placeholder="Question 1">
@@ -102,11 +98,6 @@
               <?php if (isset($errors['q_five'])): ?>
                 <div class="text-danger">
                     <?= $errors['q_five']?>
-                </div>
-              <?php endif; ?>
-              <?php if (isset($errors['status'])): ?>
-                <div class="text-danger">
-                    <?= $errors['status']?>
                 </div>
               <?php endif; ?>
             </div>

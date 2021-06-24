@@ -57,7 +57,7 @@ class HealthDeclaration extends BaseController{
 						if(!empty($assessData)){
 							foreach($assessData as $latestAssess){
 								$assessId = $latestAssess['id'];
-								$reasonAssessId = $latestAssess['reason_id'];
+								$reasonAssessId = $latestAssess['reason_checklist_token'];
 								break;
 							}
 							if($reasonAssessId == 0){
@@ -67,13 +67,15 @@ class HealthDeclaration extends BaseController{
 									break;
 								}
 								$_POST['user_id'] = $id;
-								$emailStatus = 1;
-								if($_POST['q_one'] == 'yes' ||
-									$_POST['q_two'] == 'yes' ||
-									$_POST['q_three'] == 'yes' ||
-									$_POST['q_four'] == 'yes' ||
-									$_POST['q_five'] == 'yes'){
-									$_POST['status_defined'] = 'ws';
+								$emailStatus = 0;
+								$token_reason_checklist = md5(str_shuffle('ABCDEFGHIJKLMNOPQRSTWXYZabcdefghijklmnopqrstuvwxyz0123456789'.time()));
+								$_POST['r_token'] = $token_reason_checklist;
+								if($_POST['r_q_one'] == 'yes' ||
+									$_POST['r_q_two'] == 'yes' ||
+									$_POST['r_q_three'] == 'yes' ||
+									$_POST['r_q_four'] == 'yes' ||
+									$_POST['r_q_five'] == 'yes'){
+									$_POST['r_status_defined'] = 'ws';
 									
 									$to = $_POST['email'];
 									$subject = 'Guidelines for Guest with Symptoms';
@@ -88,18 +90,25 @@ class HealthDeclaration extends BaseController{
 									}else{
 										$emailStatus = 0;
 									}
+									$invalidFunctionAction = 2;
+									$val_array = [
+										'reason_checklist_token' => $token_reason_checklist,
+										'email_status' => $emailStatus,
+										'func_action' =>$invalidFunctionAction,
+									];
+									$this->guestAssessmentModel->edit_assess($val_array, $assessId);
+								}else{
+									$invalidFunctionAction = 1;
+									$val_array = [
+										'reason_checklist_token' => $token_reason_checklist,
+										'func_action' =>$invalidFunctionAction,
+									];
+									$this->guestAssessmentModel->edit_assess($val_array, $assessId);
 								}
-								$reasonChecklistId = $_POST['reason_id'];
-								$val_array = [
-									'reason_id' => $reasonChecklistId,
-									'email_status' => $emailStatus,
-								];
-								$this->guestAssessmentModel->edit_assess($val_array, $assessId);
 								if($this->reasonsChecklistModel->add($_POST)){
 									$_SESSION['success_request'] = 'You have Successfully fillup a Health Declaration Form!';
 									$this->session->markAsFlashdata('success_request');
-									$data['viewName'] = 'successForm';
-									echo view('outside_layout\index', $data);
+									return redirect()->to(base_url('HealthDeclaration/request_form'));
 								}else{
 									$_SESSION['error'] = 'You have an error of adding a checklist!';
 									$this->session->markAsFlashdata('error');

@@ -13,9 +13,9 @@
     <title><?= SYSTEM_TITLE ?></title>
   </head>
   <style media="screen">
-  body {
+  /* body {
     zoom: .9;
-  }
+  } */
   .a, .a:hover{
     color:#333;
   }

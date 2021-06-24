@@ -7,7 +7,7 @@ class ReasonChecklistsModel extends BaseModel
 {
     protected $table = 'reason_checklists';
 
-    protected $allowedFields = ['id','user_id', 'temperature', 'q_one', 'q_two', 'q_three', 'q_four', 'q_five', 'reason_id','status_defined', 'token','status', 'created_date', 'updated_date', 'deleted_date'];
+    protected $allowedFields = ['id','user_id', 'r_q_one', 'r_q_two', 'r_q_three', 'r_q_four', 'r_q_five', 'reason_id','r_status_defined', 'r_token','status', 'created_date', 'updated_date', 'deleted_date'];
 
     public function getReasonWithCondition($conditions = [])
     {

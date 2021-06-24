@@ -1,4 +1,3 @@
-
   <body class="container" style="background-color: #e9ecef;">
     <br>
     <div class="card card-outline card-primary">
@@ -9,27 +8,26 @@
         <center><h4>Health Declaration Form</h4></center>
         <?php if(isset($_SESSION['success_request'])): ?>
           <div class="alert alert-success alert-dismissible fade show" role="alert">
-             <?= $_SESSION['success_request']; ?>
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <?= $_SESSION['success_request']; ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
         <?php endif; ?>
         <?php if(isset($_SESSION['error'])): ?>
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
-             <?= $_SESSION['error']; ?>
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <?= $_SESSION['error']; ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
         <?php endif; ?>
-      <?php $ctr = 1;?>
+        <?php $ctr = 1;?>
         <?php if(isset($error)): ?>
           <div class="alert alert-danger text-center"><?= $error;?></div>
         <?php else: ?>
           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-            <form id="myForm" action="<?= base_url().'HealthDeclaration/request_form'?>" method="post">
-              <?php foreach ($questions as $question):?>
+          <form id="myForm" action="<?= base_url().'HealthDeclaration/request_form'?>" method="post">
               <div class="card">
                 <div class="card-body">
                   <div class="form-group">
@@ -42,6 +40,7 @@
                   </div>
                 </div>
               </div>
+            <?php foreach ($questions as $question):?>
               <div id="ShowHide" style="display: none">
                 <div class="card">
                   <div class="card-body">
@@ -77,21 +76,21 @@
                     <div class="row">
                       <div class="col-10">
                         <p class="h6">1. <?=$question['q_one']?></p>
-                        <?php if (isset($errors['q_one'])): ?>
+                        <?php if (isset($errors['r_q_one'])): ?>
                           <div class="text-danger">
-                            <?= $errors['q_one']?>
+                            <?= $errors['r_q_one']?>
                           </div>
                         <?php endif; ?>
                       </div>
                       <div class="col-2">
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="q_one" id="yes1" value="yes">
+                          <input class="form-check-input" type="radio" name="r_q_one" id="yes1" value="yes">
                           <label class="form-check-label" for="yes1">
                             Yes
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="q_one" id="no1" value="no">
+                          <input class="form-check-input" type="radio" name="r_q_one" id="no1" value="no">
                           <label class="form-check-label" for="no1">
                           No
                           </label>
@@ -105,21 +104,21 @@
                     <div class="row">
                       <div class="col-10">
                         <p class="h6">2. <?=$question['q_two']?></p>
-                        <?php if (isset($errors['q_two'])): ?>
+                        <?php if (isset($errors['r_q_two'])): ?>
                           <div class="text-danger">
-                            <?= $errors['q_two']?>
+                            <?= $errors['r_q_two']?>
                           </div>
                         <?php endif; ?>
                       </div>
                       <div class="col-2">
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="q_two" id="yes2" value="yes">
+                          <input class="form-check-input" type="radio" name="r_q_two" id="yes2" value="yes">
                           <label class="form-check-label" for="yes2">
                             Yes
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="q_two" id="no2" value="no">
+                          <input class="form-check-input" type="radio" name="r_q_two" id="no2" value="no">
                           <label class="form-check-label" for="no2">
                           No
                           </label>
@@ -133,21 +132,21 @@
                     <div class="row">
                       <div class="col-10">
                         <p class="h6">3. <?=$question['q_three']?></p>
-                        <?php if (isset($errors['q_three'])): ?>
+                        <?php if (isset($errors['r_q_three'])): ?>
                           <div class="text-danger">
-                            <?= $errors['q_three']?>
+                            <?= $errors['r_q_three']?>
                           </div>
                         <?php endif; ?>
                       </div>
                       <div class="col-2">
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="q_three" id="yes3" value="yes">
+                          <input class="form-check-input" type="radio" name="r_q_three" id="yes3" value="yes">
                           <label class="form-check-label" for="yes3">
                             Yes
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="q_three" id="no3" value="no">
+                          <input class="form-check-input" type="radio" name="r_q_three" id="no3" value="no">
                           <label class="form-check-label" for="no3">
                           No
                           </label>
@@ -161,21 +160,21 @@
                     <div class="row">
                       <div class="col-10">
                         <p class="h6">4. <?=$question['q_four']?></p>
-                        <?php if (isset($errors['q_four'])): ?>
+                        <?php if (isset($errors['r_q_four'])): ?>
                           <div class="text-danger">
-                            <?= $errors['q_four']?>
+                            <?= $errors['r_q_four']?>
                           </div>
                         <?php endif; ?>
                       </div>
                       <div class="col-2">
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="q_four" id="yes4" value="yes">
+                          <input class="form-check-input" type="radio" name="r_q_four" id="yes4" value="yes">
                           <label class="form-check-label" for="yes4">
                             Yes
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="q_four" id="no4" value="no">
+                          <input class="form-check-input" type="radio" name="r_q_four" id="no4" value="no">
                           <label class="form-check-label" for="no4">
                           No
                           </label>
@@ -189,21 +188,21 @@
                     <div class="row">
                       <div class="col-10">
                         <p class="h6">5. <?=$question['q_five']?></p>
-                        <?php if (isset($errors['q_five'])): ?>
+                        <?php if (isset($errors['r_q_five'])): ?>
                           <div class="text-danger">
-                            <?= $errors['q_five']?>
+                            <?= $errors['r_q_five']?>
                           </div>
                         <?php endif; ?>
                       </div>
                       <div class="col-2">
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="q_five" id="yes5" value="yes">
+                          <input class="form-check-input" type="radio" name="r_q_five" id="yes5" value="yes">
                           <label class="form-check-label" for="yes5">
                             Yes
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="q_five" id="no5" value="no">
+                          <input class="form-check-input" type="radio" name="r_q_five" id="no5" value="no">
                           <label class="form-check-label" for="no5">
                           No
                           </label>
@@ -214,47 +213,48 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6 offset-md-6">
-                  <input class="btn btn-primary float-right" type="button" data-toggle="modal" data-target="#myModalConfirmation" value="Submit" onclick=" checkButton()">
+                    <input class="btn btn-primary float-right" type="button" data-toggle="modal" data-target="#myModalConfirmation" value="Submit" onclick=" checkButton()">
                   </div>
                 </div>
               </div>
-
-              <!-- Modal   -->
-              <div id="myModalConfirmation" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 id="myModalLabel3">Please Confirm Your Details.</h5>
-                          <button type="button" class="float-right close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <p class="h6"><?= $ctr++;?>. <?=$question['q_one']?></p>
-                            <p class="h6" id="q_one" style= "color:green"> </p>
-                            <p class="h6"><?= $ctr++;?>. <?=$question['q_two']?></p>
-                            <p class="h6" id="q_two" style= "color:green"> </p>
-                            <p class="h6"><?= $ctr++;?>. <?=$question['q_three']?></p>
-                            <p class="h6" id="q_three" style= "color:green"> </p>
-                            <p class="h6"><?= $ctr++;?>. <?=$question['q_four']?></p>
-                            <p class="h6" id="q_four" style= "color:green"> </p>
-                            <p class="h6"><?= $ctr++;?>. <?=$question['q_five']?></p>
-                            <p class="h6" id="q_five" style= "color:green"> </p>
-                            <input class="btn btn-primary float-right" type="submit" value="Submit">
-                        </div>
-                    </div>
-                 </div>
-               </div>
-              <?php endforeach;?>
-              </form>
-            <p style="clear: both"></p>
+            <?php endforeach;?>
+          </form>
+          <p style="clear: both"></p>
         <?php endif; ?>
       </div>
       <!-- /.form-box -->
-    </div><!-- /.card -->
+    </div>
+    <!-- /.card -->
+  </body>
 
-
-
+  <?php foreach ($questions as $question):?>
+    <!-- Modal   -->
+    <div id="myModalConfirmation" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="myModalLabel3">Please Confirm Your Details.</h5>
+            <button type="button" class="float-right close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p class="h6"><?= $ctr++;?>. <?=$question['q_one']?></p>
+            <p class="h6" id="q_one" style= "color:green"> </p>
+            <p class="h6"><?= $ctr++;?>. <?=$question['q_two']?></p>
+            <p class="h6" id="q_two" style= "color:green"> </p>
+            <p class="h6"><?= $ctr++;?>. <?=$question['q_three']?></p>
+            <p class="h6" id="q_three" style= "color:green"> </p>
+            <p class="h6"><?= $ctr++;?>. <?=$question['q_four']?></p>
+            <p class="h6" id="q_four" style= "color:green"> </p>
+            <p class="h6"><?= $ctr++;?>. <?=$question['q_five']?></p>
+            <p class="h6" id="q_five" style= "color:green"> </p>
+            <input class="btn btn-primary float-right" type="submit" value="Submit">
+          </div>
+        </div>
+      </div>
+    </div>
+<?php endforeach;?>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script> -->
 <script type="text/javascript">
     function ShowHideDiv(chkShowHide) {
         var ShowHide = document.getElementById("ShowHide");

@@ -1,5 +1,5 @@
 
-<?php foreach ($guestsAssess as $patient): ?>
+<?php foreach ($invalidatedGuests as $patient): ?>
 <br>
 <br>
     <table>
@@ -40,37 +40,32 @@
             <tr>
                 <td align="center" width="10%"><?= $cnt++;?></td>
                 <td width="70%"><?= $question['q_one']?></td>
-                <td align="center" width="20%"><?= ucfirst($patient['q_one'])?></td>
+                <td align="center" width="20%"><?= ucfirst($patient['r_q_one'])?></td>
             </tr>
             <tr>
                 <td align="center" width="10%"><?= $cnt++;?></td>
                 <td width="70%"><?= $question['q_two']?></td>
-                <td align="center" width="20%"><?= ucfirst($patient['q_two'])?></td>
+                <td align="center" width="20%"><?= ucfirst($patient['r_q_two'])?></td>
             </tr>
             <tr>
                 <td align="center" width="10%"><?= $cnt++;?></td>
                 <td width="70%"><?= $question['q_three']?></td>
-                <td align="center" width="20%"><?= ucfirst($patient['q_three'])?></td>
+                <td align="center" width="20%"><?= ucfirst($patient['r_q_three'])?></td>
             </tr>
             <tr>
                 <td align="center" width="10%"><?= $cnt++;?></td>
                 <td width="70%"><?= $question['q_four']?></td>
-                <td align="center" width="20%"><?= ucfirst($patient['q_four'])?></td>
+                <td align="center" width="20%"><?= ucfirst($patient['r_q_four'])?></td>
             </tr>
             <tr>
                 <td align="center" width="10%"><?= $cnt++;?></td>
                 <td width="70%"><?= $question['q_five']?></td>
-                <td align="center" width="20%"><?= ucfirst($patient['q_five'])?></td>
+                <td align="center" width="20%"><?= ucfirst($patient['r_q_five'])?></td>
             </tr>
             <tr>
                 <td width="100%">
-                    <span style="font-weight: bold;">For defined/with symptoms/identified.</span>
-                    <br>
-                    <br>
-                    <span style="font-weight: bold;">Comments: </span>
-                        Based on the collected data from your Health Declaration, we regret to inform you that your answer equate 
-                        or was associated to one of the symptoms of Covid-19. Please stay at home, and follow the quarantine guidelines.
-                    <p style="color:red;font-style:italic;">Note: Please see the sent email for further recommendation.</p>
+                    <span style="font-weight: bold;">Reason:</span>
+                    <span><?= ucfirst($patient['reason'])?></span>
                 </td>
             </tr>
         <?php endforeach; ?>

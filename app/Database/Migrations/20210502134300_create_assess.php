@@ -25,7 +25,11 @@ class CreateAssess extends \CodeIgniter\Database\Migration {
           'type' => 'VARCHAR',
           'constraint' => '32',
         ],
-        'reason_id' => [
+        'reason_checklist_token' => [
+          'type' => 'VARCHAR',
+          'constraint' => '32',
+        ],
+        'func_action' => [
           'type' => 'INT',
           'constraint' => '11',
         ],

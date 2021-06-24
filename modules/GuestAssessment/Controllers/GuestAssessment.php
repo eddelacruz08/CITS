@@ -289,12 +289,12 @@ class GuestAssessment extends BaseController
 			$reasonChecklistData = $this->reasonChecklistsModel->getLatestReasonChecklist($id);
 			foreach($reasonChecklistData as $latestReasonChecklist){
 			    $reasonChecklistId = $latestReasonChecklist['id'];
-				$q_one = $latestReasonChecklist['q_one'];
-				$q_two = $latestReasonChecklist['q_two'];
-				$q_three = $latestReasonChecklist['q_three'];
-				$q_four = $latestReasonChecklist['q_four'];
-				$q_five = $latestReasonChecklist['q_five'];
-				$status_defined = $latestReasonChecklist['status_defined'];
+				$q_one = $latestReasonChecklist['r_q_one'];
+				$q_two = $latestReasonChecklist['r_q_two'];
+				$q_three = $latestReasonChecklist['r_q_three'];
+				$q_four = $latestReasonChecklist['r_q_four'];
+				$q_five = $latestReasonChecklist['r_q_five'];
+				$status_defined = $latestReasonChecklist['r_status_defined'];
 			    break;
 			}
 			$value_invalid_guest = [
@@ -322,6 +322,41 @@ class GuestAssessment extends BaseController
 				return redirect()->to(base_url('guest%20assessment'));
 			}else{
 				$_SESSION['error'] = 'You have an error in invalidating a record';
+				$this->session->markAsFlashdata('error');
+				return redirect()->to( base_url('guest%20assessment'));
+			}
+		}
+  	}
+
+	public function denied_invalidate_guest($id, $cId)
+	{
+		$checkUser = 0;
+		$userAssessments = $this->guestAssessmentModel->getGuestAssessWithCondition(['user_id' => $id, 'status' => 'a']);
+
+		if(!empty($userAssessments)){
+			foreach($userAssessments as $userAssessment){
+				if($id == $userAssessment['user_id']){
+					$checkUser = 1;
+					$assessmentId = $userAssessment['id'];
+					break;
+				}
+			}
+		}else{
+			$_SESSION['error'] = 'Cannot find record!';
+			$this->session->markAsFlashdata('error');
+			return redirect()->to(base_url('guest%20assessment'));
+		}
+		if ($checkUser == 1) {
+			$invalidFunctionAction = 2;
+			$val_array_assess = [
+				'func_action' =>$invalidFunctionAction,
+			];
+			if ($this->guestAssessmentModel->edit_assess($val_array_assess, $assessmentId)) {
+				$_SESSION['success'] = 'Cancelled a request record';
+				$this->session->markAsFlashdata('success');
+				return redirect()->to(base_url('guest%20assessment'));
+			}else{
+				$_SESSION['error'] = 'You have an error in cancelling a record';
 				$this->session->markAsFlashdata('error');
 				return redirect()->to( base_url('guest%20assessment'));
 			}
@@ -397,6 +432,59 @@ class GuestAssessment extends BaseController
 			die('empty');
 		}
 		$html = view('Modules\GuestAssessment\Views\guestassessment\print_assess_guest', $data);
+		$pdf->writeHTML($html, true, false, false, false, '');
+		// ---------------------------------------------------------
+		// Close and output PDF document
+		// This method has several options, check the source code documentation for more information.
+		$pdf->Output('example_001.pdf', 'I');
+		die();
+	}
+	
+	public function print_invalidated_guest($id){
+		// create new PDF document
+		$pdf = new PDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+		// set document information
+		// $pdf->SetCreator(PDF_CREATOR);
+		// $pdf->SetAuthor('Nicola Asuni');
+		// $pdf->SetTitle('TCPDF Example 048');
+		// $pdf->SetSubject('TCPDF Tutorial');
+		// $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+		// set default header data
+		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
+		// set header and footer fonts
+		$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+		$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+		// set default monospaced font
+		$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+		// set margins
+		$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+		$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+		$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+		// set auto page breaks
+		$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+		// set image scale factor
+		$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+		// set some language-dependent strings (optional)
+		if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+			require_once(dirname(__FILE__).'/lang/eng.php');
+			$pdf->setLanguageArray($l);
+		}
+		// ---------------------------------------------------------
+		// set font
+		$pdf->SetFont('helvetica', 'B', 15);
+		// add a page
+		$pdf->AddPage();
+		$pdf->Write(0, 'Patient Invalidated Information', '', 0, 'C', true, 0, false, false, 0);
+		// set font
+		$pdf->SetFont('helvetica', '', 10);
+		$pdf->Write(0, 'Date: '.date('F d, Y'), '', 0, 'C', true, 0, false, false, 0);
+		$pdf->SetFont('helvetica', '', 9);
+		$data['questions'] = $this->questionsModel->get();
+		$data['invalidatedGuests'] = $this->invalidatedGuestsModel->getPrintInvalidatedGuest($id);
+		if(empty($data['invalidatedGuests'])){
+			die('empty');
+		}
+		$html = view('Modules\GuestAssessment\Views\guestassessment\print_invalidated_guest', $data);
 		$pdf->writeHTML($html, true, false, false, false, '');
 		// ---------------------------------------------------------
 		// Close and output PDF document

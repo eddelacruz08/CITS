@@ -3,6 +3,7 @@ namespace Modules\Guests\Controllers;
 
 use Modules\Visits\Models\VisitsModel;
 use Modules\Visits\Models\ChecklistModel;
+use Modules\HealthDeclaration\Models\ReasonChecklistsModel;
 use Modules\Maintenances\Models\CitiesModel;
 use Modules\Maintenances\Models\ExtensionModel;
 use Modules\Maintenances\Models\ProvinceModel;
@@ -26,6 +27,7 @@ class Guests extends BaseController
 
 		$this->usersModel = new UsersModel();
 		$this->gendersModel = new GenderModel();
+		$this->reasonsModel = new ReasonChecklistsModel();
 		$this->typesModel = new TypeModel();
 		$this->visitsModel = new VisitsModel();
 		$this->checklistsModel = new ChecklistModel();
@@ -48,6 +50,7 @@ class Guests extends BaseController
 	public function show_guest($id)
 	{
 		$this->hasPermissionRedirect('show-guest');
+		$data['reasons'] = $this->reasonsModel->getReasonChecklist($id);
 		$data['visit_id'] = $this->visitsModel->getVisitId($id);
 		$data['recent_visits'] = $this->visitsModel->get(['status' => 'a', 'user_id' => $id]);
 		$data['latest_checklist'] = $this->checklistsModel->getLatestChecklist($id);

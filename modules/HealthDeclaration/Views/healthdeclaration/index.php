@@ -59,9 +59,8 @@
         <?php if(isset($latest_checklist_date[0]['status_defined']) == true && isset($latest_checklist_date[0]['date']) == date('Y-m-d')): ?>
             <div class="callout callout-danger">
               <h5 class="text-danger"><i class="fas fa-info"></i> Important Reminder:</h5>
-              <p>Your latest self-assessment tested positive for symtoms. 
-                Make sure you don't leave and stay at home. Please quarantine yourself so as not to infect other people with the symptoms experienced.
-                Please take self-assessment for another day to clarify your status.</p>
+              <p class="h6">Your latest self-assessment tested positive for symtoms.</p>
+              <p class="h5 text-danger"><em>Note: We regret to inform that you're <b><u>denied</u></b> to enter the premises of the university.</em><p>
             </div>
         <?php endif; ?>
         
@@ -149,7 +148,7 @@
                             <?php foreach ($reasons as $reason): ?>
                               <!-- timeline time label -->
                               <div class="time-label">
-                                <?php if ($reason['status_defined']=='ws'):?>
+                                <?php if ($reason['r_status_defined']=='ws'):?>
                                   <span class="bg-red"><?=date('F d, Y', strtotime($reason['created_date']))?></span>
                                 <?php else:?>
                                   <span class="bg-green"><?=date('F d, Y', strtotime($reason['created_date']))?></span>
@@ -164,7 +163,7 @@
                                     <div class="row">
                                       <div class="col-7">
                                         <span class="time"><i class="fas fa-clock"></i> <?=date('h:i a', strtotime($reason['created_date']))?></span>
-                                        <?php if ($reason['status_defined']=='ws'):?>
+                                        <?php if ($reason['r_status_defined']=='ws'):?>
                                           <label class="text-danger"> | Have Symptoms</label>
                                         <?php else:?>
                                           <label class="text-success"> | No Symptoms</label>
@@ -218,7 +217,7 @@
                           <div class="timeline">
                             <!-- timeline time label -->
                             <div class="time-label">
-                              <?php if ($reason['status_defined']=='ws'):?>
+                              <?php if ($reason['r_status_defined']=='ws'):?>
                                 <span class="bg-red"><i class="fas fa-clock"></i> <?=date('h:i a', strtotime($reason['created_date']))?></span>
                               <?php else:?>
                                 <span class="bg-green"><i class="fas fa-clock"></i> <?=date('h:i a', strtotime($reason['created_date']))?></span>
@@ -254,26 +253,34 @@
                               <div class="timeline-item">
                                 <div class="timeline-body">
                                   <span><?= $cnt++;?>. <?= $question['q_one']?></span>
-                                  <div class="float-right">
-                                    <label for="yes">Yes</label>
-                                    <input type="radio" id="yes" disabled <?= $reason['q_one'] == 'yes' ? 'checked':'unchecked'?>>
-                                    <label for="no">No</label>
-                                    <input type="radio" id="no" disabled <?= $reason['q_one'] == 'no' ? 'checked':'unchecked'?>>
+                                  <div class="form-group clearfix float-right">
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess1" <?= $reason['r_q_one'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess1">Yes</label>
+                                    </div>
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess2" <?= $reason['r_q_one'] == 'no' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess2">No</label>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                             <!-- END timeline item -->
-                             <!-- timeline item -->
-                             <div>
+                            <!-- timeline item -->
+                            <div>
                               <div class="timeline-item">
                                 <div class="timeline-body">
                                   <span><?= $cnt++;?>. <?= $question['q_two']?></span>
-                                  <div class="float-right">
-                                    <label for="yes">Yes</label>
-                                    <input type="radio" id="yes" disabled <?= $reason['q_two'] == 'yes' ? 'checked':'unchecked'?>>
-                                    <label for="no">No</label>
-                                    <input type="radio" id="no" disabled <?= $reason['q_two'] == 'no' ? 'checked':'unchecked'?>>
+                                  <div class="form-group clearfix float-right">
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess1" <?= $reason['r_q_two'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess1">Yes</label>
+                                    </div>
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess2" <?= $reason['r_q_two'] == 'no' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess2">No</label>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -284,11 +291,15 @@
                               <div class="timeline-item">
                                 <div class="timeline-body">
                                   <span><?= $cnt++;?>. <?= $question['q_three']?></span>
-                                  <div class="float-right">
-                                    <label for="yes">Yes</label>
-                                    <input type="radio" id="yes" disabled <?= $reason['q_three'] == 'yes' ? 'checked':'unchecked'?>>
-                                    <label for="no">No</label>
-                                    <input type="radio" id="no" disabled <?= $reason['q_three'] == 'no' ? 'checked':'unchecked'?>>
+                                  <div class="form-group clearfix float-right">
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess1" <?= $reason['r_q_three'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess1">Yes</label>
+                                    </div>
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess2" <?= $reason['r_q_three'] == 'no' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess2">No</label>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -299,11 +310,15 @@
                               <div class="timeline-item">
                                 <div class="timeline-body">
                                   <span><?= $cnt++;?>. <?= $question['q_four']?></span>
-                                  <div class="float-right">
-                                    <label for="yes">Yes</label>
-                                    <input type="radio" id="yes" disabled <?= $reason['q_four'] == 'yes' ? 'checked':'unchecked'?>>
-                                    <label for="no">No</label>
-                                    <input type="radio" id="no" disabled <?= $reason['q_four'] == 'no' ? 'checked':'unchecked'?>>
+                                  <div class="form-group clearfix float-right">
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess1" <?= $reason['r_q_four'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess1">Yes</label>
+                                    </div>
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess2" <?= $reason['r_q_four'] == 'no' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess2">No</label>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -314,11 +329,15 @@
                               <div class="timeline-item">
                                 <div class="timeline-body">
                                   <span><?= $cnt++;?>. <?= $question['q_five']?></span>
-                                  <div class="float-right">
-                                    <label for="yes">Yes</label>
-                                    <input type="radio" id="yes" disabled <?= $reason['q_five'] == 'yes' ? 'checked':'unchecked'?>>
-                                    <label for="no">No</label>
-                                    <input type="radio" id="no" disabled <?= $reason['q_five'] == 'no' ? 'checked':'unchecked'?>>
+                                  <div class="form-group clearfix float-right">
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess1" <?= $reason['r_q_five'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess1">Yes</label>
+                                    </div>
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess2" <?= $reason['r_q_five'] == 'no' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess2">No</label>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -379,11 +398,15 @@
                               <div class="timeline-item">
                                 <div class="timeline-body">
                                   <span><?= $cnt++;?>. <?= $question['q_one']?></span>
-                                  <div class="float-right">
-                                    <label for="yes">Yes</label>
-                                    <input type="radio" id="yes" disabled <?= $summary['q_one'] == 'yes' ? 'checked':'unchecked'?>>
-                                    <label for="no">No</label>
-                                    <input type="radio" id="no" disabled <?= $summary['q_one'] == 'no' ? 'checked':'unchecked'?>>
+                                  <div class="form-group clearfix float-right">
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess1" <?= $summary['q_one'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess1">Yes</label>
+                                    </div>
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess2" <?= $summary['q_one'] == 'no' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess2">No</label>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -394,11 +417,15 @@
                               <div class="timeline-item">
                                 <div class="timeline-body">
                                   <span><?= $cnt++;?>. <?= $question['q_two']?></span>
-                                  <div class="float-right">
-                                    <label for="yes">Yes</label>
-                                    <input type="radio" id="yes" disabled <?= $summary['q_two'] == 'yes' ? 'checked':'unchecked'?>>
-                                    <label for="no">No</label>
-                                    <input type="radio" id="no" disabled <?= $summary['q_two'] == 'no' ? 'checked':'unchecked'?>>
+                                  <div class="form-group clearfix float-right">
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess1" <?= $summary['q_two'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess1">Yes</label>
+                                    </div>
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess2" <?= $summary['q_two'] == 'no' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess2">No</label>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -409,11 +436,15 @@
                               <div class="timeline-item">
                                 <div class="timeline-body">
                                   <span><?= $cnt++;?>. <?= $question['q_three']?></span>
-                                  <div class="float-right">
-                                    <label for="yes">Yes</label>
-                                    <input type="radio" id="yes" disabled <?= $summary['q_three'] == 'yes' ? 'checked':'unchecked'?>>
-                                    <label for="no">No</label>
-                                    <input type="radio" id="no" disabled <?= $summary['q_three'] == 'no' ? 'checked':'unchecked'?>>
+                                  <div class="form-group clearfix float-right">
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess1" <?= $summary['q_three'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess1">Yes</label>
+                                    </div>
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess2" <?= $summary['q_three'] == 'no' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess2">No</label>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -424,11 +455,15 @@
                               <div class="timeline-item">
                                 <div class="timeline-body">
                                   <span><?= $cnt++;?>. <?= $question['q_four']?></span>
-                                  <div class="float-right">
-                                    <label for="yes">Yes</label>
-                                    <input type="radio" id="yes" disabled <?= $summary['q_four'] == 'yes' ? 'checked':'unchecked'?>>
-                                    <label for="no">No</label>
-                                    <input type="radio" id="no" disabled <?= $summary['q_four'] == 'no' ? 'checked':'unchecked'?>>
+                                  <div class="form-group clearfix float-right">
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess1" <?= $summary['q_four'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess1">Yes</label>
+                                    </div>
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess2" <?= $summary['q_four'] == 'no' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess2">No</label>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -439,11 +474,15 @@
                               <div class="timeline-item">
                                 <div class="timeline-body">
                                   <span><?= $cnt++;?>. <?= $question['q_five']?></span>
-                                  <div class="float-right">
-                                    <label for="yes">Yes</label>
-                                    <input type="radio" id="yes" disabled <?= $summary['q_five'] == 'yes' ? 'checked':'unchecked'?>>
-                                    <label for="no">No</label>
-                                    <input type="radio" id="no" disabled <?= $summary['q_five'] == 'no' ? 'checked':'unchecked'?>>
+                                  <div class="form-group clearfix float-right">
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess1" <?= $summary['q_five'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess1">Yes</label>
+                                    </div>
+                                    <div class="icheck-primary d-inline">
+                                      <input type="radio" id="radioSuccess2" <?= $summary['q_five'] == 'no' ? 'checked':'unchecked'?>>
+                                      <label for="radioSuccess2">No</label>
+                                    </div>
                                   </div>
                                 </div>
                               </div>

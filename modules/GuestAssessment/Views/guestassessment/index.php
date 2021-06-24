@@ -4,12 +4,12 @@
 /* body {
 	font-family: 'Varela Round', sans-serif;
 } */
-.modal-confirm {		
+/* .modal-confirm {		
 	color: #636363;
 	width: 400px;
-}
+} */
 .modal-confirm .modal-content {
-	padding: 20px;
+	padding: 10px;
 	border-radius: 5px;
 	border: none;
 	text-align: center;
@@ -22,29 +22,29 @@
 .modal-confirm h4 {
 	text-align: center;
 	font-size: 26px;
-	margin: 30px 0 -10px;
+	/* margin: 30px 0 -10px; */
 }
 .modal-confirm .close {
 	position: absolute;
-	top: -5px;
-	right: -2px;
+	top: 5px;
+	right: 2px;
 }
 .modal-confirm .modal-body {
-	color: #999;
+	color: #3d3d3d;
 }
 .modal-confirm .modal-footer {
 	border: none;
 	text-align: center;		
 	border-radius: 5px;
 	font-size: 13px;
-	padding: 10px 15px 25px;
+	/* padding: 10px 15px 25px; */
 }
 .modal-confirm .modal-footer a {
 	color: #999;
 }		
 .modal-confirm .icon-box {
-	width: 80px;
-	height: 80px;
+	width: 50px;
+	height: 50px;
 	margin: 0 auto;
 	border-radius: 50%;
 	z-index: 9;
@@ -55,7 +55,7 @@
 	color: #f15e5e;
 	font-size: 46px;
 	display: inline-block;
-	margin-top: 13px;
+	/* margin-top: 1px; */
 }
 .modal-confirm .btn, .modal-confirm .btn:active {
 	color: #fff;
@@ -66,7 +66,7 @@
 	line-height: normal;
 	min-width: 120px;
 	border: none;
-	min-height: 40px;
+	/* min-height: 0px; */
 	border-radius: 3px;
 	margin: 0 5px;
 }
@@ -81,6 +81,12 @@
 }
 .modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
 	background: #ee3535;
+}
+.modal-confirm .btn-success {
+	background: #109442;
+}
+.modal-confirm .btn-success:hover, .modal-confirm .btn-success:focus {
+	background: #038032;
 }
 </style>
 <br>
@@ -182,7 +188,7 @@
           <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
           <div class="row">
               <div class="col-6">
-              <h4><?= $function_title?></h4>
+              <h4><?= $function_title_invalidated?></h4>
               </div>
               <div class="col-6">
                 <button type="button" class="btn btn-danger float-right btn-md" name="button" data-toggle="modal" data-target="#invalidatedGenerateModal">
@@ -247,7 +253,7 @@
                   <td><?= ucfirst($invalidatedGuest['gender']) ?></td>
                   <td><?= ucfirst($invalidatedGuest['reason']) ?></td>
                   <td>
-                    <button type="button" class="btn btn-outline-info btn-md" data-toggle="modal" data-target="#invalidated-modal-xl">
+                    <button type="button" class="btn btn-outline-info btn-md" data-toggle="modal" data-target="#invalidated<?=$invalidatedGuest['id']?>">
                       <i class="fas fa-clipboard-check"></i> Check Info
                     </button>
                   </td>
@@ -264,8 +270,8 @@
   </div>
   <?php foreach ($guestsAssess as $patient): ?>
     <!-- Modal HTML -->
-    <div id="myModal" class="modal fade">
-      <div class="modal-dialog modal-confirm">
+    <div id="invalidateModal<?=$patient['id']?>" class="modal fade">
+      <div class="modal-dialog modal-confirm modal-lg">
         <div class="modal-content">
           <div class="modal-header flex-column">
             <div class="icon-box">
@@ -276,19 +282,73 @@
           </div>
           <div class="modal-body">
             <p>Do you really want to invalidate this guest? This process cannot be undone.</p>
+            <!-- Table row -->
+            <div class="row">
+              <div class="col-12 table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Questions</th>
+                    <th>Answers</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <?php $cnt = 1; ?>
+                  <?php foreach ($questions as $question): ?>
+                    <tr>
+                      <td class="text-center"><?= $cnt++;?></td>
+                      <td colspan="1"><?= $question['q_one']?></td>
+                      <td class="text-center"><?= strtoupper($patient['r_q_one'])?></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center"><?= $cnt++;?></td>
+                      <td colspan="1"><?= $question['q_two']?></td>
+                      <td class="text-center"><?= strtoupper($patient['r_q_two'])?></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center"><?= $cnt++;?></td>
+                      <td colspan="1"><?= $question['q_three']?></td>
+                      <td class="text-center"><?= strtoupper($patient['r_q_three'])?></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center"><?= $cnt++;?></td>
+                      <td colspan="1"><?= $question['q_four']?></td>
+                      <td class="text-center"><?= strtoupper($patient['r_q_four'])?></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center"><?= $cnt++;?></td>
+                      <td colspan="1"><?= $question['q_five']?></td>
+                      <td class="text-center"><?= strtoupper($patient['r_q_five'])?></td>
+                    </tr>
+                    <tr>
+                      <td colspan="3" class="h6 <?=$patient['r_status_defined']=='ws'?'text-danger':'text-success'?>"><b>Guest Status: </b>This guest <?=$patient['r_status_defined']=='ws'?'is defined':'is not defined'?> for any symptoms.</td>
+                    </tr>
+                  <?php endforeach; ?>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
           </div>
-          <div class="modal-footer justify-content-center">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <a href="<?=base_url().'guest%20assessment/invalidate_guest/'.$patient['user_id'].'/'.$patient['checklist_token']?>">
-              <button type="submit" class="btn btn-danger">Invalidate</button>
-             </a>
+          <div class="modal-footer justify-content-center" style="margin-top: 0px;">
+            <?php if($patient['r_status_defined'] == 'ws'):?>
+              <a href="<?=base_url().'guest%20assessment/denied-invalidate-guest/'.$patient['user_id'].'/'.$patient['checklist_token']?>">
+                <button type="submit" class="btn btn-lg btn-success">Invalidate Guest</button>
+              </a>
+            <?php else:?>
+              <a href="<?=base_url().'guest%20assessment/invalidate-guest/'.$patient['user_id'].'/'.$patient['checklist_token']?>">
+                <button type="submit" class="btn btn-lg btn-success success">Invalidate Guest</button>
+              </a>
+            <?php endif;?>
           </div>
         </div>
       </div>
     </div> 
     <!-- End Modal HTML -->
   <!-- Start Guest Assessment Modal -->
-  <div class="modal fade" id="modal-xl<?=$patient['id']?>">
+  <div class="modal fade" id="assessment<?=$patient['id']?>">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
@@ -401,13 +461,13 @@
 
       <?php foreach ($invalidatedGuests as $invalidatedGuest): ?>
       <!-- Start Invalidated Guest Modal -->
-      <div class="modal fade" id="invalidated-modal-xl">
+      <div class="modal fade" id="invalidated<?=$invalidatedGuest['id']?>">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="btn btn-outline-danger btn-md">
+              <a href="<?= base_url()?>guest%20assessment/print-invalidated-guest/<?=$invalidatedGuest['id']?>" type="button" class="btn btn-outline-danger btn-md">
                 <i class="fas fa-file-pdf"></i> Print PDF
-              </button>
+              </a>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -477,27 +537,27 @@
                             <tr>
                               <td class="text-center"><?= $cnt++;?></td>
                               <td colspan="1"><?= $question['q_one']?></td>
-                              <td class="text-center"><?= strtoupper($invalidatedGuest['q_one'])?></td>
+                              <td class="text-center"><?= strtoupper($invalidatedGuest['r_q_one'])?></td>
                             </tr>
                             <tr>
                               <td class="text-center"><?= $cnt++;?></td>
                               <td colspan="1"><?= $question['q_two']?></td>
-                              <td class="text-center"><?= strtoupper($invalidatedGuest['q_two'])?></td>
+                              <td class="text-center"><?= strtoupper($invalidatedGuest['r_q_two'])?></td>
                             </tr>
                             <tr>
                               <td class="text-center"><?= $cnt++;?></td>
                               <td colspan="1"><?= $question['q_three']?></td>
-                              <td class="text-center"><?= strtoupper($invalidatedGuest['q_three'])?></td>
+                              <td class="text-center"><?= strtoupper($invalidatedGuest['r_q_three'])?></td>
                             </tr>
                             <tr>
                               <td class="text-center"><?= $cnt++;?></td>
                               <td colspan="1"><?= $question['q_four']?></td>
-                              <td class="text-center"><?= strtoupper($invalidatedGuest['q_four'])?></td>
+                              <td class="text-center"><?= strtoupper($invalidatedGuest['r_q_four'])?></td>
                             </tr>
                             <tr>
                               <td class="text-center"><?= $cnt++;?></td>
                               <td colspan="1"><?= $question['q_five']?></td>
-                              <td class="text-center"><?= strtoupper($invalidatedGuest['q_five'])?></td>
+                              <td class="text-center"><?= strtoupper($invalidatedGuest['r_q_five'])?></td>
                             </tr>
                           <?php endforeach; ?>
                           </tbody>

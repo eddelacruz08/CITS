@@ -17,23 +17,23 @@ class CreateReasonChecklists extends \CodeIgniter\Database\Migration {
           'type' => 'BIGINT',
           'comment' => ''
         ],
-        'q_one' => [
+        'r_q_one' => [
           'type' => 'VARCHAR',
           'constraint' => '255'
         ],
-        'q_two' => [
+        'r_q_two' => [
           'type' => 'VARCHAR',
           'constraint' => '255'
         ],
-        'q_three' => [
+        'r_q_three' => [
           'type' => 'VARCHAR',
           'constraint' => '255'
         ],
-        'q_four' => [
+        'r_q_four' => [
           'type' => 'VARCHAR',
           'constraint' => '255'
         ],
-        'q_five' => [
+        'r_q_five' => [
           'type' => 'VARCHAR',
           'constraint' => '255'
         ],
@@ -41,7 +41,7 @@ class CreateReasonChecklists extends \CodeIgniter\Database\Migration {
           'type' => 'INT',
           'constraint' => '11'
         ],
-        'status_defined' => [
+        'r_status_defined' => [
         'type'           => 'VARCHAR',
         'constraint'        => '25',
         'null' => true,
@@ -53,6 +53,10 @@ class CreateReasonChecklists extends \CodeIgniter\Database\Migration {
           'default' => 'a'
         ],
         'date DATE NOT NULL DEFAULT CURRENT_TIMESTAMP',
+        'r_token' => [
+          'type' => 'VARCHAR',
+          'constraint' => '32'
+        ],
         'created_date' => [
           'type' => 'DATETIME',
           'comment' => 'Date of creation',
