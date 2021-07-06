@@ -48,6 +48,7 @@
     <script src="<?= base_url() ?>public/js/user_profile.js"></script>
     <script src="<?= base_url() ?>public/js/loader.js"></script>
     <script src="<?= base_url() ?>public/plugins/summernote/summernote-bs4.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <script>
       $(document).ready(function(){
@@ -145,7 +146,7 @@
           'Student(s)',
           'Faculty(s)',
           'Employee(s)',
-          'Outsider(s)',
+          'Visitor(s)',
         ],
         datasets: [
           {

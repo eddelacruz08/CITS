@@ -114,7 +114,7 @@
                         <span class="info-box-icon"><i class="fas fa-users"></i></span>
 
                         <div class="info-box-content">
-                          <span class="info-box-text">Total of Outsider(s)</span>
+                          <span class="info-box-text">Total of Visitor(s)</span>
                           <span class="info-box-number"><?=$outsider_count?></span>
                         </div>
                         <!-- /.info-box-content -->
@@ -147,7 +147,7 @@
                     <canvas id="donutChart3" style="min-height: 150px; height: 150px; max-height: 150px; max-width: 100%;"></canvas>
                   </div>
                   <div class="col-md-3 text-center">
-                    <div class="card-body text-yellow"> Outsider's Gender
+                    <div class="card-body text-yellow"> Visitor's Gender
                     </div>
                     <canvas id="donutChart4" style="min-height: 150px; height: 150px; max-height: 150px; max-width: 100%;"></canvas>
                   </div>
@@ -219,7 +219,7 @@
             <div class="col-12 col-sm-6 col-md-3">
               <div class="info-box mb-3">
                 <div class="info-box-content">
-                  <span class="info-box-text bg-warning text-center">Outsider</span>
+                  <span class="info-box-text bg-warning text-center">Visitor</span>
                   <?php foreach ($outsider_male as $male):?>
                       <span class="info-box-text"><i class="text-info fas fa-mars"></i> Male: <?php echo $male['COUNT(u.id)'] ?></span>
                     <?php endforeach;?>

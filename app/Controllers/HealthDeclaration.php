@@ -138,15 +138,116 @@ class HealthDeclaration extends BaseController{
 			echo view('outside_layout\index', $data);
 		}
 	}
+	
+	public function health_declaration_form(){
+		$data = [];
+		$data['questions'] = $this->questionsModel->get(['status' => 'a']);
+		if($this->request->getMethod() === 'post'){
+			$usersData = $this->usersModel->getUserWithCondition(['email'=>$_POST['email'], 'status'=>'a']);
+			$checkUser = 0;
+			if(!empty($usersData)){
+                foreach ($usersData as $user) {
+                    if($_POST['email']==$user['email']){
+                        $id = $user['id'];
+                        $userToken = $user['token'];
+                        $userFirstname = $user['firstname'];
+                        $userLastname = $user['lastname'];
+                        $checkUser = 1;
+                        break;
+                    }
+                }
+			}else{
+				$_SESSION['error'] = 'You are not registered. Please register first before taking health declaration form.';
+				$this->session->markAsFlashdata('error');
+				return redirect()->to(base_url('HealthDeclaration/health_declaration_form'));
+			}
+			if($checkUser == 1){
+                if(!$this->validate('requestHealthForm')){
+                    $data['value'] = $_POST;
+                    $data['errors'] = \Config\Services::validation()->getErrors();
+                    $data['viewName'] = 'healthdeclarationform';
+                    echo view('outside_layout\index', $data);
+                }else{
+					$checklistData = $this->checklistsModel->getLatestChecklistDateForRequestForm($id);
+					if(empty($checklistData)){
+						$guidelineData = $this->guidelinesModel->get(['status'=>'a']);
+						foreach($guidelineData as $guideline){
+							$guidelineInfo = $guideline['content'];
+							break;
+						}
+						$_POST['user_id'] = $id;
+						$emailStatus = 0;
+						$guidelineData = $this->guidelinesModel->get(['status'=>'a']);
+						foreach($guidelineData as $guideline){
+							$guidelineInfo = $guideline['content'];
+							break;
+						}
+						$unavailable = false;
+						$token_checklist = md5(str_shuffle('ABCDEFGHIJKLMNOPQRSTWXYZabcdefghijklmnopqrstuvwxyz0123456789'.time()));
+						if($_POST['q_one'] == 'yes' || $_POST['q_two'] == 'yes' || $_POST['q_three'] == 'yes' || $_POST['q_four'] == 'yes' || $_POST['q_five'] == 'yes'){
+							
+							$_POST['status_defined'] = 'ws';
+							$unavailable = true;
+							$to = $_POST['email'];
+							$subject = 'Guidelines for Guest with Symptoms';
+							$message = $guidelineInfo;
+							$email = \Config\Services::email();
+							$email->setTo($to);
+							$email->setFrom('United Coders Dev Team', SYSTEM_NAME);
+							$email->setSubject($subject);
+							$email->setMessage($message);
+							if($email->send()){
+								$emailStatus = 1;
+							}else{
+								$emailStatus = 0;
+							}
 
-	public function checkExpiryDate($time)
-	{
-	  $updated_time = strtotime($time);
-	  $current_time = time();
-	  if ($current_time - $updated_time < 120) {
-		return true;
-	  }else{
-		return false;
-	  }
+							$val_array = [
+								'user_id' => $id,
+								'email_status' => $emailStatus,
+								'checklist_token' => $token_checklist,
+							];
+							$this->guestAssessmentModel->add_assess($val_array);
+						}
+						$_POST['token'] = $token_checklist;
+						if($this->checklistsModel->add($_POST)){
+							if($unavailable == true){
+								$_SESSION['unavailable'] = true;
+								$_SESSION['firstname'] = $userFirstname;
+								$_SESSION['lastname'] = $userLastname;
+								$_SESSION['unvailableQrcode'] = 'You cannot get your Qr Code because your self-assessment was defined for any symptoms.';
+								$this->session->markAsFlashdata('error');
+								$data['viewName'] = 'yourQrcodeDisplay';
+								echo view('outside_layout\index', $data);
+							}else{
+								$_SESSION['unavailable'] = false;
+								$_SESSION['success_request'] = 'You have Successfully fillup a Health Declaration Form!';
+								$_SESSION['yourQrcode'] = $userToken;
+								$_SESSION['firstname'] = $userFirstname;
+								$_SESSION['lastname'] = $userLastname;
+								$this->session->markAsFlashdata('success_request');
+								$data['viewName'] = 'yourQrcodeDisplay';
+								echo view('outside_layout\index', $data);
+							}
+						}else{
+							$_SESSION['error'] = 'You have an error of adding a checklist!';
+							$this->session->markAsFlashdata('error');
+							return redirect()->to(base_url().'HealthDeclaration/health_declaration_form');
+						}
+					}else{
+						$_SESSION['error'] = 'You already taken a self-assessment for today. Please proceed to the guard and scan your qrcode.';
+						$this->session->markAsFlashdata('error');
+						return redirect()->to(base_url('HealthDeclaration/health_declaration_form'));
+					}
+                }
+			}else{
+				$_SESSION['error'] = 'You are not registered. Please register first before taking health declaration form.';
+				$this->session->markAsFlashdata('error');
+				return redirect()->to(base_url('HealthDeclaration/health_declaration_form'));
+			}
+		}else{
+			$data['viewName'] = 'healthdeclarationform';
+			echo view('outside_layout\index', $data);
+		}
 	}
 }

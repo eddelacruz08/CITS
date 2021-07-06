@@ -7,9 +7,9 @@
                 <th width="20%"><b>Fullname</b></th>
                 <th width="15%"><b>Gender</b></th>
                 <th width="15%"><b>GuestType</b></th>
-                <th width="15%"><b>Phone</b></th>
                 <th width="15%"><b>Timein</b></th>
                 <th width="15%"><b>Timeout</b></th>
+                <th width="15%"><b>No. of hours</b></th>
             </tr>
         </thead>
         <tbody>
@@ -20,9 +20,26 @@
             <td width="20%"><?=ucwords($visit['firstname'].' '.$visit['lastname'])?></td>
             <td width="15%"><?=ucwords($visit['gender'])?></td>
             <td width="15%"><?=ucwords($visit['guest_type'])?></td>
-            <td width="15%"><?=ucwords($visit['cellphone_no'])?></td>
-            <td width="15%"><?= date('h:m:s a', strtotime($visit['log_in'])) ?></td>
-            <td width="15%"><?= date('h:m:s a', strtotime($visit['log_out'])) ?></td>
+            <td width="15%"><?= date('h:i:s a', strtotime($visit['log_in'])) ?></td>
+            <?php if($visit['log_out']==null):?>
+              <td width="15%">NO DATA</td>
+              <td width="15%">NO DATA</td>
+            <?php else:?>
+              <td width="15%"><?= date('h:i:s a', strtotime($visit['log_out'])) ?></td>
+              <?php
+                $start = new \DateTime($visit['log_in']);
+                $end   = new \DateTime($visit['log_out']);
+                $interval = $end->diff($start);
+
+                $time = sprintf(
+                    '%d:%02d:%02d',
+                    ($interval->d * 24) + $interval->h,
+                    $interval->i,
+                    $interval->s
+                );
+              ?>
+              <td width="15%"><?=$time;?></td>
+            <?php endif;?>
           </tr>
         <?php endforeach; ?>
         </tbody>

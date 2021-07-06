@@ -164,8 +164,10 @@ class UsersModel extends \CodeIgniter\Model
 
       $db = \Config\Database::connect();
 
-      $str = "SELECT COUNT(u.id), t.*, gen.* FROM users u LEFT JOIN types t ON u.user_type_id = t.id LEFT JOIN genders gen
-              ON u.gender_id = gen.id WHERE u.status = 'a' AND u.role_id = 2 AND t.guest_type = 'Student' AND gen.gender ='male'";
+      $str = "SELECT COUNT(u.id), t.*, gen.* FROM users u 
+              LEFT JOIN types t ON u.user_type_id = t.id 
+              LEFT JOIN genders gen ON u.gender_id = gen.id 
+              WHERE u.status = 'a' AND u.role_id = 2 AND t.guest_type = 'Student' AND gen.gender ='male'";
 
       $query = $db->query($str);
 
@@ -258,7 +260,7 @@ class UsersModel extends \CodeIgniter\Model
       $db = \Config\Database::connect();
 
       $str = "SELECT COUNT(u.id), t.* FROM users u LEFT JOIN types t ON u.user_type_id = t.id
-      WHERE u.status = 'a' AND u.role_id = 2 AND t.guest_type = 'Outsider'";
+      WHERE u.status = 'a' AND u.role_id = 2 AND t.guest_type = 'Visitor'";
 
       $query = $db->query($str);
 
@@ -269,7 +271,7 @@ class UsersModel extends \CodeIgniter\Model
       $db = \Config\Database::connect();
 
       $str = "SELECT COUNT(u.id), t.*, gen.* FROM users u LEFT JOIN types t ON u.user_type_id = t.id LEFT JOIN genders gen
-             ON u.gender_id = gen.id WHERE u.status = 'a' AND u.role_id = 2 AND t.guest_type = 'Outsider' AND gen.gender ='male'";
+             ON u.gender_id = gen.id WHERE u.status = 'a' AND u.role_id = 2 AND t.guest_type = 'Visitor' AND gen.gender ='male'";
 
       $query = $db->query($str);
 
@@ -281,7 +283,7 @@ class UsersModel extends \CodeIgniter\Model
       $db = \Config\Database::connect();
 
       $str = "SELECT COUNT(u.id), t.*, gen.* FROM users u LEFT JOIN types t ON u.user_type_id = t.id LEFT JOIN genders gen
-             ON u.gender_id = gen.id WHERE u.status = 'a' AND u.role_id = 2 AND t.guest_type = 'Outsider' AND gen.gender ='female'";
+             ON u.gender_id = gen.id WHERE u.status = 'a' AND u.role_id = 2 AND t.guest_type = 'Visitor' AND gen.gender ='female'";
 
       $query = $db->query($str);
 

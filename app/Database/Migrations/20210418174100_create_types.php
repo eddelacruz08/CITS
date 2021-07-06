@@ -67,7 +67,7 @@ class CreateTypes extends \CodeIgniter\Database\Migration {
         ],
         [
           'user_id' => '0',
-          'guest_type' => 'Outsider',
+          'guest_type' => 'Visitor',
           'status' => 'a',
           'created_date' => date('y-m-d H:i:s')
         ],

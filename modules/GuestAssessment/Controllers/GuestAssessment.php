@@ -107,7 +107,7 @@ class GuestAssessment extends BaseController
 		$pdf->Write(0, 'Date: '.date('F d, Y'), '', 0, 'C', true, 0, false, false, 0);
 
 		$pdf->SetFont('helvetica', '', 10);
-		// die($_POST['date']);
+		// die($_POST['startdate'] - $_POST['enddate']);
 		if(!empty($_POST['date'])){
 			$data['generateAssessByDates'] = $this->guestAssessmentModel->getGenerateAssessReportByDate($_POST['date']);
 		}else{

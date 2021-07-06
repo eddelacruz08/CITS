@@ -141,9 +141,25 @@
                       </div>
                       <div class="modal-body">
                         <form action="<?=base_url()?>guest%20assessment/generate-assess-report-by-date" method="post">
+                          <label for="">Select Date Range</label>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <label for="dateRange">Start Date</label>
+                                <div class="input-group">
+                                  <input type="date" class="form-control float-right" name="startdate" required>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="dateRange">End Date</label>
+                                <div class="input-group">
+                                  <input type="date" class="form-control float-right" name="enddate" required>
+                                </div>
+                              </div>
+                            </div>
+                            <hr>
                             <div class="row">
                               <div class="col-md-12">
-                                <label for="guest_type">Select Date</label>
+                                <label for="date">Select Specific Date</label>
                                 <div class="form-group">
                                   <select name="date" class="form-control" required>
                                     <option disabled selected>Select Date</option>
@@ -154,7 +170,7 @@
                                 </div>
                               </div>
                             </div>
-                            <button type="submit" class="btn btn-success float-right"><i class="far fa-file-pdf"></i> Generate</button>
+                            <button type="submit" class="btn btn-success"><i class="far fa-file-pdf"></i> Generate</button>
                         </form>
                       </div>
                     </div>
@@ -374,7 +390,7 @@
                         <hr>
                         <h4>
                           <i class="fas fa-user"></i> <?= ucwords($patient['firstname'].' '.$patient['middlename'].' '.$patient['lastname']) ?>
-                          <small class="float-right">Date: <?= date('m/d/Y')?></small>
+                          <small class="float-right">Date: <?= date('m/d/Y', strtotime($patient['date']))?></small>
                         </h4>
                       </div>
                       <!-- /.col -->

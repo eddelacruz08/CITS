@@ -23,7 +23,7 @@ class GuestAssessmentModel extends BaseModel
       $db = \Config\Database::connect();
 
       $str = "SELECT a.* FROM assess a 
-              WHERE a.status = 'a' AND a.func_action = '0' AND a.user_id = '$id' ORDER BY a.created_date desc LIMIT 1";
+              WHERE a.status = 'a' AND a.func_action = '0' AND a.date = CURDATE() AND a.user_id = '$id' ORDER BY a.created_date desc LIMIT 1";
 
       $query = $db->query($str);
 
@@ -83,7 +83,7 @@ class GuestAssessmentModel extends BaseModel
 
       $db = \Config\Database::connect();
 
-      $str = "SELECT a.*, a.date FROM assess a GROUP BY a.date DESC";
+      $str = "SELECT a.*, a.date FROM assess a WHERE a.status = 'a' GROUP BY a.date DESC";
 
       $query = $db->query($str);
 
@@ -95,6 +95,25 @@ class GuestAssessmentModel extends BaseModel
       $db = \Config\Database::connect();
 
       $str = "SELECT a.*, a.date FROM invalid_guests a GROUP BY a.date DESC";
+
+      $query = $db->query($str);
+
+      return $query->getResultArray();
+    }
+
+    public function getGenerateAssessReportByDateRange($startDate, $endDate){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT a.*, g.firstname, g.middlename, g.lastname,
+      g.cellphone_no, gen.gender, t.guest_type, c.q_one, c.q_two, c.q_three, c.q_four, c.q_five, c.status_defined
+      FROM assess a 
+      LEFT JOIN users g ON g.id = a.user_id
+      LEFT JOIN genders gen ON gen.id = g.gender_id 
+      LEFT JOIN types t ON t.id = g.user_type_id 
+      LEFT JOIN checklists c ON c.token = a.checklist_token 
+      WHERE a.date BETWEEN '$startDate' AND '$endDate' AND a.status = 'a'
+      ORDER BY a.created_date DESC";
 
       $query = $db->query($str);
 
