@@ -8,10 +8,10 @@
                <center>
                <label>Latest Self-Assessment Status:
                <?php if (isset($latest_checklist_date[0]['status_defined']) == true):?>
-                 <i class="fas fa-circle text-center text-danger"></i><a class="h6 text-danger"> Have Symtoms</a>
+                 <i class="fas fa-circle text-center text-danger"></i><a class="h6 text-danger"> Have Symptoms</a>
                  <hr style="margin: 0; padding: 0; border: solid 1px red;">
                <?php else:?>
-                 <i class="fas fa-circle text-center text-success"></i><a class="h6 text-success"> No Symtoms</a>
+                 <i class="fas fa-circle text-center text-success"></i><a class="h6 text-success"> No Symptoms</a>
                  <hr style="margin: 0; padding: 0; border: solid 1px green;">
                <?php endif;?>
                </label>

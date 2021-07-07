@@ -23,7 +23,7 @@
             </button>
         </div>
       <?php endif; ?>
-      <form action="<?= base_url()?>Login/forgot_password" method="post">
+      <form action="<?= base_url()?>login/forgotpassword" method="post">
         <div class="input-group mb-3">
           <input type="email" name="email" value="<?= isset($rec['email']) ? $rec['email'] : '' ?>" class="form-control <?= isset($errors['email']) ? 'is-invalid':' ' ?>" id="email" placeholder="Email">
           <div class="input-group-append">

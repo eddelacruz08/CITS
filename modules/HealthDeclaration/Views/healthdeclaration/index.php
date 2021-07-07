@@ -255,11 +255,11 @@
                                   <span><?= $cnt++;?>. <?= $question['q_one']?></span>
                                   <div class="form-group clearfix float-right">
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess1" <?= $reason['r_q_one'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess1" <?= $reason['r_q_one'] == 'yes' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess1">Yes</label>
                                     </div>
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess2" <?= $reason['r_q_one'] == 'no' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess2" <?= $reason['r_q_one'] == 'no' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess2">No</label>
                                     </div>
                                   </div>
@@ -274,11 +274,11 @@
                                   <span><?= $cnt++;?>. <?= $question['q_two']?></span>
                                   <div class="form-group clearfix float-right">
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess1" <?= $reason['r_q_two'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess1" <?= $reason['r_q_two'] == 'yes' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess1">Yes</label>
                                     </div>
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess2" <?= $reason['r_q_two'] == 'no' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess2" <?= $reason['r_q_two'] == 'no' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess2">No</label>
                                     </div>
                                   </div>
@@ -293,11 +293,11 @@
                                   <span><?= $cnt++;?>. <?= $question['q_three']?></span>
                                   <div class="form-group clearfix float-right">
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess1" <?= $reason['r_q_three'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess1" <?= $reason['r_q_three'] == 'yes' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess1">Yes</label>
                                     </div>
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess2" <?= $reason['r_q_three'] == 'no' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess2" <?= $reason['r_q_three'] == 'no' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess2">No</label>
                                     </div>
                                   </div>
@@ -312,11 +312,11 @@
                                   <span><?= $cnt++;?>. <?= $question['q_four']?></span>
                                   <div class="form-group clearfix float-right">
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess1" <?= $reason['r_q_four'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess1" <?= $reason['r_q_four'] == 'yes' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess1">Yes</label>
                                     </div>
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess2" <?= $reason['r_q_four'] == 'no' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess2" <?= $reason['r_q_four'] == 'no' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess2">No</label>
                                     </div>
                                   </div>
@@ -331,11 +331,11 @@
                                   <span><?= $cnt++;?>. <?= $question['q_five']?></span>
                                   <div class="form-group clearfix float-right">
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess1" <?= $reason['r_q_five'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess1" <?= $reason['r_q_five'] == 'yes' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess1">Yes</label>
                                     </div>
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess2" <?= $reason['r_q_five'] == 'no' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess2" <?= $reason['r_q_five'] == 'no' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess2">No</label>
                                     </div>
                                   </div>
@@ -400,11 +400,11 @@
                                   <span><?= $cnt++;?>. <?= $question['q_one']?></span>
                                   <div class="form-group clearfix float-right">
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess1" <?= $summary['q_one'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess1" <?= $summary['q_one'] == 'yes' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess1">Yes</label>
                                     </div>
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess2" <?= $summary['q_one'] == 'no' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess2" <?= $summary['q_one'] == 'no' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess2">No</label>
                                     </div>
                                   </div>
@@ -419,11 +419,11 @@
                                   <span><?= $cnt++;?>. <?= $question['q_two']?></span>
                                   <div class="form-group clearfix float-right">
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess1" <?= $summary['q_two'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess1" <?= $summary['q_two'] == 'yes' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess1">Yes</label>
                                     </div>
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess2" <?= $summary['q_two'] == 'no' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess2" <?= $summary['q_two'] == 'no' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess2">No</label>
                                     </div>
                                   </div>
@@ -438,11 +438,11 @@
                                   <span><?= $cnt++;?>. <?= $question['q_three']?></span>
                                   <div class="form-group clearfix float-right">
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess1" <?= $summary['q_three'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess1" <?= $summary['q_three'] == 'yes' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess1">Yes</label>
                                     </div>
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess2" <?= $summary['q_three'] == 'no' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess2" <?= $summary['q_three'] == 'no' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess2">No</label>
                                     </div>
                                   </div>
@@ -457,11 +457,11 @@
                                   <span><?= $cnt++;?>. <?= $question['q_four']?></span>
                                   <div class="form-group clearfix float-right">
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess1" <?= $summary['q_four'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess1" <?= $summary['q_four'] == 'yes' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess1">Yes</label>
                                     </div>
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess2" <?= $summary['q_four'] == 'no' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess2" <?= $summary['q_four'] == 'no' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess2">No</label>
                                     </div>
                                   </div>
@@ -476,11 +476,11 @@
                                   <span><?= $cnt++;?>. <?= $question['q_five']?></span>
                                   <div class="form-group clearfix float-right">
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess1" <?= $summary['q_five'] == 'yes' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess1" <?= $summary['q_five'] == 'yes' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess1">Yes</label>
                                     </div>
                                     <div class="icheck-primary d-inline">
-                                      <input type="radio" id="radioSuccess2" <?= $summary['q_five'] == 'no' ? 'checked':'unchecked'?>>
+                                      <input type="radio" id="radioSuccess2" <?= $summary['q_five'] == 'no' ? 'checked':'checked disabled'?>>
                                       <label for="radioSuccess2">No</label>
                                     </div>
                                   </div>

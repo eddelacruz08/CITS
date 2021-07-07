@@ -82,6 +82,17 @@ $routes->setAutoRoute(true);
 $routes->get('reset_password/(:num)', 'Login::reset_password/$1');
 $routes->get('logout', 'Login::logout');
 
+$routes->group('health-declaration-form', function($routes)
+{
+    $routes->get('healthform', 'HealthDeclaration::healthform');
+    $routes->get('requesthealthform', 'HealthDeclaration::requesthealthform');
+});
+
+$routes->group('login', function($routes)
+{
+    $routes->get('register', 'Login::register');
+    $routes->get('forgotpassword', 'Login::forgot_password');
+});
 /**
  * --------------------------------------------------------------------
  * Additional Routing

@@ -40,14 +40,19 @@
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
           <li class="nav-item">
             <a class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#qrcodeRegistrationForm">
-              <i class="fas fa-qrcode"></i> Registration Qr Code Link
+              <i class="fas fa-qrcode"></i> Registration Form Link
             </a>
-          </li>&nbsp&nbsp&nbsp
+          </li>&nbsp&nbsp
           <li class="nav-item">
             <a class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#qrcodeForm">
-              <i class="fas fa-qrcode"></i> Generate Qr Code Form Link
+              <i class="fas fa-qrcode"></i> Reason Health Form Link
             </a>
-          </li>&nbsp&nbsp&nbsp
+          </li>&nbsp&nbsp
+          <li class="nav-item">
+            <a class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#qrcodeHealthForm2">
+              <i class="fas fa-qrcode"></i> Health Form Link
+            </a>
+          </li>&nbsp&nbsp
           <li class="nav-item">
             <a href="<?= base_url() ?>visits" class="btn btn-outline-info" type="button" >
               <i class="fas fa-list"></i> Visit List
@@ -58,27 +63,68 @@
     </nav>
     <!-- /.navbar -->
     <!-- Modal -->
+    <div class="modal fade" id="qrcodeHealthForm2" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title text-dark">
+              <i class="fas fa-qrcode">&nbsp</i>
+              Health Form Link</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <script src="<?= base_url() ?>public/js/qrcode.js"></script>
+              <center>
+                  <div id="qrcodeHealthForm"></div>
+                  <a href="<?= base_url('health-declaration-form/healthform')?>" class="btn btn-link text-dark"><?= base_url('health-declaration-form/healthform')?></a>
+                  <br>
+                  <button class="btn btn-outline-dark mt-2" onclick="downLoadCodeForm();">Download QR Code as Image</button>
+                  <a href="<?= base_url()?>scan/print-pdf/<?='healthform'?>" class="btn btn-outline-danger mt-2">Print Qr Code PDF</a>
+              </center>
+              <script>
+                  let qrcodeHealthForm = new QRCode("qrcodeHealthForm", {
+                      text: "<?= base_url('health-declaration-form/healthform')?>",
+                      width: 350,
+                      height: 350,
+                      colorDark : "#000000",
+                      colorLight : "#ffffff",
+                      correctLevel : QRCode.CorrectLevel.H
+                  });
+                  function downLoadCodeForm(){
+                      var img = $('#qrcodeHealthForm').children('img').attr("src");
+                      var alink = document.createElement("a");
+                      alink.href = img;
+                      alink.download = "<?= date('F d, Y h:i:s')?>"+".png";
+                      alink.click();
+                  }
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end modal -->
+    <!-- Modal -->
     <div class="modal fade" id="qrcodeForm" role="dialog">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title text-dark">
               <i class="fas fa-qrcode">&nbsp</i>
-              Generate Qr Code Form Link</h4>
+              Reason Health Form Link</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
               <script src="<?= base_url() ?>public/js/qrcode.js"></script>
               <center>
                   <div id="qrcode"></div>
-                  <a href="<?= base_url('HealthDeclaration/request_form')?>" class="btn btn-link text-dark"><?= base_url('HealthDeclaration/request_form')?></a>
+                  <a href="<?= base_url('health-declaration-form/requesthealthform')?>" class="btn btn-link text-dark"><?= base_url('health-declaration-form/requesthealthform')?></a>
                   <br>
                   <button class="btn btn-outline-dark mt-2" onclick="downLoadCodeForm();">Download QR Code as Image</button>
-                  <a href="#" class="btn btn-outline-danger mt-2">Print Qr Code PDF</a>
+                  <a href="<?= base_url()?>scan/print-pdf/<?='requesthealthform'?>" class="btn btn-outline-danger mt-2">Print Qr Code PDF</a>
               </center>
               <script>
                   let qrcode = new QRCode("qrcode", {
-                      text: "<?= base_url('HealthDeclaration/request')?>",
+                      text: "<?= base_url('health-declaration-form/requesthealthform')?>",
                       width: 350,
                       height: 350,
                       colorDark : "#000000",
@@ -105,21 +151,21 @@
             <div class="modal-header">
               <h4 class="modal-title text-dark">
               <i class="fas fa-qrcode">&nbsp</i>
-              Registration Qr Code Link</h4>
+              Registration Form Link</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
               <script src="<?= base_url() ?>public/js/qrcode.js"></script>
               <center>
                   <div id="qrcodeRegister"></div>
-                  <a href="<?= base_url('Login/register')?>" class="btn btn-link text-dark"><?= base_url('Login/register')?></a>
+                  <a href="<?= base_url('login/register')?>" class="btn btn-link text-dark"><?= base_url('login/register')?></a>
                   <br>
                   <button class="btn btn-outline-dark mt-2" onclick="downLoadCodeRegister();">Download QR Code as Image</button>
-                  <a href="#" class="btn btn-outline-danger mt-2">Print Qr Code PDF</a>
+                  <a href="<?= base_url()?>scan/print-pdf/<?='register'?>" class="btn btn-outline-danger mt-2">Print Qr Code PDF</a>
               </center>
               <script>
                   let qrcodeRegister = new QRCode("qrcodeRegister", {
-                      text: "<?= base_url('Login/register')?>",
+                      text: "<?= base_url('login/register')?>",
                       width: 350,
                       height: 350,
                       colorDark : "#000000",
@@ -185,14 +231,6 @@
               <?php if(isset($_SESSION['error_added2'])): ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                   <?= $_SESSION['error_added2']; ?>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-               </div>
-             <?php endif; ?>
-              <?php if(isset($_SESSION['warning_added2'])): ?>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <?= $_SESSION['warning_added2']; ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>

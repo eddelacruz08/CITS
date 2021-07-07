@@ -25,7 +25,7 @@ class HealthDeclaration extends BaseController{
 		$this->guestAssessmentModel = new GuestAssessmentModel();
 	}
 
-	public function request_form(){
+	public function requesthealthform(){
 		$data = [];
 		$data['reasons'] = $this->reasonsModel->get(['status' => 'a']);
 		$data['questions'] = $this->questionsModel->get(['status' => 'a']);
@@ -139,7 +139,7 @@ class HealthDeclaration extends BaseController{
 		}
 	}
 	
-	public function health_declaration_form(){
+	public function healthform(){
 		$data = [];
 		$data['questions'] = $this->questionsModel->get(['status' => 'a']);
 		if($this->request->getMethod() === 'post'){

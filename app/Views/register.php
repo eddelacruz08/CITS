@@ -23,7 +23,7 @@
               </button>
           </div>
         <?php endif; ?>
-        <form action="<?= base_url() ?>Login/register" method="post">
+        <form action="<?= base_url() ?>login/register" method="post">
           <div class="row">
             <div class="col-md-6">
               <label for="firstname">First Name:</label>

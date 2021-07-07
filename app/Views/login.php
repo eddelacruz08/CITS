@@ -61,10 +61,10 @@
         </form>
 
         <p class="mb-1">
-          <a href="<?= base_url() ?>Login/forgot_password">I forgot my password</a>
+          <a href="<?= base_url() ?>login/forgotpassword">I forgot my password</a>
         </p>
         <p class="mb-0">
-          <a href="<?= base_url() ?>Login/register" class="text-center">Register a new membership</a>
+          <a href="<?= base_url() ?>login/register" class="text-center">Register a new membership</a>
         </p>
       </div>
       <!-- /.card-body -->

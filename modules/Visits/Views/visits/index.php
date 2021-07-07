@@ -68,6 +68,7 @@
                     <th>Guest Type</th>
                     <th>Login</th>
                     <th>Logout</th>
+                    <th>No. of Hours</th>
                     <th>Show Info</th>
                   </tr>
                 </thead>
@@ -76,11 +77,29 @@
                   <?php foreach($visits as $visit): ?>
                       <tr class="text-center">
                           <th scope="row"><?= $cnt++ ?></th>
-                          <td><?= ucwords($visit['firstname'].' '.$visit['middlename'].' '.$visit['lastname'].' '.$visit['extension']) ?></td>
+                          <td><?= ucwords($visit['firstname'].' '.$visit['lastname']) ?></td>
                           <td><?= ucwords($visit['gender'])?></td>
                           <td><?= ucwords($visit['guest_type'])?></td>
-                          <td><?= date('F d, Y h:m a', strtotime($visit['log_in']))?></td>
-                          <td><?= $visit['log_out'] == NULL ? 'Not Logout' : date('F d, Y h:m a', strtotime($visit['log_out']))?></td>
+                          <td><?= date('F d, Y h:i a', strtotime($visit['log_in']))?></td>
+                          <?php if($visit['log_out']==null):?>
+                            <td>NO DATA</td>
+                            <td>NO DATA</td>
+                          <?php else:?>
+                            <td><?= date('F d, Y h:i a', strtotime($visit['log_out'])) ?></td>
+                            <?php
+                              $start = new \DateTime($visit['log_in']);
+                              $end   = new \DateTime($visit['log_out']);
+                              $interval = $end->diff($start);
+
+                              $time = sprintf(
+                                  '%d:%02d:%02d',
+                                  ($interval->d * 24) + $interval->h,
+                                  $interval->i,
+                                  $interval->s
+                              );
+                            ?>
+                            <td width="15%"><?=$time;?></td>
+                          <?php endif;?>
                           <td class="text-center">
                             <?php if(guest_detail_link('guests', 'show-guest', $_SESSION['userPermmissions'], $visit['user_id'])): ?>
                               <?php guest_detail_link('guests', 'show-guest', $_SESSION['userPermmissions'], $visit['user_id']) ?>
@@ -147,6 +166,7 @@
                     <th>Guest Type</th>
                     <th>Login</th>
                     <th>Logout</th>
+                    <th>No. of Hours</th>
                     <th>Show Info</th>
                   </tr>
                 </thead>
@@ -155,11 +175,29 @@
                   <?php foreach($visitsHistory as $visit): ?>
                   <tr class="text-center">
                     <th scope="row"><?= $cnt++ ?></th>
-                    <td><?= ucwords($visit['firstname'].' '.$visit['middlename'].' '.$visit['lastname'].' '.$visit['extension']) ?></td>
+                    <td><?= ucwords($visit['firstname'].' '.$visit['lastname']) ?></td>
                     <td><?= ucwords($visit['gender'])?></td>
                     <td><?= ucwords($visit['guest_type'])?></td>
-                    <td><?= date('F d, Y h:m a', strtotime($visit['log_in'])) ?></td>
-                    <td><?= date('F d, Y h:m a', strtotime($visit['log_out'])) ?></td>
+                    <td><?= date('F d, Y h:i a', strtotime($visit['log_in'])) ?></td>
+                    <?php if($visit['log_out']==null):?>
+                      <td>NO DATA</td>
+                      <td>NO DATA</td>
+                    <?php else:?>
+                      <td><?= date('F d, Y h:i a', strtotime($visit['log_out'])) ?></td>
+                      <?php
+                        $start = new \DateTime($visit['log_in']);
+                        $end   = new \DateTime($visit['log_out']);
+                        $interval = $end->diff($start);
+
+                        $time = sprintf(
+                            '%d:%02d:%02d',
+                            ($interval->d * 24) + $interval->h,
+                            $interval->i,
+                            $interval->s
+                        );
+                      ?>
+                      <td width="15%"><?=$time;?></td>
+                    <?php endif;?>
                     <td class="text-center">
                       <?php if(guest_detail_link('guests', 'show-guest', $_SESSION['userPermmissions'], $visit['user_id'])): ?>
                         <?php guest_detail_link('guests', 'show-guest', $_SESSION['userPermmissions'], $visit['user_id']) ?>
