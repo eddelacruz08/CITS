@@ -32,7 +32,7 @@
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand-md navbar-dark bg-navy">
       <div class="container">
-        <a class="navbar-brand">
+        <a class="navbar-brand" href="<?php $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>">
           <img src="<?= base_url() ?>public/img/LOGO.png" alt="Profile Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
           <span class="brand-text font-weight-light"><?= SYSTEM_NAME ?></span>
         </a>

@@ -79,19 +79,19 @@ $routes->setAutoRoute(true);
 // $routes->post('index', 'Login::index');
 // $routes->match(['get', 'post'], 'add', 'Registration::index');
 // $routes->match(['get', 'post'], 'add', 'Registration::index');
-$routes->get('reset_password/(:num)', 'Login::reset_password/$1');
-$routes->get('logout', 'Login::logout');
 
 $routes->group('health-declaration-form', function($routes)
 {
-    $routes->get('healthform', 'HealthDeclaration::healthform');
-    $routes->get('requesthealthform', 'HealthDeclaration::requesthealthform');
+    $routes->match(['get', 'post'], 'healthform', 'HealthDeclaration::healthform');
+    $routes->match(['get', 'post'], 'requesthealthform', 'HealthDeclaration::requesthealthform');
 });
 
 $routes->group('login', function($routes)
 {
     $routes->get('register', 'Login::register');
     $routes->get('forgotpassword', 'Login::forgot_password');
+    $routes->get('reset_password/(:num)', 'Login::reset_password/$1');
+    $routes->get('logout', 'Login::logout');
 });
 /**
  * --------------------------------------------------------------------

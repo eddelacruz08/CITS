@@ -28,7 +28,7 @@
         <?php else: ?>
           <?php foreach ($questions as $question):?>
           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-            <form id="myForm" action="<?= base_url() ?>HealthDeclaration/health_declaration_form" method="post">
+            <form id="myForm" action="<?= base_url() ?>health-declaration-form/healthform" method="post">
               <?php foreach ($questions as $question):?>
               <div class="card">
                 <div class="card-body">

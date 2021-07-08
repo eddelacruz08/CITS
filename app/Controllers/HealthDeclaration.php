@@ -108,32 +108,34 @@ class HealthDeclaration extends BaseController{
 								if($this->reasonsChecklistModel->add($_POST)){
 									$_SESSION['success_request'] = 'You have Successfully fillup a Health Declaration Form!';
 									$this->session->markAsFlashdata('success_request');
-									return redirect()->to(base_url('HealthDeclaration/request_form'));
+									return redirect()->to(base_url('health-declaration-form/requesthealthform'));
 								}else{
 									$_SESSION['error'] = 'You have an error of adding a checklist!';
 									$this->session->markAsFlashdata('error');
-									return redirect()->to(base_url().'HealthDeclaration/request_form');
+									return redirect()->to(base_url().'health-declaration-form/requesthealthform');
 								}
 							}else{
 								$_SESSION['error'] = 'You already taken Health Declaration Form for your reason. Please try tommorrow!';
 								$this->session->markAsFlashdata('error');
-								return redirect()->to(base_url('HealthDeclaration/request_form'));
+								return redirect()->to(base_url('health-declaration-form/requesthealthform'));
 							}
 						}else{
 							$_SESSION['error'] = 'You already taken Health Declaration Form for your reason. Please try tommorrow!';
 							$this->session->markAsFlashdata('error');
-							return redirect()->to(base_url('HealthDeclaration/request_form'));
+							return redirect()->to(base_url('health-declaration-form/requesthealthform'));
 						}
 					}else{
 						$_SESSION['error'] = 'You dont have an updated self-assessment. Please answer Health Declaration Form in your website.';
 						$this->session->markAsFlashdata('error');
-						return redirect()->to(base_url('HealthDeclaration/request_form'));
+						return redirect()->to(base_url('health-declaration-form/requesthealthform'));
 					}
                 }
 			}else{
-				return redirect()->to(base_url('HealthDeclaration/request_form'));
+				return redirect()->to(base_url('health-declaration-form/requesthealthform'));
 			}
 		}else{
+			$_SESSION['error'] = 'Please input needed information!';
+			$this->session->markAsFlashdata('error');
 			$data['viewName'] = 'healthform';
 			echo view('outside_layout\index', $data);
 		}
@@ -159,7 +161,7 @@ class HealthDeclaration extends BaseController{
 			}else{
 				$_SESSION['error'] = 'You are not registered. Please register first before taking health declaration form.';
 				$this->session->markAsFlashdata('error');
-				return redirect()->to(base_url('HealthDeclaration/health_declaration_form'));
+				return redirect()->to(base_url('health-declaration-form/healthform'));
 			}
 			if($checkUser == 1){
                 if(!$this->validate('requestHealthForm')){
@@ -232,20 +234,22 @@ class HealthDeclaration extends BaseController{
 						}else{
 							$_SESSION['error'] = 'You have an error of adding a checklist!';
 							$this->session->markAsFlashdata('error');
-							return redirect()->to(base_url().'HealthDeclaration/health_declaration_form');
+							return redirect()->to(base_url().'health-declaration-form/healthform');
 						}
 					}else{
 						$_SESSION['error'] = 'You already taken a self-assessment for today. Please proceed to the guard and scan your qrcode.';
 						$this->session->markAsFlashdata('error');
-						return redirect()->to(base_url('HealthDeclaration/health_declaration_form'));
+						return redirect()->to(base_url('health-declaration-form/healthform'));
 					}
                 }
 			}else{
 				$_SESSION['error'] = 'You are not registered. Please register first before taking health declaration form.';
 				$this->session->markAsFlashdata('error');
-				return redirect()->to(base_url('HealthDeclaration/health_declaration_form'));
+				return redirect()->to(base_url('health-declaration-form/healthform'));
 			}
 		}else{
+			$_SESSION['error'] = 'Please input needed information!';
+			$this->session->markAsFlashdata('error');
 			$data['viewName'] = 'healthdeclarationform';
 			echo view('outside_layout\index', $data);
 		}

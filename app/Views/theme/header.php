@@ -139,7 +139,7 @@
                 <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-user fa-fw"></i> Hi <?= ucwords($_SESSION['uname']) ?>!</a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                  <a class="dropdown-item" href="<?php echo base_url() ?>logout"><center><i class="fas fa-power-off"></i> Logout</center></a>
+                  <a class="dropdown-item" href="<?php echo base_url() ?>login/logout"><center><i class="fas fa-power-off"></i> Logout</center></a>
                 </div>
             </li>
         </ul>
@@ -150,7 +150,7 @@
 <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-navy bg-navy elevation-4">
     <!-- Brand Logo -->
-    <a class="brand-link">
+    <a class="brand-link" href="<?php $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>">
       <img src="<?= base_url() ?>/public/img/LOGO.png" alt="PUP Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light"><?= SYSTEM_TITLE ?></span>
     </a>

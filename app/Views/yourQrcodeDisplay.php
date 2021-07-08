@@ -27,7 +27,7 @@
           <div class="card">
             <div class="card-body">
               <p class="h5 text-danger text-center"><?=$_SESSION['unvailableQrcode'];?></p>
-              <a href="<?=base_url('HealthDeclaration/health_declaration_form')?>" class="btn btn-primary btn-lg mt-2"><i class="fas fa-arrow-left"></i> Return to the form</a>
+              <a href="<?=base_url('health-declaration-form/healthform')?>" class="btn btn-primary btn-lg mt-2"><i class="fas fa-arrow-left"></i> Return to the form</a>
             </div>
           </div>
         <?php else: ?>
@@ -40,7 +40,7 @@
               <div id="qrcode"></div>
               <h4><?= $_SESSION['yourQrcode']?></h4>
               <h4><?= ucwords($_SESSION['firstname'].' '.$_SESSION['lastname'])?></h4>
-              <a href="<?=base_url('HealthDeclaration/health_declaration_form')?>" class="btn btn-primary btn-lg mt-2"><i class="fas fa-arrow-left"></i> Return to the form</a>
+              <a href="<?=base_url('health-declaration-form/healthform')?>" class="btn btn-primary btn-lg mt-2"><i class="fas fa-arrow-left"></i> Return to the form</a>
             </center>
             <script>
                 let qrcode = new QRCode("qrcode", {
