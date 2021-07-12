@@ -1,7 +1,7 @@
 
   <body class="container" style="background-color: #001f3f;">
     <br>
-    <div class="card card-outline card-primary">
+    <div class="card register card-outline card-primary">
       <div class="card-header text-center">
         <a href="<?= base_url() ?>" class="h4"><b><?= SYSTEM_NAME ?></b></a>
       </div>

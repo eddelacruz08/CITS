@@ -1,6 +1,6 @@
   <body class="container" style="background-color: #e9ecef;">
     <br>
-    <div class="card card-outline card-primary">
+    <div class="card qrcodedisplay card-outline card-primary">
       <div class="card-header text-center">
         <a href="<?= base_url() ?>" class="h4"><b><?= SYSTEM_NAME ?></b></a>
       </div>
@@ -26,8 +26,10 @@
         <?php if($_SESSION['unavailable'] == true): ?>
           <div class="card">
             <div class="card-body">
-              <p class="h5 text-danger text-center"><?=$_SESSION['unvailableQrcode'];?></p>
-              <a href="<?=base_url('health-declaration-form/healthform')?>" class="btn btn-primary btn-lg mt-2"><i class="fas fa-arrow-left"></i> Return to the form</a>
+              <center>
+                <p class="h5 text-danger text-center"><?=$_SESSION['unvailableQrcode'];?></p>
+                <a href="<?=base_url('health-declaration-form/healthform')?>" class="btn btn-primary btn-lg mt-2"><i class="fas fa-arrow-left"></i> Return to the form</a>
+              </center>
             </div>
           </div>
         <?php else: ?>

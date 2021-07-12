@@ -1,11 +1,14 @@
 <body class="container" style="background-color: #e9ecef;">
     <br>
-    <div class="card card-outline card-primary">
+    <div class="card healthform card-outline card-primary">
       <div class="card-header text-center">
-        <a href="<?= base_url() ?>" class="h4"><b><?= SYSTEM_NAME ?></b></a>
+        <img src="<?= base_url() ?>/public/img/LOGO_dark.png" alt="" width="50px">&nbsp
+        <a href="<?= base_url() ?>" class="h5">
+          <b><?= SYSTEM_NAME ?></b>
+        </a>
       </div>
       <div class="card-body">
-        <center><h4>Health Declaration Form</h4></center>
+        <center><h3>Health Declaration Form</h3><h6>(For forgotten self-assessment)</h6></center>
         <?php if(isset($_SESSION['success_request'])): ?>
           <div class="alert alert-success alert-dismissible fade show" role="alert">
             <?= $_SESSION['success_request']; ?>

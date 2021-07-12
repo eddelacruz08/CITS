@@ -1,9 +1,12 @@
 
 <body class="hold-transition login-page">
 <div class="login-box">
-  <div class="card card-outline card-primary">
+  <div class="card forgotpassword card-outline card-primary">
     <div class="card-header text-center">
-      <a href="<?= base_url()?>" class="h3"><b><?= SYSTEM_NAME?></b></a>
+        <a href="<?= base_url() ?>" class="h5">
+          <img src="<?= base_url() ?>/public/img/LOGO_dark.png" alt="" width="70px"><br>
+          <b><?= SYSTEM_NAME ?></b>
+        </a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>

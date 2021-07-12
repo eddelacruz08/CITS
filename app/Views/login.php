@@ -2,9 +2,12 @@
   <body class="hold-transition login-page" style="background-color: #001f3f;">
   <div class="login-box">
     <!-- /.login-logo -->
-    <div class="card card-outline card-primary">
+    <div class="card login card-outline card-primary">
       <div class="card-header text-center">
-        <a href="<?= base_url() ?>" class="h3"><b><?= SYSTEM_NAME ?></b></a>
+        <a href="<?= base_url() ?>" class="h5">
+          <img src="<?= base_url() ?>/public/img/LOGO_dark.png" alt="" width="70px"><br>
+          <b><?= SYSTEM_NAME ?></b>
+        </a>
       </div>
       <div class="card-body" style="background-color: #ced1d6;">
         <p class="h4 login-box-msg">Sign in</p>
@@ -25,7 +28,7 @@
           </div>
         <?php endif; ?>
         <form action="<?= base_url() ?>" method="post">
-          <label for="inputUsername">Email</label>
+          <!-- <label for="inputUsername">Email</label> -->
           <div class="input-group mb-2">
             <input type="email" name="email" id="inputUsername" class="form-control" placeholder="Email" required autofocus>
             <div class="input-group-append">
@@ -34,8 +37,8 @@
               </div>
             </div>
           </div>
-          <label for="inputPassword">Password</label>
-          <div class="input-group mb-2" id="show_hide_password">
+          <!-- <label for="inputPassword">Password</label> -->
+          <div class="input-group mb-3" id="show_hide_password">
             <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
             <div class="input-group-append">
               <div class="input-group-text">
@@ -43,28 +46,21 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-8">
-              <div class="icheck-primary">
-                <input type="checkbox" id="remember">
-                <label for="remember">
-                  Remember Me
-                </label>
-              </div>
-            </div>
-            <!-- /.col -->
-            <div class="col-4">
+          <div class="row mb-2">
+            <div class="col-12">
               <button type="submit" class="btn btn-primary btn-block">Sign In</button>
             </div>
             <!-- /.col -->
           </div>
         </form>
-
+          <hr>
         <p class="mb-1">
-          <a href="<?= base_url() ?>login/forgotpassword">I forgot my password</a>
+          I forgot my password,
+          <a href="<?= base_url() ?>login/forgotpassword"><em><u>here</u></em>.</a>
         </p>
         <p class="mb-0">
-          <a href="<?= base_url() ?>login/register" class="text-center">Register a new membership</a>
+         Register a new membership,
+          <a href="<?= base_url() ?>login/register" class="text-center"><em><u>here</u></em>.</a>
         </p>
       </div>
       <!-- /.card-body -->

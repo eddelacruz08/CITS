@@ -21,6 +21,8 @@
         </td>
         <td>
             <?php if($patient['func_action'] == 1):?>
+                <span class="bell fa fa-bell"></span>
+                <audio src="<?=base_url()?>public/css/notification_up.mp3" autoplay></audio>
                 <span class="badge badge-danger">Reason requested: </span>
                 <p><?= ucwords($patient['reason']) ?></p>
             <?php elseif($patient['func_action'] == 2):?>

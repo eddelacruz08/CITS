@@ -58,7 +58,7 @@
           setTimeout(function(){
               $('#load_table_assessment').load('<?= base_url()?>guest%20assessment/load_table_assessment');
               refresh();
-          }, 1000);
+          }, 2000);
       }
     </script>
     <script>

@@ -51,7 +51,7 @@ class HealthDeclaration extends BaseController{
                     $data['viewName'] = 'healthform';
                     echo view('outside_layout\index', $data);
                 }else{
-					$checklistData = $this->checklistsModel->getLatestChecklistDate($id);
+					$checklistData = $this->checklistsModel->getUpdatedChecklistDate($id);
 					if(!empty($checklistData)){
 						$assessData = $this->guestAssessmentModel->getLatestGuestAssessment($id);
 						if(!empty($assessData)){
@@ -134,8 +134,6 @@ class HealthDeclaration extends BaseController{
 				return redirect()->to(base_url('health-declaration-form/requesthealthform'));
 			}
 		}else{
-			$_SESSION['error'] = 'Please input needed information!';
-			$this->session->markAsFlashdata('error');
 			$data['viewName'] = 'healthform';
 			echo view('outside_layout\index', $data);
 		}
@@ -248,8 +246,6 @@ class HealthDeclaration extends BaseController{
 				return redirect()->to(base_url('health-declaration-form/healthform'));
 			}
 		}else{
-			$_SESSION['error'] = 'Please input needed information!';
-			$this->session->markAsFlashdata('error');
 			$data['viewName'] = 'healthdeclarationform';
 			echo view('outside_layout\index', $data);
 		}

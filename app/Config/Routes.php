@@ -89,8 +89,7 @@ $routes->group('health-declaration-form', function($routes)
 $routes->group('login', function($routes)
 {
     $routes->get('register', 'Login::register');
-    $routes->get('forgotpassword', 'Login::forgot_password');
-    $routes->get('reset_password/(:num)', 'Login::reset_password/$1');
+    $routes->match(['get', 'post'], 'forgotpassword', 'Login::forgot_password');
     $routes->get('logout', 'Login::logout');
 });
 /**

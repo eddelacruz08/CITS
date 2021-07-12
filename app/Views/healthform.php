@@ -1,8 +1,11 @@
   <body class="container" style="background-color: #e9ecef;">
     <br>
-    <div class="card card-outline card-primary">
+    <div class="card requesthealthform card-outline card-primary">
       <div class="card-header text-center">
-        <a href="<?= base_url() ?>" class="h4"><b><?= SYSTEM_NAME ?></b></a>
+        <img src="<?= base_url() ?>/public/img/LOGO_dark.png" alt="" width="50px">&nbsp
+        <a href="<?= base_url() ?>" class="h5">
+          <b><?= SYSTEM_NAME ?></b>
+        </a>
       </div>
       <div class="card-body">
         <center><h3>Health Declaration Form</h3><h6>(Requested Form For Reason)</h6></center>
