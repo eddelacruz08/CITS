@@ -3,6 +3,7 @@ namespace Modules\Maintenances\Controllers;
 
 use Modules\Maintenances\Models\TypeModel;
 use Modules\UserManagement\Models\PermissionsModel;
+use Modules\Logs\Models\LogsModel;
 use App\Controllers\BaseController;
 
 use \Mpdf\Mpdf;
@@ -15,6 +16,7 @@ class Types extends BaseController
 		parent:: __construct();
 
 		$permissions_model = new PermissionsModel();
+		$this->logsModel = new LogsModel();
 		$this->permissions = $permissions_model->getPermissionsWithCondition(['status' => 'a']);
 	}
 
@@ -54,8 +56,11 @@ class Types extends BaseController
 	    {
 	        if($model->add_maintenance($_POST))
 	        {
-	        	$patient_id = $model->insertID();
-	        	//$permissions_model->update_permitted_role($role_id, $_POST['function_id']);
+				$val_array = [ 
+					'user_id' => $_SESSION['rid'],
+					'activity' => 'added a quest type'
+				];
+				$this->logsModel->add($val_array);
 	        	$_SESSION['success'] = 'You have added a new record';
 						$this->session->markAsFlashdata('success');
 	        	return redirect()->to(base_url('types'));
@@ -83,8 +88,6 @@ class Types extends BaseController
   	$model = new TypeModel();
   	$data['rec'] = $model->find($id);
 
-		// die($_POST['status']);
-
   	if(!empty($_POST))
   	{
 			if (!$this->validate('types'))
@@ -98,7 +101,11 @@ class Types extends BaseController
 			{
 				if($model->edit_maintenance($_POST, $id))
 					{
-						//$permissions_model->update_permitted_role($id, $_POST['function_id'], $data['rec']['function_id']);
+						$val_array = [ 
+							'user_id' => $_SESSION['rid'],
+							'activity' => 'updated a guest type'
+						];
+						$this->logsModel->add($val_array);
 						$_SESSION['success'] = 'You have updated a record';
 						$this->session->markAsFlashdata('success');
 						return redirect()->to(base_url('types'));

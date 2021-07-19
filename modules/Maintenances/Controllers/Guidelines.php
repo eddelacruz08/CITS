@@ -3,6 +3,7 @@ namespace Modules\Maintenances\Controllers;
 
 use Modules\Maintenances\Models\GuidelinesModel;
 use Modules\UserManagement\Models\PermissionsModel;
+use Modules\Logs\Models\LogsModel;
 use App\Controllers\BaseController;
 
 class Guidelines extends BaseController
@@ -14,6 +15,7 @@ class Guidelines extends BaseController
 
 		$this->guidelinesModel = new GuidelinesModel();
 		$permissions_model = new PermissionsModel();
+		$this->logsModel = new LogsModel();
 		$this->permissions = $permissions_model->getPermissionsWithCondition(['status' => 'a']);
 	}
 
@@ -38,6 +40,11 @@ class Guidelines extends BaseController
 				echo view('App\Views\theme\index', $data);
 			}else{
 				if($this->guidelinesModel->edit_maintenance($_POST, $id)){
+					$val_array = [ 
+						'user_id' => $_SESSION['rid'],
+						'activity' => 'updated a guideline'
+					];
+					$this->logsModel->add($val_array);
 					$_SESSION['success'] = 'You have updated a record';
 					$this->session->markAsFlashdata('success');
 					return redirect()->to(base_url('guidelines'));

@@ -19,7 +19,7 @@ class CreateHealthDeclarationPermissions extends \CodeIgniter\Database\Migration
             'table_name' => 'healthdeclaration',
             'func_action' => 'link',
             'func_type' => 1,
-            'allowed_roles' => "[1,2]",
+            'allowed_roles' => "[2]",
             'status' => 'a',
             'created_date' => date('Y-m-d H:i:s')
         ],

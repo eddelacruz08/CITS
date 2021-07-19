@@ -18,7 +18,7 @@ class CreateGuestsPermissions extends \CodeIgniter\Database\Migration {
                           'table_name' => 'guests',
                           'func_action' => 'show',
                           'func_type' => 3,
-                          'allowed_roles' => "[1,3]",
+                          'allowed_roles' => "[3]",
                           'status' => 'a',
                           'created_date' => date('Y-m-d H:i:s')
                       ],
@@ -34,7 +34,7 @@ class CreateGuestsPermissions extends \CodeIgniter\Database\Migration {
                           'table_name' => 'users',
                           'func_action' => 'link',
                           'func_type' => 1,
-                          'allowed_roles' => "[1,3]",
+                          'allowed_roles' => "[3]",
                           'status' => 'a',
                           'created_date' => date('Y-m-d H:i:s')
                       ],

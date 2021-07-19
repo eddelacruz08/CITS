@@ -53,7 +53,6 @@ class Autoload extends \CodeIgniter\Config\AutoloadConfig
 			'Config'      => APPPATH . 'Config',
 			APP_NAMESPACE => APPPATH,                // For custom namespace
 			'App'         => APPPATH,                // To ensure filters, etc still found,
-			// 'BaseControl' => APPPATH . 'Controllers',
 			'Modules\Node'  => ROOTPATH.'modules/Node',
 			'Modules\Scan'  => ROOTPATH.'modules/Scan',
 			'Modules\Profile'  => ROOTPATH.'modules/Profile',
@@ -61,12 +60,10 @@ class Autoload extends \CodeIgniter\Config\AutoloadConfig
 			'Modules\Maintenances'  => ROOTPATH.'modules/Maintenances',
 			'Modules\Guests'  => ROOTPATH.'modules/Guests',
 			'Modules\Visits'  => ROOTPATH.'modules/Visits',
-			// 'Modules\Departments'  => ROOTPATH.'modules/Departments',
+			'Modules\Logs'  => ROOTPATH.'modules/Logs',
 			'Modules\HealthDeclaration'  => ROOTPATH.'modules/HealthDeclaration',
 			'Modules\GuestAssessment'  => ROOTPATH.'modules/GuestAssessment',
 			'Modules\UserManagement'  => ROOTPATH.'modules/UserManagement'
-			// 'Modules\Documents'  => ROOTPATH.'modules/Documents',
-			// 'Modules\Accreditation'  => ROOTPATH.'modules/Accreditation'
 		];
 
 		//echo $psr4['Modules'];  die();

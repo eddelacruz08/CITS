@@ -3,6 +3,7 @@ namespace Modules\Maintenances\Controllers;
 
 use Modules\Maintenances\Models\ReasonsModel;
 use Modules\UserManagement\Models\PermissionsModel;
+use Modules\Logs\Models\LogsModel;
 use App\Controllers\BaseController;
 
 class Reasons extends BaseController
@@ -13,23 +14,24 @@ class Reasons extends BaseController
 		parent:: __construct();
 
 		$permissions_model = new PermissionsModel();
+		$this->logsModel = new LogsModel();
 		$this->permissions = $permissions_model->getPermissionsWithCondition(['status' => 'a']);
 	}
 
-  public function index()
-  {
-  	$this->hasPermissionRedirect('list-reason');
+	public function index()
+	{
+		$this->hasPermissionRedirect('list-reason');
 
-  	$model = new ReasonsModel();
+		$model = new ReasonsModel();
 
-    $data['reasonsActive'] = $model->orderBy('reason', 'asc')->get(['status'=> 'a']);
-    $data['reasonsInactive'] = $model->get(['status'=> 'b']);
+		$data['reasonsActive'] = $model->orderBy('reason', 'asc')->get(['status'=> 'a']);
+		$data['reasonsInactive'] = $model->get(['status'=> 'b']);
 
-    $data['function_title_active'] = "Active Reason List";
-    $data['function_title_inactive'] = "Inactive Reason List";
-    $data['viewName'] = 'Modules\Maintenances\Views\reasons\index';
-    echo view('App\Views\theme\index', $data);
-  }
+		$data['function_title_active'] = "Active Reason List";
+		$data['function_title_inactive'] = "Inactive Reason List";
+		$data['viewName'] = 'Modules\Maintenances\Views\reasons\index';
+		echo view('App\Views\theme\index', $data);
+	}
 
 
 	public function add_reason(){
@@ -44,6 +46,11 @@ class Reasons extends BaseController
 				echo view('App\Views\theme\index', $data);
 			}else{
 				if($model->add_maintenance($_POST)){
+					$val_array = [ 
+						'user_id' => $_SESSION['rid'],
+						'activity' => 'added a reason'
+					];
+					$this->logsModel->add($val_array);
 					$_SESSION['success'] = 'You have added a new record';
 					$this->session->markAsFlashdata('success');
 					return redirect()->to(base_url('reasons'));
@@ -73,6 +80,11 @@ class Reasons extends BaseController
 				echo view('App\Views\theme\index', $data);
 			}else{
 				if($model->edit_maintenance($_POST, $id)){
+					$val_array = [ 
+						'user_id' => $_SESSION['rid'],
+						'activity' => 'updated a reason'
+					];
+					$this->logsModel->add($val_array);
 					$_SESSION['success'] = 'You have updated a record';
 					$this->session->markAsFlashdata('success');
 					return redirect()->to(base_url('reasons'));

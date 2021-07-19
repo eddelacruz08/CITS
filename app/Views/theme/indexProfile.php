@@ -77,10 +77,10 @@
                            </div>
                              <h3 class="profile-username text-center"><?=ucwords($profile[0]['lastname'].' '.$profile[0]['extension'].', '.$profile[0]['firstname'].' '.$profile[0]['middlename'])?></h3>
 
-                           <p class="text-muted text-center"><?=ucfirst($profile[0]['guest_type']).' | '.ucfirst($profile[0]['gender']).' | '.date_diff(date_create($profile[0]['birthdate']), date_create(date('Y-m-d')))->format("%y") . ' year(s) old'?></p>
+                           <p class="text-muted text-center"><?=$profile[0]['guest_type'] == true ? ucfirst($profile[0]['guest_type']) : ' none'?> | <?=$profile[0]['gender'] == true ? ucfirst($profile[0]['gender']): ' none'?> | <?=$profile[0]['birthdate'] == true ? date_diff(date_create($profile[0]['birthdate']), date_create(date('Y-m-d')))->format("%y") . ' year(s) old': ' none'?></p>
 
                            <hr>
-                           <div class="row" align="center">
+                           <div class="row text-center">
                              <div class="col-sm-12">
                                <i class="fas fa-user-edit text-orange"></i> <a class="text-dark" href="<?=base_url() . 'profile/update_user/' . $profile[0]['id'] ?>"> Edit Profile</a>
                              </div>
@@ -128,23 +128,23 @@
                      <!-- /.card-header -->
                      <div class="card-body">
                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-                       <p class="text-muted"><?=ucwords($profile[0]['address'] . ', ' . $profile[0]['city'] . ', ' . $profile[0]['province'] . ' ' . $profile[0]['postal'])?></p>
+                       <p class="text-muted"><?=$profile[0]['address'] == true ? ucwords($profile[0]['address'] . ', ' . $profile[0]['city'] . ', ' . $profile[0]['province'] . ' ' . $profile[0]['postal']) : ' none'?></p>
                        <hr>
                        <strong><i class="fas fa-book mr-1"></i> Contact Number</strong>
                        <br>
                        <p class="text-muted">
-                         <?='<i class="fa fa-mobile-alt"> </i> '.'| '.$profile[0]['cellphone_no']?><br>
-                         <?='<i class="fas fa-phone"> </i> '.'| '.$profile[0]['landline_no']?>
+                         <?=$profile[0]['cellphone_no'] == true ? '<i class="fa fa-mobile-alt"> </i> | '.$profile[0]['cellphone_no'] : '<i class="fa fa-mobile-alt"> </i> | none'?><br>
+                         <?=$profile[0]['landline_no'] == true ? '<i class="fas fa-phone"> </i> | '.$profile[0]['landline_no'] : '<i class="fas fa-phone"> </i> | none'?> 
                        </p>
                        <hr>
                        <strong><i class="fas fa-envelope"> </i> Email Address</strong>
                        <p class="text-muted">
-                         <?=' '.$profile[0]['email']?>
+                         <?=$profile[0]['email'] == true ? $profile[0]['email'] : ' none'?>
                        </p>
                        <hr>
                        <strong><i class="fas fa-birthday-cake"> </i> Birthdate</strong>
                        <p class="text-muted">
-                         <?=' '.date('F d, Y', strtotime($profile[0]['birthdate']))?>
+                         <?=$profile[0]['birthdate'] == true ? date('F d, Y', strtotime($profile[0]['birthdate'])) : ' none'?>
                        </p>
                      </div>
                      <!-- /.card-body -->

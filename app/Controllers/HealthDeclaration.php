@@ -90,7 +90,7 @@ class HealthDeclaration extends BaseController{
 									}else{
 										$emailStatus = 0;
 									}
-									$invalidFunctionAction = 2;
+									$invalidFunctionAction = 1;
 									$val_array = [
 										'reason_checklist_token' => $token_reason_checklist,
 										'email_status' => $emailStatus,

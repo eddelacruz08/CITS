@@ -4,6 +4,7 @@ namespace Modules\UserManagement\Controllers;
 use Modules\UserManagement\Models\PermissionsModel;
 use Modules\UserManagement\Models\ModulesModel;
 use Modules\UserManagement\Models\RolesModel;
+use Modules\Logs\Models\LogsModel;
 
 use App\Controllers\BaseController;
 
@@ -12,6 +13,7 @@ class Permissions extends BaseController
 	public function __construct()
 	{
 		parent:: __construct();
+		$this->logsModel = new LogsModel();
 	}
 
     public function index($indexPage = 1)
@@ -62,6 +64,11 @@ class Permissions extends BaseController
 
      		if($isUpdated == 1)
 	         {
+				$val_array = [ 
+					'user_id' => $_SESSION['rid'],
+					'activity' => 'updated a permission'
+				];
+				$this->logsModel->add($val_array);
 	         	$_SESSION['success'] = 'You have updated the permissions';
 				 $this->session->markAsFlashdata('success');
 	         	return redirect()->to(base_url('permissions'));

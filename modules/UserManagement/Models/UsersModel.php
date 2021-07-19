@@ -5,6 +5,10 @@ use CodeIgniter\Model;
 
 class UsersModel extends \CodeIgniter\Model
 {
+    // function __construct() {
+    //   // Set table name
+    //   $this->table = 'users';
+    // }
     protected $table = 'users';
 
     protected $allowedFields = ['lastname','middlename', 'firstname','ext_name_id', 'username','gender_id', 'email', 'password', 'birthdate',
@@ -34,6 +38,89 @@ class UsersModel extends \CodeIgniter\Model
       return $this->findAll();
     }
     
+    /*
+     * Fetch members data from the database
+     * @param array filter data based on the passed parameters
+     */
+    public function getRows($params = array()){
+      $builder = $this->db->table('users');
+      $builder->select('*');
+      
+      if(array_key_exists("where", $params)){
+          foreach($params['where'] as $key => $val){
+            $builder->where($key, $val);
+          }
+      }
+      
+      if(array_key_exists("returnType",$params) && $params['returnType'] == 'count'){
+          $result = $builder->countAllResults();
+      }else{
+          if(array_key_exists("id", $params)){
+            $builder->where('id', $params['id']);
+              $query = $builder->get();
+              $result = $query->row_array();
+          }else{
+            $builder->order_by('id', 'desc');
+              if(array_key_exists("start",$params) && array_key_exists("limit",$params)){
+                $builder->limit($params['limit'],$params['start']);
+              }elseif(!array_key_exists("start",$params) && array_key_exists("limit",$params)){
+                $builder->limit($params['limit']);
+              }
+              
+              $query = $builder->get();
+              $result = ($query->num_rows() > 0)?$query->result_array():FALSE;
+          }
+      }
+      
+      // Return fetched data
+      return $result;
+    }
+    
+    /*
+    * Insert members data into the database
+    * @param $data data to be insert based on the passed parameters
+    */
+    public function insertFile($data = array()) {
+        if(!empty($data)){
+            // Add created and modified date if not included
+            if(!array_key_exists("created_date", $data)){
+                $data['token'] = md5(str_shuffle('abcdefghijklmnopqrstuvwxyz'.time()));
+                $data['created_date'] = date("Y-m-d H:i:s");
+            }
+            if(!array_key_exists("updated_date", $data)){
+                $data['updated_date'] = date("Y-m-d H:i:s");
+            }
+            
+            // Insert member data
+            $insert = $this->insert($data);
+            
+            // Return the status
+            return $insert?$this->insert_id():false;
+        }
+        return false;
+    }
+    
+    /*
+    * Update member data into the database
+    * @param $data array to be update based on the passed parameters
+    * @param $condition array filter data
+    */
+    public function updateFile($data, $condition = array()) {
+        if(!empty($data)){
+            // Add modified date if not included
+            if(!array_key_exists("updated_date", $data)){
+                $data['updated_date'] = date("Y-m-d H:i:s");
+            }
+            
+            // Update member data
+            $update = $this->update($data, $condition);
+            
+            // Return the status
+            return $update?true:false;
+        }
+        return false;
+    }
+
     public function verifyToken($token){
       $builder = $this->db->table('users');
       $builder->select("id, token, firstname, lastname, username, updated_date");
@@ -310,15 +397,25 @@ class UsersModel extends \CodeIgniter\Model
 	    return $this->findAll();
 	}
 
-	public function getUsersWithRole($args = [])
+	public function getUsersWithRole()
 	{
 		$db = \Config\Database::connect();
 
-		$str = "SELECT a.*, b.role_name FROM users a LEFT JOIN roles b ON a.role_id = b.id WHERE a.status = '".$args['status']."' LIMIT ". $args['offset'] .','.$args['limit'];
+		$str = "SELECT a.*, b.role_name FROM users a LEFT JOIN roles b ON a.role_id = b.id WHERE a.status = 'a'";
 
 		$query = $db->query($str);
-	    return $query->getResultArray();
+	  return $query->getResultArray();
 	}
+
+	public function getUsersRecord($userdata)
+	{
+		$db = \Config\Database::connect();
+
+		$str = "SELECT a.* FROM users a WHERE a.status = 'a' AND a.email = '$userdata'";
+
+		$query = $db->query($str);
+	  return $query->getResultArray();
+	} 
 
     public function getUsers()
 	{

@@ -463,6 +463,9 @@ if (! function_exists('maintenance_action'))
 							case 'guidelines':
 								echo '<a class="btn btn-warning btn-md float-right" title="Edit guidelines" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'"><i class="far fa-edit"></i> Edit Guidelines</a> ';
 								break;
+							case 'questions':
+								echo '<a class="btn btn-warning btn-md float-right" title="Edit Questions" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'"><i class="far fa-edit"></i> Edit Questions</a> ';
+								break;
 							default:
 								// echo '<a class="btn btn-warning btn-lg" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'/'.$pId . '"><i class="far fa-clipboard"></i> Take Assessment</a> ';
 								echo '<a class="btn btn-default btn-sm" style="border: 1px solid #343a40;" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'"><i class="far fa-edit"></i></a> ';

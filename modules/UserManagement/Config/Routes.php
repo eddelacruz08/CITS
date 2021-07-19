@@ -11,6 +11,8 @@ $routes->group('users', ['namespace' => 'Modules\UserManagement\Controllers'], f
     $routes->match(['get', 'post'], 'edit-credentials/(:num)', 'Users::edit_credentials/$1');
     $routes->match(['get', 'post'], 'edit/(:num)', 'Users::edit_user/$1');
     $routes->delete('delete/(:num)', 'Users::delete_user/$1');
+    $routes->get('exportData', 'Users::exportData');
+    $routes->match(['get', 'post'], 'import-file', 'Users::importFile');
 });
 
 $routes->group('roles', ['namespace' => 'Modules\UserManagement\Controllers'], function($routes)

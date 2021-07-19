@@ -121,13 +121,45 @@
       <div class="card-body">
         <div class="tab-content" id="custom-tabs-four-tabContent">
           <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+          
+            <div class="row">
+              <div class="col-md-12">
+                <!-- Box Comment -->
+                <div class="card card-widget">
+                  <div class="card-header bg-dark">
+                    <div class="user-block">
+                      <span class="h5">Request Invalidation</span>
+                    </div>
+                    <!-- /.user-block -->
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                    </div>
+                    <!-- /.card-tools -->
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-footer">  
+
+                    <!-- load assessment -->
+                    <div id="load_table_assessment"></div>
+                    <!-- load assessment -->
+                  
+                  </div>
+                  <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+              </div>
+              <!-- /.col -->
+            </div>
+            <br>
             <div class="row">
               <div class="col-6">
-              <h4><?= $function_title?></h4>
+                <h4><?= $function_title?></h4>
               </div>
               <div class="col-6">
                 <button type="button" class="btn btn-danger float-right btn-md" name="button" data-toggle="modal" data-target="#assessGenerateModal">
-                  <i class="fas fa-print"></i> Generate Report List
+                  <i class="fas fa-print"></i> Generate Assessment Report
                 </button>
                 <!-- modal -->
                 <div class="modal fade" id="assessGenerateModal">
@@ -140,7 +172,7 @@
                         </button>
                       </div>
                       <div class="modal-body">
-                        <form action="<?=base_url()?>guest%20assessment/generate-assess-report-by-date" method="post">
+                        <form action="<?=base_url()?>guest%20assessment/generate-assess-report-by-daterange" method="post">
                           <label for="">Select Date Range</label>
                             <div class="row">
                               <div class="col-md-6">
@@ -156,7 +188,10 @@
                                 </div>
                               </div>
                             </div>
-                            <hr>
+                            <button type="submit" class="btn btn-success mt-3"><i class="far fa-file-pdf"></i> Generate</button>
+                        </form>
+                        <hr>
+                        <form action="<?=base_url()?>guest%20assessment/generate-assess-report-by-date" method="post">
                             <div class="row">
                               <div class="col-md-12">
                                 <label for="date">Select Specific Date</label>
@@ -194,10 +229,56 @@
                     <th>Action</th>
                   </tr>
                 </thead>
-                <!-- load table assessment -->
-                <tbody id="load_table_assessment">
+                <tbody>
+                  <?php if(empty($guestsAssess)):?>
+                      <tr class="text-center">
+                        <td colspan="6">No data available</td>
+                      </tr>
+                  <?php else:?>
+                      <?php $cnt = 1; ?>
+                      <?php foreach($guestsAssess as $patient): ?>
+                      <tr class="text-center">
+                          <th scope="row"><?= $cnt++ ?></th>
+                          <td><?= ucwords($patient['firstname'].' '.$patient['lastname']) ?></td>
+                          <td><?= $patient['email'] ?></td>
+                          <td>
+                              <?php if($patient['email_status']==1):?>
+                                  <span class="badge">Automatically sent email for guidelines.</span>
+                              <?php else:?>
+                                  <form action="<?= base_url() ?>guest%20assessment/<?='email_resend/'.$patient['id']?>" method="post">
+                                      <input hidden type="text" name="email" value="<?= ucwords($patient['email'])?>">
+                                      <button type="submit" class="btn btn-info btn-sm"><i class="fas fa-envelope"></i> Resend Email</button>
+                                  </form>
+                              <?php endif;?>
+                          </td>
+                          <td>
+                              <?php if($patient['func_action'] == 1):?>
+                                  <span class="bell fa fa-bell"></span>
+                                  <audio src="<?=base_url()?>public/css/notification_up.mp3" autoplay></audio>
+                                  <span class="badge badge-danger">Reason requested: </span>
+                                  <p><?= ucwords($patient['reason']) ?></p>
+                              <?php elseif($patient['func_action'] == 2):?>
+                                  <span class="badge">System Cancelled Request.</span>
+                              <?php else:?>
+                                  <span class="badge">No reason request.</span>
+                              <?php endif;?>
+                          </td>
+                          <td style="width:25%;"> 
+                              <?php if($patient['func_action'] == 1):?>
+                                  <a href="#invalidateModal<?=$patient['id']?>" class="btn btn-outline-danger" data-toggle="modal">
+                                      <i class="fas fa-exclamation-circle"></i> Invalidate
+                                  </a>
+                              <?php else:?>
+                                  <!-- No Button For Invalidation -->
+                              <?php endif;?>
+                              <button type="button" class="btn btn-outline-success success btn-md" data-toggle="modal" data-target="#assessment<?=$patient['id']?>">
+                                  <i class="fas fa-clipboard-check"></i> Check Data
+                              </button>
+                          </td>
+                      </tr>
+                      <?php endforeach; ?>
+                  <?php endif;?>
                 </tbody>
-                <!-- load table assessment -->
               </table>
             </div>
           </div>
@@ -208,7 +289,7 @@
               </div>
               <div class="col-6">
                 <button type="button" class="btn btn-danger float-right btn-md" name="button" data-toggle="modal" data-target="#invalidatedGenerateModal">
-                  <i class="fas fa-print"></i> Generate Report List
+                  <i class="fas fa-print"></i> Generate Invalidated Report
                 </button>
                 <!-- modal -->
                 <div class="modal fade" id="invalidatedGenerateModal">
@@ -221,6 +302,25 @@
                         </button>
                       </div>
                       <div class="modal-body">
+                        <form action="<?=base_url()?>guest%20assessment/generate-invalidated-report-by-daterange" method="post">
+                          <label for="">Select Date Range</label>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <label for="dateRange">Start Date</label>
+                                <div class="input-group">
+                                  <input type="date" class="form-control float-right" name="startdate" required>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="dateRange">End Date</label>
+                                <div class="input-group">
+                                  <input type="date" class="form-control float-right" name="enddate" required>
+                                </div>
+                              </div>
+                            </div>
+                            <button type="submit" class="btn btn-success mt-3"><i class="far fa-file-pdf"></i> Generate</button>
+                        </form>
+                        <hr>
                         <form action="<?=base_url()?>guest%20assessment/generate-invalidated-report-by-date" method="post">
                             <div class="row">
                               <div class="col-md-12">
@@ -235,7 +335,7 @@
                                 </div>
                               </div>
                             </div>
-                            <button type="submit" class="btn btn-success float-right"><i class="far fa-file-pdf"></i> Generate</button>
+                            <button type="submit" class="btn btn-success"><i class="far fa-file-pdf"></i> Generate</button>
                         </form>
                       </div>
                     </div>
@@ -284,9 +384,9 @@
       <!-- /.card -->
     </div>
   </div>
-  <?php foreach ($guestsAssess as $patient): ?>
+  <?php foreach ($requestguestsAssess as $patientRequest): ?>
     <!-- Modal HTML -->
-    <div id="invalidateModal<?=$patient['id']?>" class="modal fade">
+    <div id="invalidateModal<?=$patientRequest['id']?>" class="modal fade">
       <div class="modal-dialog modal-confirm modal-lg">
         <div class="modal-content">
           <div class="modal-header flex-column">
@@ -315,60 +415,57 @@
                     <tr>
                       <td class="text-center"><?= $cnt++;?></td>
                       <td colspan="1"><?= $question['q_one']?></td>
-                      <td class="text-center"><?= strtoupper($patient['r_q_one'])?></td>
+                      <td class="text-center"><?= strtoupper($patientRequest['r_q_one'])?></td>
                     </tr>
                     <tr>
                       <td class="text-center"><?= $cnt++;?></td>
                       <td colspan="1"><?= $question['q_two']?></td>
-                      <td class="text-center"><?= strtoupper($patient['r_q_two'])?></td>
+                      <td class="text-center"><?= strtoupper($patientRequest['r_q_two'])?></td>
                     </tr>
                     <tr>
                       <td class="text-center"><?= $cnt++;?></td>
                       <td colspan="1"><?= $question['q_three']?></td>
-                      <td class="text-center"><?= strtoupper($patient['r_q_three'])?></td>
+                      <td class="text-center"><?= strtoupper($patientRequest['r_q_three'])?></td>
                     </tr>
                     <tr>
                       <td class="text-center"><?= $cnt++;?></td>
                       <td colspan="1"><?= $question['q_four']?></td>
-                      <td class="text-center"><?= strtoupper($patient['r_q_four'])?></td>
+                      <td class="text-center"><?= strtoupper($patientRequest['r_q_four'])?></td>
                     </tr>
                     <tr>
                       <td class="text-center"><?= $cnt++;?></td>
                       <td colspan="1"><?= $question['q_five']?></td>
-                      <td class="text-center"><?= strtoupper($patient['r_q_five'])?></td>
+                      <td class="text-center"><?= strtoupper($patientRequest['r_q_five'])?></td>
                     </tr>
                     <tr>
-                      <td colspan="3" class="h6 <?=$patient['r_status_defined']=='ws'?'text-danger':'text-success'?>"><b>Guest Status: </b>This guest <?=$patient['r_status_defined']=='ws'?'is defined':'is not defined'?> for any symptoms.</td>
+                      <td colspan="3" class="h6 <?=$patientRequest['r_status_defined']=='ws'?'text-danger':'text-success'?>"><b>Guest Status: </b>This guest <?=$patientRequest['r_status_defined']=='ws'?'is defined':'is not defined'?> for any symptoms.</td>
                     </tr>
                   <?php endforeach; ?>
                   </tbody>
                 </table>
+                <div class="modal-footer justify-content-center text-center" style="margin-top: 0px;">
+                  <a href="<?=base_url().'guest%20assessment/invalidate-guest/'.$patientRequest['user_id'].'/'.$patientRequest['checklist_token']?>">
+                    <button type="submit" class="btn btn-md btn-success success">Invalidate Request</button>
+                  </a>
+                  <a href="<?=base_url().'guest%20assessment/denied-invalidate-guest/'.$patientRequest['user_id'].'/'.$patientRequest['checklist_token']?>">
+                    <button type="submit" class="btn btn-md btn-danger">Cancel Invalidation Request</button>
+                  </a>
+                </div>
               </div>
               <!-- /.col -->
             </div>
             <!-- /.row -->
-          </div>
-          <div class="modal-footer justify-content-center" style="margin-top: 0px;">
-            <?php if($patient['r_status_defined'] == 'ws'):?>
-              <a href="<?=base_url().'guest%20assessment/denied-invalidate-guest/'.$patient['user_id'].'/'.$patient['checklist_token']?>">
-                <button type="submit" class="btn btn-lg btn-success">Invalidate Guest</button>
-              </a>
-            <?php else:?>
-              <a href="<?=base_url().'guest%20assessment/invalidate-guest/'.$patient['user_id'].'/'.$patient['checklist_token']?>">
-                <button type="submit" class="btn btn-lg btn-success success">Invalidate Guest</button>
-              </a>
-            <?php endif;?>
           </div>
         </div>
       </div>
     </div> 
     <!-- End Modal HTML -->
   <!-- Start Guest Assessment Modal -->
-  <div class="modal fade" id="assessment<?=$patient['id']?>">
+  <div class="modal fade" id="assessment<?=$patientRequest['id']?>">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
-              <a href="<?= base_url()?>guest%20assessment/print-assess-guest/<?=$patient['id']?>" type="button" class="btn btn-outline-danger btn-md">
+              <a href="<?= base_url()?>guest%20assessment/print-assess-guest/<?=$patientRequest['id']?>" type="button" class="btn btn-outline-danger btn-md">
                 <i class="fas fa-file-pdf"></i> Print PDF
               </a>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -376,7 +473,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <?php if (empty($guestsAssess)): ?>
+              <?php if (empty($requestguestsAssess)): ?>
                 <p class="card-text text-center" style="font-style: italic;"><i class="fas fa-spinner"></i> None</p>
               <?php else: ?>
               <div class="row">
@@ -389,8 +486,8 @@
                         <h4 class="modal-title text-center">Patient Assessment Information</h4>
                         <hr>
                         <h4>
-                          <i class="fas fa-user"></i> <?= ucwords($patient['firstname'].' '.$patient['middlename'].' '.$patient['lastname']) ?>
-                          <small class="float-right">Date: <?= date('m/d/Y', strtotime($patient['date']))?></small>
+                          <i class="fas fa-user"></i> <?= ucwords($patientRequest['firstname'].' '.$patientRequest['middlename'].' '.$patientRequest['lastname']) ?>
+                          <small class="float-right">Date: <?= date('m/d/Y', strtotime($patientRequest['date']))?></small>
                         </h4>
                       </div>
                       <!-- /.col -->
@@ -399,16 +496,16 @@
                     <div class="row invoice-info">
                       <div class="col-sm-6 invoice-col">
                         <address>
-                          <b>Address:</b> <?= ucwords($patient['address'].', '.$patient['city'].', '.$patient['province'].', '.$patient['postal'])?><br>
-                          <b>Phone:</b> <?= ucwords($patient['cellphone_no'])?><br>
-                          <b>Landline:</b> <?= ucwords($patient['landline_no'])?>
+                          <b>Address:</b> <?= ucwords($patientRequest['address'].', '.$patientRequest['city'].', '.$patientRequest['province'].', '.$patientRequest['postal'])?><br>
+                          <b>Phone:</b> <?= ucwords($patientRequest['cellphone_no'])?><br>
+                          <b>Landline:</b> <?= ucwords($patientRequest['landline_no'])?>
                         </address>
                       </div>
                       <div class="col-sm-6 invoice-col">
                         <address>
-                          <b>Gender:</b> <?= ucwords($patient['gender'])?><br>
-                          <b>Guest Type:</b> <?= ucwords($patient['guest_type'])?><br>
-                          <b>Email:</b> <?= $patient['email']?>
+                          <b>Gender:</b> <?= ucwords($patientRequest['gender'])?><br>
+                          <b>Guest Type:</b> <?= ucwords($patientRequest['guest_type'])?><br>
+                          <b>Email:</b> <?= $patientRequest['email']?>
                         </address>
                       </div>
                     </div>
@@ -431,27 +528,27 @@
                             <tr>
                               <td class="text-center"><?= $cnt++;?></td>
                               <td colspan="1"><?= $question['q_one']?></td>
-                              <td class="text-center"><?= strtoupper($patient['q_one'])?></td>
+                              <td class="text-center"><?= strtoupper($patientRequest['q_one'])?></td>
                             </tr>
                             <tr>
                               <td class="text-center"><?= $cnt++;?></td>
                               <td colspan="1"><?= $question['q_two']?></td>
-                              <td class="text-center"><?= strtoupper($patient['q_two'])?></td>
+                              <td class="text-center"><?= strtoupper($patientRequest['q_two'])?></td>
                             </tr>
                             <tr>
                               <td class="text-center"><?= $cnt++;?></td>
                               <td colspan="1"><?= $question['q_three']?></td>
-                              <td class="text-center"><?= strtoupper($patient['q_three'])?></td>
+                              <td class="text-center"><?= strtoupper($patientRequest['q_three'])?></td>
                             </tr>
                             <tr>
                               <td class="text-center"><?= $cnt++;?></td>
                               <td colspan="1"><?= $question['q_four']?></td>
-                              <td class="text-center"><?= strtoupper($patient['q_four'])?></td>
+                              <td class="text-center"><?= strtoupper($patientRequest['q_four'])?></td>
                             </tr>
                             <tr>
                               <td class="text-center"><?= $cnt++;?></td>
                               <td colspan="1"><?= $question['q_five']?></td>
-                              <td class="text-center"><?= strtoupper($patient['q_five'])?></td>
+                              <td class="text-center"><?= strtoupper($patientRequest['q_five'])?></td>
                             </tr>
                           <?php endforeach; ?>
                           </tbody>

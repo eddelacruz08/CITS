@@ -44,7 +44,11 @@ class Login extends BaseController
 				return redirect()->to( base_url());
 			}
 			if($loginOK == 1){
-				if($_SESSION['rid'] == 2){
+				if($_SESSION['rid'] == 1){
+					$_SESSION['success_login'] = 'Welcome '.$user['username'].'!';
+					$this->session->markAsFlashdata('success_login');
+					return redirect()->to(base_url('activity%20logs'));
+				}elseif($_SESSION['rid'] == 2){
 					$_SESSION['success_login'] = 'Welcome '.$user['username'].'!';
 					$this->session->markAsFlashdata('success_login');
 					return redirect()->to(base_url('profile'));

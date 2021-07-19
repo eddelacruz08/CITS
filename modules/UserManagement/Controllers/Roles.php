@@ -4,6 +4,7 @@ namespace Modules\UserManagement\Controllers;
 use Modules\UserManagement\Models\RolesModel;
 use Modules\UserManagement\Models\PermissionsModel;
 use App\Controllers\BaseController;
+use Modules\Logs\Models\LogsModel;
 
 class Roles extends BaseController
 {
@@ -15,6 +16,7 @@ class Roles extends BaseController
 
 		$permissions_model = new PermissionsModel();
 		$this->permissions = $permissions_model->getPermissionsWithCondition(['status' => 'a']);
+		$this->logsModel = new LogsModel();
 	}
 
     public function index($offset = 0)
@@ -44,7 +46,7 @@ class Roles extends BaseController
 		$data['role'] = $model->getRoleWithCondition(['id' => $id]);
 
 		$data['function_title'] = "Role Details";
-    $data['viewName'] = 'Modules\UserManagement\Views\roles\roleDetails';
+    	$data['viewName'] = 'Modules\UserManagement\Views\roles\roleDetails';
         echo view('App\Views\theme\index', $data);
 	}
 
@@ -72,6 +74,11 @@ class Roles extends BaseController
 		    {
 		        if($model->addRoles($_POST))
 		        {
+					$val_array = [ 
+						'user_id' => $_SESSION['rid'],
+						'activity' => 'added a role'
+					];
+					$this->logsModel->add($val_array);
 		        	$role_id = $model->insertID();
 		        	$permissions_model->update_permitted_role($role_id, $_POST['function_id']);
 		        	$_SESSION['success'] = 'You have added a new record';
@@ -119,6 +126,11 @@ class Roles extends BaseController
 		    {
 		    	if($model->editRoles($_POST, $id))
 		        {
+					$val_array = [ 
+						'user_id' => $_SESSION['rid'],
+						'activity' => 'updated a role'
+					];
+					$this->logsModel->add($val_array);
 		        	$permissions_model->update_permitted_role($id, $_POST['function_id'], $data['rec']['function_id']);
 		        	$_SESSION['success'] = 'You have updated a record';
 					$this->session->markAsFlashdata('success');
@@ -144,6 +156,11 @@ class Roles extends BaseController
     {
     	$this->hasPermissionRedirect('delete-role');
 
+		$val_array = [ 
+			'user_id' => $_SESSION['rid'],
+			'activity' => 'deleted a role'
+		];
+		$this->logsModel->add($val_array);
     	$model = new RolesModel();
     	$model->deleteRole($id);
     }

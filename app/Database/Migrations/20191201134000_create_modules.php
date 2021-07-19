@@ -139,6 +139,15 @@ class CreateModules extends \CodeIgniter\Database\Migration {
                       'status' => 'a',
                       'created_date' => date('Y-m-d H:i:s')
                   ],
+                  [
+                      'module_name' => 'activity logs',
+                      'module_type' => 2,
+                      'module_description' => 'activity logs',
+                      'module_icon' => '<i class="fas fa-tasks"></i>',
+                      'order' => 10,
+                      'status' => 'a',
+                      'created_date' => date('Y-m-d H:i:s')
+                  ],
                   // [
                   //     'module_name' => 'departments',
                   //     'module_type' => 2,

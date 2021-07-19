@@ -8,7 +8,9 @@ $routes->group('guest%20assessment', ['namespace' => 'Modules\GuestAssessment\Co
     $routes->get('print-assess-guest/(:num)', 'GuestAssessment::print_assess_guest/$1');
     $routes->get('print-invalidated-guest/(:num)', 'GuestAssessment::print_invalidated_guest/$1');
     $routes->match(['get', 'post'], 'add', 'GuestAssessment::add_guest_assessment');
+    $routes->match(['get', 'post'], 'generate-assess-report-by-daterange', 'GuestAssessment::generate_assess_report_by_daterange');
     $routes->match(['get', 'post'], 'generate-assess-report-by-date', 'GuestAssessment::generate_assess_report_by_date');
+    $routes->match(['get', 'post'], 'generate-invalidated-report-by-daterange', 'GuestAssessment::generate_invalidated_report_by_daterange');
     $routes->match(['get', 'post'], 'generate-invalidated-report-by-date', 'GuestAssessment::generate_invalidated_report_by_date');
     $routes->get('edit/(:num)', 'GuestAssessment::edit_guest_assessment/$1');
     $routes->get('invalidate-guest/(:num)/(:alphanum)', 'GuestAssessment::invalidate_guest/$1/$2');
