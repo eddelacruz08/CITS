@@ -419,7 +419,7 @@ class GuestAssessment extends BaseController
 	{
 		// die($id);
 		$checkUser = 0;
-		$userAssessments = $this->guestAssessmentModel->getGuestAssessWithCondition(['user_id' => $id, 'status' => 'a']);
+		$userAssessments = $this->guestAssessmentModel->getGuestAssessWithCondition(['user_id' => $id, 'status' => 'a', 'func_action' => 1]);
 
 		if(!empty($userAssessments)){
 			foreach($userAssessments as $userAssessment){
@@ -456,6 +456,7 @@ class GuestAssessment extends BaseController
 			    $checklistId = $latestChecklist['id'];
 			    break;
 			}
+			// die($cId);
 			$val_array = [
 			    'q_one' => $q_one,
 			    'q_two' => $q_two,
@@ -480,7 +481,7 @@ class GuestAssessment extends BaseController
 	public function denied_invalidate_guest($id, $cId)
 	{
 		$checkUser = 0;
-		$userAssessments = $this->guestAssessmentModel->getGuestAssessWithCondition(['user_id' => $id, 'status' => 'a']);
+		$userAssessments = $this->guestAssessmentModel->getGuestAssessWithCondition(['user_id' => $id, 'status' => 'a', 'func_action' => 1]);
 
 		if(!empty($userAssessments)){
 			foreach($userAssessments as $userAssessment){
@@ -496,7 +497,7 @@ class GuestAssessment extends BaseController
 			return redirect()->to(base_url('guest%20assessment'));
 		}
 		if ($checkUser == 1) {
-			$invalidFunctionAction = 0;
+			$invalidFunctionAction = 2;
 			$val_array_assess = [
 				'func_action' =>$invalidFunctionAction,
 			];

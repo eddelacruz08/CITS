@@ -48,7 +48,7 @@ class GuestAssessmentModel extends BaseModel
       LEFT JOIN reason_checklists rc ON rc.r_token = a.reason_checklist_token 
       LEFT JOIN reasons r ON r.id = rc.reason_id
       LEFT JOIN checklists c ON c.token = a.checklist_token 
-      WHERE a.status = 'a' AND a.func_action = 1 OR a.func_action = 2
+      WHERE a.status = 'a' AND a.func_action = 1
       ORDER BY a.created_date DESC";
 
       $query = $db->query($str);
@@ -74,7 +74,7 @@ class GuestAssessmentModel extends BaseModel
       LEFT JOIN reason_checklists rc ON rc.r_token = a.reason_checklist_token 
       LEFT JOIN reasons r ON r.id = rc.reason_id
       LEFT JOIN checklists c ON c.token = a.checklist_token 
-      WHERE a.status = 'a' AND a.func_action = 0
+      WHERE a.status = 'a' AND a.func_action = 0 OR a.func_action = 2
       ORDER BY a.created_date DESC";
 
       $query = $db->query($str);

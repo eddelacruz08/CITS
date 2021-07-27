@@ -155,7 +155,7 @@
             <br>
             <div class="row">
               <div class="col-6">
-                <h4><?= $function_title?></h4>
+                <h5><?= $function_title?></h5>
               </div>
               <div class="col-6">
                 <button type="button" class="btn btn-danger float-right btn-md" name="button" data-toggle="modal" data-target="#assessGenerateModal">
@@ -243,7 +243,7 @@
                           <td><?= $patient['email'] ?></td>
                           <td>
                               <?php if($patient['email_status']==1):?>
-                                  <span class="badge">Automatically sent email for guidelines.</span>
+                                  <span class="badge text-muted">Automatically sent email for guidelines.</span>
                               <?php else:?>
                                   <form action="<?= base_url() ?>guest%20assessment/<?='email_resend/'.$patient['id']?>" method="post">
                                       <input hidden type="text" name="email" value="<?= ucwords($patient['email'])?>">
@@ -258,9 +258,9 @@
                                   <span class="badge badge-danger">Reason requested: </span>
                                   <p><?= ucwords($patient['reason']) ?></p>
                               <?php elseif($patient['func_action'] == 2):?>
-                                  <span class="badge">System Cancelled Request.</span>
+                                  <span class="badge text-muted">Canceled a requested reason.</span>
                               <?php else:?>
-                                  <span class="badge">No reason request.</span>
+                                  <span class="badge text-muted">No reason request.</span>
                               <?php endif;?>
                           </td>
                           <td style="width:25%;"> 
@@ -271,7 +271,7 @@
                               <?php else:?>
                                   <!-- No Button For Invalidation -->
                               <?php endif;?>
-                              <button type="button" class="btn btn-outline-success success btn-md" data-toggle="modal" data-target="#assessment<?=$patient['id']?>">
+                              <button type="button" class="btn btn-outline-success success btn-md" data-toggle="modal" data-target="#assessmentAll<?=$patient['id']?>">
                                   <i class="fas fa-clipboard-check"></i> Check Data
                               </button>
                           </td>
@@ -549,6 +549,119 @@
                               <td class="text-center"><?= $cnt++;?></td>
                               <td colspan="1"><?= $question['q_five']?></td>
                               <td class="text-center"><?= strtoupper($patientRequest['q_five'])?></td>
+                            </tr>
+                          <?php endforeach; ?>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+                  </div>
+                  <!-- /.invoice -->
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+              <?php endif; ?>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+     <?php endforeach; ?>
+
+  <?php foreach ($guestsAssess as $patient): ?>
+  <!-- Start Guest Assessment Modal -->
+  <div class="modal fade" id="assessmentAll<?=$patient['id']?>">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <a href="<?= base_url()?>guest%20assessment/print-assess-guest/<?=$patient['id']?>" type="button" class="btn btn-outline-danger btn-md">
+                <i class="fas fa-file-pdf"></i> Print PDF
+              </a>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <?php if (empty($guestsAssess)): ?>
+                <p class="card-text text-center" style="font-style: italic;"><i class="fas fa-spinner"></i> None</p>
+              <?php else: ?>
+              <div class="row">
+                <div class="col-12">
+                  <!-- Main content -->
+                  <div class="invoice p-3 mb-3">
+                    <!-- title row -->
+                    <div class="row">
+                      <div class="col-12">
+                        <h4 class="modal-title text-center">Patient Assessment Information</h4>
+                        <hr>
+                        <h4>
+                          <i class="fas fa-user"></i> <?= ucwords($patient['firstname'].' '.$patient['middlename'].' '.$patient['lastname']) ?>
+                          <small class="float-right">Date: <?= date('m/d/Y', strtotime($patient['date']))?></small>
+                        </h4>
+                      </div>
+                      <!-- /.col -->
+                    </div>
+                    <!-- info row -->
+                    <div class="row invoice-info">
+                      <div class="col-sm-6 invoice-col">
+                        <address>
+                          <b>Address:</b> <?= ucwords($patient['address'].', '.$patient['city'].', '.$patient['province'].', '.$patient['postal'])?><br>
+                          <b>Phone:</b> <?= ucwords($patient['cellphone_no'])?><br>
+                          <b>Landline:</b> <?= ucwords($patient['landline_no'])?>
+                        </address>
+                      </div>
+                      <div class="col-sm-6 invoice-col">
+                        <address>
+                          <b>Gender:</b> <?= ucwords($patient['gender'])?><br>
+                          <b>Guest Type:</b> <?= ucwords($patient['guest_type'])?><br>
+                          <b>Email:</b> <?= $patient['email']?>
+                        </address>
+                      </div>
+                    </div>
+                    <!-- /.row -->
+
+                    <!-- Table row -->
+                    <div class="row">
+                      <div class="col-12 table-responsive">
+                        <table class="table table-striped">
+                          <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Questions</th>
+                            <th>Answers</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <?php $cnt = 1; ?>
+                          <?php foreach ($questions as $question): ?>
+                            <tr>
+                              <td class="text-center"><?= $cnt++;?></td>
+                              <td colspan="1"><?= $question['q_one']?></td>
+                              <td class="text-center"><?= strtoupper($patient['q_one'])?></td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><?= $cnt++;?></td>
+                              <td colspan="1"><?= $question['q_two']?></td>
+                              <td class="text-center"><?= strtoupper($patient['q_two'])?></td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><?= $cnt++;?></td>
+                              <td colspan="1"><?= $question['q_three']?></td>
+                              <td class="text-center"><?= strtoupper($patient['q_three'])?></td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><?= $cnt++;?></td>
+                              <td colspan="1"><?= $question['q_four']?></td>
+                              <td class="text-center"><?= strtoupper($patient['q_four'])?></td>
+                            </tr>
+                            <tr>
+                              <td class="text-center"><?= $cnt++;?></td>
+                              <td colspan="1"><?= $question['q_five']?></td>
+                              <td class="text-center"><?= strtoupper($patient['q_five'])?></td>
                             </tr>
                           <?php endforeach; ?>
                           </tbody>

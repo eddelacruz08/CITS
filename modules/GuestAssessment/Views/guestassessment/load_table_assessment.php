@@ -1,6 +1,6 @@
 
 <?php if(empty($requestguestsAssess)):?>
-    <p class="h5 text-center">No data available</p>
+    <p class="text-center text-muted">No data available</p>
 <?php else:?>
     <?php $cnt = 1; ?>
     <?php foreach($requestguestsAssess as $patientRequest): ?>
@@ -34,11 +34,11 @@
                     <span class="badge badge-danger">Reason requested: </span>
                     <p><?= ucwords($patientRequest['reason']) ?></p>
                 <?php elseif($patientRequest['func_action'] == 2):?>
-                    <span class="bell fa fa-bell"></span>
+                    <!-- <span class="bell fa fa-bell"></span>
                     <audio src="<?=base_url()?>public/css/notification_up.mp3" autoplay></audio>
                     <span class="badge badge-danger">Reason requested: </span>
-                    <p><?= ucwords($patientRequest['reason']) ?></p>
-                    <!-- <span class="badge">System Cancelled Request.</span> -->
+                    <p><?= ucwords($patientRequest['reason']) ?></p> -->
+                    <span class="badge">Canceled a requested reason.</span>
                 <?php else:?>
                     <span class="badge">No reason request.</span>
                 <?php endif;?>

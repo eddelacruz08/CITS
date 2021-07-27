@@ -10,7 +10,7 @@
         </a>
       </div>
       <div class="card-body" style="background-color: #ced1d6;">
-        <p class="h4 login-box-msg">Sign in</p>
+        <p class="h5 login-box-msg text-muted">Sign in</p>
         <?php if(isset($_SESSION['error_login'])): ?>
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
              <?= $_SESSION['error_login']; ?>
@@ -54,11 +54,11 @@
           </div>
         </form>
           <hr>
-        <p class="mb-1">
+        <p class="mb-1 text-muted">
           I forgot my password,
           <a href="<?= base_url() ?>login/forgotpassword"><em><u>here</u></em>.</a>
         </p>
-        <p class="mb-0">
+        <p class="mb-0 text-muted">
          Register a new membership,
           <a href="<?= base_url() ?>login/register" class="text-center"><em><u>here</u></em>.</a>
         </p>

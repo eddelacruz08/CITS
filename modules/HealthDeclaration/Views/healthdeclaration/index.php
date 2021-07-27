@@ -58,7 +58,7 @@
 <?php if(isset($latest_checklist_date[0]['status_defined']) == true && isset($latest_checklist_date[0]['date']) == date('Y-m-d')): ?>
     <div class="callout callout-danger">
       <h5 class="text-danger"><i class="fas fa-info"></i> Important Reminder:</h5>
-      <p class="h6">Your latest self-assessment tested positive for symtoms.</p>
+      <p class="h6">Your latest self-assessment tested positive for symptoms.</p>
       <p class="h5 text-danger"><em>Note: We regret to inform that you're <b><u>denied</u></b> to enter the premises of the university.</em><p>
     </div>
 <?php endif; ?>

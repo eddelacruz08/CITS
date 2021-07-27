@@ -6,7 +6,7 @@
         <a href="<?= base_url() ?>" class="h4"><b><?= SYSTEM_NAME ?></b></a>
       </div>
       <div class="card-body" style="background-color: #ced1d6;">
-        <p class="h4 text-center"><?= $function_title ?></p>
+        <p class="h5 text-center text-muted"><?= $function_title ?></p>
         <?php if(isset($success)): ?>
           <div class="alert alert-success alert-dismissible fade show" role="alert">
              <?= $success; ?>
@@ -262,7 +262,10 @@
             <!-- /.col -->
           </div>
         </form>
-        <a href="<?= base_url()?>" class="text-center">I already registered. Click here!</a>
+        <p class="mb-1 text-muted">
+          I already registered,
+          <a href="<?= base_url() ?>"><em><u>here</u></em>.</a>
+        </p>
       </div>
       <!-- /.form-box -->
     </div><!-- /.card -->
