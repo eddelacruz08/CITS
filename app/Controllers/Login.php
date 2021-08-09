@@ -90,14 +90,14 @@ class Login extends BaseController
 		if(!empty($_POST)){
 			if (!$this->validate('user')){
 				$data['errors'] = \Config\Services::validation()->getErrors();
-				$data['function_title'] = "Registration";
+				$data['function_title'] = "Registration Form";
 				$data['viewName'] = 'App\Views\register';
 				echo view('App\Views\outside_layout\index', $data);
 			}else{
 				$_POST['token'] = md5(str_shuffle('abcdefghijklmnopqrstuvwxyz'.time()));
 				unset($_POST['password_retype']);
 				if($model->addUsers($_POST)){
-					$data['function_title'] = "Registration";
+					$data['function_title'] = "Registration Form";
 					$data['success'] = 'You have successfuly registered!';
 					$data['viewName'] = 'App\Views\register';
 					echo view('App\Views\outside_layout\index', $data);
@@ -108,7 +108,7 @@ class Login extends BaseController
 				}
 			}
 		}else{
-			$data['function_title'] = "Registration";
+			$data['function_title'] = "Registration Form";
 			$data['viewName'] = 'App\Views\register';
 			echo view('App\Views\outside_layout\index', $data);
 		}

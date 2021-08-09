@@ -3,12 +3,12 @@
     <div class="card requesthealthform card-outline card-primary">
       <div class="card-header text-center">
         <img src="<?= base_url() ?>/public/img/LOGO_dark.png" alt="" width="50px">&nbsp
-        <a href="<?= base_url() ?>" class="h5">
+        <a href="<?php $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>" class="h5">
           <b><?= SYSTEM_NAME ?></b>
         </a>
       </div>
       <div class="card-body">
-        <center><h3>Health Declaration Form</h3><h6>(Requested Health Declaration Form)</h6></center>
+        <center><h4 class="mb-3">Health Declaration Form</h4></center>
         <?php if(isset($_SESSION['success_request'])): ?>
           <div class="alert alert-success alert-dismissible fade show" role="alert">
             <?= $_SESSION['success_request']; ?>

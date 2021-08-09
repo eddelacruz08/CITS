@@ -36,18 +36,25 @@
           overflow-y: scroll;
       }
     </style>
-    <style media="screen">
-    .wrapper {
-      zoom: .9;
-    }
-    <style media="screen">
 
-    .box{
-          display: none;
-          margin-left: 25px;
+    <style media="screen">
+      @media print {
+        .#print-btn{
+          display:none;
+        }
       }
-  .box label,.box input{
-          margin-left: 25px;
+      .wrapper {
+        zoom: .9;
+      }
+    </style>
+
+      <style media="screen">
+      .box{
+        display: none;
+        margin-left: 25px;
+      }
+      .box label,.box input{
+        margin-left: 25px;
       }
 
       .video{
@@ -183,39 +190,39 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                            <script src="<?= base_url() ?>public/js/qrcode.js"></script>
-                            <center>
-                              <div id="qrcode"></div>
-                              <h6><?= $profiles[0]['token']?></h6>
-                              <h5><?= ucwords($profiles[0]['firstname'].' '.$profiles[0]['lastname'])?></h5>
-                              <button class="btn btn-outline-dark mt-2" onclick="downLoadCode();">Download QR code</button>
-                            </center>
-                            <script>
-                                let qrcode = new QRCode("qrcode", {
-                                    text: "<?= $profiles[0]['token']?>",
-                                    width: 177,
-                                    height: 177,
-                                    colorDark : "#000000",
-                                    colorLight : "#ffffff",
-                                    correctLevel : QRCode.CorrectLevel.H
-                                });
-                                function downLoadCode(){
-                                    var img = $('#qrcode').children('img').attr("src");
-                                    var alink = document.createElement("a");
-                                    alink.href = img;
-                                      alink.download = "<?= date('F d, Y h:i:s')?>"+".png";
-                                    alink.click();
-                                  }
-                            </script>
-                  </div>
-                </div>
-              </div>
+              <script src="<?= base_url() ?>public/js/qrcode.js"></script>
+              <center>
+                <div id="qrcode"></div>
+                <h6><?= $profiles[0]['token']?></h6>
+                <h5><?= ucwords($profiles[0]['firstname'].' '.$profiles[0]['lastname'])?></h5>
+                <button class="btn btn-outline-dark mt-2" onclick="downLoadCode();">Download QR code</button>
+              </center>
+              <script>
+                  let qrcode = new QRCode("qrcode", {
+                      text: "<?= $profiles[0]['token']?>",
+                      width: 177,
+                      height: 177,
+                      colorDark : "#000000",
+                      colorLight : "#ffffff",
+                      correctLevel : QRCode.CorrectLevel.H
+                  });
+                  function downLoadCode(){
+                      var img = $('#qrcode').children('img').attr("src");
+                      var alink = document.createElement("a");
+                      alink.href = img;
+                        alink.download = "<?= date('F d, Y h:i:s')?>"+".png";
+                      alink.click();
+                    }
+              </script>
             </div>
           </div>
-      <?php endif;?>
-  <body class="hold-transition sidebar-mini layout-fixed hidePrint"style="background-color: #d9d9d9;">
-  <div class="wrapper"style="background-color: #d9d9d9;">
+        </div>
+      </div>
+    </div>
+  <?php endif;?>
 
+<body class="hold-transition sidebar-mini layout-fixed hidePrint"style="background-color: #d9d9d9;">
+  <div class="wrapper"style="background-color: #d9d9d9;">
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
       <!-- Left navbar links -->
@@ -234,18 +241,17 @@
           </a>
         </li>
       </ul>
-
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <!-- Navbar-->
         <ul class="navbar-nav ml-auto ml-md-0">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-user fa-fw"></i> Hi <?= ucwords($_SESSION['uname']) ?>!</a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                  <a class="dropdown-item" href="<?php echo base_url() ?>login/logout"><center><i class="fas fa-power-off"></i> Logout</center></a>
-                </div>
-            </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user fa-fw"></i> Hi <?= ucwords($_SESSION['uname']) ?>!</a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="<?php echo base_url() ?>login/logout"><center><i class="fas fa-power-off"></i> Logout</center></a>
+              </div>
+          </li>
         </ul>
       </ul>
     </nav>
@@ -310,7 +316,7 @@
     <!-- /.sidebar-custom -->
   </aside>
 
-      <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper"style="background-color: #d9d9d9;">
-        <div class="container-fluid" style="background-color: #d9d9d9;">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper"style="background-color: #d9d9d9;">
+    <div class="container-fluid" style="background-color: #d9d9d9;">
 

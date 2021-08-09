@@ -30,7 +30,7 @@
         <form action="<?= base_url() ?>" method="post">
           <!-- <label for="inputUsername">Email</label> -->
           <div class="input-group mb-2">
-            <input type="email" name="email" id="inputUsername" class="form-control" placeholder="Email" required autofocus>
+            <input type="email" name="email" id="inputUsername" onfocus="this.value=''" value="" class="form-control" placeholder="Email" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -39,7 +39,7 @@
           </div>
           <!-- <label for="inputPassword">Password</label> -->
           <div class="input-group mb-3" id="show_hide_password">
-            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+            <input type="password" class="form-control"  onfocus="this.value=''" value="" name="password" id="password" placeholder="Password" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <a class="a" href=""><i class="bi bi-eye-slash" aria-hidden="true"></i></a>

@@ -3,10 +3,13 @@
     <br>
     <div class="card register card-outline card-primary">
       <div class="card-header text-center">
-        <a href="<?= base_url() ?>" class="h4"><b><?= SYSTEM_NAME ?></b></a>
+        <img src="<?= base_url() ?>/public/img/LOGO_dark.png" alt="" width="50px">&nbsp
+        <a href="<?php $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>" class="h5">
+          <b><?= SYSTEM_NAME ?></b>
+        </a>
       </div>
       <div class="card-body" style="background-color: #ced1d6;">
-        <p class="h5 text-center text-muted"><?= $function_title ?></p>
+        <p class="h5 text-center"><?= $function_title ?></p>
         <?php if(isset($success)): ?>
           <div class="alert alert-success alert-dismissible fade show" role="alert">
              <?= $success; ?>
@@ -262,7 +265,7 @@
             <!-- /.col -->
           </div>
         </form>
-        <p class="mb-1 text-muted">
+        <p class="mb-1 text-muted text-center">
           I already registered,
           <a href="<?= base_url() ?>"><em><u>here</u></em>.</a>
         </p>

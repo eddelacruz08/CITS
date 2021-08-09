@@ -1,8 +1,9 @@
+<?php $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
   <body class="container" style="background-color: #e9ecef;">
     <br>
     <div class="card qrcodedisplay card-outline card-primary">
       <div class="card-header text-center">
-        <a href="<?= base_url() ?>" class="h4"><b><?= SYSTEM_NAME ?></b></a>
+        <a href="<?php $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>" class="h4"><b><?= SYSTEM_NAME ?></b></a>
       </div>
       <div class="card-body">
         <center><p class="h4">My Qr Code</p></center>

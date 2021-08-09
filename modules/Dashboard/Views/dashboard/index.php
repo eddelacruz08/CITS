@@ -2,21 +2,16 @@
 <br>
   <?php foreach ($student_total as $student){
     $student_count = $student['COUNT(u.id)'];
-  }
-  ?>
+  }?>
   <?php foreach ($faculty_total as $faculty){
     $faculty_count = $faculty['COUNT(u.id)'];
-  }
-  ?>
+  }?>
   <?php foreach ($employee_total as $employee){
     $employee_count = $employee['COUNT(u.id)'];
-  }
-  ?>
+  }?>
   <?php foreach ($outsider_total as $outsider){
     $outsider_count = $outsider['COUNT(u.id)'];
-  }
-  ?>
-
+  }?>
   <div class="card">
     <div class="card-body"style="padding: 20px;">
       <div class="row">
@@ -24,9 +19,9 @@
           <h4 class="text-dark"><i class="fas fa-tachometer-alt"> </i> <?=$function_title?> </h4>
         </div>
         <div class="col-md-6">
-        <button onclick="window.print();" type="button" class="btn float-right" id="print-btn">
-          <i class="fas fa-print"></i> Print Dashboard
-        </button>
+          <button onclick="window.print();" type="button" class="btn btn-outline-dark float-right" id="print-btn">
+            <i class="fas fa-print"></i> Print Dashboard
+          </button>
         </div>
       </div>
     </div>
@@ -118,12 +113,232 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <div class="chart" style="margin: 10px;">
-          <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+        <div class="card">
+          <div class="card-header border-0">
+            <div class="d-flex justify-content-between">
+              <h3 class="card-title">Guest Assessment Chart</h3>
+              <div class="d-flex flex-row justify-content-end">
+                <span class="mr-2">
+                  <i class="fas fa-square text-info"></i> This year
+                </span>
+                <span>
+                  <i class="fas fa-square text-gray"></i> Last year
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="position-relative mb-4">
+              <canvas id="assessment-chart" height="200"></canvas>
+            </div>
+          </div>
+        <div class="row text-center mb-3">
+          <?php foreach($getAssessmentMonthlyCount as $AssessmentMonthlyCount):?>
+          <div class="col-1">
+            <button type="button" class="btn btn-info" title="January" width="100%">
+              <label class="text-center">Jan</label>
+              <br>
+              <label class="text-center"><?=$AssessmentMonthlyCount['Jan'];?></label>
+            </button>
+          </div>
+          <div class="col-1">
+            <button type="button" class="btn btn-info" title="February" width="100%">
+              <label class="text-center">Feb</label>
+              <br>
+              <label class="text-center"><?=$AssessmentMonthlyCount['Feb'];?></label>
+            </button>
+          </div>
+          <div class="col-1">
+            <button type="button" class="btn btn-info" title="March" width="100%">
+              <label class="text-center">Mar</label>
+              <br>
+              <label class="text-center"><?=$AssessmentMonthlyCount['Mar'];?></label>
+            </button>
+          </div>
+          <div class="col-1">
+            <button type="button" class="btn btn-info" title="April" width="100%">
+              <label class="text-center">Apr</label>
+              <br>
+              <label class="text-center"><?=$AssessmentMonthlyCount['Apr'];?></label>
+            </button>
+          </div>
+          <div class="col-1">
+            <button type="button" class="btn btn-info" title="May" width="100%">
+              <label class="text-center">May</label>
+              <br>
+              <label class="text-center"><?=$AssessmentMonthlyCount['May'];?></label>
+            </button>
+          </div>
+          <div class="col-1">
+            <button type="button" class="btn btn-info" title="June" width="100%">
+              <label class="text-center">Jun</label>
+              <br>
+              <label class="text-center"><?=$AssessmentMonthlyCount['Jun'];?></label>
+            </button>
+          </div>
+          <div class="col-1">
+            <button type="button" class="btn btn-info" title="July" width="100%">
+              <label class="text-center">Jul</label>
+              <br>
+              <label class="text-center"><?=$AssessmentMonthlyCount['Jul'];?></label>
+            </button>
+          </div>
+          <div class="col-1">
+            <button type="button" class="btn btn-info" title="August" width="100%">
+              <label class="text-center">Aug</label>
+              <br>
+              <label class="text-center"><?=$AssessmentMonthlyCount['Aug'];?></label>
+            </button>
+          </div>
+          <div class="col-1">
+            <button type="button" class="btn btn-info" title="September" width="100%">
+              <label class="text-center">Sep</label>
+              <br>
+              <label class="text-center"><?=$AssessmentMonthlyCount['Sep'];?></label>
+            </button>
+          </div>
+          <div class="col-1">
+            <button type="button" class="btn btn-info" title="October" width="100%">
+              <label class="text-center">Oct</label>
+              <br>
+              <label class="text-center"><?=$AssessmentMonthlyCount['Oct'];?></label>
+            </button>
+          </div>
+          <div class="col-1">
+            <button type="button" class="btn btn-info" title="November" width="100%">
+              <label class="text-center">Nov</label>
+              <br>
+              <label class="text-center"><?=$AssessmentMonthlyCount['Nov'];?></label>
+            </button>
+          </div>
+          <div class="col-1">
+            <button type="button" class="btn btn-info" title="December" width="100%">
+              <label class="text-center">Dec</label>
+              <br>
+              <label class="text-center"><?=$AssessmentMonthlyCount['Dec'];?></label>
+            </button>
+          </div>
+          <?php endforeach;?>
         </div>
+        </div>
+        <!-- /.card -->
       </div>
     </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header border-0">
+            <div class="d-flex justify-content-between">
+              <h3 class="card-title">Guest Invalidation Chart</h3>
+              <div class="d-flex flex-row justify-content-end">
+                <span class="mr-2">
+                  <i class="fas fa-square text-warning"></i> This year
+                </span>
+                <span>
+                  <i class="fas fa-square text-gray"></i> Last year
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="position-relative mb-4">
+              <canvas id="invalidation-chart" height="200"></canvas>
+            </div>
+          </div>
+          <div class="row text-center mb-3">
+            <?php foreach($getInvalidatedMonthlyCount as $InvalidatedMonthlyCount):?>
+            <div class="col-1">
+              <button type="button" class="btn btn-warning" title="January">
+                <label class="text-center">Jan</label>
+                <br>
+                <label class="text-center"><?=$InvalidatedMonthlyCount['Jan'];?></label>
+              </button>
+            </div>
+            <div class="col-1">
+              <button type="button" class="btn btn-warning" title="February">
+                <label class="text-center">Feb</label>
+                <br>
+                <label class="text-center"><?=$InvalidatedMonthlyCount['Feb'];?></label>
+              </button>
+            </div>
+            <div class="col-1">
+              <button type="button" class="btn btn-warning" title="March">
+                <label class="text-center">Mar</label>
+                <br>
+                <label class="text-center"><?=$InvalidatedMonthlyCount['Mar'];?></label>
+              </button>
+            </div>
+            <div class="col-1">
+              <button type="button" class="btn btn-warning" title="April">
+                <label class="text-center">Apr</label>
+                <br>
+                <label class="text-center"><?=$InvalidatedMonthlyCount['Apr'];?></label>
+              </button>
+            </div>
+            <div class="col-1">
+              <button type="button" class="btn btn-warning" title="May">
+                <label class="text-center">May</label>
+                <br>
+                <label class="text-center"><?=$InvalidatedMonthlyCount['May'];?></label>
+              </button>
+            </div>
+            <div class="col-1">
+              <button type="button" class="btn btn-warning" title="June">
+                <label class="text-center">Jun</label>
+                <br>
+                <label class="text-center"><?=$InvalidatedMonthlyCount['Jun'];?></label>
+              </button>
+            </div>
+            <div class="col-1">
+              <button type="button" class="btn btn-warning" title="July">
+                <label class="text-center">Jul</label>
+                <br>
+                <label class="text-center"><?=$InvalidatedMonthlyCount['Jul'];?></label>
+              </button>
+            </div>
+            <div class="col-1">
+              <button type="button" class="btn btn-warning" title="August">
+                <label class="text-center">Aug</label>
+                <br>
+                <label class="text-center"><?=$InvalidatedMonthlyCount['Aug'];?></label>
+              </button>
+            </div>
+            <div class="col-1">
+              <button type="button" class="btn btn-warning" title="September">
+                <label class="text-center">Sep</label>
+                <br>
+                <label class="text-center"><?=$InvalidatedMonthlyCount['Sep'];?></label>
+              </button>
+            </div>
+            <div class="col-1">
+              <button type="button" class="btn btn-warning" title="October">
+                <label class="text-center">Oct</label>
+                <br>
+                <label class="text-center"><?=$InvalidatedMonthlyCount['Oct'];?></label>
+              </button>
+            </div>
+            <div class="col-1">
+              <button type="button" class="btn btn-warning" title="November">
+                <label class="text-center">Nov</label>
+                <br>
+                <label class="text-center"><?=$InvalidatedMonthlyCount['Nov'];?></label>
+              </button>
+            </div>
+            <div class="col-1">
+              <button type="button" class="btn btn-warning" title="December">
+                <label class="text-center">Dec</label>
+                <br>
+                <label class="text-center"><?=$InvalidatedMonthlyCount['Dec'];?></label>
+              </button>
+            </div>
+            <?php endforeach;?>
+          </div>
+        </div>
+      </div>
+      <!-- /.card -->
+    </div>
   </div>
+  <!-- /.card -->
 
   <div class="row">
     <div class="col-md-8">

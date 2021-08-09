@@ -533,6 +533,12 @@ class CreateProvinces extends \CodeIgniter\Database\Migration {
           'status' => 'a',
           'created_date' => date('y-m-d H:i:s')
         ],
+        [
+          'user_id' => '0',
+          'province' => 'Metro Manila',
+          'status' => 'a',
+          'created_date' => date('y-m-d H:i:s')
+        ],
       ];
 
       $db      = \Config\Database::connect();

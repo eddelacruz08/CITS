@@ -55,7 +55,7 @@ class CreateCities extends \CodeIgniter\Database\Migration {
           ],
           [
             'user_id' => '0',
-            'city' => 'Angeles',
+            'city' => 'Angeles City',
             'status' => 'a',
             'created_date' => date('y-m-d H:i:s')
           ],
@@ -367,37 +367,25 @@ class CreateCities extends \CodeIgniter\Database\Migration {
           ],
           [
             'user_id' => '0',
-            'city' => 'Alaminos',
+            'city' => 'Iloilo City',
             'status' => 'a',
             'created_date' => date('y-m-d H:i:s')
           ],
           [
             'user_id' => '0',
-            'city' => 'Alaminos',
+            'city' => 'Imus',
             'status' => 'a',
             'created_date' => date('y-m-d H:i:s')
           ],
           [
             'user_id' => '0',
-            'city' => 'Alaminos',
+            'city' => 'Iriga',
             'status' => 'a',
             'created_date' => date('y-m-d H:i:s')
           ],
           [
             'user_id' => '0',
-            'city' => 'Alaminos',
-            'status' => 'a',
-            'created_date' => date('y-m-d H:i:s')
-          ],
-          [
-            'user_id' => '0',
-            'city' => 'Alaminos',
-            'status' => 'a',
-            'created_date' => date('y-m-d H:i:s')
-          ],
-          [
-            'user_id' => '0',
-            'city' => 'Isabela City',
+            'city' => 'Isabela',
             'status' => 'a',
             'created_date' => date('y-m-d H:i:s')
           ],
