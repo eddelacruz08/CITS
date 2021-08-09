@@ -18,6 +18,48 @@ class VisitsModel extends BaseModel
         return $this->findAll();
     }
 
+    public function getTotalVisitPerDay(){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT v.*, COUNT(v.id) AS totalVisits
+              FROM visits v 
+              WHERE v.date = CURDATE() AND v.status = 'a' 
+              ORDER BY v.created_date desc";
+
+      $query = $db->query($str);
+
+      return $query->getResultArray();
+    }
+
+    public function getTotalVisitActivePerDay(){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT v.*, COUNT(v.id) as activeVisits
+              FROM visits v 
+              WHERE v.date = CURDATE() AND v.status = 'a' AND v.updated_date is null
+              ORDER BY v.created_date desc";
+
+      $query = $db->query($str);
+
+      return $query->getResultArray();
+    }
+    
+    public function getTotalVisits(){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT v.*, COUNT(v.id) as totalVisits
+              FROM visits v 
+              WHERE v.status = 'a'
+              ORDER BY v.created_date desc";
+
+      $query = $db->query($str);
+
+      return $query->getResultArray();
+    }
+
     public function getVisitDate($date){
 
       $db = \Config\Database::connect();

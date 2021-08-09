@@ -170,8 +170,8 @@ class Validation
 			'label'  => 'Email',
 			'rules'  => 'required',
 		],
-		'reason_id' => [
-			'label'  => 'Reason',
+		'form_id' => [
+			'label'  => 'Form',
 			'rules'  => 'required',
 		],
 		'r_q_one' => [

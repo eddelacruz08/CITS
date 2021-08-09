@@ -1,5 +1,66 @@
 <br>
   <?php $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
+    <div class="card card-primary card-outline">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="col-md-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-users"></i></span>
+                <div class="info-box-content">
+                  <?php foreach($activeVisits as $activeVisit):?>
+                    <span class="info-box-number h1 text-muted">
+                      <?= $activeVisit['activeVisits']; ?>
+                    </span>
+                  <?php endforeach;?>
+                  <span class="info-box-text">Active Visits</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="info-box">
+                  <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-users"></i></span>
+                  <div class="info-box-content">
+                    <?php foreach($totalVisitsPerDay as $totalVisit):?>
+                      <span class="info-box-number h1 text-muted">
+                        <?= $totalVisit['totalVisits']; ?>
+                      </span>
+                    <?php endforeach;?>
+                    <span class="info-box-text">Total Visits of <?=date('F d, Y')?></span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="info-box">
+                  <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
+                  <div class="info-box-content">
+                    <?php foreach($totalVisits as $totalVisit):?>
+                      <span class="info-box-number h1 text-muted">
+                        <?= $totalVisit['totalVisits']; ?>
+                      </span>
+                    <?php endforeach;?>
+                    <span class="info-box-text">Total Visits</span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="card card-primary card-outline card-outline-tabs">
       <div class="card-header p-0 border-bottom-0">
         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
@@ -68,7 +129,7 @@
                     <th>Guest Type</th>
                     <th>Login</th>
                     <th>Logout</th>
-                    <th>No. of Hours</th>
+                    <th>Duration</th>
                     <th>Show Info</th>
                   </tr>
                 </thead>
@@ -166,7 +227,7 @@
                     <th>Guest Type</th>
                     <th>Login</th>
                     <th>Logout</th>
-                    <th>No. of Hours</th>
+                    <th>Duration</th>
                     <th>Show Info</th>
                   </tr>
                 </thead>

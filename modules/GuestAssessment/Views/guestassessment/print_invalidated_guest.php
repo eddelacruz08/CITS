@@ -62,12 +62,6 @@
                 <td width="70%"><?= $question['q_five']?></td>
                 <td align="center" width="20%"><?= ucfirst($patient['r_q_five'])?></td>
             </tr>
-            <tr>
-                <td width="100%">
-                    <span style="font-weight: bold;">Reason:</span>
-                    <span><?= ucfirst($patient['reason'])?></span>
-                </td>
-            </tr>
         <?php endforeach; ?>
         </tbody>
     </table>

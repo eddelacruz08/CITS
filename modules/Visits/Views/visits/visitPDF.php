@@ -9,7 +9,7 @@
                 <th width="15%"><b>GuestType</b></th>
                 <th width="15%"><b>Timein</b></th>
                 <th width="15%"><b>Timeout</b></th>
-                <th width="15%"><b>No. of hours</b></th>
+                <th width="15%"><b>Duration</b></th>
             </tr>
         </thead>
         <tbody>

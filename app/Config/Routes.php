@@ -82,7 +82,6 @@ $routes->setAutoRoute(true);
 
 $routes->group('health-declaration-form', function($routes)
 {
-    $routes->match(['get', 'post'], 'healthform', 'HealthDeclaration::healthform');
     $routes->match(['get', 'post'], 'requesthealthform', 'HealthDeclaration::requesthealthform');
 });
 

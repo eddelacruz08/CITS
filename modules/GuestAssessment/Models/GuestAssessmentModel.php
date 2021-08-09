@@ -170,7 +170,7 @@ class GuestAssessmentModel extends BaseModel
       $db = \Config\Database::connect();
 
       $str = "SELECT a.*, g.firstname, g.middlename, g.lastname,
-      g.cellphone_no, gen.gender, t.guest_type, 
+      g.cellphone_no, g.email, gen.gender, t.guest_type, 
       c.r_q_one, c.r_q_two, c.r_q_three, c.r_q_four, c.r_q_five, c.r_status_defined,
       r.reason
       FROM invalid_guests a 
@@ -192,7 +192,7 @@ class GuestAssessmentModel extends BaseModel
       $db = \Config\Database::connect();
 
       $str = "SELECT a.*, g.firstname, g.middlename, g.lastname,
-      g.cellphone_no, gen.gender, t.guest_type, 
+      g.cellphone_no, g.email, gen.gender, t.guest_type, 
       c.r_q_one, c.r_q_two, c.r_q_three, c.r_q_four, c.r_q_five, c.r_status_defined,
       r.reason
       FROM invalid_guests a 

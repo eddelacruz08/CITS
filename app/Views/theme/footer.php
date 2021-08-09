@@ -1,140 +1,164 @@
     </div>
   </div>
-<!-- /.content-wrapper -->
-<!-- <footer class="main-footer noPrint" id="print-btn">
-  <strong>All Right Reserved &copy; 2020-2021 <a href="#">United Coders Dev Team 2020</a>.</strong>
 
-  <div class="float-right d-none d-sm-inline-block noPrint">
-    <b>Version</b> 1.0.0
-  </div>
-</footer> -->
+  <script src="<?= base_url() ?>public/js/jquery.min.js"></script>
+  <script src="<?= base_url() ?>public/js/bootstrap.bundle.min.js"></script>
+  <script src="<?= base_url() ?>public/js/Chart.min.js"></script>
+  <script src="<?= base_url() ?>public/dist/js/adminlte.min.js"></script>
+  <script src="<?= base_url() ?>public/js/moment.min.js"></script>
+  <script src="<?= base_url() ?>public/plugins/moment/moment-with-locales.js"></script>
+  <script src="<?= base_url() ?>public/js/popper.min.js"></script>
+  <script src="<?= base_url() ?>public/js/bootstrap.min.js"></script>
+  <script src="<?= base_url() ?>public/js/scripts.js"></script>
+  <script src="<?= base_url() ?>public/js/sweetalert2@9.js"></script>
+  <script src="<?= base_url() ?>public/DataTables/js/jquery.dataTables.min.js"></script>
+  <script src="<?= base_url() ?>public/DataTables/js/dataTables.bootstrap4.min.js"></script>
+  <script src="<?= base_url() ?>public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="<?= base_url() ?>public/chart/utils.js"></script>
+  <script src="<?= base_url() ?>public/js/myJavascript.js"></script>
+  <script src="<?= base_url() ?>public/js/user_profile.js"></script>
+  <script src="<?= base_url() ?>public/js/loader.js"></script>
+  <script src="<?= base_url() ?>public/plugins/summernote/summernote-bs4.min.js"></script>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <!-- <script src="<?= base_url() ?>/public/js/jquery-3.3.1.slim.min.js"></script> -->
-
-    <script src="<?= base_url() ?>public/js/jquery.min.js"></script>
-    <script src="<?= base_url() ?>public/dist/js/adminlte.min.js"></script>
-    <script src="<?= base_url() ?>public/plugins/chart.js/Chart.min.js"></script>
-    <script src="<?= base_url() ?>public/js/moment.min.js"></script>
-    <script src="<?= base_url() ?>public/plugins/daterangepicker/daterangepicker.js"></script>
-    <script src="<?= base_url() ?>public/plugins/moment/moment-with-locales.js"></script>
-    <script src="<?= base_url() ?>public/plugins/select2/js/select2.full.min.js"></script>
-    <script>
-      $(function () {
-        //Initialize Select2 Elements
-        $('.select2bs4').select2({
-          theme: 'bootstrap4'
-        })
-      })
-    </script>
-    <script type="text/javascript">
-      var baseURL = "<?php echo base_url(); ?>";
-    </script>
-    <script src="<?= base_url() ?>public/js/popper.min.js"></script>
-    <script src="<?= base_url() ?>public/js/bootstrap.min.js"></script>
-    <script src="<?= base_url() ?>public/js/scripts.js"></script>
-    <script src="<?= base_url() ?>public/js/sweetalert2@9.js"></script>
-    <script src="<?= base_url() ?>public/js/select2.min.js"></script>
-    <script src="<?= base_url() ?>public/chart/Chart.min.js"></script>
-    <script src="<?= base_url() ?>public/DataTables/js/jquery.dataTables.min.js"></script>
-    <script src="<?= base_url() ?>public/DataTables/js/dataTables.bootstrap4.min.js"></script>
-    <script src="<?= base_url() ?>public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <script src="<?= base_url() ?>public/chart/utils.js"></script>
-    <script src="<?= base_url() ?>public/js/myAlerts.js"></script>
-
-    <script src="<?= base_url() ?>public/js/select2.full.min.js"></script>
-    <script src="<?= base_url() ?>public/js/myJavascript.js"></script>
-    <script src="<?= base_url() ?>public/js/user_profile.js"></script>
-    <script src="<?= base_url() ?>public/js/loader.js"></script>
-    <script src="<?= base_url() ?>public/plugins/summernote/summernote-bs4.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-
-    <script>
-      $(document).ready(function(){
-          refresh();
-      });
-      function refresh(){
-          setTimeout(function(){
-              $('#load_table_assessment').load('<?= base_url()?>guest%20assessment/load_table_assessment');
-              refresh();
-          }, 2000);
-      }
-    </script>
-    <script>
-      $(function () {
-        $('#summernote').summernote()
-      })
-    </script>
-    <script>
-      $(function() {
-        var Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          // background: '#E3E3E3',
-          showConfirmButton: false,
-          timer: 5000
-        });
-
-        $('.swalDefaultError').click(function() {
-          Toast.fire({
-            icon: 'error',
-            title: '<p class="text-dark" style="font-size:13px;">Your Qr Code is unavailable because your latest assessment was defined on symptoms.</p>'
-          })
-        });
-        $('.swalAssessmentError').click(function() {
-          Toast.fire({
-            icon: 'error',
-            title: '<p class="text-dark" style="font-size:13px;">You cannot take self-assessment. Please try tommorrow.</p>'
-          })
-        });
-      });
-    </script>
-
-    <script>
-      $(".multiple-select").select2({
-        // maximumSelectionLength: 2
-      });
-    </script>
-
-    <script>
-    $(document).ready(function(){
-      $('input[type="radio"]').click(function(){
-          var inputValue = $(this).attr("id");
-          var targetBox = $("." + inputValue);
-          $(".box").not(targetBox).hide();
-          $(targetBox).show();
-          });
-      });
-      $(document).ready(function(){
-      $('input[type="radio"]').click(function(){
-          var inputValue = $(this).attr("id");
-          var targetBox = $("." + inputValue);
-          $(".box2").not(targetBox).hide();
-          $(targetBox).show();
-          });
-      });
-        $(document).ready(function() {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-
-        $(document).ready(function() {
-            $('.js-example-basic-multiple').select2();
-        });
-
-        $(document).ready(function() {
-            $('.index-table').DataTable({
-            });
-        });
-
-    </script>
-    <script>
+  <script>
+      <?php if(isset($getAssessmentMonthlyCount)):?>
     $(function () {
-      /* ChartJS
-      * -------
-      * Here we will create a few charts using ChartJS
-      */
+      var areaChartData = {
+        labels  : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [
+          {
+            label               : 'Guest Assessment',
+            backgroundColor     : '#17a2b8',
+            borderColor         : '#17a2b8',
+            pointRadius          : false,
+            pointColor          : '#17a2b8',
+            pointStrokeColor    : '#17a2b8',
+            pointHighlightFill  : '#17a2b8',
+            pointHighlightStroke: '#17a2b8',
+            data                : [
+            <?php foreach($getAssessmentMonthlyCount as $AssessmentMonthlyCount):?>
+              <?=$AssessmentMonthlyCount['Jan'];?>,
+              <?=$AssessmentMonthlyCount['Feb'];?>,
+              <?=$AssessmentMonthlyCount['Mar'];?>,
+              <?=$AssessmentMonthlyCount['Apr'];?>,
+              <?=$AssessmentMonthlyCount['May'];?>,
+              <?=$AssessmentMonthlyCount['Jun'];?>,
+              <?=$AssessmentMonthlyCount['Jul'];?>,
+              <?=$AssessmentMonthlyCount['Aug'];?>,
+              <?=$AssessmentMonthlyCount['Sep'];?>,
+              <?=$AssessmentMonthlyCount['Oct'];?>,
+              <?=$AssessmentMonthlyCount['Nov'];?>,
+              <?=$AssessmentMonthlyCount['Dec'];?>,
+            <?php endforeach;?>
+            ]
+          },
+          {
+            label               : 'Guest Invalidated',
+            backgroundColor     : '#ffc107 ',
+            borderColor         : '#ffc107 ',
+            pointRadius         : false,
+            pointColor          : '#ffc107 ',
+            pointStrokeColor    : '#ffc107 ',
+            pointHighlightFill  : '#17a2b8',
+            pointHighlightStroke: '#ffc107 ',
+            data                : [
+      <?php if(isset($getInvalidatedMonthlyCount)):?>
+            <?php foreach($getInvalidatedMonthlyCount as $InvalidatedMonthlyCount):?>
+              <?=$InvalidatedMonthlyCount['Jan'];?>,
+              <?=$InvalidatedMonthlyCount['Feb'];?>,
+              <?=$InvalidatedMonthlyCount['Mar'];?>,
+              <?=$InvalidatedMonthlyCount['Apr'];?>,
+              <?=$InvalidatedMonthlyCount['May'];?>,
+              <?=$InvalidatedMonthlyCount['Jun'];?>,
+              <?=$InvalidatedMonthlyCount['Jul'];?>,
+              <?=$InvalidatedMonthlyCount['Aug'];?>,
+              <?=$InvalidatedMonthlyCount['Sep'];?>,
+              <?=$InvalidatedMonthlyCount['Oct'];?>,
+              <?=$InvalidatedMonthlyCount['Nov'];?>,
+              <?=$InvalidatedMonthlyCount['Dec'];?>,
+            <?php endforeach;?>
+      <?php endif;?>
+            ]
+          },
+        ]
+      }
 
+      //-------------
+      //- BAR CHART -
+      //-------------
+      var barChartCanvas = $('#barChart').get(0).getContext('2d')
+      var barChartData = $.extend(true, {}, areaChartData)
+      var temp0 = areaChartData.datasets[0]
+      var temp1 = areaChartData.datasets[1]
+      barChartData.datasets[0] = temp1
+      barChartData.datasets[1] = temp0
+
+      var barChartOptions = {
+        responsive              : true,
+        maintainAspectRatio     : false,
+        datasetFill             : false
+      }
+
+      new Chart(barChartCanvas, {
+        type: 'bar',
+        data: barChartData,
+        options: barChartOptions
+      })
+    })
+      <?php endif;?>
+  </script>
+
+  <script>
+    $(document).ready(function(){
+        refresh();
+    });
+    function refresh(){
+        setTimeout(function(){
+            $('#load_table_assessment').load('<?= base_url()?>guest%20assessment/load_table_assessment').fadeIn("slow");
+            refresh();
+        }, 2000);
+    }
+  </script>
+
+  <script>
+    $(function () {
+      $('#summernote').summernote()
+    })
+  </script>
+
+  <script>
+    $(function() {
+      var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 5000
+      });
+
+      $('.swalDefaultError').click(function() {
+        Toast.fire({
+          icon: 'error',
+          title: '<p class="text-dark" style="font-size:13px;">Your Qr Code is unavailable because your latest assessment was defined on symptoms.</p>'
+        })
+      });
+      $('.swalAssessmentError').click(function() {
+        Toast.fire({
+          icon: 'error',
+          title: '<p class="text-dark" style="font-size:13px;">You cannot take self-assessment. Please try tommorrow.</p>'
+        })
+      });
+    });
+  </script>
+  
+  <script>
+      $(document).ready(function() {
+          $('.index-table').DataTable({
+          });
+      });
+  </script>
+
+  <script>
+    $(function () {
       //-------------
       //- PIE CHART -
       //-------------
@@ -344,32 +368,19 @@
         <?php if (isset($outsider_male)): ?>
         var donutChartCanvas = $('#donutChart4').get(0).getContext('2d')
         var donutData        = {
-          labels: [
-              'Male',
-              'Female'
-          ],
-          datasets: [
-            {
+          labels: ['Male', 'Female'],
+          datasets: [{
               data: [
-                <?php
-                foreach ($outsider_male as $male) {
-                  ?>
+                <?php foreach ($outsider_male as $male) { ?>
                     <?php echo ucwords($male['COUNT(u.id)']) ?>,
-                  <?php
-                }
-                ?>
-                <?php
-                foreach ($outsider_female as $female) {
-                  ?>
+                  <?php } ?>
+                <?php foreach ($outsider_female as $female) { ?>
                     <?php echo ucwords($female['COUNT(u.id)']) ?>
-                  <?php
-                }
-                ?>
+                  <?php } ?>
               ],
               backgroundColor : ['#00c0ef', '#f56954'],
             }
-          ]
-        }
+          ]}
         var donutOptions     = {
           maintainAspectRatio : false,
           responsive : true,
@@ -383,8 +394,7 @@
         })
         <?php endif; ?>
       })
-    </script>
-
+  </script>
 
   </body>
 </html>

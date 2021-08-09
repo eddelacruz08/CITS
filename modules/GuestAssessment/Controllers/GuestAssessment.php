@@ -530,7 +530,6 @@ class GuestAssessment extends BaseController
 				$this->guestAssessmentModel->edit_assess($_POST, $id);
 				$_SESSION['success'] = 'You successfully resend email for guidelines.';
 				$this->session->markAsFlashdata('success');
-				return redirect()->to(base_url('guest%20assessment'));
 			}
 			return redirect()->to(base_url('guest%20assessment'));
 		}

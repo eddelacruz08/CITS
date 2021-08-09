@@ -23,6 +23,9 @@ class Visits extends BaseController
 		$data['visits'] = $this->visitsModel->getVisitActive();
 		$data['visitDate'] = $this->visitsModel->getVisitDatePrint();
 		$data['visitsHistory'] = $this->visitsModel->getVisitHistory();
+		$data['totalVisitsPerDay'] = $this->visitsModel->getTotalVisitPerDay();
+		$data['activeVisits'] = $this->visitsModel->getTotalVisitActivePerDay();
+		$data['totalVisits'] = $this->visitsModel->getTotalVisits();
 		$data['function_title'] = "Active Visit List";
 		$data['function_title_history'] = "Visits History";
 		$data['viewName'] = 'Modules\Visits\Views\visits\index';

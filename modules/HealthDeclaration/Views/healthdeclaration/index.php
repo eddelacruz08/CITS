@@ -167,9 +167,6 @@
                                 <?php else:?>
                                   <label class="text-success"> | No Symptoms</label>
                                 <?php endif;?>
-                                <br>
-                                <label>Reason: </label>
-                                <span><?= $reason['reason']?></span>
                               </div>
                               <div class="col-5">
                                 <a class="btn btn-link float-right" type="button" data-toggle="modal" data-target="#myModalsReason<?= $reason['id']?>">
@@ -223,16 +220,6 @@
                       <?php endif;?>
                     </div>
                     <!-- /.timeline-label --> 
-                    <!-- timeline item -->
-                    <div>
-                      <div class="timeline-item">
-                        <div class="timeline-body">
-                          <label>Reason: </label>
-                          <span><?=$reason['reason']?></span>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- END timeline item -->
                     <!-- timeline item -->
                     <div>
                       <div class="timeline-item">

@@ -225,7 +225,8 @@
                     <th>Full Name</th>
                     <th>Email</th>
                     <th>Email Guidelines</th>
-                    <th>Reason request</th>
+                    <th>Invalidation request</th>
+                    <th>Date</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -258,12 +259,13 @@
                                   <span class="badge badge-danger">Reason requested: </span>
                                   <p><?= ucwords($patient['reason']) ?></p>
                               <?php elseif($patient['func_action'] == 2):?>
-                                  <span class="badge text-muted">Canceled a requested reason.</span>
+                                  <span class="badge text-muted">Canceled a request.</span>
                               <?php else:?>
-                                  <span class="badge text-muted">No reason request.</span>
+                                  <span class="badge text-muted">No request.</span>
                               <?php endif;?>
                           </td>
-                          <td style="width:25%;"> 
+                          <td><?= date('F d, Y', strtotime($patient['created_date']))?></td>
+                          <td> 
                               <?php if($patient['func_action'] == 1):?>
                                   <a href="#invalidateModal<?=$patient['id']?>" class="btn btn-outline-danger" data-toggle="modal">
                                       <i class="fas fa-exclamation-circle"></i> Invalidate
@@ -355,7 +357,7 @@
                   <th>Full Name</th>
                   <th>Guest Type</th>
                   <th>Gender</th>
-                  <th>Reason</th>
+                  <th>Date</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -367,7 +369,7 @@
                   <td><?= ucwords($invalidatedGuest['firstname'].' '.$invalidatedGuest['middlename'].' '.$invalidatedGuest['lastname']) ?></td>
                   <td><?= ucwords($invalidatedGuest['guest_type']) ?></td>
                   <td><?= ucfirst($invalidatedGuest['gender']) ?></td>
-                  <td><?= ucfirst($invalidatedGuest['reason']) ?></td>
+                  <td><?= date('F d, Y h:i a', strtotime($invalidatedGuest['created_date']))?></td>
                   <td>
                     <button type="button" class="btn btn-outline-info btn-md" data-toggle="modal" data-target="#invalidated<?=$invalidatedGuest['id']?>">
                       <i class="fas fa-clipboard-check"></i> Check Info
@@ -448,7 +450,7 @@
                     <button type="submit" class="btn btn-md btn-success success">Invalidate Request</button>
                   </a>
                   <a href="<?=base_url().'guest%20assessment/denied-invalidate-guest/'.$patientRequest['user_id'].'/'.$patientRequest['checklist_token']?>">
-                    <button type="submit" class="btn btn-md btn-danger">Cancel Invalidation Request</button>
+                    <button type="submit" class="btn btn-md btn-danger">Cancel Request</button>
                   </a>
                 </div>
               </div>
@@ -713,7 +715,7 @@
                         <hr>
                         <h4>
                           <i class="fas fa-user"></i> <?= ucwords($invalidatedGuest['firstname'].' '.$invalidatedGuest['middlename'].' '.$invalidatedGuest['lastname']) ?>
-                          <small class="float-right">Date: <?= date('m/d/Y')?></small>
+                          <small class="float-right">Date: <?= date('m/d/Y', strtotime($invalidatedGuest['date']))?></small>
                         </h4>
                       </div>
                       <!-- /.col -->
@@ -737,13 +739,13 @@
                     </div>
                     <!-- /.row -->
                     <!-- info row -->
-                    <div class="row invoice-info">
+                    <!-- <div class="row invoice-info">
                       <div class="col-sm-12 invoice-col">
                         <address>
                           <b>Invalidated Reason:</b> <?= ucwords($invalidatedGuest['reason'])?>
                         </address>
                       </div>
-                    </div>
+                    </div> -->
                     <!-- /.row -->
 
                     <!-- Table row -->

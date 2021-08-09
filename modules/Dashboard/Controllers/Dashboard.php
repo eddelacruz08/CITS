@@ -5,6 +5,7 @@ use Modules\UserManagement\Models\UsersModel;
 use Modules\Dashboard\Models\DashboardModel;
 use Modules\Visits\Models\ChecklistModel;
 use Modules\Guests\Models\GuestsModel;
+use Modules\GuestAssessment\Models\GuestAssessmentModel;
 use App\Controllers\BaseController;
 
 class Dashboard extends BaseController
@@ -14,33 +15,42 @@ class Dashboard extends BaseController
 		parent:: __construct();
 		$permissions_model = new PermissionsModel();
 		$this->permissions = $permissions_model->getPermissionsWithCondition(['status' => 'a']);
-
+		$this->usersModel = new UsersModel();
+		$this->guestAssessmentModel = new DashboardModel();
 	}
 	public function index(){
 		$this->hasPermissionRedirect('dashboard');
 		$data['function_title'] = "Dashboard";
-		$model = new UsersModel();
-		$data['user_total'] = $model->getUsersTotal();
+
+		$data['totalAssessPerDays'] = $this->guestAssessmentModel->getTotalAssessPerDay();
+		$data['totalInvalidatedPerDays'] = $this->guestAssessmentModel->getTotalInvalidatedPerDay();
+		$data['totalAssessments'] = $this->guestAssessmentModel->getTotalGuestAssessment();
+		$data['totalInvalidated'] = $this->guestAssessmentModel->getTotalGuestInvalidated();
+		/* stack bar chart */
+		$data['getAssessmentMonthlyCount'] = $this->guestAssessmentModel->getAssessmentMonthlyCount();
+		$data['getInvalidatedMonthlyCount'] = $this->guestAssessmentModel->getInvalidatedMonthlyCount();
+
+		$data['user_total'] = $this->usersModel->getUsersTotal();
 		/////////// student //////////////////////////////
-		$data['student_total'] = $model->getStudentTotal();
-		$data['student_male'] = $model->getStudentMale();
-		$data['student_female'] = $model->getStudentFemale();
+		$data['student_total'] = $this->usersModel->getStudentTotal();
+		$data['student_male'] = $this->usersModel->getStudentMale();
+		$data['student_female'] = $this->usersModel->getStudentFemale();
 		/////////// outsider //////////////////////////////
-		$data['faculty_total'] = $model->getFacultyTotal();
-		$data['faculty_male'] = $model->getFacultyMale();
-		$data['faculty_female'] = $model->getFacultyFemale();
+		$data['faculty_total'] = $this->usersModel->getFacultyTotal();
+		$data['faculty_male'] = $this->usersModel->getFacultyMale();
+		$data['faculty_female'] = $this->usersModel->getFacultyFemale();
 		/////////// faculty //////////////////////////////
-		$data['employee_total'] = $model->getEmployeeTotal();
-		$data['employee_male'] = $model->getEmployeeMale();
-		$data['employee_female'] = $model->getEmployeeFemale();
+		$data['employee_total'] = $this->usersModel->getEmployeeTotal();
+		$data['employee_male'] = $this->usersModel->getEmployeeMale();
+		$data['employee_female'] = $this->usersModel->getEmployeeFemale();
 		/////////// outsider //////////////////////////////
-		$data['outsider_total'] = $model->getOutsiderTotal();
-		$data['outsider_male'] = $model->getOutsiderMale();
-		$data['outsider_female'] = $model->getOutsiderFemale();
+		$data['outsider_total'] = $this->usersModel->getOutsiderTotal();
+		$data['outsider_male'] = $this->usersModel->getOutsiderMale();
+		$data['outsider_female'] = $this->usersModel->getOutsiderFemale();
 		///////////// patient defined List//////////////////////////////
-		$data['guest_defined_list'] = $model->getGuestDefinedList();
+		$data['guest_defined_list'] = $this->usersModel->getGuestDefinedList();
 		// /////////// patient assess List//////////////////////////////
-		$data['patient_assess_list'] = $model->getPatientAssessList();
+		$data['patient_assess_list'] = $this->usersModel->getPatientAssessList();
 		$data['viewName'] = 'Modules\Dashboard\Views\dashboard\index';
 		echo view('theme\index', $data);
   	}

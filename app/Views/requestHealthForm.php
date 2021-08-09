@@ -8,7 +8,7 @@
         </a>
       </div>
       <div class="card-body">
-        <center><h3>Health Declaration Form</h3><h6>(Requested Form For Reason)</h6></center>
+        <center><h3>Health Declaration Form</h3><h6>(Requested Health Declaration Form)</h6></center>
         <?php if(isset($_SESSION['success_request'])): ?>
           <div class="alert alert-success alert-dismissible fade show" role="alert">
             <?= $_SESSION['success_request']; ?>
@@ -38,7 +38,7 @@
                     <div class="custom-control custom-checkbox">
                       <input class="custom-control-input" type="checkbox" id="chkShowHide" onclick="ShowHideDiv(this)">
                       <label for="chkShowHide" class="custom-control-label">
-                        I herby certify that all information is true and complete. I understand that my failure to answer, or any false or misleading information given by me may be used as a ground for my serious consequence.
+                        I hereby certify that all information is true and complete. I understand that my failure to answer, or any false or misleading information given by me may be used as a ground for my serious consequence.
                       </label>
                     </div>
                   </div>
@@ -58,16 +58,15 @@
                         <?php endif; ?>
                       </div>
                       <div class="col-6">
-                        <label for="reason_id">Reason for wrong self-assessment.</label>
-                        <select type="text" class="form-select" name="reason_id" id="reason_id">
-                          <option selected disabled>-- Select Reason --</option>
-                          <?php foreach ($reasons as $reason): ?>
-                          <option value="<?=$reason['id']?>"><?=$reason['reason']?></option>
-                          <?php endforeach; ?>
+                        <label for="form_id">Select Health Declaration Form.</label>
+                        <select type="text" class="form-select" name="form_id" id="form_id" required>
+                          <option selected disabled>-- Select Form --</option>
+                          <option value="1">Take Health Declaration</option>
+                          <option value="2">Request Invalidation Health Declaration</option>
                         </select>
-                        <?php if (isset($errors['reason_id'])): ?>
+                        <?php if (isset($errors['form_id'])): ?>
                           <div class="text-danger">
-                            <?= $errors['reason_id']?>
+                            <?= $errors['form_id']?>
                           </div>
                         <?php endif; ?>
                       </div>

@@ -5,7 +5,7 @@
         <a href="<?= base_url() ?>" class="h4"><b><?= SYSTEM_NAME ?></b></a>
       </div>
       <div class="card-body">
-        <center><h2>My Qr Code</h2></center>
+        <center><p class="h4">My Qr Code</p></center>
         <?php if(isset($_SESSION['success_request'])): ?>
           <div class="alert alert-success alert-dismissible fade show" role="alert">
             <?= $_SESSION['success_request']; ?>
@@ -24,13 +24,12 @@
         <?php endif; ?>
         <?php $ctr = 1;?>
         <?php if($_SESSION['unavailable'] == true): ?>
-          <div class="card">
-            <div class="card-body">
+          <div class="callout callout-danger">
+              <h5 class="text-danger"><i class="fas fa-info"></i> Reminder:</h5>
+              <p class="h6"><?=$_SESSION['unvailableQrcode'];?></p>
               <center>
-                <p class="h5 text-danger text-center"><?=$_SESSION['unvailableQrcode'];?></p>
-                <a href="<?=base_url('health-declaration-form/healthform')?>" class="btn btn-primary btn-lg mt-2"><i class="fas fa-arrow-left"></i> Return to the form</a>
+                <a href="<?=base_url('health-declaration-form/requesthealthform')?>" class="btn btn-primary text-white btn-md mt-2"><i class="fas fa-arrow-left"></i> Return to the form</a>
               </center>
-            </div>
           </div>
         <?php else: ?>
           <?php if(isset($error)): ?>
@@ -38,12 +37,14 @@
           <?php else: ?>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
             <script src="<?= base_url() ?>public/js/qrcode.js"></script>
+          <div class="callout callout-success">
             <center>
+              <h4><?= ucwords($_SESSION['firstname'].' '.$_SESSION['lastname'])?></h4>
               <div id="qrcode"></div>
               <h4><?= $_SESSION['yourQrcode']?></h4>
-              <h4><?= ucwords($_SESSION['firstname'].' '.$_SESSION['lastname'])?></h4>
-              <a href="<?=base_url('health-declaration-form/healthform')?>" class="btn btn-primary btn-lg mt-2"><i class="fas fa-arrow-left"></i> Return to the form</a>
+              <a href="<?=base_url('health-declaration-form/requesthealthform')?>" class="btn btn-primary text-white btn-md mt-2"><i class="fas fa-arrow-left"></i> Return to the form</a>
             </center>
+          </div>
             <script>
                 let qrcode = new QRCode("qrcode", {
                     text: "<?= $_SESSION['yourQrcode']?>",

@@ -64,17 +64,13 @@ class BaseController extends Controller
 		$model_module = new ModulesModel();
 		$model_user = new UsersModel();
 
-		if(isset($_SESSION['user_logged_in']))
-		{
+		if(isset($_SESSION['user_logged_in'])){
 			$this->permissions = $model_permission->like('allowed_roles', $_SESSION['rid'])->findAll();
 			$this->modules = $model_module->findAll();
 
 			$_SESSION['appmodules'] = $this->modules;
 			$_SESSION['userPermmissions'] = $this->permissions;
-		}
-		else
-		{
-			// die($referrer);
+		}else{
 			$str = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     		if($str != base_url()){
 				if($str == base_url().'login/register'){
@@ -83,8 +79,6 @@ class BaseController extends Controller
 					return redirect()->to(base_url().'login/forgotpassword');
 				}elseif($str == base_url().'health-declaration-form/requesthealthform'){
 					return redirect()->to(base_url().'health-declaration-form/requesthealthform');
-				}elseif($str == base_url().'health-declaration-form/healthform'){
-					return redirect()->to(base_url().'health-declaration-form/healthform');
 				}else{
 					header('Location: '.base_url());
 				}

@@ -26,7 +26,6 @@
     </style>
     <title><?= SYSTEM_TITLE ?></title>
   </head>
-  <?php $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>
   <body class="hold-transition layout-top-nav bg-navy">
   <div class="wrapper">
     <!-- Navbar -->
@@ -49,11 +48,6 @@
             </a>
           </li>&nbsp&nbsp
           <li class="nav-item">
-            <a class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#qrcodeHealthForm2">
-              <i class="fas fa-qrcode"></i> Health Form Link
-            </a>
-          </li>&nbsp&nbsp
-          <li class="nav-item">
             <a href="<?= base_url() ?>visits" class="btn btn-outline-info" type="button" >
               <i class="fas fa-list"></i> Visit List
             </a>
@@ -62,47 +56,6 @@
       </div>
     </nav>
     <!-- /.navbar -->
-    <!-- Modal -->
-    <div class="modal fade" id="qrcodeHealthForm2" role="dialog">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title text-dark">
-              <i class="fas fa-qrcode">&nbsp</i>
-              Health Form Link</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-              <script src="<?= base_url() ?>public/js/qrcode.js"></script>
-              <center>
-                  <div id="qrcodeHealthForm"></div>
-                  <a href="<?= base_url('health-declaration-form/healthform')?>" class="btn btn-link text-dark"><?= base_url('health-declaration-form/healthform')?></a>
-                  <br>
-                  <button class="btn btn-outline-dark mt-2" onclick="downLoadCodeForm();">Download QR Code as Image</button>
-                  <a href="<?= base_url()?>scan/print-pdf/<?='healthform'?>" class="btn btn-outline-danger mt-2">Print Qr Code PDF</a>
-              </center>
-              <script>
-                  let qrcodeHealthForm = new QRCode("qrcodeHealthForm", {
-                      text: "<?= base_url('health-declaration-form/healthform')?>",
-                      width: 350,
-                      height: 350,
-                      colorDark : "#000000",
-                      colorLight : "#ffffff",
-                      correctLevel : QRCode.CorrectLevel.H
-                  });
-                  function downLoadCodeForm(){
-                      var img = $('#qrcodeHealthForm').children('img').attr("src");
-                      var alink = document.createElement("a");
-                      alink.href = img;
-                      alink.download = "<?= date('F d, Y h:i:s')?>"+".png";
-                      alink.click();
-                  }
-              </script>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- end modal -->
     <!-- Modal -->
     <div class="modal fade" id="qrcodeForm" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -199,43 +152,44 @@
                     <h5 style="color: black;">QR Code Scanner <i class="fas fa-qrcode"></i> <span id="remain"></span></h5>
                   </center>
                     <video id="previewChecklist"></video>
-                    <form action="<?= base_url() ?>scan" id="form1" name="form1" method="post">
+                    <form action="<?= base_url() ?>scan" id="search-form" method="post">
                       <div class="custom-control mt-2 text-center">
                         <div class="row">
                           <div class="col-md-1">
                             <label>ID:</label>
                           </div>
                           <div class="col-md-11">
-                            <input readonly class="form-control <?= isset($errors['identifier']) ? 'is-invalid':'is-valid' ?>" type="text" id="identifier" name="identifier"> 
+                            <input readonly class="form-control <?= isset($errors['identifier']) ? 'is-invalid':'is-valid' ?> tokenId" type="text" id="identifier" onChange="this.form.submit()" name="identifier"> 
                           </div>
                         </div>
                       </div>
-                      <div class="custom-control mt-2 text-center">
-                        <button class="btn btn-success" type="submit">Enter</button>
+                      <div hidden class="custom-control mt-2 text-center">
+                        <input type="submit" class="btn btn-success"  name="search-btn" id="search-btn" value="Enter">
+                        <!-- <button type="submit">Enter</button> -->
                       </div>
                     </form>
                 </div>
               </div>
             </div>
-          <div class="col-md-7">
+        <div class="col-md-7">
           <div class="row">
             <div class="col-md-12">
-              <?php if(isset($_SESSION['success_added2'])): ?>
+              <?php if(isset($success_added2) == true): ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <?= $_SESSION['success_added2']; ?>
+                  <?= $success_added2; ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-              <?php endif; ?>
-              <?php if(isset($_SESSION['error_added2'])): ?>
+              <?php elseif(isset($error_added2) == true): ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <?= $_SESSION['error_added2']; ?>
+                  <?= $error_added2; ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
-               </div>
-             <?php endif; ?>
+                </div>
+              <?php else: ?>
+              <?php endif; ?>
             </div>
           </div>
               <!-- Profile Image -->
@@ -364,8 +318,9 @@
 
     scanner.addListener('scan', function(cont){
       var parts = cont.split(':');
-
+      // alert(parts[0]);
       document.getElementById('identifier').value = parts[0];
+      $("#search-form").submit();
 
     });
   </script>

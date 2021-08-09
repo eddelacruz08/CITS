@@ -39,7 +39,7 @@ class Login extends BaseController
 				}
 			}else{
 
-				$_SESSION['error_login'] = 'Cannot Find Username';
+				$_SESSION['error_login'] = 'Cannot Find Email';
 				$this->session->markAsFlashdata('error_login');
 				return redirect()->to( base_url());
 			}
@@ -62,7 +62,7 @@ class Login extends BaseController
 					return redirect()->to(base_url('dashboard'));
 				}
 			}else{
-				$_SESSION['error_login'] = 'Username and Password mismatch!';
+				$_SESSION['error_login'] = 'Email and Password mismatch!';
 				$this->session->markAsFlashdata('error_login');
 				return redirect()->to(base_url());
 			}

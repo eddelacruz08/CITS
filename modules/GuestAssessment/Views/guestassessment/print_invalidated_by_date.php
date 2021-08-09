@@ -8,7 +8,7 @@
                 <th width="15%"><b>Gender</b></th>
                 <th width="20%"><b>GuestType</b></th>
                 <th width="20%"><b>Phone</b></th>
-                <th width="20%"><b>Reasons</b></th>
+                <th width="20%"><b>Email</b></th>
             </tr>
         </thead>
         <tbody>
@@ -20,7 +20,7 @@
             <td width="15%"><?=ucwords($generateInvalidatedByDate['gender'])?></td>
             <td width="20%"><?=ucwords($generateInvalidatedByDate['guest_type'])?></td>
             <td width="20%"><?=ucwords($generateInvalidatedByDate['cellphone_no'])?></td>
-            <td width="20%"><?=ucwords($generateInvalidatedByDate['reason'])?></td>
+            <td width="20%"><?=ucwords($generateInvalidatedByDate['email'])?></td>
           </tr>
         <?php endforeach; ?>
         </tbody>

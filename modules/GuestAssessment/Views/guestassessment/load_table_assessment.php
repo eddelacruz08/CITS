@@ -5,10 +5,9 @@
     <?php $cnt = 1; ?>
     <?php foreach($requestguestsAssess as $patientRequest): ?>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <span class="text-muted username">
                     Name: <?= ucwords($patientRequest['firstname'].' '.$patientRequest['lastname']) ?>
-                    <span class="text-muted float-right"><?= date('F d, Y h:i:s a', strtotime($patientRequest['created_date'])) ?></span>
                 </span>
                 <br>
                 <span class="text-muted username">
@@ -27,23 +26,24 @@
                 </span>
                 <!-- /.username -->
             </div>
-            <div class="col-md-3 text-center">
+            <div class="col-md-4 text-center">
                 <?php if($patientRequest['func_action'] == 1):?>
                     <span class="bell fa fa-bell"></span>
                     <audio src="<?=base_url()?>public/css/notification_up.mp3" autoplay></audio>
-                    <span class="badge badge-danger">Reason requested: </span>
-                    <p><?= ucwords($patientRequest['reason']) ?></p>
+                    <span class="badge badge-danger">Invalidation request: </span>
+                    <br>
+                    <span class="text-muted"><?= date('F d, Y h:i:s a', strtotime($patientRequest['created_date'])) ?></span>
                 <?php elseif($patientRequest['func_action'] == 2):?>
                     <!-- <span class="bell fa fa-bell"></span>
                     <audio src="<?=base_url()?>public/css/notification_up.mp3" autoplay></audio>
                     <span class="badge badge-danger">Reason requested: </span>
                     <p><?= ucwords($patientRequest['reason']) ?></p> -->
-                    <span class="badge">Canceled a requested reason.</span>
+                    <span class="badge">Canceled a request.</span>
                 <?php else:?>
-                    <span class="badge">No reason request.</span>
+                    <span class="badge">No request.</span>
                 <?php endif;?>
             </div>
-            <div class="col-md-3 text-center">
+            <div class="col-md-4 text-center">
                 <?php if($patientRequest['func_action'] == 1):?>
                     <a href="#invalidateModal<?=$patientRequest['id']?>" class="btn btn-outline-danger" data-toggle="modal">
                         <i class="fas fa-exclamation-circle"></i> Invalidate
