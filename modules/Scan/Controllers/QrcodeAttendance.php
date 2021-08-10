@@ -35,6 +35,7 @@ class QrcodeAttendance extends BaseController
 					}
 				}else{
 					$data['error_added2'] = 'Cannot find user!';
+					$data['status'] = '<span class="text-danger">Not registered!</span>';
 				}
 				if($registerOK == 1){
 					$data['profile'] = $this->usersModel->getScanProfile($_POST['identifier']);
@@ -50,6 +51,7 @@ class QrcodeAttendance extends BaseController
 						}
 					}else{
 						$data['error_added2'] = 'Please take Health Declaration Form from your website, before entry!';
+						$data['status'] = '<span class="text-danger">Take self-assessment!</span>';
 						$this->session->markAsFlashdata('error_added2');
 					}
 					if($latestChecklistOK == 1){
@@ -99,9 +101,11 @@ class QrcodeAttendance extends BaseController
 								];
 								if($this->visitsModel->edit_visits_logout($val_array_logout, $vId)){
 									$data['success_added2'] = 'Successfully Logout!';
+									$data['status'] = '<span class="text-success">Successfully Logout!</span>';
 									$this->session->markAsFlashdata('success_added2');
 								}else{
 									$data['error_added2'] = 'Error Logout!';
+									$data['status'] = '<span class="text-danger">Error Logout!</span>';
 									$this->session->markAsFlashdata('error_added2');
 								}
 							}else{
@@ -112,28 +116,34 @@ class QrcodeAttendance extends BaseController
 								$data['profile'] = $this->usersModel->getScanProfile($_POST['identifier']);
 								if($this->visitsModel->add_visits_login($val_array_login)){
 									$data['success_added2'] = 'Successfully Validated!';
+									$data['status'] = '<span class="text-success">Successfully Login!</span>';
 									$this->session->markAsFlashdata('success_added2');
 								}else{
 									$data['error_added2'] = 'Error Login!';
+									$data['status'] = '<span class="text-danger">Error Login!</span>';
 									$this->session->markAsFlashdata('error_added2');
 								}
 							}
 						}else{
 							$data['error_added2'] = 'You are not required to enter to the premises, because your latest self-assessment detected that had a symptoms!';
+							$data['status'] = '<span class="text-danger">You have symptoms!</span>';
 							$this->session->markAsFlashdata('error_added2');
 						}
 					}else{
 						$data['error_added2'] = 'Please take Health Declaration Form from your website, before entry!';
+						$data['status'] = '<span class="text-danger">Please take self-assessment!</span>';
 						$this->session->markAsFlashdata('error_added2');
 					}
 				}else{
 					$data['error_added2'] = 'This guest was not registered!';
+					$data['status'] = '<span class="text-danger">Not registered!</span>';
 					$this->session->markAsFlashdata('error_added2');
 				}
 			}else{
 				$data['value'] = $_POST;
 				$data['errors'] = $this->validation->getErrors();
 				$data['error_added2'] = 'Empty field for ID. QR Code is required to scan for enter!';
+				$data['status'] = '<span class="text-danger">QRCode required!</span>';
 				$this->session->markAsFlashdata('error_added2');
 			}
 		}

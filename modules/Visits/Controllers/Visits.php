@@ -25,6 +25,7 @@ class Visits extends BaseController
 		$data['visitsHistory'] = $this->visitsModel->getVisitHistory();
 		$data['totalVisitsPerDay'] = $this->visitsModel->getTotalVisitPerDay();
 		$data['activeVisits'] = $this->visitsModel->getTotalVisitActivePerDay();
+		$data['deniedGuestPerDay'] = $this->visitsModel->getDeniedGuestPerDay();
 		$data['totalVisits'] = $this->visitsModel->getTotalVisits();
 		$data['function_title'] = "Active Visit List";
 		$data['function_title_history'] = "Visits History";

@@ -32,7 +32,7 @@
                 $interval = $end->diff($start);
 
                 $time = sprintf(
-                    '%d:%02d:%02d',
+                    '%d hrs %02d mins %02d secs',
                     ($interval->d * 24) + $interval->h,
                     $interval->i,
                     $interval->s

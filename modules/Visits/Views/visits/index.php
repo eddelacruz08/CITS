@@ -3,28 +3,94 @@
     <div class="card card-primary card-outline">
       <div class="card-body">
         <div class="row">
-          <div class="col-md-4">
-            <div class="col-md-12">
-              <div class="info-box">
-                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-users"></i></span>
-                <div class="info-box-content">
-                  <?php foreach($activeVisits as $activeVisit):?>
-                    <span class="info-box-number h1 text-muted">
-                      <?= $activeVisit['activeVisits']; ?>
-                    </span>
-                  <?php endforeach;?>
-                  <span class="info-box-text">Active Visits</span>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="info-box bg-navy">
+                  <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-user-slash"></i></span>
+                  <div class="info-box-content">
+                    <?php foreach($deniedGuestPerDay as $deniedGuest):?>
+                      <span class="info-box-number h1">
+                        <?= $deniedGuest['totalDeniedGuests']; ?>
+                        <span><button type="button" class="btn btn-outline-light float-right" data-toggle="modal" data-target="#deniedGuestModal">See all denied guest</button></span>
+                      </span>
+                    <?php endforeach;?>
+                      <span class="info-box-text h5">Denied Guests of <?=date('F d, Y')?></span>
+                  </div>
+                  <!-- /.info-box-content -->
                 </div>
-                <!-- /.info-box-content -->
+                <!-- /.info-box -->
               </div>
-              <!-- /.info-box -->
             </div>
+            <!-- Modal -->
+            <div class="modal fade" id="deniedGuestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Denied Guest List</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="table-responsive">
+                      <table class="table table-sm table-striped table-bordered">
+                        <thead class="thead-dark">
+                          <tr class="text-center">
+                            <th>#</th>
+                            <th>Full Name</th>
+                            <th>Gender</th>
+                            <th>Guest Type</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php $cnt = 1; ?>
+                          <?php foreach($deniedGuestPerDay as $deniedGuest): ?>
+                            <tr class="text-center">
+                              <th scope="row"><?= $cnt++ ?></th>
+                              <td><?= ucwords($deniedGuest['firstname'].' '.$deniedGuest['lastname']) ?></td>
+                              <td><?= ucwords($deniedGuest['gender']) ?></td>
+                              <td><?= ucwords($deniedGuest['guest_type']) ?></td>
+                              <td><span class="badge badge-danger">System Denied</span></td>
+                            </tr>
+                          <?php endforeach; ?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+            <!-- End Modal -->
           </div>
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="row">
               <div class="col-md-12">
                 <div class="info-box">
-                  <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-users"></i></span>
+                  <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user-clock"></i></span>
+                  <div class="info-box-content">
+                    <?php foreach($activeVisits as $activeVisit):?>
+                      <span class="info-box-number h1 text-muted">
+                      <?= $activeVisit['activeVisits']; ?>
+                      </span>
+                    <?php endforeach;?>
+                    <span class="info-box-text">Active Visits of <?=date('F d, Y')?></span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="info-box">
+                  <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-user-friends"></i></span>
                   <div class="info-box-content">
                     <?php foreach($totalVisitsPerDay as $totalVisit):?>
                       <span class="info-box-number h1 text-muted">
@@ -39,7 +105,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="row">
               <div class="col-md-12">
                 <div class="info-box">
@@ -153,7 +219,7 @@
                               $interval = $end->diff($start);
 
                               $time = sprintf(
-                                  '%d:%02d:%02d',
+                                  '%d hrs %02d mins %02d secs',
                                   ($interval->d * 24) + $interval->h,
                                   $interval->i,
                                   $interval->s
@@ -251,7 +317,7 @@
                         $interval = $end->diff($start);
 
                         $time = sprintf(
-                            '%d:%02d:%02d',
+                            '%d hrs %02d mins %02d secs',
                             ($interval->d * 24) + $interval->h,
                             $interval->i,
                             $interval->s

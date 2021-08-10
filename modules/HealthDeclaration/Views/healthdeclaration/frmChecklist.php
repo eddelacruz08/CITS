@@ -18,7 +18,7 @@
                     <div class="custom-control custom-checkbox">
                       <input class="custom-control-input" type="checkbox" id="chkShowHide" onclick="ShowHideDiv(this)">
                       <label for="chkShowHide" class="custom-control-label">
-                        I herby certify that all information is true and complete. I understand that my failure to answer, or any false or misleading information given by me may be used as a ground for my serious consequence.
+                        I hereby certify that all information is true and complete. I understand that my failure to answer, or any false or misleading information given by me may be used as a ground for my serious consequence.
                       </label>
                     </div>
                   </div>

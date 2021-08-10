@@ -236,6 +236,14 @@
                     </div>
                   </div>
                   <ul class="list-group list-group-unbordered mb-3">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p class="h5 float-right">Status: </p>
+                      </div>
+                      <div class="col-md-6">
+                        <?=$status;?>
+                      </div>
+                    </div>
                   </ul>
                   </div>
                 <!-- load info scan -->
@@ -280,6 +288,14 @@
                     </div>
                   </div>
                   <ul class="list-group list-group-unbordered mb-3">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p class="h5 float-right">Status: </p>
+                      </div>
+                      <div class="col-md-6">
+                        <span>Unavailable</span>
+                      </div>
+                    </div>
                   </ul>
                 </div>
                 <!-- /.card-body -->

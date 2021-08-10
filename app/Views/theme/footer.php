@@ -2,7 +2,6 @@
   </div>
 
   <script src="<?= base_url() ?>public/js/jquery.min.js"></script>
-  <script src="<?= base_url() ?>public/js/Chart.min.js"></script>
   <script src="<?= base_url() ?>public/dist/js/adminlte.min.js"></script>
   <script src="<?= base_url() ?>public/js/moment.min.js"></script>
   <script src="<?= base_url() ?>public/plugins/moment/moment-with-locales.js"></script>
@@ -13,28 +12,26 @@
   <script src="<?= base_url() ?>public/DataTables/js/jquery.dataTables.min.js"></script>
   <script src="<?= base_url() ?>public/DataTables/js/dataTables.bootstrap4.min.js"></script>
   <script src="<?= base_url() ?>public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <script src="<?= base_url() ?>public/js/Chart.min.js"></script>
   <script src="<?= base_url() ?>public/chart/utils.js"></script>
   <script src="<?= base_url() ?>public/js/myJavascript.js"></script>
   <script src="<?= base_url() ?>public/js/user_profile.js"></script>
   <script src="<?= base_url() ?>public/js/loader.js"></script>
   <script src="<?= base_url() ?>public/plugins/summernote/summernote-bs4.min.js"></script>
   <script>
-    /* global Chart:false */
-
     $(function () {
       'use strict'
 
-      var ticksStyle = {
-        fontColor: '#495057',
-        fontStyle: 'bold'
-      }
-
       var mode = 'index'
       var intersect = true
+      var salesChart = document.getElementById('assessment-chart'); // node
+      var salesChart = document.getElementById('assessment-chart').getContext('2d'); // 2d context
+      var salesChart = $('#assessment-chart'); // jQuery instance
+      var salesChart = 'assessment-chart'; // element id
 
-      var $salesChart = $('#assessment-chart')
+      // var $salesChart = $('#assessment-chart')
       // eslint-disable-next-line no-unused-vars
-      var salesChart = new Chart($salesChart, {
+      var salesChart = new Chart(salesChart, {
         type: 'bar',
         data: {
           labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
@@ -43,20 +40,20 @@
               backgroundColor: '#17a2b8',
               borderColor: '#17a2b8',
               data: [
-      <?php if(isset($getInvalidatedMonthlyCount)):?>
-            <?php foreach($getInvalidatedMonthlyCount as $InvalidatedMonthlyCount):?>
-              <?=$InvalidatedMonthlyCount['Jan'];?>,
-              <?=$InvalidatedMonthlyCount['Feb'];?>,
-              <?=$InvalidatedMonthlyCount['Mar'];?>,
-              <?=$InvalidatedMonthlyCount['Apr'];?>,
-              <?=$InvalidatedMonthlyCount['May'];?>,
-              <?=$InvalidatedMonthlyCount['Jun'];?>,
-              <?=$InvalidatedMonthlyCount['Jul'];?>,
-              <?=$InvalidatedMonthlyCount['Aug'];?>,
-              <?=$InvalidatedMonthlyCount['Sep'];?>,
-              <?=$InvalidatedMonthlyCount['Oct'];?>,
-              <?=$InvalidatedMonthlyCount['Nov'];?>,
-              <?=$InvalidatedMonthlyCount['Dec'];?>,
+      <?php if(isset($getAssessmentMonthlyCount)):?>
+            <?php foreach($getAssessmentMonthlyCount as $AssessmentMonthlyCount):?>
+              <?=$AssessmentMonthlyCount['Jan'];?>,
+              <?=$AssessmentMonthlyCount['Feb'];?>,
+              <?=$AssessmentMonthlyCount['Mar'];?>,
+              <?=$AssessmentMonthlyCount['Apr'];?>,
+              <?=$AssessmentMonthlyCount['May'];?>,
+              <?=$AssessmentMonthlyCount['Jun'];?>,
+              <?=$AssessmentMonthlyCount['Jul'];?>,
+              <?=$AssessmentMonthlyCount['Aug'];?>,
+              <?=$AssessmentMonthlyCount['Sep'];?>,
+              <?=$AssessmentMonthlyCount['Oct'];?>,
+              <?=$AssessmentMonthlyCount['Nov'];?>,
+              <?=$AssessmentMonthlyCount['Dec'];?>,
             <?php endforeach;?>
       <?php endif;?>
               ]
@@ -65,20 +62,20 @@
               backgroundColor: '#6c757d ',
               borderColor: '#6c757d ',
               data: [
-      <?php if(isset($getAssessmentMonthlyCount)):?>
-            <?php foreach($getAssessmentMonthlyCount as $AssessmentMonthlyCount):?>
-              <?=$AssessmentMonthlyCount['Jan'];?>,
-              <?=$AssessmentMonthlyCount['Feb'];?>,
-              <?=$AssessmentMonthlyCount['Mar'];?>,
-              <?=$AssessmentMonthlyCount['Apr'];?>,
-              <?=$AssessmentMonthlyCount['May'];?>,
-              <?=$AssessmentMonthlyCount['Jun'];?>,
-              <?=$AssessmentMonthlyCount['Jul'];?>,
-              <?=$AssessmentMonthlyCount['Aug'];?>,
-              <?=$AssessmentMonthlyCount['Sep'];?>,
-              <?=$AssessmentMonthlyCount['Oct'];?>,
-              <?=$AssessmentMonthlyCount['Nov'];?>,
-              <?=$AssessmentMonthlyCount['Dec'];?>,
+      <?php if(isset($totalAssessmentLastYears)):?>
+            <?php foreach($totalAssessmentLastYears as $totalAssessmentLastYear):?>
+              <?=$totalAssessmentLastYear['Jan'];?>,
+              <?=$totalAssessmentLastYear['Feb'];?>,
+              <?=$totalAssessmentLastYear['Mar'];?>,
+              <?=$totalAssessmentLastYear['Apr'];?>,
+              <?=$totalAssessmentLastYear['May'];?>,
+              <?=$totalAssessmentLastYear['Jun'];?>,
+              <?=$totalAssessmentLastYear['Jul'];?>,
+              <?=$totalAssessmentLastYear['Aug'];?>,
+              <?=$totalAssessmentLastYear['Sep'];?>,
+              <?=$totalAssessmentLastYear['Oct'];?>,
+              <?=$totalAssessmentLastYear['Nov'];?>,
+              <?=$totalAssessmentLastYear['Dec'];?>,
             <?php endforeach;?>
       <?php endif;?>
               ]
@@ -113,29 +110,25 @@
               gridLines: {
                 display: false
               },
-              ticks: ticksStyle
             }]
           }
         }
       })
-    })
-  </script><script>
-    /* global Chart:false */
-
+    });
+  </script>
+  <script>
     $(function () {
       'use strict'
-
-      var ticksStyle = {
-        fontColor: '#495057',
-        fontStyle: 'bold'
-      }
 
       var mode = 'index'
       var intersect = true
 
-      var $salesChart = $('#invalidation-chart')
+      var salesChart = document.getElementById('invalidation-chart'); // node
+      var salesChart = document.getElementById('invalidation-chart').getContext('2d'); // 2d context
+      var salesChart = $('#invalidation-chart'); // jQuery instance
+      var salesChart = 'invalidation-chart'; // element id
       // eslint-disable-next-line no-unused-vars
-      var salesChart = new Chart($salesChart, {
+      var salesChart = new Chart(salesChart, {
         type: 'bar',
         data: {
           labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
@@ -143,28 +136,6 @@
             {
               backgroundColor: '#ffc107 ',
               borderColor: '#ffc107 ',
-              data: [
-      <?php if(isset($getAssessmentMonthlyCount)):?>
-            <?php foreach($getAssessmentMonthlyCount as $AssessmentMonthlyCount):?>
-              <?=$AssessmentMonthlyCount['Jan'];?>,
-              <?=$AssessmentMonthlyCount['Feb'];?>,
-              <?=$AssessmentMonthlyCount['Mar'];?>,
-              <?=$AssessmentMonthlyCount['Apr'];?>,
-              <?=$AssessmentMonthlyCount['May'];?>,
-              <?=$AssessmentMonthlyCount['Jun'];?>,
-              <?=$AssessmentMonthlyCount['Jul'];?>,
-              <?=$AssessmentMonthlyCount['Aug'];?>,
-              <?=$AssessmentMonthlyCount['Sep'];?>,
-              <?=$AssessmentMonthlyCount['Oct'];?>,
-              <?=$AssessmentMonthlyCount['Nov'];?>,
-              <?=$AssessmentMonthlyCount['Dec'];?>,
-            <?php endforeach;?>
-      <?php endif;?>
-              ]
-            },
-            {
-              backgroundColor: '#6c757d',
-              borderColor: '#6c757d',
               data: [
       <?php if(isset($getInvalidatedMonthlyCount)):?>
             <?php foreach($getInvalidatedMonthlyCount as $InvalidatedMonthlyCount):?>
@@ -183,6 +154,28 @@
             <?php endforeach;?>
       <?php endif;?>
               ]
+            },
+            {
+              backgroundColor: '#6c757d',
+              borderColor: '#6c757d',
+              data: [
+      <?php if(isset($totalInvalidatedLastYears)):?>
+            <?php foreach($totalInvalidatedLastYears as $totalInvalidatedLastYear):?>
+              <?=$totalInvalidatedLastYear['Jan'];?>,
+              <?=$totalInvalidatedLastYear['Feb'];?>,
+              <?=$totalInvalidatedLastYear['Mar'];?>,
+              <?=$totalInvalidatedLastYear['Apr'];?>,
+              <?=$totalInvalidatedLastYear['May'];?>,
+              <?=$totalInvalidatedLastYear['Jun'];?>,
+              <?=$totalInvalidatedLastYear['Jul'];?>,
+              <?=$totalInvalidatedLastYear['Aug'];?>,
+              <?=$totalInvalidatedLastYear['Sep'];?>,
+              <?=$totalInvalidatedLastYear['Oct'];?>,
+              <?=$totalInvalidatedLastYear['Nov'];?>,
+              <?=$totalInvalidatedLastYear['Dec'];?>,
+            <?php endforeach;?>
+      <?php endif;?>
+              ]
             }
           ]
         },
@@ -214,12 +207,11 @@
               gridLines: {
                 display: false
               },
-              ticks: ticksStyle
             }]
           }
         }
       })
-    })
+    });
   </script>
   <script>
       <?php if(isset($getAssessmentMonthlyCount)):?>

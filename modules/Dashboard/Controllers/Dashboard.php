@@ -26,6 +26,8 @@ class Dashboard extends BaseController
 		$data['totalInvalidatedPerDays'] = $this->guestAssessmentModel->getTotalInvalidatedPerDay();
 		$data['totalAssessments'] = $this->guestAssessmentModel->getTotalGuestAssessment();
 		$data['totalInvalidated'] = $this->guestAssessmentModel->getTotalGuestInvalidated();
+		$data['totalAssessmentLastYears'] = $this->guestAssessmentModel->getTotalAssessmentLastYear();
+		$data['totalInvalidatedLastYears'] = $this->guestAssessmentModel->getTotalInvalidatedLastYear();
 		/* stack bar chart */
 		$data['getAssessmentMonthlyCount'] = $this->guestAssessmentModel->getAssessmentMonthlyCount();
 		$data['getInvalidatedMonthlyCount'] = $this->guestAssessmentModel->getInvalidatedMonthlyCount();
