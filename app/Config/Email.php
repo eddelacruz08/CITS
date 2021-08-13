@@ -68,7 +68,7 @@ class Email
 	 *
 	 * @var integer
 	 */
-	public $SMTPTimeout = 60;
+	public $SMTPTimeout = 20;
 
 	/**
 	 * Enable persistent SMTP connections

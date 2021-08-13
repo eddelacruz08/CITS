@@ -45,16 +45,22 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <?php $cnt = 1; ?>
-                          <?php foreach($deniedGuestPerDay as $deniedGuest): ?>
+                          <?php if($deniedGuestPerDay):?>
                             <tr class="text-center">
-                              <th scope="row"><?= $cnt++ ?></th>
-                              <td><?= ucwords($deniedGuest['firstname'].' '.$deniedGuest['lastname']) ?></td>
-                              <td><?= ucwords($deniedGuest['gender']) ?></td>
-                              <td><?= ucwords($deniedGuest['guest_type']) ?></td>
-                              <td><span class="badge badge-danger">System Denied</span></td>
+                              <td colspan="5">No data available.</td>
                             </tr>
-                          <?php endforeach; ?>
+                          <?php else: ?>
+                            <?php $cnt = 1; ?>
+                            <?php foreach($deniedGuestPerDay as $deniedGuest): ?>
+                              <tr class="text-center">
+                                <th scope="row"><?= $cnt++ ?></th>
+                                <td><?= ucwords($deniedGuest['firstname'].' '.$deniedGuest['lastname']) ?></td>
+                                <td><?= ucwords($deniedGuest['gender']) ?></td>
+                                <td><?= ucwords($deniedGuest['guest_type']) ?></td>
+                                <td><span class="badge badge-danger">System Denied</span></td>
+                              </tr>
+                            <?php endforeach; ?>
+                          <?php endif; ?>
                         </tbody>
                       </table>
                     </div>
@@ -196,7 +202,7 @@
                     <th>Login</th>
                     <th>Logout</th>
                     <th>Duration</th>
-                    <th>Show Info</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -228,8 +234,10 @@
                             <td width="15%"><?=$time;?></td>
                           <?php endif;?>
                           <td class="text-center">
-                            <?php if(guest_detail_link('guests', 'show-guest', $_SESSION['userPermmissions'], $visit['user_id'])): ?>
-                              <?php guest_detail_link('guests', 'show-guest', $_SESSION['userPermmissions'], $visit['user_id']) ?>
+                            <?php if($visit['log_out'] == null): ?>
+                              <span class="badge badge-success">Active</span>
+                            <?php else: ?>
+                              <span class="badge badge-danger">Not active</span>
                             <?php endif; ?>
                           </td>
                       </tr>
@@ -294,7 +302,6 @@
                     <th>Login</th>
                     <th>Logout</th>
                     <th>Duration</th>
-                    <th>Show Info</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -325,11 +332,6 @@
                       ?>
                       <td width="15%"><?=$time;?></td>
                     <?php endif;?>
-                    <td class="text-center">
-                      <?php if(guest_detail_link('guests', 'show-guest', $_SESSION['userPermmissions'], $visit['user_id'])): ?>
-                        <?php guest_detail_link('guests', 'show-guest', $_SESSION['userPermmissions'], $visit['user_id']) ?>
-                      <?php endif; ?>
-                    </td>
                   </tr>
                 <?php endforeach; ?>
                 </tbody>

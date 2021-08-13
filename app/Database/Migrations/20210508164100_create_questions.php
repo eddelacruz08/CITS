@@ -66,15 +66,15 @@ class CreateQuestions extends \CodeIgniter\Database\Migration {
         [
           'user_id' => '1',
           
-          'q_one' => 'Is your temperature greater than 37.5 degrees for the past 3 days?',
+          'q_one' => 'Is your temperature greater than 37.5 degrees for the past 14 days?',
           
-          'q_two' => 'Tested positive or presumptively positive with covid-19 (The new Coronavirus or SARS-COV2) or been identified as a potential carrier of the coronavirus?',
+          'q_two' => 'Tested positive or presumptively positive with covid-19 (The new Coronavirus or SARS-COV2) or been identified as a potential carrier of the coronavirus for the past 14 days?',
           
-          'q_three' => 'Experienced any symtoms commonly associated with covid-19 (Fever; Cough; Fatigue or Muscle Pain; Difficulty Breathing; Soar Throat; Lung Infections; Headache; Loss of Taste; or Diarrhea)?',
+          'q_three' => 'Experienced any symptoms commonly associated with covid-19  (Fever, Cough, Fatigue or Muscle Pain, Difficulty Breathing, Sore Throat, Lung Infections, Headache, Loss of Taste, or Diarrhea) for the past 14 days?',
            
-          'q_four' => 'Been in any location/site declared as hazardous with and/or potentially infective with the new coronavirus by a recognized health and regulatory authority?',
+          'q_four' => 'Been in any location/site declared as hazardous with and/or potentially infective with the new coronavirus by a recognized health and regulatory authority for the past 14 days?',
           
-          'q_five' => 'Been in direct contact with or in the immediate vicinity of any person who tested positive with the new coronavirus or who was diagnosed as possibly being infected by the new coronavirus?',
+          'q_five' => 'Been in direct contact with or in the immediate vicinity of any person who tested positive with the new coronavirus or who was diagnosed as possibly being infected by the new coronavirus for the past 14 days?',
          
           'status' => 'a',
           

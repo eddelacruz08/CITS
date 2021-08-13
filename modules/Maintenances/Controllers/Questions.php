@@ -28,7 +28,7 @@ class Questions extends BaseController
 
 		$data['questionActive'] = $model->get(['status'=> 'a']);
 
-		$data['function_title_active'] = "Health Declaration Question List";
+		$data['function_title_active'] = "Clinical Information and Triage System Questions";
 		$data['viewName'] = 'Modules\Maintenances\Views\questions\index';
 		echo view('App\Views\theme\index', $data);
 	}
