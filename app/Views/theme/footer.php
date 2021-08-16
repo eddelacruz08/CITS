@@ -13,7 +13,7 @@
   <script src="<?= base_url() ?>public/DataTables/js/jquery.dataTables.min.js"></script>
   <script src="<?= base_url() ?>public/DataTables/js/dataTables.bootstrap4.min.js"></script>
   <script src="<?= base_url() ?>public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <script src="<?= base_url() ?>public/js/Chart.min.js"></script>
+  <script src="<?= base_url() ?>public/chart/Chart.min.js"></script>
   <script src="<?= base_url() ?>public/chart/utils.js"></script>
   <script src="<?= base_url() ?>public/js/myJavascript.js"></script>
   <script src="<?= base_url() ?>public/js/user_profile.js"></script>

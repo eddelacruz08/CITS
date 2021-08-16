@@ -285,8 +285,8 @@ class CreatePermissions extends \CodeIgniter\Database\Migration {
                         'link_icon' => '',
                         'order' => '13',
                         'table_name' => 'permissions',
-                        'func_action' => 'link',
-                        'func_type' => 4,
+                        'func_action' => 'edit',
+                        'func_type' => 3,
                         'allowed_roles' => "[1]",
                         'status' => 'a',
                         'created_date' => date('Y-m-d H:i:s')
