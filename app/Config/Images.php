@@ -1,6 +1,8 @@
 <?php namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
+use CodeIgniter\Images\Handlers\GDHandler;
+use CodeIgniter\Images\Handlers\ImageMagickHandler;
 
 class Images extends BaseConfig
 {

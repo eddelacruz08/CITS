@@ -7,6 +7,6 @@ class GuidelinesModel extends BaseModel
 {
     protected $table = 'guidelines';
 
-    protected $allowedFields = ['id','user_id','content','status', 'created_date','updated_date', 'deleted_date'];
+    protected $allowedFields = ['id','user_id','content','image','status', 'created_date','updated_date', 'deleted_date'];
 
 }

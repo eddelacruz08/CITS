@@ -16,7 +16,7 @@ class CreateHealthDeclarationPermissions extends \CodeIgniter\Database\Migration
             'module_id' => '7',
             'link_icon' => '<i class="fas fa-file"></i>',
             'order' => '1',
-            'table_name' => 'healthdeclaration',
+            'table_name' => 'health declaration',
             'func_action' => 'link',
             'func_type' => 1,
             'allowed_roles' => "[2]",

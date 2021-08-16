@@ -27,7 +27,7 @@
               <div class="card">
                 <div class="card-body h6">
                   <span style="font-weight: bold;">Question <?=$ctr++;?>:</span>
-                  <span><?= $question['q_one'] ?></span> <br>
+                  <span><?= $question['q_two'] ?></span> <br>
                 </div>
               </div>
               <div class="card">

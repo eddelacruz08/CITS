@@ -286,6 +286,10 @@ class Validation
 			'label'  => 'Guidelines',
 			'rules'  => 'required',
 		],
+		'image' => [
+			'label' => 'Image',
+			'rules' => 'uploaded[image]|max_size[image, 10240]|ext_in[image,png,jpg,gif,jpeg]|is_image[image]',
+		],
 	];
 	public $questions = [
 		'q_one' => [

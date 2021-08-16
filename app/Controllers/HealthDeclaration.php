@@ -68,10 +68,6 @@ class HealthDeclaration extends BaseController{
 									}
 									if($reasonAssessId == 0){
 										$guidelineData = $this->guidelinesModel->get(['status'=>'a']);
-										foreach($guidelineData as $guideline){
-											$guidelineInfo = $guideline['content'];
-											break;
-										}
 										$_POST['user_id'] = $id;
 										$emailStatus = 0;
 										$unavailable = false;
@@ -87,12 +83,16 @@ class HealthDeclaration extends BaseController{
 											$unavailable = true;
 											$to = $_POST['email'];
 											$subject = 'Guidelines for Guest with Symptoms';
-											$message = $guidelineInfo;
 											$email = \Config\Services::email();
-											$email->setTo($to);
-											$email->setFrom('United Coders Dev Team', SYSTEM_NAME);
-											$email->setSubject($subject);
-											$email->setMessage($message);
+											$content = '';
+											foreach($guidelineData as $guideline){
+												$content .= $guideline['content'].'<br>';
+												$email->setTo($to);
+												$email->setFrom('United Coders Development Team', SYSTEM_NAME);
+												$email->setSubject('Defined Symptom Guidelines');
+												$email->setMessage('List of Guide Tips for COVID-19:<br>'.$content);
+												$email->attach(base_url().'public/uploads/guidelines/'.$guideline['image']);
+											}
 											if($email->send()){
 												$emailStatus = 1;
 											}else{
@@ -187,17 +187,8 @@ class HealthDeclaration extends BaseController{
 						}else{
 							$checklistData = $this->checklistsModel->getLatestChecklistDateForRequestForm($id);
 							if(empty($checklistData)){
-								$guidelineData = $this->guidelinesModel->get(['status'=>'a']);
-								foreach($guidelineData as $guideline){
-									$guidelineInfo = $guideline['content'];
-									break;
-								}
 								$emailStatus = 0;
 								$guidelineData = $this->guidelinesModel->get(['status'=>'a']);
-								foreach($guidelineData as $guideline){
-									$guidelineInfo = $guideline['content'];
-									break;
-								}
 								$unavailable = false;
 								$status_defined = '';
 								$token_checklist = md5(str_shuffle('ABCDEFGHIJKLMNOPQRSTWXYZabcdefghijklmnopqrstuvwxyz0123456789'.time()));
@@ -207,13 +198,16 @@ class HealthDeclaration extends BaseController{
 									$status_defined = $_POST['r_status_defined'];
 									$unavailable = true;
 									$to = $_POST['email'];
-									$subject = 'Guidelines for Guest with Symptoms';
-									$message = $guidelineInfo;
 									$email = \Config\Services::email();
-									$email->setTo($to);
-									$email->setFrom('United Coders Dev Team', SYSTEM_NAME);
-									$email->setSubject($subject);
-									$email->setMessage($message);
+									$content = '';
+									foreach($guidelineData as $guideline){
+										$content .= $guideline['content'].'<br>';
+										$email->setTo($to);
+										$email->setFrom('United Coders Development Team', SYSTEM_NAME);
+										$email->setSubject('Defined Symptom Guidelines');
+										$email->setMessage('List of Guide Tips for COVID-19:<br>'.$content);
+										$email->attach(base_url().'public/uploads/guidelines/'.$guideline['image']);
+									}
 									if($email->send()){
 										$emailStatus = 1;
 									}else{

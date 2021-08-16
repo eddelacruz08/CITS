@@ -16,7 +16,7 @@ class CreateAssessPermissions extends \CodeIgniter\Database\Migration {
             'module_id' => '9',
             'link_icon' => '<i class="fas fa-clipboard"></i>',
             'order' => '1',
-            'table_name' => 'assess',
+            'table_name' => 'guest assessment',
             'func_action' => 'link',
             'func_type' => 1,
             'allowed_roles' => "[3]",

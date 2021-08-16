@@ -5,6 +5,18 @@ use CodeIgniter\Model;
 
 class BaseModel extends Model
 {
+  protected $primaryKey = 'id';
+
+  protected $useAutoIncrement = true;
+
+  protected $useSoftDeletes = true;
+  protected $returnType     = 'array';
+
+  protected $useTimestamps = true;
+  protected $createdField  = 'created_date';
+  protected $updatedField  = 'updated_date';
+  protected $deletedField  = 'deleted_date';
+  
   public function get($conditions = [], $fields = [], $tables = [])
   {
 

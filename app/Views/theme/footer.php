@@ -9,6 +9,7 @@
   <script src="<?= base_url() ?>public/js/bootstrap.min.js"></script>
   <script src="<?= base_url() ?>public/js/scripts.js"></script>
   <script src="<?= base_url() ?>public/js/sweetalert2@9.js"></script>
+  <script src="<?= base_url() ?>public/js/myAlerts.js"></script>
   <script src="<?= base_url() ?>public/DataTables/js/jquery.dataTables.min.js"></script>
   <script src="<?= base_url() ?>public/DataTables/js/dataTables.bootstrap4.min.js"></script>
   <script src="<?= base_url() ?>public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>

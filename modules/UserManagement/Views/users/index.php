@@ -13,7 +13,7 @@
     <div class="row">
        <div class="col-md-4 mt-2">
         <!-- Export Data --> 
-        <a type="button" class="btn btn-success" href='<?= base_url('users/exportData') ?>'>Export Users</a><br><br>
+        <!-- <a type="button" class="btn btn-success" href='<?= base_url('users/exportData') ?>'>Export Users</a><br><br> -->
         <?php if(session()->has('message')){ ?>
           <div class="alert <?= session()->getFlashdata('alert-class') ?>">
             <?= session()->getFlashdata('message') ?>
@@ -30,16 +30,16 @@
               <div class="alert alert-danger"><?php echo $error_msg; ?></div>
           </div>
           <?php endif; ?>
-          <form action="<?= base_url('users/import-file'); ?>" method="post" enctype="multipart/form-data">
+          <!-- <form action="<?= base_url('users/import-file'); ?>" method="post" enctype="multipart/form-data">
             <div class="input-group mb-3">
               <input class="form-control" type="file" name="file" required accept=".csv" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
               <button type="submit" class="btn btn-success" id="button-addon2" name="importSubmit">Import Users</button>
             </div>
-          </form>
+          </form> -->
         </div>
-        <div class="col-md-2 offset-md-6">
+        <!-- <div class="col-md-2 offset-md-6">
           <?php user_add_link('users', $_SESSION['userPermmissions']) ?>
-        </div>
+        </div> -->
       </div>
     <br>
       <?php $uri = new \CodeIgniter\HTTP\URI(current_url()); ?>

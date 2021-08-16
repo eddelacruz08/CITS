@@ -67,23 +67,22 @@ class HealthDeclaration extends BaseController
 				echo view('App\Views\theme\indexHealth', $data);
 			}else{
 				$guidelineData = $this->guidelinesModel->get(['status'=>'a']);
-				foreach($guidelineData as $guideline){
-					$guidelineInfo = $guideline['content'];
-					break;
-				}
 				$token_checklist = md5(str_shuffle('ABCDEFGHIJKLMNOPQRSTWXYZabcdefghijklmnopqrstuvwxyz0123456789'.time()));
 				if($_POST['q_one'] == 'yes' || $_POST['q_two'] == 'yes' || $_POST['q_three'] == 'yes' || $_POST['q_four'] == 'yes' || $_POST['q_five'] == 'yes'){
 					
 					$_POST['status_defined'] = 'ws';
 					
 					$to = $_SESSION['email'];
-					$subject = 'Guidelines for Guest with Symptoms';
-					$message = $guidelineInfo;
 					$email = \Config\Services::email();
-					$email->setTo($to);
-					$email->setFrom('United Coders Dev Team', SYSTEM_NAME);
-					$email->setSubject($subject);
-					$email->setMessage($message);
+					$content = '';
+					foreach($guidelineData as $guideline){
+						$content .= $guideline['content'].'<br>';
+						$email->setTo($to);
+						$email->setFrom('United Coders Development Team', SYSTEM_NAME);
+						$email->setSubject('Defined Symptom Guidelines');
+						$email->setMessage('List of Guide Tips for COVID-19:<br>'.$content);
+						$email->attach(base_url().'public/uploads/guidelines/'.$guideline['image']);
+					}
 					if($email->send()){
 						$emailStatus = 1;
 					}else{

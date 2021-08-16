@@ -22,36 +22,34 @@ if (! function_exists('user_primary_links'))
 		{
 			if(hasPrimary($module['id'], $array_permissions))
 			{
-
-
 				if ($module['module_type'] == 1)
 				{
-									echo '<li class="nav-item">';
-									echo '<a href="#" class="nav-link">';
-									echo getIcon($module['id'], $_SESSION['appmodules'], false);
-									echo '&nbsp<p>';
-									echo ucwords(name_on_system($module['id'], $_SESSION['appmodules'], 'modules'));
-									echo '<i class="fas fa-angle-left right"></i>';
-									echo '</p>';
-									echo '</a>';
+					echo '<li class="nav-item">';
+					echo '<a href="#" class="nav-link">';
+					echo getIcon($module['id'], $_SESSION['appmodules'], false);
+					echo '&nbsp<p>';
+					echo ucwords(name_on_system($module['id'], $_SESSION['appmodules'], 'modules'));
+					echo '<i class="fas fa-angle-left right"></i>';
+					echo '</p>';
+					echo '</a>';
 
-									echo '<ul class="nav nav-treeview" aria-labelledby="'.str_replace(' ', '', ucwords(name_on_system($module['id'], $_SESSION['appmodules'], 'modules'))).'">';
-									echo '<li class="nav-item">';
-									foreach($array_permissions as $permission)
-									{
-										if($permission['status'] == 'a' && $permission['module_id'] == $module['id'] && $permission['func_type'] == 1 && in_array($_SESSION['rid'], json_decode($permission['allowed_roles'])))
-										{
-											echo '<a id="color" class="nav-link title="'.ucwords($permission['function_name']) .'" href="'. base_url() .''.str_replace("_","-",$permission['table_name']).'">'.getIcon($permission['id'], $_SESSION['userPermmissions']);
-											echo '&nbsp<p>';
-											echo ucwords($permission['function_name']);
-											echo '</p>';
-											echo '</a>';
-										}
-									}
-								}
-									// echo '</li>';
-									echo '</ul>';
-									echo '</li>';
+					echo '<ul class="nav nav-treeview" aria-labelledby="'.str_replace(' ', '', ucwords(name_on_system($module['id'], $_SESSION['appmodules'], 'modules'))).'">';
+					echo '<li class="nav-item">';
+					foreach($array_permissions as $permission)
+					{
+						if($permission['status'] == 'a' && $permission['module_id'] == $module['id'] && $permission['func_type'] == 1 && in_array($_SESSION['rid'], json_decode($permission['allowed_roles'])))
+						{
+							echo '<a id="color" class="nav-link title="'.ucwords($permission['function_name']) .'" href="'. base_url() .''.str_replace("_","-",$permission['table_name']).'">'.getIcon($permission['id'], $_SESSION['userPermmissions']);
+							echo '&nbsp<p>';
+							echo ucwords($permission['function_name']);
+							echo '</p>';
+							echo '</a>';
+						}
+					}
+				}
+					// echo '</li>';
+					echo '</ul>';
+					echo '</li>';
 			}
 		}
 	}
@@ -317,7 +315,7 @@ if (! function_exists('maintenance_detail_add_link'))
 						echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#frmParameterItems"><i class="fas fa-plus"></i> Add Parameter Items</button>';
 						break;
 					default:
-						echo  '<a href="'. base_url() .''.str_replace("_","-",$table).'/add" class="btn btn-sm btn-primary btn-block float-right"><i class="fas fa-plus"></i> Add '.ucwords(str_replace('_', ' ', $table)) .'</a>';
+						echo  '<a href="'. base_url() .''.str_replace("_","-",$table).'/add" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add '.ucwords(str_replace('_', ' ', $table)) .'</a>';
 						break;
 				}
 				break;
@@ -461,7 +459,7 @@ if (! function_exists('maintenance_action'))
 								echo '<a class="btn btn-default btn-sm" style="border: 1px solid #343a40;" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'"><i class="far fa-edit"></i></a> ';
 								break;
 							case 'guidelines':
-								echo '<a class="btn btn-warning btn-md float-right" title="Edit guidelines" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'"><i class="far fa-edit"></i> Edit Guidelines</a> ';
+								echo '<a class="btn btn-outline-dark" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'"><i class="far fa-edit"></i></a> ';
 								break;
 							case 'questions':
 								echo '<a class="btn btn-warning btn-md float-right" title="Edit Questions" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'"><i class="far fa-edit"></i> Edit Questions</a> ';
@@ -474,8 +472,8 @@ if (! function_exists('maintenance_action'))
 						break;
 					// case 'delete':
 					// 	switch($table){
-					// 		case 'guest_conditions':
-					// 			echo  '<a class="btn btn-default btn-sm remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete/'.$id.'/'.$pId.'\')" title="delete"><i class="far fa-trash-alt"></i></a>';
+					// 		case 'guidelines':
+					// 			echo  '<a class="btn btn-outline-dark remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete/'.$id.'/'.$pId.'\')" title="delete"><i class="far fa-trash-alt"></i></a>';
 					// 		break;
 					// 		case 'guests':
 					// 				echo  '<a class="btn btn-default btn-sm remove" style="border: 1px solid #343a40;" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete/'.$id.'\')" title="delete"><i class="far fa-trash-alt"></i></a>';
@@ -483,8 +481,8 @@ if (! function_exists('maintenance_action'))
 					// 		default:
 					// 				echo  '<a class="btn btn-default btn-sm remove" style="border: 1px solid #343a40;" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete/'.$id.'\')" title="delete"><i class="far fa-trash-alt"></i></a>';
 					// 		break;
-						// }
-						// break;
+					// 	}
+					// 	break;
 				}
 			}
 		}

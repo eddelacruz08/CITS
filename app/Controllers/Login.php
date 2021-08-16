@@ -23,7 +23,7 @@ class Login extends BaseController
 	public function index(){
 		if($_POST){
 			$loginOK = 0;
-			$users = $this->usersModel->getUserWithCondition(['email' => $_POST['email'], 'status' => 'a']);
+			$users = $this->usersModel->getUserWithConditionLandingPage($_POST['email']);
 			if(!empty($users)){
 				foreach($users as $user){
 					if(password_verify($_POST['password'], $user['password'])){
@@ -33,6 +33,7 @@ class Login extends BaseController
 						$_SESSION['fname'] = $user['firstname'].' '.$user['lastname'];
 						$_SESSION['email'] = $user['email'];
 						$_SESSION['rid'] = $user['role_id'];
+						$_SESSION['landingPage'] = $user['table_name'];
 						$_SESSION['user_logged_in'] = 1;
 						break;
 					}
@@ -44,23 +45,9 @@ class Login extends BaseController
 				return redirect()->to( base_url());
 			}
 			if($loginOK == 1){
-				if($_SESSION['rid'] == 1){
-					$_SESSION['success_login'] = 'Welcome '.$user['username'].'!';
-					$this->session->markAsFlashdata('success_login');
-					return redirect()->to(base_url('activity%20logs'));
-				}elseif($_SESSION['rid'] == 2){
-					$_SESSION['success_login'] = 'Welcome '.$user['username'].'!';
-					$this->session->markAsFlashdata('success_login');
-					return redirect()->to(base_url('profile'));
-				}elseif($_SESSION['rid'] == 4){
-					$_SESSION['success_login'] = 'Welcome '.$user['username'].'!';
-					$this->session->markAsFlashdata('success_login');
-					return redirect()->to(base_url('visits'));
-				}else{
-					$_SESSION['success_login'] = 'Welcome '.$user['username'].'!';
-					$this->session->markAsFlashdata('success_login');
-					return redirect()->to(base_url('dashboard'));
-				}
+				$_SESSION['success_login'] = 'Welcome '.$user['username'].'!';
+				$this->session->markAsFlashdata('success_login');
+				return redirect()->to(base_url($_SESSION['landingPage']));
 			}else{
 				$_SESSION['error_login'] = 'Email and Password mismatch!';
 				$this->session->markAsFlashdata('error_login');

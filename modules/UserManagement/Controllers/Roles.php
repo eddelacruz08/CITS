@@ -56,7 +56,8 @@ class Roles extends BaseController
 
     	$permissions_model = new PermissionsModel();
 
-    	$data['permissions'] = $this->permissions;
+		$data['permissions'] = $permissions_model->getPermissionsWithCondition(['status' => 'a', 'func_type' => 1]);
+    	// $data['permissions'] = $this->permissions;
 
     	helper(['form', 'url']);
     	$model = new RolesModel();

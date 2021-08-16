@@ -48,9 +48,9 @@ class Genders extends BaseController
 			if (!$this->validate('gender'))
 			{
 				$data['errors'] = \Config\Services::validation()->getErrors();
-			$data['function_title'] = "Adding Gender";
-			$data['viewName'] = 'Modules\Maintenances\Views\genders\frmGender';
-			echo view('App\Views\theme\index', $data);
+				$data['function_title'] = "Adding Gender";
+				$data['viewName'] = 'Modules\Maintenances\Views\genders\frmGender';
+				echo view('App\Views\theme\index', $data);
 			}
 			else
 			{
@@ -62,7 +62,7 @@ class Genders extends BaseController
 					];
 					$this->logsModel->add($val_array);
 					$_SESSION['success'] = 'You have added a new record';
-							$this->session->markAsFlashdata('success');
+					$this->session->markAsFlashdata('success');
 					return redirect()->to(base_url('genders'));
 				}
 				else

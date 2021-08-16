@@ -16,7 +16,7 @@ class CreateLogsPermissions extends \CodeIgniter\Database\Migration {
             'module_id' => '10',
             'link_icon' => '<i class="fas fa-tasks"></i>',
             'order' => '1',
-            'table_name' => 'logs',
+            'table_name' => 'activity logs',
             'func_action' => 'link',
             'func_type' => 1,
             'allowed_roles' => "[1]",

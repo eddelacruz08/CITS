@@ -16,7 +16,7 @@ class CreateProfilePermissions extends \CodeIgniter\Database\Migration {
             'module_id' => '6',
             'link_icon' => '<i class="fas fa-address-card"></i>',
             'order' => '1',
-            'table_name' => 'profiles',
+            'table_name' => 'profile',
             'func_action' => 'link',
             'func_type' => 1,
             'allowed_roles' => "[2]",

@@ -66,15 +66,15 @@ class CreateQuestions extends \CodeIgniter\Database\Migration {
         [
           'user_id' => '1',
           
-          'q_one' => 'Is your temperature greater than 37.5 degrees for the past 14 days?',
+          'q_one' => 'Are you Experiencing (a. Fever Temperature greater than 37.5 degrees Celcius, Flu-like symptoms: cough & colds, sore throat, runny nose, Shortness of breath, loss of smell and taste, Diarrhea, Headache, Joint/Muscle pain)?',
           
-          'q_two' => 'Tested positive or presumptively positive with covid-19 (The new Coronavirus or SARS-COV2) or been identified as a potential carrier of the coronavirus for the past 14 days?',
+          'q_two' => 'Have you been tested for COVID-19 for the last 14 days?',
           
-          'q_three' => 'Experienced any symptoms commonly associated with covid-19  (Fever, Cough, Fatigue or Muscle Pain, Difficulty Breathing, Sore Throat, Lung Infections, Headache, Loss of Taste, or Diarrhea) for the past 14 days?',
+          'q_three' => 'Have you been in close contact or staying in the same environment with COVID positive, first/second generation?',
            
-          'q_four' => 'Been in any location/site declared as hazardous with and/or potentially infective with the new coronavirus by a recognized health and regulatory authority for the past 14 days?',
+          'q_four' => 'Have you been in close contact or staying in the same environment with a person with flu-like symptoms (fever, cough or cold, sore throat, runny nose) symptoms in the past 14 days?',
           
-          'q_five' => 'Been in direct contact with or in the immediate vicinity of any person who tested positive with the new coronavirus or who was diagnosed as possibly being infected by the new coronavirus for the past 14 days?',
+          'q_five' => 'Do you have any travel history abroad or in places with a high incidence of COVID-19 in the last 14 days?',
          
           'status' => 'a',
           

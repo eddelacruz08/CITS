@@ -388,13 +388,28 @@ class UsersModel extends \CodeIgniter\Model
       return $query->getResultArray();
     }
     /////////////////////////////////////////////////////////////////////////////
-    public function getUserWithCondition($conditions = [])
+  public function getUserWithCondition($conditions = [])
+  {
+    foreach($conditions as $field => $value)
+    {
+      $this->where($field, $value);
+    }
+      return $this->findAll();
+  }
+
+	public function getUserWithConditionLandingPage($email)
 	{
-		foreach($conditions as $field => $value)
-		{
-			$this->where($field, $value);
-		}
-	    return $this->findAll();
+		$db = \Config\Database::connect();
+
+		$str = "SELECT a.*, b.role_name, p.table_name 
+            FROM users a 
+            LEFT JOIN roles b ON a.role_id = b.id 
+            LEFT JOIN permissions p ON b.function_id = p.id 
+            WHERE a.status = 'a' AND a.email = '$email'";
+
+		$query = $db->query($str);
+
+	  return $query->getResultArray();
 	}
 
 	public function getUsersWithRole()
