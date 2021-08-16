@@ -45,7 +45,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <?php if($deniedGuestPerDay):?>
+                          <?php if(empty($deniedGuestPerDay)):?>
                             <tr class="text-center">
                               <td colspan="5">No data available.</td>
                             </tr>
