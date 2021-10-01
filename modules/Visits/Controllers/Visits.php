@@ -26,11 +26,12 @@ class Visits extends BaseController
 		$data['totalVisitsPerDay'] = $this->visitsModel->getTotalVisitPerDay();
 		$data['activeVisits'] = $this->visitsModel->getTotalVisitActivePerDay();
 		$data['deniedGuestPerDay'] = $this->visitsModel->getDeniedGuestPerDay();
+		$data['deniedGuestPerDayTotal'] = $this->visitsModel->getDeniedGuestPerDayTotal();
 		$data['totalVisits'] = $this->visitsModel->getTotalVisits();
 		$data['function_title'] = "Active Visit List";
 		$data['function_title_history'] = "Visits History";
 		$data['viewName'] = 'Modules\Visits\Views\visits\index';
-		echo view('theme\index', $data);
+		echo view('App\Views\theme\index', $data);
     }
 
 	public function print(){

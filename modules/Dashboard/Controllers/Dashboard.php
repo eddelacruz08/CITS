@@ -54,7 +54,7 @@ class Dashboard extends BaseController
 		// /////////// patient assess List//////////////////////////////
 		$data['patient_assess_list'] = $this->usersModel->getPatientAssessList();
 		$data['viewName'] = 'Modules\Dashboard\Views\dashboard\index';
-		echo view('theme\index', $data);
+		echo view('App\Views\theme\index', $data);
   	}
 
 }

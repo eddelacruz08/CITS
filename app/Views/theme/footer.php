@@ -23,6 +23,7 @@
     $(function () {
       'use strict'
 
+      <?php if(isset($getAssessmentMonthlyCount)):?>
       var mode = 'index'
       var intersect = true
       var salesChart = document.getElementById('assessment-chart'); // node
@@ -41,7 +42,6 @@
               backgroundColor: '#17a2b8',
               borderColor: '#17a2b8',
               data: [
-      <?php if(isset($getAssessmentMonthlyCount)):?>
             <?php foreach($getAssessmentMonthlyCount as $AssessmentMonthlyCount):?>
               <?=$AssessmentMonthlyCount['Jan'];?>,
               <?=$AssessmentMonthlyCount['Feb'];?>,
@@ -56,7 +56,6 @@
               <?=$AssessmentMonthlyCount['Nov'];?>,
               <?=$AssessmentMonthlyCount['Dec'];?>,
             <?php endforeach;?>
-      <?php endif;?>
               ]
             },
             {
@@ -115,12 +114,14 @@
           }
         }
       })
+      <?php endif;?>
     });
   </script>
   <script>
     $(function () {
       'use strict'
 
+      <?php if(isset($getInvalidatedMonthlyCount)):?>
       var mode = 'index'
       var intersect = true
 
@@ -138,7 +139,6 @@
               backgroundColor: '#ffc107 ',
               borderColor: '#ffc107 ',
               data: [
-      <?php if(isset($getInvalidatedMonthlyCount)):?>
             <?php foreach($getInvalidatedMonthlyCount as $InvalidatedMonthlyCount):?>
               <?=$InvalidatedMonthlyCount['Jan'];?>,
               <?=$InvalidatedMonthlyCount['Feb'];?>,
@@ -153,7 +153,6 @@
               <?=$InvalidatedMonthlyCount['Nov'];?>,
               <?=$InvalidatedMonthlyCount['Dec'];?>,
             <?php endforeach;?>
-      <?php endif;?>
               ]
             },
             {
@@ -212,6 +211,7 @@
           }
         }
       })
+      <?php endif;?>
     });
   </script>
   <script>

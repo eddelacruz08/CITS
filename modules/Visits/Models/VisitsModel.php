@@ -22,7 +22,7 @@ class VisitsModel extends BaseModel
 
       $db = \Config\Database::connect();
 
-      $str = "SELECT a.*, u.firstname, u.lastname, t.guest_type, g.gender, COUNT(a.id) AS totalDeniedGuests
+      $str = "SELECT a.*, u.firstname, u.lastname, t.guest_type, g.gender
               FROM assess a 
               LEFT JOIN users u ON a.user_id = u.id
               LEFT JOIN genders g ON g.id = u.gender_id
@@ -34,6 +34,19 @@ class VisitsModel extends BaseModel
       return $query->getResultArray();
     }
 
+    public function getDeniedGuestPerDayTotal(){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT a.*, COUNT(a.id) AS totalDefinedGuest
+              FROM assess a 
+              WHERE a.date = CURDATE() AND a.status = 'a'";
+
+      $query = $db->query($str);
+
+      return $query->getResultArray();
+    }
+    
     public function getTotalVisitPerDay(){
 
       $db = \Config\Database::connect();

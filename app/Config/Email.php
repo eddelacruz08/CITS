@@ -40,22 +40,23 @@ class Email
 	 *
 	 * @var string
 	 */
-	public $SMTPHost = 'smtp.gmail.com';
+	public $SMTPHost = 'smtp.googlemail.com';
 
 	/**
 	 * SMTP Username
 	 *
 	 * @var string
 	 */
-	public $SMTPUser = 'unitedcodersdcsnl@gmail.com';
+	public $SMTPUser = "cits.pupt@gmail.com";
+// 	unitedcodersdcsnl@gmail.com
 
 	/**
 	 * SMTP Password
 	 *
 	 * @var string
 	 */
-	public $SMTPPass = 'UnitedCodersDCSNL2020';
-
+	public $SMTPPass = "citsPUPT2021";
+// UnitedCodersDCSNL2020
 	/**
 	 * SMTP Port
 	 *
@@ -68,7 +69,7 @@ class Email
 	 *
 	 * @var integer
 	 */
-	public $SMTPTimeout = 20;
+	public $SMTPTimeout = 60;
 
 	/**
 	 * Enable persistent SMTP connections

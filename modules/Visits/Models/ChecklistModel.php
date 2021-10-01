@@ -9,6 +9,19 @@ class ChecklistModel extends BaseModel
 
     protected $allowedFields = ['id','user_id', 'q_one', 'q_two', 'q_three', 'q_four', 'q_five', 'reason_id','status_defined', 'token','status', 'created_date', 'updated_date', 'deleted_date'];
 
+    public function getLatestChecklistUser($id){
+
+      $db = \Config\Database::connect();
+
+      $str = "SELECT c.*
+              FROM checklists c 
+              WHERE c.status = 'a' AND c.created_date = CURDATE() AND c.user_id = '$id'";
+
+      $query = $db->query($str);
+
+      return $query->getResultArray();
+    }
+
     public function verifyTokenChecklist($token){
       $builder = $this->db->table('checklists');
       $builder->select("id, user_id, token, created_date, updated_date");

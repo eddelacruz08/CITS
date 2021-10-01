@@ -109,34 +109,48 @@ class CreateUsers extends \CodeIgniter\Database\Migration {
                 $this->forge->addKey('id', TRUE);
                 $this->forge->createTable($this->table);
 
-                // $data = [
-                //     [
-                //         'lastname' => 'coders',
-                //         'middlename' => 'coders',
-                //         'firstname' => 'united',
-                //         'ext_name_id' => '',
-                //         'username' => 'unitedcodersdcsnl',
-                //         'email' => 'unitedcodersdcsnl@gmail.com',
-                //         'password' => password_hash('unitedcodersdcsnl', PASSWORD_DEFAULT),
-                //         'birthdate' => date('Y-m-d H:i:s', strtotime('1999-11-22')),
-                //         'gender_id' => '2',
-                //         'cellphone_no' => '09673104255',
-                //         'landline_no' => '',
-                //         'address' => 'Blk 161 Lot 6 Central Bicutan',
-                //         'city_id' => '1',
-                //         'province_id' => '3',
-                //         'postal' => '1633',
-                //         'user_type_id' => '3',
-                //         'role_id' => 1,
-                //         'token' => md5(str_shuffle('abcdefghijklmnopqrstuvwxyz'.time())),
-                //         'status' => 'a',
-                //         'created_date' => date('Y-m-d H:i:s')
-                //     ],
-                // ];
+                $data = [
+                    [
+                        'lastname' => 'coders',
+                        'middlename' => 'coders',
+                        'firstname' => 'united',
+                        'username' => 'unitedcodersdcsnl',
+                        'email' => 'unitedcodersdcsnl@gmail.com',
+                        'password' => password_hash('unitedcodersdcsnl', PASSWORD_DEFAULT),
+                        'role_id' => 1,
+                        'token' => md5(str_shuffle('abcdefghijklmnopqrstuvwxyz'.time())),
+                        'status' => 'a',
+                        'created_date' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'lastname' => 'nurse',
+                        'middlename' => 'nurse',
+                        'firstname' => 'nurse',
+                        'username' => 'nurse',
+                        'email' => 'nurse123@gmail.com',
+                        'password' => password_hash('nursenurse123', PASSWORD_DEFAULT),
+                        'role_id' => 3,
+                        'token' => md5(str_shuffle('abcdefghijklmnopqrstuvwxyz'.time())),
+                        'status' => 'a',
+                        'created_date' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'lastname' => 'guard',
+                        'middlename' => 'guard',
+                        'firstname' => 'guard',
+                        'username' => 'guard',
+                        'email' => 'guard123@gmail.com',
+                        'password' => password_hash('guardguard123', PASSWORD_DEFAULT),
+                        'role_id' => 4,
+                        'token' => md5(str_shuffle('abcdefghijklmnopqrstuvwxyz'.time())),
+                        'status' => 'a',
+                        'created_date' => date('Y-m-d H:i:s')
+                    ],
+                ];
 
-                // $db      = \Config\Database::connect();
-                // $builder = $db->table($this->table);
-                // $builder->insertBatch($data);
+                $db      = \Config\Database::connect();
+                $builder = $db->table($this->table);
+                $builder->insertBatch($data);
         }
 
         public function down()

@@ -9,9 +9,9 @@
                 <div class="info-box bg-navy">
                   <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-user-slash"></i></span>
                   <div class="info-box-content">
-                    <?php foreach($deniedGuestPerDay as $deniedGuest):?>
+                    <?php foreach($deniedGuestPerDayTotal as $deniedGuest):?>
                       <span class="info-box-number h1">
-                        <?= $deniedGuest['totalDeniedGuests']; ?>
+                        <?= $deniedGuest['totalDefinedGuest']; ?>
                         <span><button type="button" class="btn btn-outline-light float-right" data-toggle="modal" data-target="#deniedGuestModal">See all denied guest</button></span>
                       </span>
                     <?php endforeach;?>

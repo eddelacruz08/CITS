@@ -179,7 +179,7 @@ class GuestAssessment extends BaseController
 		// set font
 		$pdf->SetFont('helvetica', 'B', 10);
 
-		$pdf->Write(0, 'Date: '.date('F d, Y'), '', 0, 'C', true, 0, false, false, 0);
+		$pdf->Write(0, 'Date: '. $_POST['date'] == true ? date('F d, Y', strtotime($_POST['date'])) : date('F d, Y'), '', 0, 'C', true, 0, false, false, 0);
 
 		$pdf->SetFont('helvetica', '', 10);
 		// die($_POST['startdate'] - $_POST['enddate']);
@@ -327,7 +327,7 @@ class GuestAssessment extends BaseController
 		// set font
 		$pdf->SetFont('helvetica', 'B', 10);
 
-		$pdf->Write(0, 'Date: '.date('F d, Y'), '', 0, 'C', true, 0, false, false, 0);
+		$pdf->Write(0, 'Date: '. $_POST['date'] == true ? date('F d, Y', strtotime($_POST['date'])) : date('F d, Y'), '', 0, 'C', true, 0, false, false, 0);
 
 		$pdf->SetFont('helvetica', '', 10);
 		// die($_POST['date']);

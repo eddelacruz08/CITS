@@ -71,8 +71,8 @@ class Login extends BaseController
 
 		$data['extensions'] = $extension_model->get(['status'=> 'a']);
 		$data['genders'] = $gender_model->get(['status'=> 'a']);
-		$data['provinces'] = $province_model->get(['status'=> 'a']);
-		$data['cities'] = $city_model->get(['status'=> 'a']);
+		$data['provinces'] = $province_model->orderBy('province','ASC')->get(['status'=> 'a']);
+		$data['cities'] = $city_model->orderBy('city','ASC')->get(['status'=> 'a']);
 		$data['guest_types'] = $guest_type_model->get(['status'=> 'a']);
 		if(!empty($_POST)){
 			if (!$this->validate('user')){
@@ -127,42 +127,46 @@ class Login extends BaseController
 				}else{
 					$_SESSION['error_login_forgot_password'] = 'Cannot Find Email!';
 					$this->session->markAsFlashdata('error_login_forgot_password');
-					$data['viewName'] = 'forgotPassword';
-					echo view('outside_layout\index', $data);
+				    return redirect()->to(base_url('login/forgotpassword'));
 				}
 				if($passwordOK == 1){
 					$to = $email;
 					$subject = 'Requested Password!';
 					$message = 'Hi '.ucfirst($firstname).' '.ucfirst($lastname).'!<br><br>'
-						.'<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-						Your new password request has been recieved. Please click '
+						.'Your new password request has been recieved. Please click '
 						.'the below link to verify your password.<br><br>'
 						.'New password: '.$randomPassword.'<br><br>'
 						.'<a type="button" href="'.base_url().'" class="btn btn-lg"> Verify New Password </a><br><br>'
 						.'Thanks!';
 					$email = \Config\Services::email();
 					$email->setTo($to);
-					$email->setFrom('United Coders Dev Team', SYSTEM_NAME);
+                    // $email->setFrom('unitedcodersdcsnl@gmail.com', SYSTEM_NAME.' Reset Password | United Coders Dev Team');
+					$email->setFrom('United Coders Dev Team', SYSTEM_NAME);			
 					$email->setSubject($subject);
 					$email->setMessage($message);
 					$_POST['password'] = $randomPassword;
 					$_POST['updated_date'] = date('Y-m-d h:i:s');
-					if($this->usersModel->editUsers($_POST, $id)){
-						$email->send();
-						$_SESSION['success_login_forgot'] = 'Successfully generate a new password.<br>Please check your email to verify your password.';
-						$this->session->markAsFlashdata('success_login_forgot');
-						return redirect()->to(base_url().'login/forgotpassword');
+					if($email->send()){
+    					if($this->usersModel->editUsers($_POST, $id)){
+    						$_SESSION['success_login_forgot'] = 'Successfully generate a new password. Please check your email to verify your password.';
+    						$this->session->markAsFlashdata('success_login_forgot');
+    						return redirect()->to(base_url().'login/forgotpassword');
+    					}else{
+    						$_SESSION['error_login_forgot_password'] = 'You cannot update data!';
+    						$this->session->markAsFlashdata('error_login_forgot_password');
+    						return redirect()->to(base_url().'login/forgotpassword');
+    					}
 					}else{
-						$_SESSION['error_login_forgot_password'] = 'You cannot update data!';
-						$this->session->markAsFlashdata('error_login_forgot_password');
-						return redirect()->to(base_url().'login/forgotpassword');
+    					$_SESSION['error_login_forgot_password'] = $email->printDebugger(['headers']);
+    					$this->session->markAsFlashdata('error_login_forgot_password');
+    					return redirect()->to(base_url().'login/forgotpassword');
 					}
 				}
 			}
 		}else{
 			$data['function_title'] = "Forgot Password";
 			$data['viewName'] = 'forgotPassword';
-			echo view('outside_layout\index', $data);
+			echo view('App\Views\outside_layout\index', $data);
 		}
 	}
 

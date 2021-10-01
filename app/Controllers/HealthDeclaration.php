@@ -48,14 +48,14 @@ class HealthDeclaration extends BaseController{
 						}
 					}else{
 						$data['viewName'] = 'requestHealthForm';
-						echo view('outside_layout\index', $data);
+						echo view('App\Views\outside_layout\index', $data);
 					}
 					if($checkUser == 1){
 						if(!$this->validate('requestChecklist')){
 							$data['value'] = $_POST;
 							$data['errors'] = \Config\Services::validation()->getErrors();
 							$data['viewName'] = 'requestHealthForm';
-							echo view('outside_layout\index', $data);
+							echo view('App\Views\outside_layout\index', $data);
 						}else{
 							$checklistData = $this->checklistsModel->getUpdatedChecklistDate($id);
 							if(!empty($checklistData)){
@@ -121,7 +121,7 @@ class HealthDeclaration extends BaseController{
 												$_SESSION['unvailableQrcode'] = 'You cannot get your Qr Code because your self-assessment was defined for any symptoms.';
 												$this->session->markAsFlashdata('error');
 												$data['viewName'] = 'yourQrcodeDisplay';
-												echo view('outside_layout\index', $data);
+												echo view('App\Views\outside_layout\index', $data);
 											}else{
 												$_SESSION['unavailable'] = false;
 												$_SESSION['success_request'] = 'You have Successfully fillup a Health Declaration Form!';
@@ -130,7 +130,7 @@ class HealthDeclaration extends BaseController{
 												$_SESSION['lastname'] = $userLastname;
 												$this->session->markAsFlashdata('success_request');
 												$data['viewName'] = 'yourQrcodeDisplay';
-												echo view('outside_layout\index', $data);
+												echo view('App\Views\outside_layout\index', $data);
 											}
 										}else{
 											$_SESSION['error'] = 'You have an error of adding a checklist!';
@@ -183,7 +183,7 @@ class HealthDeclaration extends BaseController{
 							$data['value'] = $_POST;
 							$data['errors'] = \Config\Services::validation()->getErrors();
 							$data['viewName'] = 'requestHealthForm';
-							echo view('outside_layout\index', $data);
+							echo view('App\Views\outside_layout\index', $data);
 						}else{
 							$checklistData = $this->checklistsModel->getLatestChecklistDateForRequestForm($id);
 							if(empty($checklistData)){
@@ -239,7 +239,7 @@ class HealthDeclaration extends BaseController{
 										$_SESSION['unvailableQrcode'] = 'You cannot get your Qr Code because your self-assessment was defined for any symptoms.';
 										$this->session->markAsFlashdata('error');
 										$data['viewName'] = 'yourQrcodeDisplay';
-										echo view('outside_layout\index', $data);
+										echo view('App\Views\outside_layout\index', $data);
 									}else{
 										$_SESSION['unavailable'] = false;
 										$_SESSION['success_request'] = 'You have Successfully fillup a Health Declaration Form!';
@@ -248,7 +248,7 @@ class HealthDeclaration extends BaseController{
 										$_SESSION['lastname'] = $userLastname;
 										$this->session->markAsFlashdata('success_request');
 										$data['viewName'] = 'yourQrcodeDisplay';
-										echo view('outside_layout\index', $data);
+										echo view('App\Views\outside_layout\index', $data);
 									}
 								}else{
 									$_SESSION['error'] = 'You have an error of adding a checklist!';
@@ -274,7 +274,7 @@ class HealthDeclaration extends BaseController{
 			}
 		}else{
 			$data['viewName'] = 'requestHealthForm';
-			echo view('outside_layout\index', $data);
+			echo view('App\Views\outside_layout\index', $data);
 		}
 	}
 }

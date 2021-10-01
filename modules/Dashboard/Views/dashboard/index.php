@@ -134,85 +134,85 @@
           </div>
         <div class="row text-center mb-3">
           <?php foreach($getAssessmentMonthlyCount as $AssessmentMonthlyCount):?>
-          <div class="col-1">
-            <button type="button" class="btn btn-info" title="January" width="100%">
+          <div class="col-sm-1 col-2 mt-1">
+            <button type="button" class="btn btn-<?=date('m')==1?'dark':'info'?>" title="January" width="100%">
               <label class="text-center">Jan</label>
               <br>
               <label class="text-center"><?=$AssessmentMonthlyCount['Jan'];?></label>
             </button>
           </div>
-          <div class="col-1">
-            <button type="button" class="btn btn-info" title="February" width="100%">
+          <div class="col-sm-1 col-2 mt-1">
+            <button type="button" class="btn btn-<?=date('m')==2?'dark':'info'?>" title="February" width="100%">
               <label class="text-center">Feb</label>
               <br>
               <label class="text-center"><?=$AssessmentMonthlyCount['Feb'];?></label>
             </button>
           </div>
-          <div class="col-1">
-            <button type="button" class="btn btn-info" title="March" width="100%">
+          <div class="col-sm-1 col-2 mt-1">
+            <button type="button" class="btn btn-<?=date('m')==3?'dark':'info'?>" title="March" width="100%">
               <label class="text-center">Mar</label>
               <br>
               <label class="text-center"><?=$AssessmentMonthlyCount['Mar'];?></label>
             </button>
           </div>
-          <div class="col-1">
-            <button type="button" class="btn btn-info" title="April" width="100%">
+          <div class="col-sm-1 col-2 mt-1">
+            <button type="button" class="btn btn-<?=date('m')==4?'dark':'info'?>" title="April" width="100%">
               <label class="text-center">Apr</label>
               <br>
               <label class="text-center"><?=$AssessmentMonthlyCount['Apr'];?></label>
             </button>
           </div>
-          <div class="col-1">
-            <button type="button" class="btn btn-info" title="May" width="100%">
+          <div class="col-sm-1 col-2 mt-1">
+            <button type="button" class="btn btn-<?=date('m')==5?'dark':'info'?>" title="May" width="100%">
               <label class="text-center">May</label>
               <br>
               <label class="text-center"><?=$AssessmentMonthlyCount['May'];?></label>
             </button>
           </div>
-          <div class="col-1">
-            <button type="button" class="btn btn-info" title="June" width="100%">
+          <div class="col-sm-1 col-2 mt-1">
+            <button type="button" class="btn btn-<?=date('m')==6?'dark':'info'?>" title="June" width="100%">
               <label class="text-center">Jun</label>
               <br>
               <label class="text-center"><?=$AssessmentMonthlyCount['Jun'];?></label>
             </button>
           </div>
-          <div class="col-1">
-            <button type="button" class="btn btn-info" title="July" width="100%">
+          <div class="col-sm-1 col-2 mt-1">
+            <button type="button" class="btn btn-<?=date('m')==7?'dark':'info'?>" title="July" width="100%">
               <label class="text-center">Jul</label>
               <br>
               <label class="text-center"><?=$AssessmentMonthlyCount['Jul'];?></label>
             </button>
           </div>
-          <div class="col-1">
-            <button type="button" class="btn btn-info" title="August" width="100%">
+          <div class="col-sm-1 col-2 mt-1">
+            <button type="button" class="btn btn-<?=date('m')==8?'dark':'info'?>" title="August" width="100%">
               <label class="text-center">Aug</label>
               <br>
               <label class="text-center"><?=$AssessmentMonthlyCount['Aug'];?></label>
             </button>
           </div>
-          <div class="col-1">
-            <button type="button" class="btn btn-info" title="September" width="100%">
+          <div class="col-sm-1 col-2 mt-1">
+            <button type="button" class="btn btn-<?=date('m')==9?'dark':'info'?>" title="September" width="100%">
               <label class="text-center">Sep</label>
               <br>
               <label class="text-center"><?=$AssessmentMonthlyCount['Sep'];?></label>
             </button>
           </div>
-          <div class="col-1">
-            <button type="button" class="btn btn-info" title="October" width="100%">
+          <div class="col-sm-1 col-2 mt-1">
+            <button type="button" class="btn btn-<?=date('m')==10?'dark':'info'?>" title="October" width="100%">
               <label class="text-center">Oct</label>
               <br>
               <label class="text-center"><?=$AssessmentMonthlyCount['Oct'];?></label>
             </button>
           </div>
-          <div class="col-1">
-            <button type="button" class="btn btn-info" title="November" width="100%">
+          <div class="col-sm-1 col-2 mt-1">
+            <button type="button" class="btn btn-<?=date('m')==11?'dark':'info'?>" title="November" width="100%">
               <label class="text-center">Nov</label>
               <br>
               <label class="text-center"><?=$AssessmentMonthlyCount['Nov'];?></label>
             </button>
           </div>
-          <div class="col-1">
-            <button type="button" class="btn btn-info" title="December" width="100%">
+          <div class="col-sm-1 col-2 mt-1">
+            <button type="button" class="btn btn-<?=date('m')==12?'dark':'info'?>" title="December" width="100%">
               <label class="text-center">Dec</label>
               <br>
               <label class="text-center"><?=$AssessmentMonthlyCount['Dec'];?></label>
@@ -247,85 +247,85 @@
           </div>
           <div class="row text-center mb-3">
             <?php foreach($getInvalidatedMonthlyCount as $InvalidatedMonthlyCount):?>
-            <div class="col-1">
-              <button type="button" class="btn btn-warning" title="January">
+            <div class="col-sm-1 col-2 mt-1">
+              <button type="button" class="btn btn-<?=date('m')==1?'dark':'warning'?>" title="January">
                 <label class="text-center">Jan</label>
                 <br>
                 <label class="text-center"><?=$InvalidatedMonthlyCount['Jan'];?></label>
               </button>
             </div>
-            <div class="col-1">
-              <button type="button" class="btn btn-warning" title="February">
+            <div class="col-sm-1 col-2 mt-1">
+              <button type="button" class="btn btn-<?=date('m')==2?'dark':'warning'?>" title="February">
                 <label class="text-center">Feb</label>
                 <br>
                 <label class="text-center"><?=$InvalidatedMonthlyCount['Feb'];?></label>
               </button>
             </div>
-            <div class="col-1">
-              <button type="button" class="btn btn-warning" title="March">
+            <div class="col-sm-1 col-2 mt-1">
+              <button type="button" class="btn btn-<?=date('m')==3?'dark':'warning'?>" title="March">
                 <label class="text-center">Mar</label>
                 <br>
                 <label class="text-center"><?=$InvalidatedMonthlyCount['Mar'];?></label>
               </button>
             </div>
-            <div class="col-1">
-              <button type="button" class="btn btn-warning" title="April">
+            <div class="col-sm-1 col-2 mt-1">
+              <button type="button" class="btn btn-<?=date('m')==4?'dark':'warning'?>" title="April">
                 <label class="text-center">Apr</label>
                 <br>
                 <label class="text-center"><?=$InvalidatedMonthlyCount['Apr'];?></label>
               </button>
             </div>
-            <div class="col-1">
-              <button type="button" class="btn btn-warning" title="May">
+            <div class="col-sm-1 col-2 mt-1">
+              <button type="button" class="btn btn-<?=date('m')==5?'dark':'warning'?>" title="May">
                 <label class="text-center">May</label>
                 <br>
                 <label class="text-center"><?=$InvalidatedMonthlyCount['May'];?></label>
               </button>
             </div>
-            <div class="col-1">
-              <button type="button" class="btn btn-warning" title="June">
+            <div class="col-sm-1 col-2 mt-1">
+              <button type="button" class="btn btn-<?=date('m')==6?'dark':'warning'?>" title="June">
                 <label class="text-center">Jun</label>
                 <br>
                 <label class="text-center"><?=$InvalidatedMonthlyCount['Jun'];?></label>
               </button>
             </div>
-            <div class="col-1">
-              <button type="button" class="btn btn-warning" title="July">
+            <div class="col-sm-1 col-2 mt-1">
+              <button type="button" class="btn btn-<?=date('m')==7?'dark':'warning'?>" title="July">
                 <label class="text-center">Jul</label>
                 <br>
                 <label class="text-center"><?=$InvalidatedMonthlyCount['Jul'];?></label>
               </button>
             </div>
-            <div class="col-1">
-              <button type="button" class="btn btn-warning" title="August">
+            <div class="col-sm-1 col-2 mt-1">
+              <button type="button" class="btn btn-<?=date('m')==8?'dark':'warning'?>" title="August">
                 <label class="text-center">Aug</label>
                 <br>
                 <label class="text-center"><?=$InvalidatedMonthlyCount['Aug'];?></label>
               </button>
             </div>
-            <div class="col-1">
-              <button type="button" class="btn btn-warning" title="September">
+            <div class="col-sm-1 col-2 mt-1">
+              <button type="button" class="btn btn-<?=date('m')==9?'dark':'warning'?>" title="September">
                 <label class="text-center">Sep</label>
                 <br>
                 <label class="text-center"><?=$InvalidatedMonthlyCount['Sep'];?></label>
               </button>
             </div>
-            <div class="col-1">
-              <button type="button" class="btn btn-warning" title="October">
+            <div class="col-sm-1 col-2 mt-1">
+              <button type="button" class="btn btn-<?=date('m')==10?'dark':'warning'?>" title="October">
                 <label class="text-center">Oct</label>
                 <br>
                 <label class="text-center"><?=$InvalidatedMonthlyCount['Oct'];?></label>
               </button>
             </div>
-            <div class="col-1">
-              <button type="button" class="btn btn-warning" title="November">
+            <div class="col-sm-1 col-2 mt-1">
+              <button type="button" class="btn btn-<?=date('m')==11?'dark':'warning'?>" title="November">
                 <label class="text-center">Nov</label>
                 <br>
                 <label class="text-center"><?=$InvalidatedMonthlyCount['Nov'];?></label>
               </button>
             </div>
-            <div class="col-1">
-              <button type="button" class="btn btn-warning" title="December">
+            <div class="col-sm-1 col-2 mt-1">
+              <button type="button" class="btn btn-<?=date('m')==12?'dark':'warning'?>" title="December">
                 <label class="text-center">Dec</label>
                 <br>
                 <label class="text-center"><?=$InvalidatedMonthlyCount['Dec'];?></label>

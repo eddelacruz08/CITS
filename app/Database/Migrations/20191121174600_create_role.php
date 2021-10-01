@@ -55,28 +55,28 @@ class CreateRole extends \CodeIgniter\Database\Migration {
                 $data = [
                     [
                         'role_name' => 'administrator',
-                        'function_id' => 1,
+                        'function_id' => 44,
                         'description' => 'System Administrator',
                         'status' => 'a',
                         'created_date' => date('Y-m-d H:i:s')
                     ],
                     [
                         'role_name' => 'user',
-                        'function_id' => 1,
+                        'function_id' => 45,
                         'description' => 'User Related Role',
                         'status' => 'a',
                         'created_date' => date('Y-m-d H:i:s')
                     ],
                     [
                         'role_name' => 'nurse',
-                        'function_id' => 1,
+                        'function_id' => 13,
                         'description' => 'Nurse Related Role',
                         'status' => 'a',
                         'created_date' => date('Y-m-d H:i:s')
                     ],
                     [
                         'role_name' => 'guard',
-                        'function_id' => 1,
+                        'function_id' => 14,
                         'description' => 'Guard Scanning',
                         'status' => 'a',
                         'created_date' => date('Y-m-d H:i:s')

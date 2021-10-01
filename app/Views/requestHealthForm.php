@@ -38,7 +38,7 @@
                     <div class="custom-control custom-checkbox">
                       <input class="custom-control-input" type="checkbox" id="chkShowHide" onclick="ShowHideDiv(this)">
                       <label for="chkShowHide" class="custom-control-label">
-                        I hereby certify that all information is true and complete. I understand that my failure to answer, or any false or misleading information given by me may be used as a ground for my serious consequence.
+                        I hereby certify that all information is true and complete. I understand that my failure to answer, or any false or misleading information given by me may be used as a ground for my serious consequence.<span class="text-danger h5"> *</span>
                       </label>
                     </div>
                   </div>
@@ -49,7 +49,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-6">
-                        <label for="email">Email</label>
+                        <label for="email">Email<span class="text-danger h5"> *</span></label>
                         <input type="email" class="form-control" name="email" placeholder="Email">
                         <?php if (isset($errors['email'])): ?>
                           <div class="text-danger">
@@ -58,7 +58,7 @@
                         <?php endif; ?>
                       </div>
                       <div class="col-6">
-                        <label for="form_id">Select Health Declaration Form.</label>
+                        <label for="form_id">Select Health Declaration Form.<span class="text-danger h5"> *</span></label>
                         <select type="text" class="form-select" name="form_id" id="form_id" required>
                           <option selected disabled>-- Select Form --</option>
                           <option value="1">Take Health Declaration</option>
@@ -77,7 +77,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-10">
-                        <p class="h6">1. <?=$question['q_one']?></p>
+                        <label class="h6">1. <?=$question['q_one']?><span class="text-danger h5"> *</span></label>
                         <?php if (isset($errors['r_q_one'])): ?>
                           <div class="text-danger">
                             <?= $errors['r_q_one']?>
@@ -105,7 +105,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-10">
-                        <p class="h6">2. <?=$question['q_two']?></p>
+                        <label class="h6">2. <?=$question['q_two']?><span class="text-danger h5"> *</span></label>
                         <?php if (isset($errors['r_q_two'])): ?>
                           <div class="text-danger">
                             <?= $errors['r_q_two']?>
@@ -133,7 +133,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-10">
-                        <p class="h6">3. <?=$question['q_three']?></p>
+                        <label class="h6">3. <?=$question['q_three']?><span class="text-danger h5"> *</span></label>
                         <?php if (isset($errors['r_q_three'])): ?>
                           <div class="text-danger">
                             <?= $errors['r_q_three']?>
@@ -161,7 +161,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-10">
-                        <p class="h6">4. <?=$question['q_four']?></p>
+                        <label class="h6">4. <?=$question['q_four']?><span class="text-danger h5"> *</span></label>
                         <?php if (isset($errors['r_q_four'])): ?>
                           <div class="text-danger">
                             <?= $errors['r_q_four']?>
@@ -189,7 +189,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-10">
-                        <p class="h6">5. <?=$question['q_five']?></p>
+                        <label class="h6">5. <?=$question['q_five']?><span class="text-danger h5"> *</span></label>
                         <?php if (isset($errors['r_q_five'])): ?>
                           <div class="text-danger">
                             <?= $errors['r_q_five']?>
@@ -236,7 +236,7 @@
                                   <p class="h6" id="q_four" style= "color:green"> </p>
                                   <p class="h6"><?= $ctr++;?>. <?=$question['q_five']?></p>
                                   <p class="h6" id="q_five" style= "color:green"> </p>
-                                  <input class="btn btn-primary float-right" type="submit" value="Submit">
+                                  <input class="btn btn-primary float-right" id="btnSubmit" type="submit" value="Submit">
                               </div>
                           </div>
                       </div>
@@ -256,12 +256,23 @@
   </body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script> -->
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script type="text/javascript">
     function ShowHideDiv(chkShowHide) {
         var ShowHide = document.getElementById("ShowHide");
         ShowHide.style.display = chkShowHide.checked ? "block" : "none";
     }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#myForm").submit(function (e) {
+            //disable the submit button
+            alert('Please wait...');
+            document.getElementById('btnSubmit').innerHTML = 'Loading...';
+            $("#btnSubmit").attr("disabled", true);
+            return true;
+        });
+    });
 </script>
 <script>
   function checkButton() {  
